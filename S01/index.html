@@ -687,6 +687,8 @@ On pose ensemble les règles du jeu !</p>
     transition: 'fade', transitionSpeed: 'default',
     backgroundTransition: 'fade',
     autoPlayMedia: true,
+    scrollActivationWidth: null, // désactive l'auto scroll-view de reveal (sinon s'active
+                                 // à l'init en iframe étroite Moodle → diapos empilées)
   });
   deck.initialize();
 
