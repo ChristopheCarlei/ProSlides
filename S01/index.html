@@ -687,9 +687,22 @@ On pose ensemble les règles du jeu !</p>
     transition: 'fade', transitionSpeed: 'default',
     backgroundTransition: 'fade',
     autoPlayMedia: true,
-    scrollActivationWidth: null, // jamais de scroll-view auto (sinon casse en iframe Moodle étroit)
   });
   deck.initialize();
+
+  // Recalcule la mise en page dès que le conteneur change de taille.
+  // Indispensable en iframe (Moodle) : reveal s'initialise avant que l'iframe
+  // ait ses dimensions (aspect-ratio calculé après) et ne se recadre jamais sinon.
+  if (window.ResizeObserver) {
+    var __lw = 0, __lh = 0;
+    new ResizeObserver(function(){
+      if (window.innerWidth === __lw && window.innerHeight === __lh) return;
+      __lw = window.innerWidth; __lh = window.innerHeight;
+      try { deck.layout(); } catch(e){}
+      applyCover();
+    }).observe(document.documentElement);
+  }
+  window.addEventListener('load', function(){ try { deck.layout(); } catch(e){} applyCover(); });
 
   // ---- remplir tout l'écran (cover) au lieu du letterbox 16:9 ----
   // reveal calcule un scale "contain" ; on le remplace par un scale "cover",
