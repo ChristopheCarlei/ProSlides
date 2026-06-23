@@ -696,10 +696,24 @@ On pose ensemble les règles du jeu !</p>
   // En iframe (Moodle), reveal peut s'initialiser avant que l'iframe ait ses dimensions
   // finales et ne se recadre jamais. On force un re-sync interne complet (resize) après
   // chargement et à chaque changement de taille du conteneur.
+  function __diag(tag){
+    try {
+      var sl = document.querySelector('.reveal .slides');
+      var c = sl ? getComputedStyle(sl) : null;
+      parent.postMessage({ __deckDiag: { tag:tag, iw:window.innerWidth, ih:window.innerHeight,
+        present: document.querySelectorAll('.reveal .slides > section.present').length,
+        revealCls: (document.querySelector('.reveal')||{}).className||'none',
+        slidesTr: c ? (c.transform||'').slice(0,22) : 'none', slidesPos: c ? c.position : 'n/a',
+        bodyCls: document.body.className } }, '*');
+    } catch(e){}
+  }
+  var __dn=0, __di=setInterval(function(){ __diag('t'+(__dn++)); if(__dn>12) clearInterval(__di); }, 600);
+  deck.on('ready', function(){ __diag('ready'); });
   function __resync(){
     try { deck.layout(); } catch(e){}
     window.dispatchEvent(new Event('resize')); // déclenche le re-sync complet de reveal
     applyCover();
+    __diag('resync');
   }
   if (window.ResizeObserver) {
     var __lw = 0, __lh = 0;
