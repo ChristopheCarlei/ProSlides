@@ -1,0 +1,50 @@
+SÉANCE 01 — Cadre & Objectifs · Export pour Moodle
+====================================================
+
+✅ 100 % AUTONOME / HORS-LIGNE
+   reveal.js est désormais inclus dans le paquet (assets/vendor/reveal/).
+   Aucune connexion Internet n'est requise : vidéos, police, logos et
+   moteur de présentation sont tous embarqués.
+
+Contenu du paquet
+-----------------
+  index.html              → la présentation (à ouvrir / lier dans Moodle)
+  assets/vendor/reveal/   → moteur reveal.js (CSS + JS) — local
+  assets/clips/           → vidéos de fond (Cameleon2…7)
+  assets/fonts/           → police TheSans (UNIGE/FPSE)
+  assets/logos/           → logos AFORDENS + FPSE
+
+⚠️ Garder l'arborescence intacte : index.html doit rester à côté du dossier
+   « assets/ ». Ne pas déplacer les fichiers séparément.
+
+
+Intégrer dans Moodle — 3 options
+--------------------------------
+
+1) Ressource « Dossier » (recommandé)
+   • Mode édition → Ajouter une activité ou ressource → Dossier.
+   • Téléverser le .zip puis « Décompresser », OU déposer index.html ET le
+     dossier assets/ en conservant la structure.
+   • Les étudiant·es ouvrent index.html → la présentation s'affiche.
+
+2) Ressource « Fichier »
+   • Ajouter une ressource → Fichier → téléverser le .zip.
+   • Moodle propose de décompresser ; définir index.html comme fichier
+     principal. Affichage « Intégrer » ou « Nouvelle fenêtre ».
+
+3) Intégration en iframe dans une « Page »
+   • Héberger le dossier (dépôt de fichiers Moodle ou serveur).
+   • Dans une Page Moodle, basculer l'éditeur en HTML et coller :
+     <iframe src="CHEMIN/index.html" width="100%" height="640"
+             style="border:0" allowfullscreen></iframe>
+
+
+Utilisation
+-----------
+  • Navigation : flèches ← → du clavier, ou les contrôles à l'écran.
+  • Plein écran : touche F.
+  • Bouton « Mode lecture » (haut-droite) : défilement vertical de toutes
+    les diapos — pratique pour la révision asynchrone.
+  • Les activités comportent un minuteur : cliquer dessus pour le lancer
+    (bip + flash en fin d'étape).
+  • Impression / PDF : ajouter ?print-pdf à l'URL puis imprimer.
