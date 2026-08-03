@@ -483,28 +483,6 @@
   .modebtn .lbl-read{ display:inline; } .modebtn .lbl-pres{ display:none; }
   body.reading .modebtn .lbl-read{ display:none; } body.reading .modebtn .lbl-pres{ display:inline; }
 
-  /* Groupe de boutons en haut à droite : plein écran + mode lecture */
-  .topbtns{ position:fixed; top:16px; right:18px; z-index:60; display:flex; gap:10px; align-items:center; }
-  .topbtns .modebtn{ position:static; top:auto; right:auto; }
-
-  /* BOUTON PLEIN ÉCRAN — visible uniquement sur la couverture, en mode présentation */
-  .fsbtn{
-    appearance:none; cursor:pointer; font-family:var(--font);
-    display:none; align-items:center; gap:9px;
-    padding:9px 16px 9px 13px; border-radius:999px;
-    border:1.5px solid rgba(0,133,127,.4); background:rgba(255,255,255,.92);
-    backdrop-filter:blur(6px); font-size:14px; font-weight:700; color:var(--teal-deep);
-    box-shadow:0 2px 14px rgba(0,133,127,.18); transition:background .15s,border-color .15s,color .15s;
-  }
-  body.cover-active .fsbtn{ display:inline-flex; }
-  body.reading .fsbtn{ display:none; }   /* en mode lecture, il n’y a rien à passer en plein écran */
-  .fsbtn:hover{ background:var(--bg-teal); border-color:var(--teal-deep); }
-  .fsbtn svg{ display:block; }
-  .fsbtn .ic-exit, .fsbtn .lbl-exit{ display:none; }
-  body.is-fullscreen .fsbtn .ic-enter, body.is-fullscreen .fsbtn .lbl-enter{ display:none; }
-  body.is-fullscreen .fsbtn .ic-exit{ display:block; }
-  body.is-fullscreen .fsbtn .lbl-exit{ display:inline; }
-
   /* MODE LECTURE DÉROULANTE */
   body.reading, body.reading.reveal-viewport{ overflow:auto; background:var(--bg-soft) !important; }
   body.reading .deckfoot{ display:none; }
@@ -550,7 +528,7 @@
 
   /* ---- impression / PDF (?print-pdf de reveal) ---- */
   @media print{
-    .brandstrip, .topbtns, .modebtn, .fsbtn, .kbdhint, .reveal .controls, .reveal .progress, .reveal .slide-number{ display:none !important; }
+    .brandstrip, .modebtn, .kbdhint, .reveal .controls, .reveal .progress, .reveal .slide-number{ display:none !important; }
     .timepanel{ display:none !important; }
     .progmap{ position:absolute; }
   }
@@ -561,19 +539,11 @@
 
 <div class="brandstrip"></div>
 
-<div class="topbtns">
-<button class="fsbtn" id="fsbtn" type="button" aria-label="Afficher la présentation en plein écran">
-  <svg class="ic-enter" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
-  <svg class="ic-exit" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v3a2 2 0 0 1-2 2H4M15 3v3a2 2 0 0 0 2 2h3M9 21v-3a2 2 0 0 0-2-2H4M15 21v-3a2 2 0 0 1 2-2h3"/></svg>
-  <span class="lbl-enter">Plein écran</span>
-  <span class="lbl-exit">Quitter le plein écran</span>
-</button>
 <button class="modebtn" id="modebtn" type="button" aria-pressed="false" aria-label="Passer en mode lecture (défilement vertical)">
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18M3 12h18M3 19h18"/></svg>
   <span class="lbl-read">Mode lecture</span>
   <span class="lbl-pres">Mode présentation</span>
 </button>
-</div>
 
 <div class="kbdhint" id="kbdhint" aria-hidden="true">
   <span><kbd>←</kbd><kbd>→</kbd> naviguer</span>
@@ -1228,31 +1198,6 @@
       var cur0 = document.querySelector('.slides > section.present');
       window.__updateProgmap(cur0 ? secs.indexOf(cur0) : 0);
     })();
-  })();
-<script>
-  /* Bouton plein écran de la couverture */
-  (function(){
-    var btn = document.getElementById('fsbtn');
-    if(!btn) return;
-    var root = document.documentElement;
-    var demande = root.requestFullscreen || root.webkitRequestFullscreen;
-    var sortie  = document.exitFullscreen || document.webkitExitFullscreen;
-    if(!demande){ btn.remove(); return; }   // navigateur sans plein écran : pas de bouton mort
-
-    function actif(){ return !!(document.fullscreenElement || document.webkitFullscreenElement); }
-    function sync(){
-      var on = actif();
-      document.body.classList.toggle('is-fullscreen', on);
-      btn.setAttribute('aria-label', on ? 'Quitter le plein écran' : 'Afficher la présentation en plein écran');
-      // reveal recalcule son échelle après le changement de viewport
-      if(window.Reveal && Reveal.layout) setTimeout(function(){ Reveal.layout(); }, 80);
-    }
-    btn.addEventListener('click', function(){
-      try { actif() ? sortie.call(document) : demande.call(root); } catch(e){}
-    });
-    document.addEventListener('fullscreenchange', sync);
-    document.addEventListener('webkitfullscreenchange', sync);
-    sync();
   })();
 </script>
 </body>
