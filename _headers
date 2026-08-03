@@ -1,0 +1,36 @@
+# Règles de cache Netlify (fichier ignoré par les autres hébergeurs).
+#
+# Principe : les ressources qui ne changent jamais sont mises en cache
+# longtemps ; les pages HTML restent revalidées à chaque visite, pour
+# qu'une correction de diapo soit visible immédiatement.
+
+# Polices — jamais modifiées depuis la création du dépôt.
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Moteur reveal.js — version figée.
+/assets/vendor/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Logos institutionnels — très stables.
+/assets/logos/*
+  Cache-Control: public, max-age=2592000
+
+# Vidéos et images de fond — gros fichiers, mais un clip peut être
+# remplacé sous le même nom entre deux séances : 1 jour de cache, puis
+# réutilisation immédiate pendant la revalidation en arrière-plan.
+/assets/clips/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+# Composant partagé.
+/image-slot.js
+  Cache-Control: public, max-age=86400
+
+# Icône.
+/favicon.svg
+  Cache-Control: public, max-age=604800
+
+# Les pages de séance ne sont volontairement pas mises en cache :
+# toute modification d'une diapo doit apparaître au rechargement.
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
