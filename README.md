@@ -5,38 +5,48 @@ Hébergé via GitHub Pages → https://christophecarlei.github.io/ProSlides/
 
 ## Séances
 
-- `S01/` — Séance 01 : Cadre & Objectifs
-- `S02/` — Séance 02 : Projets & groupes
-- `S03/` — Séance 03 : Mémoire & Collaboration
-- `S04/` — Séance 04 : Avant-projet & IA
-- `S05/` — Séance 05 : Prise de parole & Agilité
+| # | Titre | Date 2027 |
+|---|-------|-----------|
+| `S01/` | Cadre & Objectifs | 23 fév |
+| `S02/` | Projets & groupes | 2 mars |
+| `S03/` | Mémoire & Collaboration | 9 mars |
+| `S04/` | Avant-projet & IA | 16 mars |
+| `S05/` | Prise de parole & Agilité | 23 mars |
+| `S06/` | Communication & feedback | 6 avril |
+| `S07/` | Gestion projet & planification | 13 avril |
+| `S08/` | Présentations intermédiaires *(évaluée)* | 20 avril |
+| `S09/` | Neuro-mythes | 27 avril |
+| `S10/` | Observation & jugement | 4 mai |
+| `S11/` | Efficacité & biais cognitifs | 11 mai |
+| `S12/` | Controverses & apprentissage | 18 mai |
+| `S13/` | Démonstration des projets *(évaluée finale)* | 25 mai |
 
 ## Structure
 
 ```
-videos/            ← tous les clips et images, mutualisés entre les séances
-S01/
-  index.html       ← la présentation
-  assets/fonts/    ← police TheSans (UNIGE/FPSE)
-  assets/logos/    ← logos AFORDENS + FPSE
-  assets/vendor/   ← moteur reveal.js (CSS + JS), local
-S02/ … S05/        ← même structure
+assets/
+  clips/       ← toutes les vidéos et images de fond
+  fonts/       ← police TheSans (UNIGE/FPSE)
+  logos/       ← logos AFORDENS + FPSE
+  vendor/      ← moteur reveal.js (CSS + JS), local
+image-slot.js  ← composant partagé
+S01/ … S13/    ← une séance = un seul index.html
 ```
 
-Les médias sont **mutualisés** dans `videos/` à la racine : chaque diapo y accède
-via un chemin relatif `../videos/NomDuFichier.mp4`. Un clip utilisé par plusieurs
-séances n'existe donc qu'en un seul exemplaire.
+Tout est **mutualisé** à la racine : chaque séance référence les ressources
+partagées via `../assets/…` et `../image-slot.js`. Une ressource utilisée par
+plusieurs séances n'existe qu'en un seul exemplaire.
 
 > ⚠️ Conséquence : une séance n'est **pas** autonome prise isolément. Pour la
-> diffuser, publier le dépôt entier (GitHub Pages) — ne pas déplacer un dossier
-> `S0x/` seul, il perdrait ses vidéos.
+> diffuser, publier le dépôt entier — ne pas déplacer un dossier `S0x/` seul,
+> il perdrait ses vidéos, ses polices et son moteur de présentation.
 
 ## Intégration dans Moodle
 
 Dans une « Page » Moodle, basculer l'éditeur en HTML et coller :
 
 ```html
-<iframe src="https://christophecarlei.github.io/ProSlides/S01/"
+<iframe src="https://christophecarlei.github.io/ProSlides/S06/"
         width="100%" height="640" style="border:0" allowfullscreen></iframe>
 ```
 

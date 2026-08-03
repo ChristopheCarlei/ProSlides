@@ -5,18 +5,18 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Séance 01 — Cadre &amp; Objectifs · FPSE</title>
 
-<link rel="stylesheet" href="assets/vendor/reveal/reset.min.css" />
-<link rel="stylesheet" href="assets/vendor/reveal/reveal.min.css" />
+<link rel="stylesheet" href="../assets/vendor/reveal/reset.min.css" />
+<link rel="stylesheet" href="../assets/vendor/reveal/reveal.min.css" />
 
 <style>
   /* ============================================================
      FPSE · Séance 01 — Cadre & Objectifs  (thème reveal.js)
      ============================================================ */
-  @font-face{font-family:"TheSans";src:url("assets/fonts/TheSansOsF-Light.otf") format("opentype");font-weight:300;font-display:swap}
-  @font-face{font-family:"TheSans";src:url("assets/fonts/TheSansOsF-Plain.otf") format("opentype");font-weight:400;font-display:swap}
-  @font-face{font-family:"TheSans";src:url("assets/fonts/TheSansOsF-SemiBold.otf") format("opentype");font-weight:600;font-display:swap}
-  @font-face{font-family:"TheSans";src:url("assets/fonts/TheSansOsF-Bold.otf") format("opentype");font-weight:700;font-display:swap}
-  @font-face{font-family:"TheSans";src:url("assets/fonts/TheSansOsF-ExtraBold.otf") format("opentype");font-weight:800;font-display:swap}
+  @font-face{font-family:"TheSans";src:url("../assets/fonts/TheSansOsF-Light.otf") format("opentype");font-weight:300;font-display:swap}
+  @font-face{font-family:"TheSans";src:url("../assets/fonts/TheSansOsF-Plain.otf") format("opentype");font-weight:400;font-display:swap}
+  @font-face{font-family:"TheSans";src:url("../assets/fonts/TheSansOsF-SemiBold.otf") format("opentype");font-weight:600;font-display:swap}
+  @font-face{font-family:"TheSans";src:url("../assets/fonts/TheSansOsF-Bold.otf") format("opentype");font-weight:700;font-display:swap}
+  @font-face{font-family:"TheSans";src:url("../assets/fonts/TheSansOsF-ExtraBold.otf") format("opentype");font-weight:800;font-display:swap}
 
   :root{
     --teal:#00B1AE; --teal-deep:#00857F; --teal-ink:#0A4C4A;
@@ -95,7 +95,7 @@
 
   .steps{ list-style:none; margin:.3em 0 0; padding:0; display:flex; flex-direction:column; gap:.5em; }
   .steps li{ display:flex; gap:1em; align-items:flex-start; font-size:.56em; line-height:1.4;
-    background:var(--bg-soft); border:1px solid var(--line); border-radius:12px; padding:.7em 1em; }
+    background:rgba(255,255,255,.55); backdrop-filter:blur(7px); -webkit-backdrop-filter:blur(7px); border:1px solid rgba(255,255,255,.4); border-radius:12px; padding:.7em 1em; }
   .steps li .t{ flex:none; font-weight:800; color:var(--teal-deep); font-variant-numeric:tabular-nums; white-space:nowrap; }
   .steps li .x{ flex:1; }
   .steps li .x b{ color:var(--ink); }
@@ -160,9 +160,18 @@
   .bridge__arrows{ display:grid; grid-template-columns:1fr 1fr; height:30px; }
   .bridge__arrows i{ width:3px; height:100%; margin:0 auto; background:linear-gradient(var(--line),var(--line-strong)); }
   .bridge__cols{ display:grid; grid-template-columns:1fr 1fr; gap:44px; margin-top:12px; flex:1; }
-  .bridge__col{ border-radius:16px; padding:26px 32px; }
-  .bridge__col--l{ background:var(--bg-teal); border-top:6px solid var(--teal-deep); }
-  .bridge__col--r{ background:#fbe6f0; border-top:6px solid var(--rose); }
+  .bridge__col{ position:relative; border-radius:16px; padding:26px 32px; cursor:pointer; user-select:none; transition:background .3s ease, box-shadow .3s ease; }
+  .bridge__col__details{ max-height:0; opacity:0; overflow:hidden; margin-top:0; transition:max-height .4s ease, opacity .3s ease, margin-top .35s ease; }
+  .bridge__col.is-open .bridge__col__details{ max-height:14em; opacity:1; margin-top:14px; }
+  .bridge__col__chev{ position:absolute; top:22px; right:22px; width:22px; height:22px; transition:transform .3s ease; }
+  .bridge__col__chev svg{ width:100%; height:100%; display:block; }
+  .bridge__col--l .bridge__col__chev{ color:var(--teal-deep); }
+  .bridge__col--r .bridge__col__chev{ color:var(--rose-deep); }
+  .bridge__col.is-open .bridge__col__chev{ transform:rotate(180deg); }
+  .bridge__col--l{ background:rgba(234,246,245,.55); border-top:6px solid var(--teal-deep); }
+  .bridge__col--l.is-open{ background:var(--bg-teal); }
+  .bridge__col--r{ background:rgba(251,230,240,.55); border-top:6px solid var(--rose); }
+  .bridge__col--r.is-open{ background:#fbe6f0; }
   .bridge__tag{ font-size:23px; font-weight:800; display:flex; align-items:center; gap:14px; }
   .bridge__ico{ flex:none; display:inline-flex; }
   .bridge__ico svg{ height:30px; width:auto; display:block; }
@@ -273,7 +282,7 @@
   .mediafull.activity .overlay{ justify-content:center; padding:6% 34% 7% 8%; }
   .mediafull.activity .scrim{
     background:
-      linear-gradient(90deg, rgba(10,76,74,.72) 0%, rgba(10,76,74,.3) 40%, transparent 66%);
+      linear-gradient(90deg, rgba(10,76,74,.5) 0%, rgba(10,76,74,.18) 40%, transparent 66%);
   }
   .steps.timed li{ cursor:pointer; user-select:none; transition:background .2s,border-color .2s,box-shadow .2s; }
   .steps.timed li:hover{ border-color:rgba(207,0,99,.5); }
@@ -311,6 +320,9 @@
   .tt-time{ position:relative; z-index:1; font-size:50px; font-weight:800; color:#fff; font-variant-numeric:tabular-nums; letter-spacing:-.02em; }
   .tt-hint{ font-size:14px; font-weight:600; color:rgba(255,255,255,.85); text-align:center; max-width:210px; line-height:1.35; }
   .timepanel.is-idle .tt-disc{ background:rgba(255,255,255,.14); }
+  .timepanel.is-idle .tt-disc::before{ background:transparent; }
+  .timepanel.is-idle .tt-hint{ display:none; }
+  .tt-disc:focus-visible, .bridge__col:focus-visible{ outline:3px solid #9ff0ed; outline-offset:3px; border-radius:14px; }
   /* contrôles live du minuteur */
   .tt-controls{ display:flex; align-items:center; gap:8px; }
   .tt-btn{ appearance:none; cursor:pointer; font-family:var(--font); font-size:13px; font-weight:700;
@@ -431,15 +443,15 @@
     <section data-screen-label="Couverture" data-phase="1" data-state="dark">
       <div class="mediafull cover2">
         <div class="media-slot video">
-          <video data-autoplay autoplay muted loop playsinline src="../videos/Cameleon8.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Cameleon8.mp4"></video>
         </div>
         <div class="scrim"></div>
         <div class="cover-logos">
-          <img class="cl-afordens" src="assets/logos/AFORDENS_white.png" alt="AFORDENS" />
-          <img class="cl-fpse" src="assets/logos/logoFPSE_new.webp" alt="UNIGE — FPSE" />
+          <img class="cl-afordens" src="../assets/logos/AFORDENS_white.png" alt="AFORDENS" />
+          <img class="cl-fpse" src="../assets/logos/logoFPSE_new.webp" alt="UNIGE — FPSE" />
         </div>
         <div class="overlay" style="padding: 102px 102px 128px">
-          <span style="display:inline-block;align-self:flex-start;font-size:.44em;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#fff;margin:0 0 .9em;padding-bottom:.6em;border-bottom:2px solid rgba(255,255,255,.4);">Professionnalisations et intervention</span>
+          <span style="display:inline-block;align-self:flex-start;font-size:.44em;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#fff;margin:0 0 .9em;padding-bottom:.6em;border-bottom:2px solid rgba(255,255,255,.4);">Professionnalisation &amp; intervention</span>
           <span class="eyebrow">Séance 01 · 23 février 2027</span>
           <h1>Cadre &amp;<br />objectifs</h1>
           <div class="cover__meta">
@@ -457,7 +469,7 @@
     <section data-screen-label="Objectifs" data-phase="1" data-state="dark">
       <div class="mediafull objectifs">
         <div class="media-slot video">
-          <video data-autoplay autoplay muted loop playsinline src="../videos/Crabe2.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Crabe2.mp4"></video>
         </div>
         <div class="scrim"></div>
         <div class="overlay">
@@ -476,7 +488,7 @@
     <section data-screen-label="Problématique" data-phase="1" data-state="dark">
       <div class="mediafull">
         <div class="media-slot video">
-          <video data-autoplay autoplay muted loop playsinline src="../videos/Cameleon2.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Cameleon2.mp4"></video>
         </div>
         <div class="scrim"></div>
         <div class="overlay" style="justify-content:center;">
@@ -490,7 +502,7 @@
     <section data-screen-label="Activité" data-phase="1" data-state="dark">
       <div class="mediafull activity">
         <div class="media-slot video">
-          <video data-autoplay autoplay muted loop playsinline src="../videos/Cameleon4.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Cameleon4.mp4"></video>
         </div>
         <div class="scrim"></div>
         <div class="overlay">
@@ -502,7 +514,7 @@
           </ol>
         </div>
         <div class="timepanel is-idle">
-          <div class="tt-disc"><span class="tt-time">—</span></div>
+          <div class="tt-disc" role="button" tabindex="0" aria-label="Lancer ou avancer le minuteur"><span class="tt-time">—</span></div>
           <div class="tt-controls">
             <button class="tt-btn" type="button" data-act="minus">− 1 min</button>
             <button class="tt-btn tt-pause" type="button" data-act="pause">Pause</button>
@@ -517,7 +529,7 @@
     <section data-screen-label="Déroulé du cours" data-phase="2" data-state="dark">
       <div class="mediafull">
         <div class="media-slot video">
-          <video data-autoplay autoplay muted loop playsinline src="../videos/Cameleon6.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Cameleon6.mp4"></video>
         </div>
         <div class="scrim"></div>
         <div class="overlay" style="justify-content:center;">
@@ -543,7 +555,7 @@ On pose ensemble les règles du jeu !</p>
     <section data-screen-label="Professionnalisation" data-phase="3" data-state="dark">
       <div class="mediafull">
         <div class="media-slot video">
-          <video data-autoplay autoplay muted loop playsinline src="../videos/Cameleon3.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Cameleon3.mp4"></video>
         </div>
         <div class="scrim"></div>
         <div class="overlay">
@@ -558,7 +570,7 @@ On pose ensemble les règles du jeu !</p>
     <section data-screen-label="Tri conceptuel" data-phase="3" data-state="dark">
       <div class="mediafull activity">
         <div class="media-slot video">
-          <video data-autoplay autoplay muted loop playsinline src="../videos/Cameleon7.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Cameleon7.mp4"></video>
         </div>
         <div class="scrim"></div>
         <div class="overlay">
@@ -570,7 +582,7 @@ On pose ensemble les règles du jeu !</p>
           </ol>
         </div>
         <div class="timepanel is-idle">
-          <div class="tt-disc"><span class="tt-time">—</span></div>
+          <div class="tt-disc" role="button" tabindex="0" aria-label="Lancer ou avancer le minuteur"><span class="tt-time">—</span></div>
           <div class="tt-controls">
             <button class="tt-btn" type="button" data-act="minus">− 1 min</button>
             <button class="tt-btn tt-pause" type="button" data-act="pause">Pause</button>
@@ -585,7 +597,7 @@ On pose ensemble les règles du jeu !</p>
     <section data-screen-label="Deux regards" data-phase="3" data-state="dark">
       <div class="mediafull content content--diagram">
         <div class="media-slot video">
-          <video data-autoplay autoplay muted loop playsinline src="../videos/Cameleon6.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Cameleon6.mp4"></video>
         </div>
         <div class="scrim"></div>
         <div class="bridge">
@@ -596,25 +608,31 @@ On pose ensemble les règles du jeu !</p>
         <div class="bridge__hub">Professionnalisation<small>un seul processus</small></div>
         <div class="bridge__arrows"><i></i><i></i></div>
         <div class="bridge__cols">
-          <div class="bridge__col bridge__col--l">
+          <div class="bridge__col bridge__col--l" role="button" tabindex="0" aria-expanded="false">
             <div class="bridge__tag"><span class="bridge__ico" data-modal="groupe"></span>Approches socio-historiques <span class="zoom">vue macro</span></div>
+            <span class="bridge__col__chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
             <p class="bridge__q">Comment un métier devient-il une «&nbsp;profession&nbsp;» reconnue&nbsp;?</p>
+            <div class="bridge__col__details">
             <p class="bridge__lens">On dézoome sur le <strong>groupe</strong></p>
             <ul class="bridge__list">
               <li>Statut &amp; reconnaissance</li>
               <li>Histoire &amp; identité du métier</li>
               <li>Enjeux socio-politiques</li>
             </ul>
+            </div>
           </div>
-          <div class="bridge__col bridge__col--r">
+          <div class="bridge__col bridge__col--r" role="button" tabindex="0" aria-expanded="false">
             <div class="bridge__tag"><span class="bridge__ico" data-modal="seul"></span>Analyse du travail <span class="zoom">vue micro</span></div>
+            <span class="bridge__col__chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
             <p class="bridge__q">Qu'est-ce qu'on apprend réellement en travaillant&nbsp;?</p>
+            <div class="bridge__col__details">
             <p class="bridge__lens">On zoome sur l'<strong>activité</strong></p>
             <ul class="bridge__list">
               <li>Travail réel vs prescrit</li>
               <li>Compétences en situation</li>
               <li>Développement professionnel</li>
             </ul>
+            </div>
           </div>
         </div>
         </div>
@@ -625,7 +643,7 @@ On pose ensemble les règles du jeu !</p>
     <section data-screen-label="Outils" data-phase="3" data-state="dark">
       <div class="mediafull content outils">
         <div class="media-slot video">
-          <video data-autoplay autoplay muted loop playsinline src="../videos/ChatClavier.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/ChatClavier.mp4"></video>
         </div>
         <div class="scrim"></div>
         <div class="overlay">
@@ -640,7 +658,7 @@ On pose ensemble les règles du jeu !</p>
     <section data-screen-label="À retenir" data-phase="4" data-state="dark">
       <div class="mediafull content">
         <div class="media-slot video">
-          <video data-autoplay autoplay muted loop playsinline src="../videos/Ecureuil.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Ecureuil.mp4"></video>
         </div>
         <div class="scrim"></div>
         <div class="overlay">
@@ -659,7 +677,7 @@ On pose ensemble les règles du jeu !</p>
     <section data-screen-label="Prochaine fois" data-phase="4" data-state="dark">
       <div class="mediafull content">
         <div class="media-slot video">
-          <video data-autoplay autoplay muted loop playsinline src="../videos/Pingoin.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Pingoin.mp4"></video>
         </div>
         <div class="scrim"></div>
         <div class="overlay">
@@ -685,18 +703,18 @@ On pose ensemble les règles du jeu !</p>
   </div>
 </div>
 
-<div class="progmap" id="progmap"></div>
+<div class="progmap" id="progmap" role="navigation" aria-label="Progression des phases de la séance"></div>
 
 <div class="deckfoot">
   <span class="ftag"><b>S01</b> · Cadre &amp; Objectifs</span>
   <span class="flogos">
-    <img class="afordens afordens--color" src="assets/logos/AFORDENS_color.webp" alt="AFORDENS" />
-    <img class="afordens afordens--white" src="assets/logos/AFORDENS_white.png" alt="" aria-hidden="true" />
-    <img class="fpse" src="assets/logos/logoFPSE_new.webp" alt="UNIGE — FPSE" />
+    <img class="afordens afordens--color" src="../assets/logos/AFORDENS_color.webp" alt="AFORDENS" />
+    <img class="afordens afordens--white" src="../assets/logos/AFORDENS_white.png" alt="" aria-hidden="true" />
+    <img class="fpse" src="../assets/logos/logoFPSE_new.webp" alt="UNIGE — FPSE" />
   </span>
 </div>
 
-<script src="assets/vendor/reveal/reveal.min.js"></script>
+<script src="../assets/vendor/reveal/reveal.min.js"></script>
 <script>
   const deck = new Reveal({
     width: 1280, height: 720,
@@ -917,7 +935,7 @@ On pose ensemble les règles du jeu !</p>
         if(li && steps.indexOf(li) !== -1){ start(steps.indexOf(li)); return; }
         next();
       });
-      disc.addEventListener('click', next);
+      disc.addEventListener('click', next); disc.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); next(); } });
       hint.addEventListener('click', next);
       // arrêt propre quand on quitte la slide (stoppe le setInterval en arrière-plan)
       window.__timers.push({ slide: slide, pause: function(){ if(running) togglePause(); } });
@@ -961,6 +979,11 @@ On pose ensemble les règles du jeu !</p>
     document.querySelectorAll('.bridge__ico[data-modal]').forEach(function(el){
       if(el.children.length) return;
       el.innerHTML = modalSvg(el.getAttribute('data-modal'));
+    });
+    document.querySelectorAll('.bridge__col').forEach(function(col){
+      function toggle(){ var open = col.classList.toggle('is-open'); col.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+      col.addEventListener('click', toggle);
+      col.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); } });
     });
 
     // ---- petites icônes (objectifs, à retenir, frise) ----
