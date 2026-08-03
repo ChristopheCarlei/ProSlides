@@ -413,11 +413,75 @@
   body.dark-slide .kbdhint kbd{ color:#fff; background:rgba(255,255,255,.14); border-color:rgba(255,255,255,.3); }
   body.reading .kbdhint{ display:none; }
 
-  /* ---- impression / PDF (?print-pdf de reveal) ---- */
+  /* ---- IMPRESSION -------------------------------------------------------
+     Deux chemins coexistent :
+       · Ctrl+P            -> polycopié déroulant, une suite de diapos (ci-dessous)
+       · URL + ?print-pdf  -> rendu natif de reveal, une diapo par page
+     Les règles du polycopié sont donc préfixées html:not(.print-pdf)
+     pour laisser le second intact.                                          */
   @media print{
+    /* Commun aux deux chemins. */
     .brandstrip, .modebtn, .kbdhint, .reveal .controls, .reveal .progress, .reveal .slide-number{ display:none !important; }
     .timepanel{ display:none !important; }
     .progmap{ position:absolute; }
+
+    /* ---- Polycopié ---- */
+    html:not(.print-pdf), html:not(.print-pdf) body{ background:#fff !important; overflow:visible !important; height:auto !important; }
+
+    html:not(.print-pdf) .progmap, html:not(.print-pdf) .deckfoot, html:not(.print-pdf) .rhint, html:not(.print-pdf) .rclose, html:not(.print-pdf) .dimtoggle,
+    html:not(.print-pdf) .roomreveal, html:not(.print-pdf) .roomreveal-cta, html:not(.print-pdf) .reveal .backgrounds{ display:none !important; }
+
+    /* La mise en page déroulante s'applique quel que soit le mode affiché à
+       l'écran : l'étudiant·e obtient le même document depuis la présentation
+       comme depuis le mode lecture.                                          */
+    html:not(.print-pdf) .reveal{ position:static !important; height:auto !important; width:auto !important;
+      overflow:visible !important; transform:none !important; zoom:normal !important; }
+    html:not(.print-pdf) .reveal .slides{ position:static !important; left:0 !important; top:0 !important;
+      width:auto !important; height:auto !important; padding:0 !important;
+      transform:none !important; zoom:normal !important; display:block !important; }
+    html:not(.print-pdf) .reveal .slides > section,
+    html:not(.print-pdf) .reveal .slides > section[hidden]{
+      position:relative !important; display:block !important;
+      visibility:visible !important; opacity:1 !important;
+      transform:none !important; pointer-events:auto !important;
+      top:auto !important; left:auto !important;
+      width:100% !important; aspect-ratio:16/9;
+      height:auto !important; min-height:0 !important; max-height:none !important;
+      margin:0 0 6mm !important; padding:0 !important;
+      border:1px solid #D4D9E0 !important; border-radius:5px;
+      overflow:hidden !important; box-shadow:none !important;
+      break-inside:avoid; page-break-inside:avoid;
+    }
+    html:not(.print-pdf) .reveal .slides > section > *{ height:100%; }
+
+    /* Toutes les diapos sont en texte blanc. Sans impression des fonds, la
+       page sortirait vierge : on l'exige donc explicitement. Le fond retenu
+       est --teal-ink, plus sombre que celui de l'écran, pour rester lisible
+       y compris sur une imprimante noir et blanc.                           */
+    html:not(.print-pdf) .reveal .slides > section{
+      -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important;
+    }
+    html:not(.print-pdf) .reveal .slides > section[data-state="dark"]{ background:var(--teal-ink) !important; }
+    html:not(.print-pdf) .media-slot{ background-color:var(--teal-ink) !important; background-image:none !important; }
+    html:not(.print-pdf) .media-slot .ph{ display:none !important; }
+
+    /* Les vidéos ne s'impriment pas : on les retire pour laisser un aplat
+       propre plutôt qu'un rectangle vide. Les images sont conservées.       */
+    html:not(.print-pdf) .reveal video, html:not(.print-pdf) .reveal .scrim{ display:none !important; }
+
+    /* Un polycopié ne se clique pas : on déplie ce qui est replié ou flouté. */
+    html:not(.print-pdf) .bridge.gated .dimsgrid{ filter:none !important; opacity:1 !important; }
+    html:not(.print-pdf) .bridge__col__details{ max-height:none !important; opacity:1 !important; margin-top:14px !important; }
+    html:not(.print-pdf) .roomsteps .rscard.gated .rexbox{ display:block !important; }
+
+    /* Repère de diapo, repris du mode lecture. */
+    html:not(.print-pdf) .reveal .slides > section::after{
+      content:attr(data-screen-label); position:absolute; top:3mm; right:4mm; z-index:5;
+      font-size:7.5pt; font-weight:800; letter-spacing:.09em; text-transform:uppercase;
+      color:#fff; background:rgba(255,255,255,.22); padding:1mm 2.5mm; border-radius:999px;
+      -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important;
+    }
+    html:not(.print-pdf) .reveal a{ text-decoration:none; }
   }
 </style>
 </head>
