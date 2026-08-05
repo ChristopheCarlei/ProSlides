@@ -760,7 +760,59 @@
       </div>
     </section>
 
-    <!-- 02b · NOTION — Succès des projets -->
+    <!-- 02b · PROBLÉMATIQUE -->
+    <section data-screen-label="Définition" data-phase="2" data-state="dark">
+      <div class="mediafull">
+        <div class="media-slot video">
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Cameleon2.mp4"></video>
+        </div>
+        <div class="scrim"></div>
+        <div class="overlay" style="justify-content:center;">
+          <span class="eyebrow">La problématique</span>
+          <h1 style="font-size:1.4em;max-width:20ch;">C'est quoi un projet&nbsp;?</h1>
+          <div class="revealtext" onclick="this.classList.toggle('open')">
+            <span class="rt-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>Afficher une définition</span>
+          </div>
+          <p class="rt-body" style="text-align:left;">Un processus unique qui consiste en un ensemble d'activités coordonnées et maîtrisées comportant des dates de <strong>début</strong> et de <strong>fin</strong>, entrepris dans le but d'atteindre un <strong>objectif</strong> conforme à des exigences spécifiques, incluant les contraintes de <strong>délais</strong>, de <strong>coûts</strong> et de <strong>ressources</strong>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02c · NOTION — Triangle de Martin Barnes -->
+    <section data-screen-label="Triangle qualité" data-phase="2" data-state="dark">
+      <div class="tri-wrap">
+        <div class="tri-head">
+          <span class="eyebrow">Notion clé</span>
+          <h2>Objectif(s) du projet</h2>
+          <p>Le triangle de Martin Barnes&nbsp;: qualité, coûts et délais sont trois composantes essentielles des projets&nbsp;! Il est important de fixer les priorités et (souvent) faire des compromis&nbsp;!</p>
+        </div>
+        <svg class="tri-svg" viewBox="0 0 640 640" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="triArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 Z" fill="rgba(255,255,255,.6)"></path>
+            </marker>
+          </defs>
+          <line class="tri-axis" x1="320" y1="320" x2="320" y2="90" marker-end="url(#triArrow)"></line>
+          <line class="tri-axis" x1="320" y1="320" x2="519.2" y2="435" marker-end="url(#triArrow)"></line>
+          <line class="tri-axis" x1="320" y1="320" x2="120.8" y2="435" marker-end="url(#triArrow)"></line>
+
+          <polygon class="tri-fill" points="320,140 475.9,410 164.1,410"></polygon>
+
+          <circle class="tri-handle" data-axis="qualite" cx="320" cy="140"></circle>
+          <circle class="tri-handle" data-axis="delais" cx="475.9" cy="410"></circle>
+          <circle class="tri-handle" data-axis="couts" cx="164.1" cy="410"></circle>
+
+          <circle class="tri-center" cx="320" cy="320" r="3"></circle>
+          <text class="tri-zero" x="332" y="316">0</text>
+
+          <text class="tri-label" x="320" y="52" text-anchor="middle">Qualité</text>
+          <text class="tri-label" x="552.1" y="460" text-anchor="start">Délais</text>
+          <text class="tri-label" x="87.9" y="460" text-anchor="end">Coûts</text>
+        </svg>
+      </div>
+    </section>
+
+    <!-- 03 · NOTION — Succès des projets -->
     <section data-screen-label="Succès projets" data-phase="2" data-state="dark">
       <div class="mediafull content">
         <div class="media-slot video">
@@ -803,58 +855,6 @@
             </div>
             <p class="chaos-source">CHAOS 2020&nbsp;: Beyond Infinity — The Standish Group International, Inc.</p>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 02c · NOTION — Triangle de Martin Barnes -->
-    <section data-screen-label="Triangle qualité" data-phase="2" data-state="dark">
-      <div class="tri-wrap">
-        <div class="tri-head">
-          <span class="eyebrow">Notion clé</span>
-          <h2>Objectif(s) du projet</h2>
-          <p>Le triangle de Martin Barnes&nbsp;: qualité, coûts et délais sont trois composantes essentielles des projets&nbsp;! Il est important de fixer les priorités et (souvent) faire des compromis&nbsp;!</p>
-        </div>
-        <svg class="tri-svg" viewBox="0 0 640 640" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <marker id="triArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-              <path d="M0,0 L10,5 L0,10 Z" fill="rgba(255,255,255,.6)"></path>
-            </marker>
-          </defs>
-          <line class="tri-axis" x1="320" y1="320" x2="320" y2="90" marker-end="url(#triArrow)"></line>
-          <line class="tri-axis" x1="320" y1="320" x2="519.2" y2="435" marker-end="url(#triArrow)"></line>
-          <line class="tri-axis" x1="320" y1="320" x2="120.8" y2="435" marker-end="url(#triArrow)"></line>
-
-          <polygon class="tri-fill" points="320,140 475.9,410 164.1,410"></polygon>
-
-          <circle class="tri-handle" data-axis="qualite" cx="320" cy="140"></circle>
-          <circle class="tri-handle" data-axis="delais" cx="475.9" cy="410"></circle>
-          <circle class="tri-handle" data-axis="couts" cx="164.1" cy="410"></circle>
-
-          <circle class="tri-center" cx="320" cy="320" r="3"></circle>
-          <text class="tri-zero" x="332" y="316">0</text>
-
-          <text class="tri-label" x="320" y="52" text-anchor="middle">Qualité</text>
-          <text class="tri-label" x="552.1" y="460" text-anchor="start">Délais</text>
-          <text class="tri-label" x="87.9" y="460" text-anchor="end">Coûts</text>
-        </svg>
-      </div>
-    </section>
-
-    <!-- 03 · PROBLÉMATIQUE -->
-    <section data-screen-label="Définition" data-phase="2" data-state="dark">
-      <div class="mediafull">
-        <div class="media-slot video">
-          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Cameleon2.mp4"></video>
-        </div>
-        <div class="scrim"></div>
-        <div class="overlay" style="justify-content:center;">
-          <span class="eyebrow">La problématique</span>
-          <h1 style="font-size:1.4em;max-width:20ch;">C'est quoi un projet&nbsp;?</h1>
-          <div class="revealtext" onclick="this.classList.toggle('open')">
-            <span class="rt-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>Afficher une définition</span>
-          </div>
-          <p class="rt-body" style="text-align:left;">Un processus unique qui consiste en un ensemble d'activités coordonnées et maîtrisées comportant des dates de <strong>début</strong> et de <strong>fin</strong>, entrepris dans le but d'atteindre un <strong>objectif</strong> conforme à des exigences spécifiques, incluant les contraintes de <strong>délais</strong>, de <strong>coûts</strong> et de <strong>ressources</strong>.</p>
         </div>
       </div>
     </section>
