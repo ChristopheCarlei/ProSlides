@@ -294,6 +294,24 @@
   .chaos-chart.show-difficulte .lbl-difficulte .val{ display:inline; }
   .chaos-source{ margin:24px 0 0; font-size:11.5px; color:rgba(255,255,255,.55); text-align:center; }
 
+  /* ---- diagramme interactif « Triangle de Martin Barnes » ---- */
+  .tri-wrap{ position:relative; width:100%; height:100%; overflow:hidden;
+    background:radial-gradient(circle at 66% 50%, #0f4f4c 0%, #0a3d3b 52%, #072e2c 100%); }
+  .tri-head{ position:absolute; left:7%; top:11%; max-width:24ch; z-index:2; color:#fff; }
+  .tri-head .eyebrow{ display:block; font-size:14px; font-weight:800; letter-spacing:.06em; text-transform:uppercase;
+    color:rgba(255,255,255,.72); margin:0 0 .5em; }
+  .tri-head h2{ margin:0 0 .4em; font-size:36px; font-weight:800; color:#fff; text-shadow:0 2px 18px rgba(8,40,39,.45); }
+  .tri-head p{ margin:0; font-size:15.5px; line-height:1.5; color:rgba(255,255,255,.85); max-width:26ch; }
+  .tri-svg{ position:absolute; right:3%; top:50%; transform:translateY(-50%); width:min(50vw,600px); height:auto; }
+  .tri-svg .tri-axis{ stroke:rgba(255,255,255,.55); stroke-width:3; stroke-linecap:round; fill:none; }
+  .tri-svg .tri-fill{ fill:rgba(0,177,174,.34); stroke:var(--teal); stroke-width:2.5; stroke-linejoin:round; }
+  .tri-svg .tri-handle{ fill:#fff; stroke:var(--teal-deep); stroke-width:3; cursor:grab; r:14; transition:r .15s; touch-action:none; }
+  .tri-svg .tri-handle:hover{ r:17; }
+  .tri-svg .tri-handle.grabbing{ r:18; cursor:grabbing; }
+  .tri-svg .tri-center{ fill:rgba(255,255,255,.5); }
+  .tri-svg .tri-zero{ font-family:var(--font); font-size:14px; font-weight:700; fill:rgba(255,255,255,.55); }
+  .tri-svg .tri-label{ font-family:var(--font); font-size:24px; font-weight:800; fill:#fff; text-shadow:0 2px 10px rgba(0,0,0,.5); }
+
   /* ---- tuiles outils ---- */
 
   /* ---- icônes par objectif ---- */
@@ -786,6 +804,40 @@
             <p class="chaos-source">CHAOS 2020&nbsp;: Beyond Infinity — The Standish Group International, Inc.</p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- 02c · NOTION — Triangle de Martin Barnes -->
+    <section data-screen-label="Triangle qualité" data-phase="2" data-state="dark">
+      <div class="tri-wrap">
+        <div class="tri-head">
+          <span class="eyebrow">Notion clé</span>
+          <h2>Objectif(s) du projet</h2>
+          <p>Le triangle de Martin Barnes&nbsp;: qualité, coûts et délais se répondent. Faites glisser les sommets le long des axes pour explorer les compromis.</p>
+        </div>
+        <svg class="tri-svg" viewBox="0 0 640 640" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="triArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 Z" fill="rgba(255,255,255,.6)"></path>
+            </marker>
+          </defs>
+          <line class="tri-axis" x1="320" y1="320" x2="320" y2="90" marker-end="url(#triArrow)"></line>
+          <line class="tri-axis" x1="320" y1="320" x2="519.2" y2="435" marker-end="url(#triArrow)"></line>
+          <line class="tri-axis" x1="320" y1="320" x2="120.8" y2="435" marker-end="url(#triArrow)"></line>
+
+          <polygon class="tri-fill" points="320,140 475.9,410 164.1,410"></polygon>
+
+          <circle class="tri-handle" data-axis="qualite" cx="320" cy="140"></circle>
+          <circle class="tri-handle" data-axis="delais" cx="475.9" cy="410"></circle>
+          <circle class="tri-handle" data-axis="couts" cx="164.1" cy="410"></circle>
+
+          <circle class="tri-center" cx="320" cy="320" r="3"></circle>
+          <text class="tri-zero" x="332" y="316">0</text>
+
+          <text class="tri-label" x="320" y="52" text-anchor="middle">Qualité</text>
+          <text class="tri-label" x="552.1" y="460" text-anchor="start">Délais</text>
+          <text class="tri-label" x="87.9" y="460" text-anchor="end">Coûts</text>
+        </svg>
       </div>
     </section>
 
@@ -1353,6 +1405,69 @@
       var cur0 = document.querySelector('.slides > section.present');
       window.__updateProgmap(cur0 ? secs.indexOf(cur0) : 0);
     })();
+  })();
+
+  // ---- Triangle de Martin Barnes : sommets glissables le long des axes ----
+  (function(){
+    var svg = document.querySelector('.tri-svg');
+    if(!svg) return;
+    var CX=320, CY=320, MAXR=230, MINR=0;
+    var axes = [
+      { key:'qualite',  dx:0,        dy:-1   },
+      { key:'delais',   dx:0.8660,   dy:0.5  },
+      { key:'couts',    dx:-0.8660,  dy:0.5  }
+    ];
+    var poly = svg.querySelector('.tri-fill');
+
+    function render(){
+      var pts = [];
+      axes.forEach(function(ax){
+        var x = CX + ax.dx*ax.r, y = CY + ax.dy*ax.r;
+        ax.handle.setAttribute('cx', x);
+        ax.handle.setAttribute('cy', y);
+        pts.push(x+','+y);
+      });
+      poly.setAttribute('points', pts.join(' '));
+    }
+
+    axes.forEach(function(ax){
+      ax.handle = svg.querySelector('.tri-handle[data-axis="'+ax.key+'"]');
+      ax.r = 180; // position initiale (78 % de l'axe)
+    });
+    render();
+
+    function svgPoint(evt){
+      var pt = svg.createSVGPoint();
+      pt.x = evt.clientX; pt.y = evt.clientY;
+      var ctm = svg.getScreenCTM();
+      if(!ctm) return {x:CX,y:CY};
+      return pt.matrixTransform(ctm.inverse());
+    }
+
+    var dragging = null;
+    axes.forEach(function(ax){
+      ax.handle.addEventListener('pointerdown', function(e){
+        e.preventDefault();
+        dragging = ax;
+        try{ ax.handle.setPointerCapture(e.pointerId); }catch(err){}
+        ax.handle.classList.add('grabbing');
+      });
+    });
+    svg.addEventListener('pointermove', function(e){
+      if(!dragging) return;
+      var p = svgPoint(e);
+      var vx = p.x-CX, vy = p.y-CY;
+      var r = vx*dragging.dx + vy*dragging.dy; // projection sur l'axe
+      dragging.r = Math.max(MINR, Math.min(MAXR, r));
+      render();
+    });
+    function endDrag(){
+      if(!dragging) return;
+      dragging.handle.classList.remove('grabbing');
+      dragging = null;
+    }
+    window.addEventListener('pointerup', endDrag);
+    window.addEventListener('pointercancel', endDrag);
   })();
 </script>
 </body>
