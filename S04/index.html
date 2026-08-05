@@ -252,6 +252,48 @@
     display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background .15s; }
   .roomreveal .rr-close:hover{ background:rgba(255,255,255,.24); }
 
+  /* ---- graphique interactif « Succès des projets » (CHAOS 2020) ---- */
+  .chaos-modal{ width:min(920px,92vw); max-height:88vh; overflow:auto; background:rgba(10,76,74,.55);
+    border:1px solid rgba(255,255,255,.18); border-radius:20px; padding:34px 40px 28px;
+    box-shadow:0 34px 90px -30px rgba(0,0,0,.85); animation:rrPop .45s cubic-bezier(.2,.7,.2,1) both; }
+  .chaos-modal h3{ margin:0; font-size:20px; font-weight:800; color:#fff; text-align:center; }
+  .chaos-modal h3 small{ display:block; font-size:13px; font-weight:600; color:rgba(255,255,255,.68); margin-top:5px; }
+  .chaos-body{ display:flex; align-items:center; justify-content:center; gap:44px; flex-wrap:wrap; margin-top:24px; }
+  .chaos-pie{ width:min(300px,58vw); height:auto; flex:0 0 auto; }
+  .chaos-pie .wedge{ fill:rgba(255,255,255,.12); stroke:rgba(255,255,255,.5); stroke-width:2;
+    transition:fill .5s ease; }
+  .chaos-pie .wedge-pct{ font-family:var(--font); font-weight:800; font-size:26px; fill:#fff;
+    text-anchor:middle; dominant-baseline:middle; opacity:0; transition:opacity .4s ease .15s;
+    pointer-events:none; }
+  .chaos-chart.show-succes .w-succes{ fill:#22C55E; }
+  .chaos-chart.show-succes .pct-succes{ opacity:1; }
+  .chaos-chart.show-echec .w-echec{ fill:#EF4444; }
+  .chaos-chart.show-echec .pct-echec{ opacity:1; }
+  .chaos-chart.show-difficulte .w-difficulte{ fill:#0EA5E9; }
+  .chaos-chart.show-difficulte .pct-difficulte{ opacity:1; }
+  .chaos-legend{ display:flex; flex-direction:column; gap:12px; min-width:220px; }
+  .chaos-label{ appearance:none; cursor:pointer; display:flex; align-items:center; gap:12px;
+    font-family:var(--font); font-size:16px; font-weight:700; color:#fff;
+    background:rgba(255,255,255,.08); border:1.5px solid rgba(255,255,255,.22); border-radius:12px;
+    padding:11px 18px; transition:background .15s,border-color .15s; text-align:left; }
+  .chaos-label:hover{ background:rgba(255,255,255,.17); border-color:rgba(255,255,255,.4); }
+  .chaos-label .dot{ width:14px; height:14px; border-radius:50%; flex:0 0 auto; background:rgba(255,255,255,.3); transition:background .3s; }
+  .chaos-label .qmark{ margin-left:auto; opacity:.55; font-weight:800; }
+  .chaos-label .val{ margin-left:auto; display:none; font-weight:800; }
+  .lbl-succes .dot{ background:rgba(34,197,94,.4); }
+  .lbl-echec .dot{ background:rgba(239,68,68,.4); }
+  .lbl-difficulte .dot{ background:rgba(14,165,233,.4); }
+  .chaos-chart.show-succes .lbl-succes .dot{ background:#22C55E; }
+  .chaos-chart.show-succes .lbl-succes .qmark{ display:none; }
+  .chaos-chart.show-succes .lbl-succes .val{ display:inline; }
+  .chaos-chart.show-echec .lbl-echec .dot{ background:#EF4444; }
+  .chaos-chart.show-echec .lbl-echec .qmark{ display:none; }
+  .chaos-chart.show-echec .lbl-echec .val{ display:inline; }
+  .chaos-chart.show-difficulte .lbl-difficulte .dot{ background:#0EA5E9; }
+  .chaos-chart.show-difficulte .lbl-difficulte .qmark{ display:none; }
+  .chaos-chart.show-difficulte .lbl-difficulte .val{ display:inline; }
+  .chaos-source{ margin:24px 0 0; font-size:11.5px; color:rgba(255,255,255,.55); text-align:center; }
+
   /* ---- tuiles outils ---- */
 
   /* ---- icônes par objectif ---- */
@@ -695,6 +737,53 @@
               <span class="qq">Des points à clarifier&nbsp;?</span>
               <span class="qh">C'est le moment&nbsp;: posez vos questions avant de continuer.</span>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02b · NOTION — Succès des projets -->
+    <section data-screen-label="Succès projets" data-phase="2" data-state="dark">
+      <div class="mediafull content">
+        <div class="media-slot video">
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Cameleon2.mp4"></video>
+        </div>
+        <div class="scrim"></div>
+        <div class="overlay">
+          <span class="eyebrow">Notion clé</span>
+          <h2 style="max-width:20ch;">Succès des projets&nbsp;?</h2>
+          <p class="lead" style="max-width:52ch;">Sur 50&nbsp;000 projets étudiés entre 2015 et 2020, quelle part aboutit vraiment&nbsp;? À votre avis&nbsp;: succès, échec, ou en difficulté&nbsp;?</p>
+          <button class="roomreveal-cta" type="button" onclick="this.closest('.mediafull').classList.add('reveal-open')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 12V3"/><path d="M12 12l7.5-4.3"/></svg>
+            Afficher le graphique
+          </button>
+        </div>
+        <div class="roomreveal" onclick="this.closest('.mediafull').classList.remove('reveal-open')">
+          <button class="rr-close" type="button" aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+          <div class="chaos-modal chaos-chart" onclick="event.stopPropagation()">
+            <h3>Résolution de projets entre 2015 et 2020<small>Échantillon de 50&nbsp;000 projets</small></h3>
+            <div class="chaos-body">
+              <svg class="chaos-pie" viewBox="0 0 440 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path class="wedge w-succes" d="M220,220 L220.00,30.00 A190,190 0 0,1 376.13,328.27 Z"></path>
+                <path class="wedge w-echec" d="M220,220 L376.13,328.27 A190,190 0 0,1 179.02,405.53 Z"></path>
+                <path class="wedge w-difficulte" d="M220,220 L179.02,405.53 A190,190 0 0,1 219.88,30.00 Z"></path>
+                <text class="wedge-pct pct-succes" x="324.4" y="165.4">34.65%</text>
+                <text class="wedge-pct pct-echec" x="263.0" y="329.7">18.81%</text>
+                <text class="wedge-pct pct-difficulte" x="102.9" y="207.3">46.53%</text>
+              </svg>
+              <div class="chaos-legend">
+                <button class="chaos-label lbl-succes" type="button" onclick="this.closest('.chaos-chart').classList.add('show-succes')">
+                  <span class="dot"></span>Succès<span class="qmark">?</span><span class="val">34.65%</span>
+                </button>
+                <button class="chaos-label lbl-echec" type="button" onclick="this.closest('.chaos-chart').classList.add('show-echec')">
+                  <span class="dot"></span>Échec<span class="qmark">?</span><span class="val">18.81%</span>
+                </button>
+                <button class="chaos-label lbl-difficulte" type="button" onclick="this.closest('.chaos-chart').classList.add('show-difficulte')">
+                  <span class="dot"></span>En difficulté<span class="qmark">?</span><span class="val">46.53%</span>
+                </button>
+              </div>
+            </div>
+            <p class="chaos-source">CHAOS 2020&nbsp;: Beyond Infinity — The Standish Group International, Inc.</p>
           </div>
         </div>
       </div>
