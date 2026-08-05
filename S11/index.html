@@ -262,6 +262,55 @@
     display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background .15s; }
   .roomreveal .rr-close:hover{ background:rgba(255,255,255,.24); }
 
+  /* ---- dilemmes du formateur : curseurs déplaçables sur un axe ---- */
+  .dil-wrap{ position:relative; width:100%; height:100%; overflow:hidden;
+    box-sizing:border-box; padding:34px 54px 26px;
+    display:flex; flex-direction:column; color:#fff;
+    background:radial-gradient(circle at 70% 22%, #0f5350 0%, #0a3d3b 55%, #072e2c 100%); }
+  .dil-title{ text-align:center; flex:0 0 auto; margin-bottom:16px; }
+  .dil-title .eyebrow{ display:block; font-size:12.5px; font-weight:800; letter-spacing:.09em;
+    text-transform:uppercase; color:rgba(255,255,255,.62); margin-bottom:.45em; }
+  .dil-title h2{ margin:0; font-size:29px; font-weight:800; color:#fff;
+    text-shadow:0 2px 16px rgba(8,40,39,.5); }
+  .dil-hint{ font-size:12px; color:rgba(255,255,255,.5); margin:.45em 0 0; }
+
+  .dil-list{ flex:1 1 auto; display:flex; flex-direction:column; justify-content:center; gap:17px; min-height:0; }
+  .dil-row{ --ol:0; --or:0; --fg:#fff; }
+  .dil-head{ background:var(--c); color:var(--fg); border-radius:7px;
+    padding:8px 18px; text-align:center; font-size:18.5px; font-weight:800; line-height:1.25;
+    box-shadow:0 6px 18px -10px rgba(0,0,0,.7); transition:background .2s; }
+  .dil-head em{ font-style:italic; font-weight:700; opacity:.9; }
+  .dil-head .t-full, .dil-head .t-left, .dil-head .t-right{ display:none; }
+  .dil-row.is-center .dil-head .t-full{ display:inline; }
+  .dil-row.is-left   .dil-head .t-left{ display:inline; }
+  .dil-row.is-right  .dil-head .t-right{ display:inline; }
+
+  .dil-body{ display:grid; grid-template-columns:242px 1fr 242px; align-items:center; gap:16px; margin-top:8px; }
+  .dil-col{ display:flex; flex-direction:column; gap:7px; }
+  .dil-col--r{ align-items:flex-end; }
+  /* Pas de transition sur l'opacité : elle suit directement la position du
+     curseur, un fondu la ferait traîner derrière le geste. */
+  .dil-pole{ background:var(--c); color:var(--fg); border-radius:6px; padding:7px 13px;
+    font-size:14.5px; font-weight:700; line-height:1.25; width:100%; box-sizing:border-box; }
+  .dil-col--l .dil-pole{ opacity:var(--ol); }
+  .dil-col--r .dil-pole{ opacity:var(--or); text-align:right; }
+
+  .dil-track{ position:relative; height:30px; cursor:pointer; touch-action:none; }
+  .dil-track::before{ content:""; position:absolute; left:0; right:0; top:50%; height:5px;
+    transform:translateY(-50%); background:var(--c); border-radius:3px; opacity:.85; }
+  /* pointes de flèche aux deux extrémités, comme sur le modèle */
+  .dil-track::after{ content:""; position:absolute; left:0; right:0; top:50%; height:13px; transform:translateY(-50%);
+    background:
+      linear-gradient(45deg, var(--c) 0 50%, transparent 50%) left center / 9px 13px no-repeat,
+      linear-gradient(-45deg, var(--c) 0 50%, transparent 50%) right center / 9px 13px no-repeat;
+    opacity:.85; }
+  .dil-thumb{ position:absolute; top:50%; left:50%; width:24px; height:24px; margin:-12px 0 0 -12px;
+    border-radius:50%; background:#fff; border:3px solid var(--c); cursor:grab; touch-action:none;
+    box-shadow:0 4px 14px -4px rgba(0,0,0,.75); transition:transform .12s, box-shadow .12s; }
+  .dil-thumb:hover{ transform:scale(1.12); }
+  .dil-thumb:focus-visible{ outline:3px solid #9ff0ed; outline-offset:3px; }
+  .dil-thumb.grabbing{ cursor:grabbing; transform:scale(1.2); box-shadow:0 6px 20px -4px rgba(0,0,0,.85); }
+
   /* ---- tuiles outils ---- */
 
   /* ---- icônes par objectif ---- */
@@ -596,6 +645,10 @@
     html:not(.print-pdf) .bridge.gated .dimsgrid{ filter:none !important; opacity:1 !important; }
     html:not(.print-pdf) .bridge__col__details{ max-height:none !important; opacity:1 !important; margin-top:14px !important; }
     html:not(.print-pdf) .roomsteps .rscard.gated .rexbox{ display:block !important; }
+    /* Dilemmes : les deux pôles ne sont visibles qu'en déplaçant le curseur.
+       Sur papier, on les affiche tous, sinon la diapo sortirait vide.        */
+    html:not(.print-pdf) .dil-pole{ opacity:1 !important; }
+    html:not(.print-pdf) .dil-hint{ display:none !important; }
 
     /* Repère de diapo, repris du mode lecture. */
     html:not(.print-pdf) .reveal .slides > section::after{
@@ -778,6 +831,89 @@
             <li data-ico="bulb">Valoriser les <strong>ressources et les progrès</strong> plutôt que les manques.</li>
             <li data-ico="groupe">Un regard qui <strong>fait grandir</strong> plutôt qu'il ne sanctionne.</li>
           </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07b · NOTION — dilemmes typiques (curseurs) -->
+    <section data-screen-label="Dilemmes typiques" data-phase="3" data-state="dark">
+      <div class="dil-wrap">
+        <div class="dil-title">
+          <span class="eyebrow">Notion clé · le formateur</span>
+          <h2>Dilemmes typiques du formateur</h2>
+          <p class="dil-hint">Faites glisser chaque curseur vers l'un des deux pôles.</p>
+        </div>
+
+        <div class="dil-list">
+          <div class="dil-row is-center" style="--c:#2A73BF">
+            <div class="dil-head">
+              <span class="t-full">Aider <em>ou</em> évaluer</span>
+              <span class="t-left">Aider</span>
+              <span class="t-right">Évaluer</span>
+            </div>
+            <div class="dil-body">
+              <div class="dil-col dil-col--l"><span class="dil-pole">Hiérarchiser les conseils</span></div>
+              <div class="dil-track">
+                <div class="dil-thumb" role="slider" tabindex="0" aria-label="Aider ou évaluer"
+                     aria-valuemin="-100" aria-valuemax="100" aria-valuenow="0"></div>
+              </div>
+              <div class="dil-col dil-col--r"><span class="dil-pole">Dire tout ce qu'on a vu</span></div>
+            </div>
+          </div>
+
+          <div class="dil-row is-center" style="--c:#E0A030;--fg:#14212E">
+            <div class="dil-head">
+              <span class="t-full">Conseiller à partir de ce que l'on a fait soi-même <em>ou</em> à partir d'une «&nbsp;culture de métier&nbsp;»</span>
+              <span class="t-left">Conseiller à partir de ce que l'on a fait soi-même</span>
+              <span class="t-right">Conseiller à partir d'une «&nbsp;culture de métier&nbsp;»</span>
+            </div>
+            <div class="dil-body">
+              <div class="dil-col dil-col--l"><span class="dil-pole">Transmettre <em>son</em> métier</span></div>
+              <div class="dil-track">
+                <div class="dil-thumb" role="slider" tabindex="0" aria-label="Conseiller à partir de soi-même ou d'une culture de métier"
+                     aria-valuemin="-100" aria-valuemax="100" aria-valuenow="0"></div>
+              </div>
+              <div class="dil-col dil-col--r"><span class="dil-pole">Transmettre <em>le</em> métier</span></div>
+            </div>
+          </div>
+
+          <div class="dil-row is-center" style="--c:#0B7A70">
+            <div class="dil-head">
+              <span class="t-full">Aider à réaliser <em>ou</em> à apprendre le métier</span>
+              <span class="t-left">Aider à réaliser</span>
+              <span class="t-right">Aider à apprendre le métier</span>
+            </div>
+            <div class="dil-body">
+              <div class="dil-col dil-col--l">
+                <span class="dil-pole">Co-construire une solution</span>
+                <span class="dil-pole">Transmettre le métier</span>
+              </div>
+              <div class="dil-track">
+                <div class="dil-thumb" role="slider" tabindex="0" aria-label="Aider à réaliser ou à apprendre le métier"
+                     aria-valuemin="-100" aria-valuemax="100" aria-valuenow="0"></div>
+              </div>
+              <div class="dil-col dil-col--r">
+                <span class="dil-pole">Prescrire <em>une</em> solution</span>
+                <span class="dil-pole">Faire réfléchir au métier</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="dil-row is-center" style="--c:#5BC4C0;--fg:#0A2E2C">
+            <div class="dil-head">
+              <span class="t-full">Conseiller face à l'urgence de la situation <em>ou</em> pour un plus long terme</span>
+              <span class="t-left">Conseiller face à l'urgence de la situation</span>
+              <span class="t-right">Conseiller pour un plus long terme</span>
+            </div>
+            <div class="dil-body">
+              <div class="dil-col dil-col--l"><span class="dil-pole">Apprentissage élèves</span></div>
+              <div class="dil-track">
+                <div class="dil-thumb" role="slider" tabindex="0" aria-label="Conseiller dans l'urgence ou pour le long terme"
+                     aria-valuemin="-100" aria-valuemax="100" aria-valuenow="0"></div>
+              </div>
+              <div class="dil-col dil-col--r"><span class="dil-pole">Apprentissage enseignant</span></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1213,6 +1349,75 @@
       var cur0 = document.querySelector('.slides > section.present');
       window.__updateProgmap(cur0 ? secs.indexOf(cur0) : 0);
     })();
+  })();
+
+  // ---- Dilemmes du formateur : curseurs déplaçables sur chaque axe ----
+  (function(){
+    var rows = document.querySelectorAll('.dil-row');
+    if(!rows.length) return;
+    var DEAD = 0.10;    // zone morte centrale : rien ne s'affiche tant qu'on n'a pas quitté le centre
+    var SWITCH = 0.14;  // seuil auquel l'intitulé bascule sur un seul pôle
+
+    Array.prototype.forEach.call(rows, function(row){
+      var track = row.querySelector('.dil-track');
+      var thumb = row.querySelector('.dil-thumb');
+      if(!track || !thumb) return;
+      var pos = 0;   // -1 (pôle gauche) … 0 (centre) … +1 (pôle droit)
+
+      function apply(){
+        thumb.style.left = ((pos + 1) / 2 * 100) + '%';
+        // opacité progressive : 0 dans la zone morte, 1 à l'extrémité
+        var l = Math.min(1, Math.max(0, (-pos - DEAD) / (1 - DEAD)));
+        var r = Math.min(1, Math.max(0, ( pos - DEAD) / (1 - DEAD)));
+        row.style.setProperty('--ol', l);
+        row.style.setProperty('--or', r);
+        row.classList.toggle('is-left',   pos <= -SWITCH);
+        row.classList.toggle('is-right',  pos >=  SWITCH);
+        row.classList.toggle('is-center', Math.abs(pos) < SWITCH);
+        thumb.setAttribute('aria-valuenow', Math.round(pos * 100));
+      }
+      apply();
+
+      function setFromClientX(x){
+        var r = track.getBoundingClientRect();
+        if(!r.width) return;
+        pos = Math.max(-1, Math.min(1, (x - r.left) / r.width * 2 - 1));
+        apply();
+      }
+
+      var dragging = false;
+      thumb.addEventListener('pointerdown', function(e){
+        e.preventDefault(); e.stopPropagation();
+        dragging = true;
+        try{ thumb.setPointerCapture(e.pointerId); }catch(err){}
+        thumb.classList.add('grabbing');
+      });
+      // clic ailleurs sur la barre : le curseur s'y déplace directement
+      track.addEventListener('pointerdown', function(e){
+        if(e.target === thumb) return;
+        e.preventDefault(); e.stopPropagation();
+        setFromClientX(e.clientX);
+      });
+      window.addEventListener('pointermove', function(e){
+        if(dragging) setFromClientX(e.clientX);
+      });
+      function endDrag(){
+        if(!dragging) return;
+        dragging = false;
+        thumb.classList.remove('grabbing');
+      }
+      window.addEventListener('pointerup', endDrag);
+      window.addEventListener('pointercancel', endDrag);
+
+      // Flèches du clavier : on arrête la propagation, sinon reveal change de diapo.
+      thumb.addEventListener('keydown', function(e){
+        var step = e.shiftKey ? 0.25 : 0.1, used = false;
+        if(e.key === 'ArrowLeft'  || e.key === 'ArrowDown'){ pos = Math.max(-1, pos - step); used = true; }
+        if(e.key === 'ArrowRight' || e.key === 'ArrowUp'){   pos = Math.min( 1, pos + step); used = true; }
+        if(e.key === 'Home'){ pos = 0; used = true; }
+        if(used){ e.preventDefault(); e.stopPropagation(); apply(); }
+      });
+    });
   })();
 </script>
 </body>
