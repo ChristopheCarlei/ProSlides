@@ -480,6 +480,19 @@
   .revealtext.open .rt-hint{ display:none; }
   .revealtext.open + .rt-body{ display:block; }
 
+  /* Variante « aux origines » sur un plan très contrasté : le sujet éclairé
+     occupe le centre de l'image sur toute sa hauteur, aucun placement ne met
+     le titre blanc à l'abri (contraste mesuré à 1,04). Le texte est donc posé
+     sur le même panneau translucide que la description — 0,78 d'opacité, soit
+     5,5:1 même sur les pixels les plus clairs du plan. */
+  .mediafull.origine .overlay{ align-items:flex-start; }
+  .origine .op{ box-sizing:border-box; max-width:64ch; padding:24px 30px 26px; border-radius:16px;
+    background:rgba(10,76,74,.78); backdrop-filter:blur(7px); -webkit-backdrop-filter:blur(7px);
+    box-shadow:0 18px 46px -20px rgba(0,0,0,.72); }
+  .origine .op .revealtext{ margin-top:.35em; }
+  .origine .op .rt-body{ background:none; backdrop-filter:none; -webkit-backdrop-filter:none;
+    box-shadow:none; padding:.45em 0 0; max-width:none; text-shadow:none; }
+
   /* ---- schéma cerveau (aires visuelles) ---- */
   .brainmap{ position:relative; width:100%; height:100%; overflow:hidden;
     background:radial-gradient(circle at 42% 38%, #54575d 0%, #313338 78%); }
@@ -744,6 +757,10 @@
        Sur papier, on les affiche tous, sinon la diapo sortirait vide.        */
     html:not(.print-pdf) .dil-pole{ opacity:1 !important; }
     html:not(.print-pdf) .dil-hint{ display:none !important; }
+    /* Description repliée derrière « Afficher la description » : sur papier,
+       la diapo ne garderait que son titre. On la déplie.                     */
+    html:not(.print-pdf) .rt-body{ display:block !important; }
+    html:not(.print-pdf) .revealtext .rt-hint{ display:none !important; }
     /* Iceberg : les deux encarts sont fermés au départ. Sur papier, on les
        ouvre tous les deux et on affiche la synthèse.                        */
     /* Le canevas mis à l'échelle par JS ne connaît pas la largeur de la page
@@ -1132,6 +1149,25 @@
             <li data-ico="target"><strong>Évaluer ou soutenir&nbsp;?</strong> Tenir les deux sans les confondre.</li>
             <li data-ico="identite"><strong>Ses propres biais&nbsp;:</strong> les reconnaître pour rester juste.</li>
           </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08b · AUX ORIGINES — l'effet Pygmalion (même gabarit que S03) -->
+    <section data-screen-label="Effet Pygmalion" data-phase="3" data-state="dark">
+      <div class="mediafull content origine">
+        <div class="media-slot video">
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Pygmalion.mp4"></video>
+        </div>
+        <div class="overlay">
+         <div class="op">
+          <span class="eyebrow">Aux origines · mythologie grecque</span>
+          <h2 style="max-width:20ch;margin-bottom:.15em;">Pygmalion et la statue qui s'anime</h2>
+          <div class="revealtext" onclick="this.classList.toggle('open')">
+            <span class="rt-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>Afficher la description</span>
+          </div>
+          <p class="rt-body" style="text-align:left;">Le sculpteur <strong>Pygmalion</strong> taille dans l'ivoire une femme si parfaite<br />qu'il en tombe amoureux et la traite comme vivante.<br />Aphrodite exauce son vœu&nbsp;: la statue <strong>s'anime</strong>.<br />En 1968, <strong>Rosenthal et Jacobson</strong> en font un effet mesuré en classe&nbsp;:<br />les élèves dont on attend davantage progressent davantage.<br />Ce que l'on <em>croit</em> de l'autre finit par le façonner.</p>
+         </div>
         </div>
       </div>
     </section>
