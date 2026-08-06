@@ -262,6 +262,90 @@
     display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background .15s; }
   .roomreveal .rr-close:hover{ background:rgba(255,255,255,.24); }
 
+  /* ---- courbe de l'oubli : tracé progressif au clic -------------------
+     Le bouton lance le tracé ; la tête de courbe entraîne le compteur de
+     rétention, les trois jalons et la conclusion. Composition réglée au pixel
+     sur un canevas 1280×720, mis à l'échelle hors présentation.             */
+  .fg-wrap{ position:relative; width:100%; height:100%; overflow:hidden;
+    background:radial-gradient(circle at 78% 16%, #12595A 0%, #0a3d3b 54%, #061f22 100%); }
+  .fg-canvas{ position:absolute; left:0; top:0; width:1280px; height:720px; transform-origin:top left;
+    box-sizing:border-box; padding:70px 54px 92px; display:flex; flex-direction:column; color:#fff; }
+  .fg-head{ flex:0 0 auto; text-align:center; margin-bottom:12px; }
+  .fg-head .eyebrow{ display:block; font-size:12.5px; font-weight:800; letter-spacing:.09em;
+    text-transform:uppercase; color:rgba(255,255,255,.62); margin-bottom:.4em; }
+  .fg-head h2{ margin:0; font-size:29px; font-weight:800; color:#fff; text-shadow:0 2px 16px rgba(8,40,39,.5); }
+  .fg-body{ flex:1 1 auto; min-height:0; display:flex; gap:28px; }
+
+  /* le graphique */
+  .fg-chart{ flex:0 0 800px; width:800px; border-radius:16px; overflow:hidden; background:#fff;
+    box-shadow:0 22px 56px -26px rgba(0,0,0,.8); }
+  .fg-chart svg{ display:block; width:100%; height:100%; }
+  .fg-grid{ stroke:#DDE4E6; stroke-width:1; }
+  .fg-axis{ stroke:#1B2A2E; stroke-width:2; }
+  .fg-tick{ font-family:var(--font); font-size:15px; font-weight:700; fill:#41545A; }
+  .fg-tick.x{ text-anchor:middle; }
+  .fg-tick.y{ text-anchor:end; }
+  .fg-atitle{ font-family:var(--font); font-size:15.5px; font-weight:800; fill:#1B2A2E; }
+  .fg-curve{ fill:none; stroke:#E5323F; stroke-width:4; stroke-linecap:round; stroke-linejoin:round; }
+  .fg-area{ fill:#00B1AE; fill-opacity:.16; }
+  .fg-badge rect{ fill:#E5323F; }
+  .fg-badge text{ font-family:var(--font); font-size:21px; font-weight:800; fill:#fff; text-anchor:middle; }
+  .fg-guide{ stroke:#2A6FE0; stroke-width:2.5; stroke-dasharray:7 6; }
+  .fg-marker{ fill:#fff; stroke:#2A6FE0; stroke-width:4; }
+  .fg-guide, .fg-marker{ opacity:0; transition:opacity .3s ease; }
+  .fg-map.armed .fg-guide, .fg-map.armed .fg-marker{ opacity:1; }
+
+  /* colonne de droite */
+  .fg-side{ flex:1 1 auto; min-width:0; position:relative; }
+  .fg-card{ position:absolute; left:0; right:0; box-sizing:border-box; border-radius:14px;
+    background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); padding:14px 20px; }
+  .fg-live{ top:0; height:136px; display:flex; flex-direction:column; justify-content:center; }
+  .fg-k{ font-size:11.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:#9ff0ed; }
+  .fg-num{ font-size:52px; font-weight:800; letter-spacing:-.03em; line-height:1; color:#fff;
+    font-variant-numeric:tabular-nums; margin:4px 0 3px; }
+  .fg-sub{ font-size:15px; font-weight:600; line-height:1.3; color:rgba(255,255,255,.82); }
+
+  /* Éteint, le jalon reste lisible (5,4:1) : c'est sa valeur qui est cachée,
+     pas son intitulé — le chiffre se dévoile quand la courbe l'atteint. */
+  .fg-mile{ height:52px; display:flex; align-items:center; justify-content:space-between; gap:10px;
+    padding:0 18px; opacity:.75; transition:opacity .35s ease, background .35s ease, border-color .35s ease; }
+  /* ancrées par data-at, pas par nth-of-type : les cartes voisines sont des
+     div elles aussi, la numérotation par type ne désignait pas les jalons. */
+  .fg-mile[data-at="1"]{ top:148px; } .fg-mile[data-at="3"]{ top:206px; } .fg-mile[data-at="5"]{ top:264px; }
+  .fg-mile .ml{ font-size:15.5px; font-weight:700; color:rgba(255,255,255,.88); }
+  .fg-mile .mv{ font-size:23px; font-weight:800; color:#fff; font-variant-numeric:tabular-nums; }
+  .fg-mile .mr{ display:none; }
+  .fg-mile .mq{ color:#9ff0ed; }
+  .fg-mile.on{ opacity:1; background:rgba(229,50,63,.26); border-color:rgba(229,50,63,.8); }
+  .fg-mile.on .mv{ color:#FFC2C7; }
+  .fg-mile.on .mr{ display:inline; }
+  .fg-mile.on .mq{ display:none; }
+
+  .fg-concl{ top:328px; height:110px; display:flex; flex-direction:column; justify-content:center; gap:5px;
+    background:rgba(159,240,237,.14); border-color:rgba(159,240,237,.4);
+    opacity:0; transform:translateY(9px); transition:opacity .45s ease, transform .45s ease; }
+  .fg-map.done .fg-concl{ opacity:1; transform:none; }
+  .fg-concl .ct{ font-size:17px; font-weight:700; line-height:1.34; color:#fff; }
+  .fg-concl .ct b{ color:#9ff0ed; font-weight:800; }
+
+  .fg-btn{ position:absolute; left:0; right:0; top:448px; height:50px; appearance:none; border:0;
+    border-radius:999px; cursor:pointer; font-family:var(--font); font-size:17px; font-weight:800;
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    background:var(--rose); color:#fff; box-shadow:0 14px 34px -14px rgba(207,0,99,.9);
+    transition:background .16s, transform .12s, opacity .16s; }
+  .fg-btn:hover{ background:var(--rose-deep); transform:translateY(-2px); }
+  .fg-btn:focus-visible{ outline:3px solid #9ff0ed; outline-offset:3px; }
+  .fg-btn svg{ width:19px; height:19px; display:block; }
+  .fg-btn .l-run, .fg-btn .l-again{ display:none; }
+  .fg-btn[data-state="running"]{ background:rgba(255,255,255,.16); cursor:default; transform:none; }
+  .fg-btn[data-state="running"] .l-idle, .fg-btn[data-state="done"] .l-idle{ display:none; }
+  .fg-btn[data-state="running"] .l-run{ display:inline; }
+  .fg-btn[data-state="done"] .l-again{ display:inline; }
+  .fg-btn[data-state="running"] svg, .fg-btn[data-state="done"] .ico-play{ display:none; }
+  .fg-btn .ico-again{ display:none; }
+  .fg-btn[data-state="done"] .ico-again{ display:block; }
+  @media(prefers-reduced-motion:reduce){ .fg-concl, .fg-mile, .fg-guide, .fg-marker{ transition:none; } }
+
   /* ---- tuiles outils ---- */
 
   /* ---- icônes par objectif ---- */
@@ -596,6 +680,19 @@
     html:not(.print-pdf) .bridge.gated .dimsgrid{ filter:none !important; opacity:1 !important; }
     html:not(.print-pdf) .bridge__col__details{ max-height:none !important; opacity:1 !important; margin-top:14px !important; }
     html:not(.print-pdf) .roomsteps .rscard.gated .rexbox{ display:block !important; }
+    /* Courbe de l'oubli : rien n'est tracé tant qu'on n'a pas cliqué. Sur
+       papier, on affiche la courbe entière, les jalons et la conclusion. Le
+       compteur, lui, n'a plus de sens figé : on le retire.                   */
+    html:not(.print-pdf) .fg-canvas{ position:static !important; width:100% !important; height:100% !important;
+      transform:none !important; padding:5% 4% 4% !important; }
+    html:not(.print-pdf) .fg-curve{ stroke-dasharray:none !important; stroke-dashoffset:0 !important; }
+    html:not(.print-pdf) .fg-area{ clip-path:none !important; }
+    html:not(.print-pdf) .fg-live, html:not(.print-pdf) .fg-btn,
+    html:not(.print-pdf) .fg-guide, html:not(.print-pdf) .fg-marker{ display:none !important; }
+    html:not(.print-pdf) .fg-mile{ opacity:1 !important; }
+    html:not(.print-pdf) .fg-mile .mr{ display:inline !important; }
+    html:not(.print-pdf) .fg-mile .mq{ display:none !important; }
+    html:not(.print-pdf) .fg-concl{ top:0 !important; opacity:1 !important; transform:none !important; }
 
     /* Repère de diapo, repris du mode lecture. */
     html:not(.print-pdf) .reveal .slides > section::after{
@@ -760,6 +857,88 @@
             <li data-ico="target"><strong>Revoir régulièrement</strong> vaut mieux qu'un seul bloc intensif.</li>
           </ol>
         </div>
+      </div>
+    </section>
+
+    <!-- 06b · NOTION — courbe de l'oubli (tracé progressif au clic) -->
+    <section data-screen-label="Courbe de l'oubli" data-phase="3" data-state="dark">
+      <div class="fg-wrap">
+       <div class="fg-canvas">
+        <div class="fg-head">
+          <span class="eyebrow">Notion clé · mémoire</span>
+          <h2>Courbe de l'oubli</h2>
+        </div>
+
+        <div class="fg-body fg-map">
+          <div class="fg-chart">
+            <svg viewBox="0 0 800 498" role="img" aria-label="Courbe de l'oubli : la rétention passe de 100 % à 17 % en un mois">
+              <defs>
+                <clipPath id="s12FgClip"><rect id="s12FgClipRect" x="78" y="20" width="0" height="422" /></clipPath>
+              </defs>
+
+              <!-- grille + axes -->
+              <g class="fg-grid">
+                <line x1="78" y1="26"  x2="772" y2="26"  /><line x1="78" y1="108" x2="772" y2="108" />
+                <line x1="78" y1="190" x2="772" y2="190" /><line x1="78" y1="272" x2="772" y2="272" />
+                <line x1="78" y1="354" x2="772" y2="354" />
+              </g>
+              <g class="fg-tick y">
+                <text x="66" y="32">100</text><text x="66" y="114">80</text><text x="66" y="196">60</text>
+                <text x="66" y="278">40</text><text x="66" y="360">20</text><text x="66" y="442">0</text>
+              </g>
+              <g class="fg-axis">
+                <line x1="78" y1="20" x2="78" y2="436" /><line x1="78" y1="436" x2="778" y2="436" />
+              </g>
+              <g class="fg-tick x">
+                <text x="78" y="462">0</text><text x="217" y="462">20 min</text><text x="356" y="462">1 heure</text>
+                <text x="494" y="462">1 jour</text><text x="633" y="462">1 semaine</text><text x="772" y="462">1 mois</text>
+              </g>
+              <text class="fg-atitle" x="425" y="490" text-anchor="middle">Temps écoulé depuis l'apprentissage</text>
+              <text class="fg-atitle" x="24" y="231" text-anchor="middle" transform="rotate(-90 24 231)">Rétention d'information (%)</text>
+
+              <!-- aire + courbe, dévoilées de gauche à droite -->
+              <g clip-path="url(#s12FgClip)">
+                <path id="s12FgArea" class="fg-area" d="" />
+              </g>
+              <path id="s12FgCurve" class="fg-curve" d="" />
+
+              <!-- repère mobile -->
+              <line id="s12FgGuide" class="fg-guide" x1="78" y1="26" x2="78" y2="26" />
+              <circle id="s12FgMarker" class="fg-marker" cx="78" cy="26" r="9" />
+
+              <g class="fg-badge">
+                <rect x="470" y="56" width="232" height="44" rx="7" />
+                <text x="586" y="86">Courbe de l'oubli</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="fg-side">
+            <div class="fg-card fg-live">
+              <span class="fg-k">Ce qu'il vous reste</span>
+              <div class="fg-num"><span id="s12FgNum">100</span>&nbsp;%</div>
+              <span class="fg-sub">de ce que vous venez d'apprendre</span>
+            </div>
+
+            <div class="fg-card fg-mile" data-at="1"><span class="ml">Après 20 minutes</span><span class="mv"><span class="mq">?</span><span class="mr">58 %</span></span></div>
+            <div class="fg-card fg-mile" data-at="3"><span class="ml">Après 1 jour</span><span class="mv"><span class="mq">?</span><span class="mr">38 %</span></span></div>
+            <div class="fg-card fg-mile" data-at="5"><span class="ml">Après 1 mois</span><span class="mv"><span class="mq">?</span><span class="mr">17 %</span></span></div>
+
+            <div class="fg-card fg-concl">
+              <span class="fg-k">Ce que ça dit</span>
+              <span class="ct">Oublier n'est <b>pas un défaut</b>&nbsp;: c'est le fonctionnement normal de la mémoire. Ce qui se travaille, c'est le <b>rythme des reprises</b>.</span>
+            </div>
+
+            <button class="fg-btn" id="s12FgBtn" type="button" data-state="idle">
+              <svg class="ico-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.8v14.4L19.5 12z"/></svg>
+              <svg class="ico-again" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v5h-5"/></svg>
+              <span class="l-idle">Tracer la courbe</span>
+              <span class="l-run">Tracé en cours…</span>
+              <span class="l-again">Rejouer</span>
+            </button>
+          </div>
+        </div>
+       </div>
       </div>
     </section>
 
@@ -1209,6 +1388,127 @@
       var cur0 = document.querySelector('.slides > section.present');
       window.__updateProgmap(cur0 ? secs.indexOf(cur0) : 0);
     })();
+  })();
+
+  // ---- Courbe de l'oubli : tracé progressif au clic ----
+  (function(){
+    var map = document.querySelector('.fg-map');
+    if(!map) return;
+
+    // Mise à l'échelle du canevas 1280×720 sur son cadre. On mesure en pixels
+    // de mise en page (clientWidth) : en présentation le cadre fait exactement
+    // 1280×720 malgré le scale « cover » de reveal, donc le facteur vaut 1.
+    var wrap = map.closest('.fg-wrap');
+    var canvas = wrap && wrap.querySelector('.fg-canvas');
+    function fitFg(){
+      if(!canvas) return;
+      var w = wrap.clientWidth, h = wrap.clientHeight;
+      if(!w || !h) return;
+      var s = Math.min(w/1280, h/720);
+      canvas.style.transform = 'scale(' + s.toFixed(4) + ')';
+      canvas.style.left = ((w - 1280*s)/2).toFixed(1) + 'px';
+      canvas.style.top  = ((h -  720*s)/2).toFixed(1) + 'px';
+    }
+    fitFg();
+    window.addEventListener('resize', fitFg);
+    window.addEventListener('load', fitFg);
+    if(window.ResizeObserver){ try{ new ResizeObserver(fitFg).observe(wrap); }catch(e){} }
+
+    // Repères du graphique (coordonnées du viewBox 800×498)
+    var X0 = 78, X1 = 772, Y0 = 26, Y1 = 436, SPANS = 5;
+    // Rétention aux six graduations : 0 · 20 min · 1 h · 1 jour · 1 semaine · 1 mois
+    var ANCH = [100, 58, 44, 38, 26, 17];
+
+    // Interpolation Catmull-Rom : la courbe passe exactement par chaque
+    // graduation, sans les angles d'une ligne brisée.
+    function retention(t){
+      var i = Math.max(0, Math.min(SPANS-1, Math.floor(t))), f = t - i;
+      var p0 = ANCH[Math.max(0,i-1)], p1 = ANCH[i], p2 = ANCH[i+1], p3 = ANCH[Math.min(SPANS,i+2)];
+      var v = 0.5*((2*p1) + (-p0+p2)*f + (2*p0-5*p1+4*p2-p3)*f*f + (-p0+3*p1-3*p2+p3)*f*f*f);
+      return Math.max(0, Math.min(100, v));
+    }
+    var xOf = function(t){ return X0 + (X1-X0)*t/SPANS; };
+    var yOf = function(v){ return Y1 - (Y1-Y0)*v/100; };
+
+    var curve  = document.getElementById('s12FgCurve');
+    var area   = document.getElementById('s12FgArea');
+    var clip   = document.getElementById('s12FgClipRect');
+    var guide  = document.getElementById('s12FgGuide');
+    var marker = document.getElementById('s12FgMarker');
+    var num    = document.getElementById('s12FgNum');
+    var btn    = document.getElementById('s12FgBtn');
+    var miles  = Array.prototype.slice.call(map.querySelectorAll('.fg-mile'));
+
+    var d = '', N = 240;
+    for(var i = 0; i <= N; i++){
+      var t = i/N*SPANS;
+      d += (i ? ' L' : 'M') + xOf(t).toFixed(2) + ' ' + yOf(retention(t)).toFixed(2);
+    }
+    curve.setAttribute('d', d);
+    area.setAttribute('d', d + ' L' + X1 + ' ' + Y1 + ' L' + X0 + ' ' + Y1 + ' Z');
+
+    var LEN = curve.getTotalLength();
+    var DUR = 5000;
+    var raf = null, t0 = 0;
+
+    function paint(p){          // p : avancement du tracé, 0 → 1
+      curve.style.strokeDashoffset = (LEN * (1-p)).toFixed(2);
+      var pt = curve.getPointAtLength(LEN * p);
+      clip.setAttribute('width', Math.max(0, pt.x - X0 + 1).toFixed(2));
+      marker.setAttribute('cx', pt.x.toFixed(2)); marker.setAttribute('cy', pt.y.toFixed(2));
+      guide.setAttribute('y1', pt.y.toFixed(2));
+      guide.setAttribute('x2', pt.x.toFixed(2)); guide.setAttribute('y2', pt.y.toFixed(2));
+      var v = (Y1 - pt.y) / (Y1-Y0) * 100;
+      num.textContent = Math.round(v);
+      // un jalon s'allume quand la tête dépasse sa graduation
+      miles.forEach(function(m){
+        m.classList.toggle('on', pt.x >= xOf(parseFloat(m.getAttribute('data-at'))) - 0.5);
+      });
+    }
+
+    function reset(){
+      if(raf) cancelAnimationFrame(raf); raf = null;
+      curve.style.strokeDasharray = LEN; curve.style.strokeDashoffset = LEN;
+      map.classList.remove('armed','done');
+      clip.setAttribute('width', 0);
+      num.textContent = '100';
+      miles.forEach(function(m){ m.classList.remove('on'); });
+      btn.setAttribute('data-state','idle');
+    }
+
+    function finish(){
+      paint(1); map.classList.add('done'); btn.setAttribute('data-state','done'); raf = null;
+    }
+
+    function run(){
+      if(btn.getAttribute('data-state') === 'running') return;
+      reset();
+      map.classList.add('armed');
+      btn.setAttribute('data-state','running');
+      // sans animation demandée par le système, on affiche la courbe entière
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ finish(); return; }
+      t0 = performance.now();
+      (function step(now){
+        var p = Math.min(1, (now - t0) / DUR);
+        paint(p);
+        if(p < 1) raf = requestAnimationFrame(step); else finish();
+      })(t0);
+    }
+
+    btn.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); run(); });
+    // Espace / Entrée : on arrête la propagation, sinon reveal change de diapo.
+    btn.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); e.stopPropagation(); run(); }
+    });
+
+    // On quitte la diapo : le tracé repart de zéro à la prochaine visite.
+    if(typeof deck !== 'undefined' && deck.on){
+      deck.on('slidechanged', function(){
+        var cur = deck.getCurrentSlide();
+        if(!cur || !cur.contains(map)) reset();
+      });
+    }
+    reset();
   })();
 </script>
 </body>
