@@ -348,6 +348,82 @@
   .fg-btn[data-state="done"] .ico-again{ display:block; }
   @media(prefers-reduced-motion:reduce){ .fg-concl, .fg-mile, .fg-guide, .fg-marker{ transition:none; } }
 
+  /* ---- fonction mémoire : le souvenir sert la décision à venir -----------
+     Cinq souvenirs cliquables à gauche ; chacun dévoile à droite ce qu'il
+     permet d'anticiper. Les cinq dévoilés, la consigne cède la place aux
+     deux citations.                                                         */
+  .fm-wrap{ position:relative; width:100%; height:100%; overflow:hidden;
+    background:radial-gradient(circle at 22% 12%, #143f3f 0%, #0a2f30 52%, #05191c 100%); }
+  .fm-canvas{ position:absolute; left:0; top:0; width:1280px; height:720px; transform-origin:top left;
+    box-sizing:border-box; padding:70px 54px 92px; display:flex; flex-direction:column; color:#fff; }
+  .fm-head{ flex:0 0 auto; text-align:center; margin-bottom:12px; }
+  .fm-head .eyebrow{ display:block; font-size:12.5px; font-weight:800; letter-spacing:.09em;
+    text-transform:uppercase; color:rgba(255,255,255,.62); margin-bottom:.4em; }
+  .fm-head h2{ margin:0; font-size:29px; font-weight:800; color:#fff; text-shadow:0 2px 16px rgba(8,40,39,.5); }
+  .fm-map{ position:relative; flex:1 1 auto; min-height:0; }
+
+  /* en-têtes de colonnes */
+  .fm-ch{ position:absolute; top:0; height:32px; display:flex; align-items:center; gap:10px; }
+  .fm-ch .tag{ font-size:11px; font-weight:800; letter-spacing:.11em; text-transform:uppercase;
+    padding:3px 9px; border-radius:999px; }
+  .fm-ch .lab{ font-size:16px; font-weight:800; }
+  .fm-ch.past{ left:0; width:470px; }
+  .fm-ch.past .tag{ background:rgba(255,255,255,.16); color:rgba(255,255,255,.82); }
+  .fm-ch.past .lab{ color:rgba(255,255,255,.72); }
+  .fm-ch.fut{ left:540px; right:0; }
+  .fm-ch.fut .tag{ background:#F5C518; color:#3A2B00; }
+  .fm-ch.fut .lab{ color:#FFD86B; }
+  .fm-ch.fut .warn{ width:22px; height:20px; flex:none; }
+
+  /* rangées */
+  .fm-past, .fm-fut{ position:absolute; height:56px; box-sizing:border-box; border-radius:12px;
+    display:flex; align-items:center; }
+  .fm-past{ left:0; width:470px; gap:13px; padding:0 16px; appearance:none; border:1px solid rgba(255,255,255,.2);
+    background:rgba(255,255,255,.08); color:rgba(255,255,255,.92); cursor:pointer; text-align:left;
+    font-family:var(--font); font-size:16px; font-weight:600; line-height:1.25;
+    transition:background .16s, border-color .16s, transform .12s; }
+  .fm-past:hover{ background:rgba(255,255,255,.16); border-color:rgba(245,197,24,.7); transform:translateY(-1px); }
+  .fm-past:focus-visible{ outline:3px solid #F5C518; outline-offset:3px; }
+  .fm-past .ico{ width:32px; height:32px; flex:none; color:#9ff0ed; }
+  .fm-past .tx{ flex:1 1 auto; }
+  .fm-past .dot{ flex:none; width:22px; height:22px; border-radius:50%; background:#F5C518; color:#3A2B00;
+    font-size:13px; font-weight:800; line-height:22px; text-align:center;
+    animation:fmDot 2.1s ease-in-out infinite; }
+  @keyframes fmDot{ 0%,100%{ transform:scale(1) } 50%{ transform:scale(1.16) } }
+  .fm-row.on .fm-past{ background:rgba(245,197,24,.14); border-color:rgba(245,197,24,.55); }
+  .fm-row.on .fm-past .ico{ color:#FFD86B; }
+  .fm-row.on .fm-past .dot{ display:none; }
+
+  .fm-arw{ position:absolute; left:470px; width:70px; height:56px; display:flex;
+    align-items:center; justify-content:center; color:rgba(255,255,255,.26); transition:color .3s ease; }
+  .fm-arw svg{ width:30px; height:30px; display:block; }
+  .fm-row.on .fm-arw{ color:#F5C518; }
+
+  .fm-fut{ left:540px; right:0; padding:0 20px; border:1px dashed rgba(255,255,255,.26);
+    background:rgba(255,255,255,.04); font-size:17px; font-weight:700; line-height:1.25; }
+  .fm-fut .ft{ opacity:0; transform:translateY(7px); transition:opacity .38s ease, transform .38s ease; color:#fff; }
+  .fm-fut .ft b{ color:#FFD86B; font-weight:800; }
+  .fm-row.on .fm-fut{ border-style:solid; border-color:rgba(245,197,24,.7); background:rgba(245,197,24,.16); }
+  .fm-row.on .fm-fut .ft{ opacity:1; transform:none; }
+
+  /* bandeau bas : consigne, puis les deux citations */
+  .fm-band{ position:absolute; left:0; right:0; top:360px; height:138px; box-sizing:border-box;
+    border-radius:14px; padding:14px 22px; display:flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.18);
+    transition:background .3s ease, border-color .3s ease; }
+  .fm-band .hint{ font-size:17px; font-weight:700; color:rgba(255,255,255,.8); text-align:center; }
+  .fm-band .hint .cnt{ color:#FFD86B; font-weight:800; }
+  .fm-quotes{ display:none; width:100%; gap:0; }
+  .fm-map.done .fm-band{ background:rgba(255,255,255,.92); border-color:rgba(255,255,255,.92); }
+  .fm-map.done .fm-band .hint{ display:none; }
+  .fm-map.done .fm-quotes{ display:flex; animation:fmIn .45s cubic-bezier(.2,.7,.2,1) both; }
+  @keyframes fmIn{ from{ opacity:0; transform:translateY(9px) } to{ opacity:1; transform:none } }
+  .fm-q{ flex:1 1 0; min-width:0; padding:0 26px; text-align:center; }
+  .fm-q + .fm-q{ border-left:1px solid #C9D2D4; }
+  .fm-q .qt{ font-size:15px; font-style:italic; font-weight:700; line-height:1.4; color:#1F3B7A; }
+  .fm-q .qa{ display:block; margin-top:7px; font-size:13.5px; font-weight:600; color:#41545A; font-style:normal; }
+  @media(prefers-reduced-motion:reduce){ .fm-fut .ft, .fm-arw, .fm-band{ transition:none; } .fm-past .dot{ animation:none; } }
+
   /* ---- apprentissage distribué : une courbe relancée à chaque rappel -----
      Les graduations de l'axe « Rappel » sont les boutons. Chaque clic fait
      monter une flèche verte puis trace la courbe suivante, plus plate et plus
@@ -736,6 +812,18 @@
     html:not(.print-pdf) .bridge.gated .dimsgrid{ filter:none !important; opacity:1 !important; }
     html:not(.print-pdf) .bridge__col__details{ max-height:none !important; opacity:1 !important; margin-top:14px !important; }
     html:not(.print-pdf) .roomsteps .rscard.gated .rexbox{ display:block !important; }
+    /* Fonction mémoire : la colonne « futur » est vide tant qu'on n'a pas
+       cliqué, et les citations n'apparaissent qu'à la fin. Sur papier, on
+       déplie tout et on remplace la consigne par les citations.             */
+    html:not(.print-pdf) .fm-canvas{ position:static !important; width:100% !important; height:100% !important;
+      transform:none !important; padding:5% 4% 4% !important; }
+    html:not(.print-pdf) .fm-fut{ border-style:solid !important; }
+    html:not(.print-pdf) .fm-fut .ft{ opacity:1 !important; transform:none !important; }
+    html:not(.print-pdf) .fm-past .dot{ display:none !important; }
+    html:not(.print-pdf) .fm-band{ background:#fff !important; border-color:#fff !important; }
+    html:not(.print-pdf) .fm-band .hint{ display:none !important; }
+    html:not(.print-pdf) .fm-quotes{ display:flex !important; opacity:1 !important; transform:none !important; }
+
     /* Courbe de l'oubli : rien n'est tracé tant qu'on n'a pas cliqué. Sur
        papier, on affiche la courbe entière, les jalons et la conclusion. Le
        compteur, lui, n'a plus de sens figé : on le retire.                   */
@@ -927,7 +1015,86 @@
       </div>
     </section>
 
-    <!-- 06b · NOTION — courbe de l'oubli (tracé progressif au clic) -->
+    <!-- 06b · NOTION — fonction mémoire : anticiper, pas archiver -->
+    <section data-screen-label="Fonction mémoire" data-phase="3" data-state="dark">
+      <div class="fm-wrap">
+       <div class="fm-canvas">
+        <div class="fm-head">
+          <span class="eyebrow">Notion clé · mémoire</span>
+          <h2>Fonction mémoire</h2>
+        </div>
+
+        <div class="fm-map">
+          <div class="fm-ch past"><span class="tag">Passé</span><span class="lab">Ce que la mémoire a enregistré</span></div>
+          <div class="fm-ch fut">
+            <svg class="warn" viewBox="0 0 24 22" aria-hidden="true"><path d="M12 1.6 23 20.4H1z" fill="#F5C518" stroke="#3A2B00" stroke-width="1.3" stroke-linejoin="round"/><path d="M12 8v5.6M12 16.7h.02" stroke="#3A2B00" stroke-width="2.2" stroke-linecap="round"/></svg>
+            <span class="tag">Futur</span><span class="lab">Ce qu'elle sert à anticiper</span>
+          </div>
+
+          <div class="fm-row" data-i="0">
+            <button class="fm-past" type="button" style="top:40px" aria-label="Souvenir du serpent : révéler ce qu'il permet d'anticiper">
+              <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 18c2 0 2-3 4-3s2 3 4 3 2-3 4-3"/><path d="M18.5 15c0-2.6 1.2-3.4 1.2-5.2a2.2 2.2 0 1 0-4.4 0"/></svg>
+              <span class="tx">«&nbsp;Ce serpent m'a mordu.&nbsp;»</span><span class="dot" aria-hidden="true">?</span>
+            </button>
+            <span class="fm-arw" style="top:40px" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h14M12 6l6 6-6 6"/></svg></span>
+            <div class="fm-fut" style="top:40px"><span class="ft">Fuir <b>avant</b> de l'avoir vu en entier.</span></div>
+          </div>
+
+          <div class="fm-row" data-i="1">
+            <button class="fm-past" type="button" style="top:102px" aria-label="Souvenir du gibier : révéler ce qu'il permet d'anticiper">
+              <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.6 13.8c0-4.1 3.5-7.3 8-7.3s6.9 2.7 6.9 6.1-3 7.1-7.5 7.1-7.4-2-7.4-5.9z"/><path d="M8.4 12.2a3 3 0 0 1 4.2 0"/></svg>
+              <span class="tx">«&nbsp;Le gibier était là au printemps.&nbsp;»</span><span class="dot" aria-hidden="true">?</span>
+            </button>
+            <span class="fm-arw" style="top:102px" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h14M12 6l6 6-6 6"/></svg></span>
+            <div class="fm-fut" style="top:102px"><span class="ft">Savoir <b>où chasser</b> à la prochaine saison.</span></div>
+          </div>
+
+          <div class="fm-row" data-i="2">
+            <button class="fm-past" type="button" style="top:164px" aria-label="Souvenir de la pierre taillée : révéler ce qu'il permet d'anticiper">
+              <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.6 19 9.6 15.4 21H8.6L5 9.6z"/><path d="M9 9.6h6"/></svg>
+              <span class="tx">«&nbsp;Cette pierre-là taillait bien.&nbsp;»</span><span class="dot" aria-hidden="true">?</span>
+            </button>
+            <span class="fm-arw" style="top:164px" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h14M12 6l6 6-6 6"/></svg></span>
+            <div class="fm-fut" style="top:164px"><span class="ft"><b>Refaire</b> l'outil qui a fonctionné.</span></div>
+          </div>
+
+          <div class="fm-row" data-i="3">
+            <button class="fm-past" type="button" style="top:226px" aria-label="Souvenir de la grotte : révéler ce qu'il permet d'anticiper">
+              <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20.5v-7a9 9 0 0 1 18 0v7"/><path d="M8.4 20.5v-6a3.6 3.6 0 0 1 7.2 0v6"/></svg>
+              <span class="tx">«&nbsp;Cette grotte m'a protégé de l'orage.&nbsp;»</span><span class="dot" aria-hidden="true">?</span>
+            </button>
+            <span class="fm-arw" style="top:226px" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h14M12 6l6 6-6 6"/></svg></span>
+            <div class="fm-fut" style="top:226px"><span class="ft">S'abriter <b>avant</b> que la nuit tombe.</span></div>
+          </div>
+
+          <div class="fm-row" data-i="4">
+            <button class="fm-past" type="button" style="top:288px" aria-label="Souvenir du partage : révéler ce qu'il permet d'anticiper">
+              <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17.2" cy="9.2" r="2.3"/><path d="M3 20.5c0-3.4 2.7-6 6-6s6 2.6 6 6"/><path d="M15.4 20.5c0-2.5 1.3-4.4 3.3-5.1"/></svg>
+              <span class="tx">«&nbsp;Celui-là a partagé sa part.&nbsp;»</span><span class="dot" aria-hidden="true">?</span>
+            </button>
+            <span class="fm-arw" style="top:288px" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h14M12 6l6 6-6 6"/></svg></span>
+            <div class="fm-fut" style="top:288px"><span class="ft">Choisir <b>avec qui</b> chasser demain.</span></div>
+          </div>
+
+          <div class="fm-band">
+            <span class="hint">Cliquez chaque souvenir&nbsp;: à quoi sert-il, <b>demain</b>&nbsp;? — <span class="cnt" id="s12FmCnt">0 / 5</span></span>
+            <span class="fm-quotes">
+              <span class="fm-q">
+                <span class="qt">«&nbsp;La mémoire du passé n'est pas faite pour se souvenir du passé, elle est faite pour prévenir le futur. La mémoire est un instrument de prédiction.&nbsp;»
+                  <span class="qa">Alain Berthoz — neurophysiologiste</span></span>
+              </span>
+              <span class="fm-q">
+                <span class="qt">«&nbsp;Le but de la mémoire n'est pas de transmettre des informations à travers le temps, mais d'optimiser la prise de décision.&nbsp;»
+                  <span class="qa">Paul Frankland — neuroscientifique</span></span>
+              </span>
+            </span>
+          </div>
+        </div>
+       </div>
+      </div>
+    </section>
+
+    <!-- 06c · NOTION — courbe de l'oubli (tracé progressif au clic) -->
     <section data-screen-label="Courbe de l'oubli" data-phase="3" data-state="dark">
       <div class="fg-wrap">
        <div class="fg-canvas">
@@ -1529,6 +1696,56 @@
       var cur0 = document.querySelector('.slides > section.present');
       window.__updateProgmap(cur0 ? secs.indexOf(cur0) : 0);
     })();
+  })();
+
+  // ---- Fonction mémoire : chaque souvenir dévoile ce qu'il anticipe ----
+  (function(){
+    var map = document.querySelector('.fm-map');
+    if(!map) return;
+
+    var wrap = map.closest('.fm-wrap');
+    var canvas = wrap && wrap.querySelector('.fm-canvas');
+    function fitFm(){
+      if(!canvas) return;
+      var w = wrap.clientWidth, h = wrap.clientHeight;
+      if(!w || !h) return;
+      var s = Math.min(w/1280, h/720);
+      canvas.style.transform = 'scale(' + s.toFixed(4) + ')';
+      canvas.style.left = ((w - 1280*s)/2).toFixed(1) + 'px';
+      canvas.style.top  = ((h -  720*s)/2).toFixed(1) + 'px';
+    }
+    fitFm();
+    window.addEventListener('resize', fitFm);
+    window.addEventListener('load', fitFm);
+    if(window.ResizeObserver){ try{ new ResizeObserver(fitFm).observe(wrap); }catch(e){} }
+
+    var rows = Array.prototype.slice.call(map.querySelectorAll('.fm-row'));
+    var cnt  = document.getElementById('s12FmCnt');
+
+    function sync(){
+      var n = rows.filter(function(r){ return r.classList.contains('on'); }).length;
+      cnt.textContent = n + ' / ' + rows.length;
+      map.classList.toggle('done', n === rows.length);
+    }
+
+    rows.forEach(function(row){
+      var btn = row.querySelector('.fm-past');
+      function toggle(){ row.classList.toggle('on'); sync(); }
+      btn.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); toggle(); });
+      // Espace / Entrée : on arrête la propagation, sinon reveal change de diapo.
+      btn.addEventListener('keydown', function(e){
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); e.stopPropagation(); toggle(); }
+      });
+    });
+
+    function reset(){ rows.forEach(function(r){ r.classList.remove('on'); }); sync(); }
+    if(typeof deck !== 'undefined' && deck.on){
+      deck.on('slidechanged', function(){
+        var s = deck.getCurrentSlide();
+        if(!s || !s.contains(map)) reset();
+      });
+    }
+    reset();
   })();
 
   // ---- Courbe de l'oubli : tracé progressif au clic ----
