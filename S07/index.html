@@ -266,20 +266,24 @@
      Grille 4×4 : synergie en ordonnée, antagonisme en abscisse.
      Les zones sont muettes au départ ; un clic révèle couleur, intitulé,
      valeurs d'axe concernées et fiche descriptive.                        */
+  /* Marges hautes et basses calées sur la frise de progression (0 → 65 px)
+     et sur le pied de page (630 → 720 px), qui restent affichés.           */
   .socio{ position:relative; width:100%; height:100%; overflow:hidden; box-sizing:border-box;
-    padding:26px 46px 20px; display:flex; flex-direction:column; color:#fff;
+    padding:74px 46px 92px; display:flex; flex-direction:column; color:#fff;
     background:radial-gradient(circle at 74% 26%, #0f5350 0%, #0a3d3b 56%, #072e2c 100%); }
-  .socio-head{ flex:0 0 auto; margin-bottom:12px; }
+  .socio-head{ flex:0 0 auto; margin-bottom:10px; }
   .socio-head .eyebrow{ display:block; font-size:12px; font-weight:800; letter-spacing:.09em;
     text-transform:uppercase; color:rgba(255,255,255,.6); margin-bottom:.35em; }
   .socio-head h2{ margin:0; font-size:26px; font-weight:800; color:#fff; text-shadow:0 2px 16px rgba(8,40,39,.5); }
   .socio-head .src{ font-size:12px; font-weight:600; color:rgba(255,255,255,.5); margin-left:.6em; }
 
-  .socio-main{ flex:1 1 auto; display:flex; gap:26px; align-items:flex-start; min-height:0; }
+  /* flex:0 0 auto — sinon le panneau s'étire jusqu'au bas de la diapo et
+     ses boutons passent derrière le pied de page.                          */
+  .socio-main{ flex:0 0 auto; display:flex; gap:26px; align-items:flex-start; }
 
   /* ---- repère et grille ---- */
   .socio-chart{ flex:0 0 auto; display:grid; grid-template-columns:26px 62px 620px;
-    grid-template-rows:420px 30px; align-items:stretch; }
+    grid-template-rows:420px 28px 20px; align-items:stretch; }
   .socio-ytitle{ grid-column:1; grid-row:1; writing-mode:vertical-rl; transform:rotate(180deg);
     display:flex; align-items:center; justify-content:center;
     font-size:13px; font-weight:800; color:rgba(255,255,255,.85); letter-spacing:.04em; }
@@ -291,7 +295,7 @@
     align-items:center; padding-top:7px; }
   .socio-xstep{ display:flex; align-items:center; gap:7px; }
   .socio-xstep .lab{ font-size:11.5px; font-weight:700; color:rgba(255,255,255,.55); }
-  .socio-xtitle{ grid-column:3; grid-row:2; justify-self:end; align-self:center;
+  .socio-xtitle{ grid-column:3; grid-row:3; text-align:center;
     font-size:13px; font-weight:800; color:rgba(255,255,255,.85); }
   .socio-badge{ width:23px; height:23px; border-radius:50%; display:flex; align-items:center;
     justify-content:center; font-size:12px; font-weight:800;
@@ -363,6 +367,94 @@
   .socio-moves{ display:none; font-size:13.5px; line-height:1.45; color:#F2C14E; font-weight:700;
     border-left:4px solid #F2C14E; padding-left:12px; margin-top:12px; }
   .socio.show-moves .socio-moves{ display:block; }
+
+  /* ---- matrice objectifs / méthodes (Turner & Cochrane) ----
+     Même grammaire que la carte des acteurs ci-dessus : zones muettes au
+     départ, révélées au clic, graduations d'axe mises en surbrillance.
+     Les couleurs suivent ici les quatre éléments (eau, air, terre, feu),
+     qui sont le systeme de nommage du modèle : la couleur devient un
+     repère mnémotechnique et non une simple decoration.                    */
+  .typo{ position:relative; width:100%; height:100%; overflow:hidden; box-sizing:border-box;
+    padding:74px 46px 92px; display:flex; flex-direction:column; color:#fff;
+    background:radial-gradient(circle at 74% 26%, #0f5350 0%, #0a3d3b 56%, #072e2c 100%); }
+  .typo-head{ flex:0 0 auto; margin-bottom:10px; }
+  .typo-head .eyebrow{ display:block; font-size:12px; font-weight:800; letter-spacing:.09em;
+    text-transform:uppercase; color:rgba(255,255,255,.6); margin-bottom:.35em; }
+  .typo-head h2{ margin:0; font-size:26px; font-weight:800; color:#fff; text-shadow:0 2px 16px rgba(8,40,39,.5); }
+  .typo-head .src{ font-size:12px; font-weight:600; color:rgba(255,255,255,.5); margin-left:.6em; }
+
+  .typo-main{ flex:0 0 auto; display:flex; gap:26px; align-items:flex-start; }
+  .typo-chart{ flex:0 0 auto; display:grid; grid-template-columns:26px 96px 620px;
+    grid-template-rows:420px 28px 20px; align-items:stretch; }
+  .typo-ytitle{ grid-column:1; grid-row:1; writing-mode:vertical-rl; transform:rotate(180deg);
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:800; color:rgba(255,255,255,.85); text-align:center; }
+  .typo-yaxis{ grid-column:2; grid-row:1; display:flex; flex-direction:column;
+    justify-content:space-around; align-items:flex-end; padding-right:11px; }
+  .typo-xaxis{ grid-column:3; grid-row:2; display:flex; justify-content:space-around;
+    align-items:center; padding-top:6px; }
+  .typo-xtitle{ grid-column:3; grid-row:3; text-align:center;
+    font-size:13px; font-weight:800; color:rgba(255,255,255,.85); }
+  .typo-badge{ padding:4px 13px; border-radius:999px; font-size:12.5px; font-weight:800; letter-spacing:.04em;
+    background:rgba(255,255,255,.13); color:rgba(255,255,255,.6);
+    border:1.5px solid rgba(255,255,255,.2); transition:background .2s, color .2s, transform .2s; }
+  .typo-badge.on{ background:#fff; color:#0a3d3b; border-color:#fff; transform:scale(1.1); }
+
+  .typo-gridwrap{ grid-column:3; grid-row:1; position:relative; }
+  .typo-grid{ position:absolute; inset:0; display:grid;
+    grid-template-columns:repeat(2,1fr); grid-template-rows:repeat(2,1fr); gap:6px; }
+
+  .typo-zone{ position:relative; appearance:none; font-family:var(--font); cursor:pointer;
+    border-radius:11px; border:1.5px dashed rgba(255,255,255,.26); background:rgba(255,255,255,.045);
+    padding:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
+    transition:background .35s, border-color .35s, transform .15s, box-shadow .25s; }
+  .typo-zone:hover{ background:rgba(255,255,255,.13); border-color:rgba(255,255,255,.5); }
+  .typo-zone:focus-visible{ outline:3px solid #9ff0ed; outline-offset:2px; }
+  .typo-zone .zn{ font-size:25px; font-weight:800; letter-spacing:.06em; color:transparent; transition:color .3s; }
+  .typo-zone .zr{ font-size:15px; font-style:italic; font-weight:600; color:transparent; transition:color .3s; }
+  .typo-zone .zq{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-size:26px; font-weight:800; color:rgba(255,255,255,.3); transition:opacity .25s; }
+  .typo-zone.on{ background:var(--c); border:1.5px solid var(--c);
+    box-shadow:0 10px 26px -14px rgba(0,0,0,.85); }
+  .typo-zone.on .zn, .typo-zone.on .zr{ color:var(--fg,#fff); }
+  .typo-zone.on .zq{ opacity:0; }
+  .typo-zone.on:hover{ transform:translateY(-2px); }
+  /* Terre : la cible du modèle, signalée par un anneau plutôt que par une
+     couleur à part — les couleurs sont déjà prises par les éléments.       */
+  .typo-zone.is-target.on{ box-shadow:0 0 0 3px rgba(242,193,78,.55), 0 12px 30px -12px rgba(0,0,0,.85); }
+
+  .typo-arrows{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; opacity:0;
+    transition:opacity .4s ease; }
+  .typo.show-moves .typo-arrows{ opacity:1; }
+  .typo-arrows > path{ fill:none; stroke:#F2C14E; stroke-width:3.4; stroke-linecap:round;
+    stroke-dasharray:var(--len,300); stroke-dashoffset:var(--len,300); }
+  .typo.show-moves .typo-arrows > path{ animation:socioDraw .9s ease forwards; }
+  .typo.show-moves .typo-arrows > path:nth-of-type(2){ animation-delay:.3s; }
+  .typo.show-moves .typo-arrows > path:nth-of-type(3){ animation-delay:.6s; }
+  @media(prefers-reduced-motion:reduce){
+    .typo.show-moves .typo-arrows > path{ animation:none; stroke-dashoffset:0; }
+  }
+
+  .typo-panel{ flex:1 1 auto; min-width:0; align-self:stretch; display:flex; flex-direction:column; }
+  .typo-ask{ font-size:15px; line-height:1.5; color:rgba(255,255,255,.9); }
+  .typo-ask p{ margin:0 0 .9em; }
+  .typo-ask strong{ color:#9ff0ed; }
+  .typo-card{ display:none; border-left:4px solid var(--c,#fff); padding:2px 0 2px 14px; }
+  .typo-card h3{ margin:0 0 .05em; font-size:21px; font-weight:800; color:#fff; }
+  .typo-card .role{ display:block; font-size:14px; font-style:italic; font-weight:600;
+    color:rgba(255,255,255,.75); margin-bottom:.15em; }
+  .typo-card .coord{ display:block; font-size:11.5px; font-weight:700; letter-spacing:.05em;
+    text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:.6em; }
+  .typo-card p{ margin:0 0 .7em; font-size:14.5px; line-height:1.5; color:rgba(255,255,255,.88); }
+  .typo-card .todo{ font-size:14px; line-height:1.45; color:#9ff0ed; font-weight:700; }
+  .typo-card .todo::before{ content:"→ "; }
+  .typo.has-sel .typo-ask{ display:none; }
+  .typo.has-sel .typo-card.is-sel{ display:block; }
+
+  .typo-actions{ margin-top:auto; padding-top:14px; display:flex; flex-direction:column; gap:9px; }
+  .typo-moves{ display:none; font-size:13.5px; line-height:1.45; color:#F2C14E; font-weight:700;
+    border-left:4px solid #F2C14E; padding-left:12px; margin-top:12px; }
+  .typo.show-moves .typo-moves{ display:block; }
 
   /* ---- tuiles outils ---- */
 
@@ -707,6 +799,15 @@
     html:not(.print-pdf) .socio-actions,
     html:not(.print-pdf) .socio-moves{ display:none !important; }
     html:not(.print-pdf) .socio-ask{ display:block !important; }
+    /* Matrice de projets : même logique que la carte ci-dessus. */
+    html:not(.print-pdf) .typo-zone{ background:var(--c) !important; border:1.5px solid var(--c) !important; }
+    html:not(.print-pdf) .typo-zone .zn,
+    html:not(.print-pdf) .typo-zone .zr{ color:var(--fg,#fff) !important; }
+    html:not(.print-pdf) .typo-zone .zq{ display:none !important; }
+    html:not(.print-pdf) .typo-card,
+    html:not(.print-pdf) .typo-actions,
+    html:not(.print-pdf) .typo-moves{ display:none !important; }
+    html:not(.print-pdf) .typo-ask{ display:block !important; }
 
     /* Repère de diapo, repris du mode lecture. */
     html:not(.print-pdf) .reveal .slides > section::after{
@@ -874,6 +975,109 @@
       </div>
     </section>
 
+    <!-- 06b · NOTION — matrice objectifs / méthodes -->
+    <section data-screen-label="Matrice projets" data-phase="3" data-state="dark">
+      <div class="typo">
+        <div class="typo-head">
+          <span class="eyebrow">Notion clé · typologie de projet</span>
+          <h2>Où se trouve VOTRE projet&nbsp;?<span class="src">Turner &amp; Cochrane</span></h2>
+        </div>
+
+        <div class="typo-main">
+          <div class="typo-chart">
+            <div class="typo-ytitle">Méthodes bien définies</div>
+
+            <div class="typo-yaxis">
+              <span class="typo-badge" data-axis="y" data-v="non">NON</span>
+              <span class="typo-badge" data-axis="y" data-v="oui">OUI</span>
+            </div>
+
+            <div class="typo-gridwrap">
+              <div class="typo-grid">
+                <button class="typo-zone" type="button" data-k="eau" data-x="oui" data-y="non"
+                        style="grid-area:1/1/2/2;--c:#17708F">
+                  <span class="zq">?</span><span class="zn">EAU</span><span class="zr">Coach</span></button>
+                <button class="typo-zone" type="button" data-k="air" data-x="non" data-y="non"
+                        style="grid-area:1/2/2/3;--c:#6FB6D9;--fg:#10222B">
+                  <span class="zq">?</span><span class="zn">AIR</span><span class="zr">Équilibriste</span></button>
+                <button class="typo-zone is-target" type="button" data-k="terre" data-x="oui" data-y="oui"
+                        style="grid-area:2/1/3/2;--c:#C98A0E;--fg:#201800">
+                  <span class="zq">?</span><span class="zn">TERRE</span><span class="zr">Chef d'orchestre</span></button>
+                <button class="typo-zone" type="button" data-k="feu" data-x="non" data-y="oui"
+                        style="grid-area:2/2/3/3;--c:#BC4715">
+                  <span class="zq">?</span><span class="zn">FEU</span><span class="zr">Sculpteur</span></button>
+              </div>
+
+              <svg class="typo-arrows" viewBox="0 0 620 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <defs>
+                  <marker id="typoArr" viewBox="0 0 10 10" refX="8.5" refY="5"
+                          markerWidth="5.2" markerHeight="5.2" orient="auto-start-reverse">
+                    <path d="M0,0 L10,5 L0,10 Z" fill="#F2C14E"></path>
+                  </marker>
+                </defs>
+                <path d="M382,105 L248,105" marker-end="url(#typoArr)"></path>
+                <path d="M155,180 L155,246" marker-end="url(#typoArr)"></path>
+                <path d="M382,315 L248,315" marker-end="url(#typoArr)"></path>
+              </svg>
+            </div>
+
+            <div class="typo-xaxis">
+              <span class="typo-badge" data-axis="x" data-v="oui">OUI</span>
+              <span class="typo-badge" data-axis="x" data-v="non">NON</span>
+            </div>
+            <div class="typo-xtitle">Objectifs bien définis</div>
+          </div>
+
+          <div class="typo-panel">
+            <div class="typo-ask">
+              <p><strong>Où se trouve VOTRE projet&nbsp;?</strong> Le <em>quoi</em> et le <em>comment</em> sont-ils déjà clairs&nbsp;?</p>
+              <p><strong>Comment le faire évoluer&nbsp;?</strong></p>
+              <p style="font-size:13.5px;color:rgba(255,255,255,.55);">Cliquez sur une case pour la découvrir.</p>
+            </div>
+
+            <div class="typo-card" data-card="terre" style="--c:#C98A0E">
+              <h3>Terre</h3><span class="role">Le chef d'orchestre</span>
+              <span class="coord">Objectifs OUI · Méthodes OUI</span>
+              <p>On sait où l'on va <em>et</em> comment y aller. Le cas des projets d'ingénierie ou de construction.</p>
+              <p class="todo">Piloter par le planning&nbsp;: découper, jalonner, tenir les délais.</p>
+            </div>
+            <div class="typo-card" data-card="eau" style="--c:#17708F">
+              <h3>Eau</h3><span class="role">Le coach</span>
+              <span class="coord">Objectifs OUI · Méthodes NON</span>
+              <p>La cible est claire, le chemin reste à inventer. Typique du développement de produit.</p>
+              <p class="todo">Piloter par étapes&nbsp;: prototyper, tester, ajuster la méthode en avançant.</p>
+            </div>
+            <div class="typo-card" data-card="feu" style="--c:#BC4715">
+              <h3>Feu</h3><span class="role">Le sculpteur</span>
+              <span class="coord">Objectifs NON · Méthodes OUI</span>
+              <p>On maîtrise le savoir-faire, mais la cible se précise en chemin. Cas des systèmes d'information.</p>
+              <p class="todo">Piloter par les usages&nbsp;: faire émerger le besoin par itérations avec les utilisateurs.</p>
+            </div>
+            <div class="typo-card" data-card="air" style="--c:#6FB6D9">
+              <h3>Air</h3><span class="role">L'équilibriste</span>
+              <span class="coord">Objectifs NON · Méthodes NON</span>
+              <p>Ni la cible ni le chemin ne sont fixés. Recherche, conduite du changement&nbsp;: le plus incertain.</p>
+              <p class="todo">Piloter par la vision&nbsp;: avancer à petits pas et sécuriser chaque acquis.</p>
+            </div>
+
+            <p class="typo-moves">Un projet ne reste pas dans sa case. En clarifiant d'abord les objectifs, puis les méthodes, on le fait glisser vers <strong>Terre</strong>&nbsp;: là où il devient réellement pilotable.</p>
+
+            <div class="typo-actions">
+              <button class="socio-btn" type="button" id="typoMoves">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 L20 6"/><path d="M14 6h6v6"/></svg>
+                <span class="lbl-on">Comment le faire évoluer&nbsp;?</span>
+                <span class="lbl-off" hidden>Masquer l'évolution</span>
+              </button>
+              <button class="socio-btn ghost" type="button" id="typoAll">
+                <span class="lbl-on">Tout révéler</span>
+                <span class="lbl-off" hidden>Tout masquer</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- 07 · NOTION — typologie de projets -->
     <section data-screen-label="Typologie" data-phase="3" data-state="dark">
       <div class="mediafull objectifs">
@@ -903,7 +1107,7 @@
 
         <div class="socio-main">
           <div class="socio-chart">
-            <div class="socio-ytitle">Synergie&nbsp;↑</div>
+            <div class="socio-ytitle">Synergie</div>
 
             <div class="socio-yaxis">
               <div class="socio-ystep"><span class="lab">Faible</span><span class="socio-badge" data-axis="y" data-v="1">1</span></div>
@@ -1454,88 +1658,97 @@
     })();
   })();
 
-  // ---- Carte sociodynamique des acteurs ----
+  // ---- Cartes interactives : carte des acteurs (.socio) et matrice de
+  //      projets (.typo). Même mécanique, donc une seule implémentation
+  //      paramétrée par le préfixe de classe.
   (function(){
-    var wrap = document.querySelector('.socio');
-    if(!wrap) return;
-    var zones   = Array.prototype.slice.call(wrap.querySelectorAll('.socio-zone'));
-    var badges  = Array.prototype.slice.call(wrap.querySelectorAll('.socio-badge'));
-    var cards   = Array.prototype.slice.call(wrap.querySelectorAll('.socio-card'));
-    var btnMove = wrap.querySelector('#socioMoves');
-    var btnAll  = wrap.querySelector('#socioAll');
-    var current = null;   // zone sélectionnée, ou null
+    function initMap(p){
+      var wrap = document.querySelector('.' + p);
+      if(!wrap) return;
+      var q = function(sel){ return Array.prototype.slice.call(wrap.querySelectorAll(sel)); };
+      var zones   = q('.' + p + '-zone');
+      var badges  = q('.' + p + '-badge');
+      var cards   = q('.' + p + '-card');
+      var btnMove = wrap.querySelector('#' + p + 'Moves');
+      var btnAll  = wrap.querySelector('#' + p + 'All');
+      if(!zones.length || !btnMove || !btnAll) return;
+      var current = null;   // zone sélectionnée, ou null
 
-    // Longueur réelle de chaque flèche : sans cela le tracé progressif est faux.
-    Array.prototype.forEach.call(wrap.querySelectorAll('.socio-arrows > path'), function(p){
-      try{ p.style.setProperty('--len', p.getTotalLength()); }catch(e){}
-    });
+      // Longueur réelle de chaque flèche : sans cela le tracé progressif est faux.
+      q('.' + p + '-arrows > path').forEach(function(path){
+        try{ path.style.setProperty('--len', path.getTotalLength()); }catch(e){}
+      });
 
-    function clearBadges(){ badges.forEach(function(b){ b.classList.remove('on'); }); }
+      function clearBadges(){ badges.forEach(function(b){ b.classList.remove('on'); }); }
 
-    function lightBadges(zone){
-      clearBadges();
-      ['x','y'].forEach(function(axis){
-        (zone.getAttribute('data-' + axis) || '').split(',').forEach(function(v){
-          v = v.trim(); if(!v) return;
-          var b = wrap.querySelector('.socio-badge[data-axis="' + axis + '"][data-v="' + v + '"]');
-          if(b) b.classList.add('on');
+      function lightBadges(zone){
+        clearBadges();
+        ['x','y'].forEach(function(axis){
+          (zone.getAttribute('data-' + axis) || '').split(',').forEach(function(v){
+            v = v.trim(); if(!v) return;
+            var b = wrap.querySelector('.' + p + '-badge[data-axis="' + axis + '"][data-v="' + v + '"]');
+            if(b) b.classList.add('on');
+          });
         });
+      }
+
+      function showCard(key){
+        cards.forEach(function(c){ c.classList.toggle('is-sel', c.getAttribute('data-card') === key); });
+        wrap.classList.toggle('has-sel', !!key);
+      }
+
+      function select(zone){
+        if(current === zone){            // second clic : on désélectionne
+          zone.classList.remove('on');
+          zone.setAttribute('aria-pressed','false');
+          current = null; clearBadges(); showCard(null);
+          return;
+        }
+        // une seule zone mise en avant à la fois, mais on garde les autres révélées
+        if(current){ current.setAttribute('aria-pressed','false'); }
+        zone.classList.add('on');
+        zone.setAttribute('aria-pressed','true');
+        current = zone;
+        lightBadges(zone);
+        showCard(zone.getAttribute('data-k'));
+      }
+
+      zones.forEach(function(z){
+        z.setAttribute('aria-pressed','false');
+        z.addEventListener('click', function(){ select(z); });
+      });
+
+      function swapLabels(btn, on){
+        var a = btn.querySelector('.lbl-on'), b = btn.querySelector('.lbl-off');
+        if(a) a.hidden = on;
+        if(b) b.hidden = !on;
+        btn.setAttribute('aria-pressed', String(on));
+      }
+
+      function revealAll(on){
+        zones.forEach(function(z){ z.classList.toggle('on', on); });
+        swapLabels(btnAll, on);
+        if(!on){
+          current = null; clearBadges(); showCard(null);
+          zones.forEach(function(z){ z.setAttribute('aria-pressed','false'); });
+        }
+      }
+
+      btnAll.addEventListener('click', function(){
+        revealAll(!zones.every(function(z){ return z.classList.contains('on'); }));
+      });
+
+      btnMove.addEventListener('click', function(){
+        var on = !wrap.classList.contains('show-moves');
+        wrap.classList.toggle('show-moves', on);
+        swapLabels(btnMove, on);
+        // les flèches ne veulent rien dire sur une carte encore muette
+        if(on){ revealAll(true); }
       });
     }
 
-    function showCard(key){
-      cards.forEach(function(c){ c.classList.toggle('is-sel', c.getAttribute('data-card') === key); });
-      wrap.classList.toggle('has-sel', !!key);
-    }
-
-    function select(zone){
-      if(current === zone){            // second clic : on désélectionne
-        zone.classList.remove('on');
-        zone.setAttribute('aria-pressed','false');
-        current = null; clearBadges(); showCard(null);
-        return;
-      }
-      // une seule zone mise en avant à la fois, mais on garde les autres révélées
-      if(current){ current.setAttribute('aria-pressed','false'); }
-      zone.classList.add('on');
-      zone.setAttribute('aria-pressed','true');
-      current = zone;
-      lightBadges(zone);
-      showCard(zone.getAttribute('data-k'));
-    }
-
-    zones.forEach(function(z){
-      z.setAttribute('aria-pressed','false');
-      z.addEventListener('click', function(){ select(z); });
-    });
-
-    function swapLabels(btn, on){
-      var a = btn.querySelector('.lbl-on'), b = btn.querySelector('.lbl-off');
-      if(a) a.hidden = on;
-      if(b) b.hidden = !on;
-      btn.setAttribute('aria-pressed', String(on));
-    }
-
-    function revealAll(on){
-      zones.forEach(function(z){ z.classList.toggle('on', on); });
-      swapLabels(btnAll, on);
-      if(!on){
-        current = null; clearBadges(); showCard(null);
-        zones.forEach(function(z){ z.setAttribute('aria-pressed','false'); });
-      }
-    }
-
-    btnAll.addEventListener('click', function(){
-      revealAll(!zones.every(function(z){ return z.classList.contains('on'); }));
-    });
-
-    btnMove.addEventListener('click', function(){
-      var on = !wrap.classList.contains('show-moves');
-      wrap.classList.toggle('show-moves', on);
-      swapLabels(btnMove, on);
-      // les flèches ne veulent rien dire sur une carte encore muette
-      if(on){ revealAll(true); }
-    });
+    initMap('socio');
+    initMap('typo');
   })();
 </script>
 </body>
