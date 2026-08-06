@@ -646,6 +646,10 @@
     html:not(.print-pdf) .bridge.gated .dimsgrid{ filter:none !important; opacity:1 !important; }
     html:not(.print-pdf) .bridge__col__details{ max-height:none !important; opacity:1 !important; margin-top:14px !important; }
     html:not(.print-pdf) .roomsteps .rscard.gated .rexbox{ display:block !important; }
+    /* Description repliée derrière « Afficher la description » : sur papier,
+       la diapo ne garderait que son titre. On la déplie.                     */
+    html:not(.print-pdf) .rt-body{ display:block !important; }
+    html:not(.print-pdf) .revealtext .rt-hint{ display:none !important; }
 
     /* Repère de diapo, repris du mode lecture. */
     html:not(.print-pdf) .reveal .slides > section::after{
