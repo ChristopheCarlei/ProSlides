@@ -311,6 +311,101 @@
   .dil-thumb:focus-visible{ outline:3px solid #9ff0ed; outline-offset:3px; }
   .dil-thumb.grabbing{ cursor:grabbing; transform:scale(1.2); box-shadow:0 6px 20px -4px rgba(0,0,0,.85); }
 
+  /* ---- iceberg de l'activité : ce que l'on voit / ce que l'on fait ----
+     Deux zones cliquables (pointe émergée, masse immergée) ; chacune ouvre
+     son encart. Quand les deux sont ouvertes, le bandeau de synthèse s'allume. */
+  /* La composition est réglée au pixel sur le canevas 1280×720 : hors
+     présentation (mode lecture, impression), on la met à l'échelle du cadre
+     plutôt que de la laisser s'écraser. */
+  .ice-wrap{ position:relative; width:100%; height:100%; overflow:hidden;
+    background:radial-gradient(circle at 74% 16%, #0f5350 0%, #0a3d3b 55%, #062725 100%); }
+  .ice-canvas{ position:absolute; left:0; top:0; width:1280px; height:720px; transform-origin:top left;
+    box-sizing:border-box; padding:70px 54px 92px; display:flex; flex-direction:column; color:#fff; }
+  .ice-head{ flex:0 0 auto; text-align:center; margin-bottom:13px; }
+  .ice-head .eyebrow{ display:block; font-size:12.5px; font-weight:800; letter-spacing:.09em;
+    text-transform:uppercase; color:rgba(255,255,255,.62); margin-bottom:.4em; }
+  .ice-head h2{ margin:0; font-size:29px; font-weight:800; color:#fff; text-shadow:0 2px 16px rgba(8,40,39,.5); }
+
+  .ice-scene{ position:relative; flex:1 1 auto; min-height:0; border-radius:16px; overflow:hidden;
+    background:linear-gradient(180deg,#A6DCE2 0%,#E6F6F5 42%,#0E6C7E 42%,#04222E 100%);
+    box-shadow:0 24px 60px -26px rgba(0,0,0,.75); }
+  /* ligne de flottaison */
+  .ice-scene::after{ content:""; position:absolute; left:0; right:0; top:42%; height:2px;
+    background:rgba(255,255,255,.6); pointer-events:none; }
+
+  /* positions en % du décor : le repli fluide de l'impression reste cohérent */
+  .ice-svg{ position:absolute; left:2.22%; top:0; width:36.7%; height:100%; display:block;
+    filter:drop-shadow(0 14px 26px rgba(2,22,30,.45)); }
+  .ice-part{ cursor:pointer; }
+  .ice-part .body{ transition:filter .25s ease; }
+  .ice-part:hover .body{ filter:brightness(1.1); }
+  .ice-part:focus-visible{ outline:none; }
+  .ice-part:focus-visible .body{ filter:brightness(1.15) drop-shadow(0 0 7px #9ff0ed); }
+  .ice-ring{ transform-box:fill-box; transform-origin:center; animation:iceRing 2.4s ease-out infinite; }
+  @keyframes iceRing{ 0%{ transform:scale(.55); opacity:.8 } 70%{ transform:scale(1.7); opacity:0 } 100%{ transform:scale(1.7); opacity:0 } }
+  .ice-scene.show-top  .p-top  .ice-ring,
+  .ice-scene.show-deep .p-deep .ice-ring{ display:none; }
+
+  /* plaques posées sur la glace : le contraste, en toutes lettres */
+  .ice-plate{ position:absolute; z-index:2; appearance:none; font-family:var(--font); cursor:pointer;
+    display:flex; align-items:center; justify-content:center; gap:9px; box-sizing:border-box;
+    padding:5px 12px; border-radius:7px; border:0; color:#fff;
+    font-size:17px; font-weight:800; font-style:italic; letter-spacing:-.01em; white-space:nowrap;
+    box-shadow:0 8px 20px -10px rgba(0,0,0,.75); transition:background .18s, transform .12s; }
+  .ice-plate:hover{ transform:translateY(-1px); }
+  .ice-plate .pk{ font-style:normal; font-weight:800; font-size:14px; color:#9ff0ed; }
+  .ice-plate.up{ left:13.48%; width:13.99%; top:31%; background:#0B7A70; }
+  .ice-plate.up:hover{ background:#00857F; }
+  .ice-plate.deep{ left:10.07%; width:18.43%; top:60%; background:#0E7C90; }
+  .ice-plate.deep:hover{ background:#1293AB; }
+  .ice-scene.show-top .ice-plate.up,
+  .ice-scene.show-deep .ice-plate.deep{ background:var(--rose); }
+  .ice-scene.show-top .ice-plate.up .pk,
+  .ice-scene.show-deep .ice-plate.deep .pk{ color:#ffd7e7; }
+
+  /* encarts révélés */
+  .ice-panel{ position:absolute; left:40.1%; right:2.73%; z-index:2; box-sizing:border-box;
+    border-radius:14px; padding:14px 22px; display:flex; flex-direction:column;
+    transition:background .25s, border-color .25s; }
+  .ice-panel.up{ top:3.5%; height:36%; }
+  .ice-panel.deep{ top:46%; bottom:4%; }
+  .ice-panel.up.open{ background:#fff; color:#0A3A44; box-shadow:0 16px 36px -18px rgba(4,34,46,.8); border:0; }
+  .ice-panel.deep.open{ background:rgba(3,29,40,.74); color:#fff; border:1px solid rgba(159,240,237,.3);
+    box-shadow:0 16px 40px -20px rgba(0,0,0,.8); }
+  .ice-panel.up:not(.open){ background:rgba(255,255,255,.42); border:1.5px dashed rgba(11,122,112,.55); color:#0A4C4A; }
+  .ice-panel.deep:not(.open){ background:rgba(255,255,255,.07); border:1.5px dashed rgba(255,255,255,.4); color:rgba(255,255,255,.8); }
+  .ice-k{ font-size:11.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; line-height:1.3; }
+  .ice-panel.up .ice-k{ color:#0B7A70; }
+  .ice-panel.deep .ice-k{ color:#9ff0ed; }
+  .ice-t{ margin:1px 0 0; font-size:21px; font-weight:800; font-style:italic; letter-spacing:-.015em; line-height:1.2; }
+  .ice-list{ list-style:none; margin:7px 0 0; padding:0; display:flex; flex-direction:column; gap:5px; }
+  .ice-list li{ position:relative; padding-left:19px; font-size:15px; line-height:1.3; }
+  .ice-list li::before{ content:""; position:absolute; left:0; top:.45em; width:9px; height:9px; border-radius:50%; }
+  .ice-panel.up .ice-list li::before{ background:var(--teal); }
+  .ice-panel.deep .ice-list li::before{ background:#9ff0ed; }
+  .ice-note{ margin:auto 0 0; padding-top:8px; font-size:14px; font-weight:700; line-height:1.35; }
+  .ice-panel.deep .ice-note{ color:#ffbcd8; }
+  .ice-body{ display:none; }
+  .ice-panel.open .ice-body{ display:flex; flex-direction:column; flex:1 1 auto; min-height:0;
+    animation:iceIn .4s cubic-bezier(.2,.7,.2,1) both; }
+  .ice-panel.open .ice-hint{ display:none; }
+  .ice-hint{ margin:auto; display:flex; align-items:center; gap:9px; font-size:14.5px; font-weight:700; }
+  .ice-hint svg{ width:17px; height:17px; flex:none; }
+  @keyframes iceIn{ from{ opacity:0; transform:translateY(10px) } to{ opacity:1; transform:none } }
+
+  /* bandeau de synthèse */
+  .ice-ribbon{ flex:0 0 auto; margin-top:12px; height:46px; border-radius:12px;
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    font-size:16.5px; font-weight:700; line-height:1.2;
+    background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.16); color:rgba(255,255,255,.7);
+    transition:background .25s, border-color .25s, color .25s; }
+  .ice-ribbon .rb-done{ display:none; align-items:center; gap:12px; }
+  .ice-ribbon svg{ width:20px; height:20px; flex:none; }
+  .ice-ribbon.on{ background:var(--rose); border-color:var(--rose); color:#fff;
+    box-shadow:0 14px 34px -16px rgba(207,0,99,.9); }
+  .ice-ribbon.on .rb-wait{ display:none; }
+  .ice-ribbon.on .rb-done{ display:flex; animation:iceIn .45s cubic-bezier(.2,.7,.2,1) both; }
+
   /* ---- tuiles outils ---- */
 
   /* ---- icônes par objectif ---- */
@@ -649,6 +744,19 @@
        Sur papier, on les affiche tous, sinon la diapo sortirait vide.        */
     html:not(.print-pdf) .dil-pole{ opacity:1 !important; }
     html:not(.print-pdf) .dil-hint{ display:none !important; }
+    /* Iceberg : les deux encarts sont fermés au départ. Sur papier, on les
+       ouvre tous les deux et on affiche la synthèse.                        */
+    /* Le canevas mis à l'échelle par JS ne connaît pas la largeur de la page
+       imprimée : on repasse en fluide pour ne rien tronquer.                 */
+    html:not(.print-pdf) .ice-canvas{ position:static !important; width:100% !important; height:100% !important;
+      transform:none !important; padding:5% 4% 4% !important; }
+    html:not(.print-pdf) .ice-hint, html:not(.print-pdf) .ice-ring,
+    html:not(.print-pdf) .ice-ribbon .rb-wait{ display:none !important; }
+    html:not(.print-pdf) .ice-body{ display:flex !important; opacity:1 !important; transform:none !important; }
+    html:not(.print-pdf) .ice-panel.up{ background:#fff !important; color:#0A3A44 !important; border:0 !important; }
+    html:not(.print-pdf) .ice-panel.deep{ background:rgba(3,29,40,.85) !important; color:#fff !important; }
+    html:not(.print-pdf) .ice-ribbon{ background:var(--rose) !important; border-color:var(--rose) !important; color:#fff !important; }
+    html:not(.print-pdf) .ice-ribbon .rb-done{ display:flex !important; opacity:1 !important; transform:none !important; }
 
     /* Repère de diapo, repris du mode lecture. */
     html:not(.print-pdf) .reveal .slides > section::after{
@@ -813,6 +921,97 @@
           </div>
           <div class="tt-hint">Cliquez pour lancer le minuteur</div>
         </div>
+      </div>
+    </section>
+
+    <!-- 06b · NOTION — approche d'évaluation non déficitaire (iceberg cliquable) -->
+    <section data-screen-label="Iceberg de l'activité" data-phase="3" data-state="dark">
+      <div class="ice-wrap">
+       <div class="ice-canvas">
+        <div class="ice-head">
+          <span class="eyebrow">Notion clé · évaluer l'activité</span>
+          <h2>Approche d'évaluation non déficitaire</h2>
+        </div>
+
+        <div class="ice-scene">
+          <svg class="ice-svg" viewBox="0 0 420 400" preserveAspectRatio="none" role="group"
+               aria-label="Iceberg de l'activité : deux parties cliquables">
+            <defs>
+              <linearGradient id="s11IceTop" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#FFFFFF" />
+                <stop offset="1" stop-color="#CFEAF1" />
+              </linearGradient>
+              <linearGradient id="s11IceDeep" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#B6E7F4" stop-opacity=".9" />
+                <stop offset="1" stop-color="#3E9CBB" stop-opacity=".5" />
+              </linearGradient>
+            </defs>
+
+            <g class="ice-part p-deep" data-part="deep" role="button" tabindex="0"
+               aria-label="Partie immergée : ce que l'on fait">
+              <g class="body">
+                <path d="M92 168 L322 168 L364 226 L340 278 L304 308 L250 356 L184 376 L120 348 L62 306 L40 244 L60 200 Z" fill="url(#s11IceDeep)" />
+                <path d="M214 168 L322 168 L364 226 L340 278 L304 308 L250 356 L214 364 Z" fill="#2E7F9C" fill-opacity=".26" />
+                <path d="M92 168 L214 168 L214 364 L184 376 L120 348 L62 306 L40 244 L60 200 Z" fill="#FFFFFF" fill-opacity=".09" />
+              </g>
+              <circle class="ice-ring" cx="280" cy="310" r="15" fill="none" stroke="#9ff0ed" stroke-width="3" />
+            </g>
+
+            <g class="ice-part p-top" data-part="top" role="button" tabindex="0"
+               aria-label="Partie émergée : ce que l'on voit">
+              <g class="body">
+                <path d="M200 22 L240 96 L258 78 L322 168 L92 168 L150 98 L172 116 Z" fill="url(#s11IceTop)" />
+                <path d="M200 22 L240 96 L258 78 L322 168 L206 168 Z" fill="#9DC7D8" fill-opacity=".45" />
+              </g>
+              <circle class="ice-ring" cx="204" cy="60" r="13" fill="none" stroke="#0B7A70" stroke-width="3" />
+            </g>
+          </svg>
+
+          <button class="ice-plate up" type="button" data-part="top">Ce que l'on voit</button>
+          <button class="ice-plate deep" type="button" data-part="deep">Ce que l'on fait</button>
+
+          <div class="ice-panel up" data-part="top">
+            <div class="ice-hint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v9M9 13 6.4 16.6a2 2 0 0 0 .4 2.7l3 2.2a4 4 0 0 0 2.4.8h3.3a3 3 0 0 0 3-2.6l.4-3.2a2 2 0 0 0-1.6-2.2L13 12.6"/></svg>
+              Cliquez la pointe émergée
+            </div>
+            <div class="ice-body">
+              <span class="ice-k">Partie émergée · le visible</span>
+              <div class="ice-t">«&nbsp;Ce que l'on voit&nbsp;»</div>
+              <ul class="ice-list">
+                <li>Les <strong>prescriptions</strong>&nbsp;: «&nbsp;ce qu'on me demande&nbsp;»</li>
+                <li>Le <strong>résultat</strong>, la performance observable</li>
+                <li>Un jugement d'<strong>efficacité objective</strong></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="ice-panel deep" data-part="deep">
+            <div class="ice-hint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v9M9 13 6.4 16.6a2 2 0 0 0 .4 2.7l3 2.2a4 4 0 0 0 2.4.8h3.3a3 3 0 0 0 3-2.6l.4-3.2a2 2 0 0 0-1.6-2.2L13 12.6"/></svg>
+              Cliquez la masse immergée
+            </div>
+            <div class="ice-body">
+              <span class="ice-k">Partie immergée · le réel</span>
+              <div class="ice-t">«&nbsp;Ce que l'on fait&nbsp;»</div>
+              <ul class="ice-list">
+                <li>L'<strong>activité réelle</strong>&nbsp;: des compromis opératoires</li>
+                <li>Les <strong>conflits de logique</strong> arbitrés en situation</li>
+                <li>Le coût pour la personne&nbsp;: «&nbsp;ce que ça me demande&nbsp;»</li>
+              </ul>
+              <p class="ice-note">Un jugement d'<strong>efficacité subjective</strong> — invisible de l'extérieur, et pourtant c'est là que se joue le métier.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ice-ribbon">
+          <span class="rb-wait">Cliquez les deux faces de l'iceberg pour les comparer.</span>
+          <span class="rb-done">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 12S5.5 5.5 12 5.5 22.2 12 22.2 12 18.5 18.5 12 18.5 1.8 12 1.8 12z"/><circle cx="12" cy="12" r="3"/></svg>
+            Évaluer sans déficit&nbsp;: croiser un <strong>double jugement</strong> d'efficacité — objective <em style="color:inherit;font-weight:800;">et</em> subjective.
+          </span>
+        </div>
+       </div>
       </div>
     </section>
 
@@ -1349,6 +1548,59 @@
       var cur0 = document.querySelector('.slides > section.present');
       window.__updateProgmap(cur0 ? secs.indexOf(cur0) : 0);
     })();
+  })();
+
+  // ---- Iceberg de l'activité : révélation des deux faces au clic ----
+  (function(){
+    var scene = document.querySelector('.ice-scene');
+    if(!scene) return;
+    var ribbon = scene.parentElement.querySelector('.ice-ribbon');
+
+    function toggle(part){
+      var panel = scene.querySelector('.ice-panel[data-part="' + part + '"]');
+      if(!panel) return;
+      var open = !panel.classList.contains('open');
+      panel.classList.toggle('open', open);
+      scene.classList.toggle('show-' + part, open);
+      if(ribbon){
+        ribbon.classList.toggle('on',
+          scene.classList.contains('show-top') && scene.classList.contains('show-deep'));
+      }
+    }
+
+    // Mise à l'échelle du canevas 1280×720 sur son cadre. On mesure en pixels
+    // de mise en page (clientWidth) : en présentation le cadre fait exactement
+    // 1280×720 malgré le scale « cover » de reveal, donc le facteur vaut 1.
+    var wrap = scene.closest('.ice-wrap');
+    var canvas = wrap && wrap.querySelector('.ice-canvas');
+    function fitIce(){
+      if(!canvas) return;
+      var w = wrap.clientWidth, h = wrap.clientHeight;
+      if(!w || !h) return;
+      var s = Math.min(w/1280, h/720);
+      canvas.style.transform = 'scale(' + s.toFixed(4) + ')';
+      canvas.style.left = ((w - 1280*s)/2).toFixed(1) + 'px';
+      canvas.style.top  = ((h -  720*s)/2).toFixed(1) + 'px';
+    }
+    fitIce();
+    window.addEventListener('resize', fitIce);
+    window.addEventListener('load', fitIce);
+    if(window.ResizeObserver){ try{ new ResizeObserver(fitIce).observe(wrap); }catch(e){} }
+
+    // Les deux zones de la glace + les deux plaques déclenchent la même bascule.
+    scene.querySelectorAll('.ice-part[data-part], .ice-plate[data-part]').forEach(function(el){
+      el.addEventListener('click', function(e){
+        e.preventDefault(); e.stopPropagation();
+        toggle(el.getAttribute('data-part'));
+      });
+      // Espace / Entrée : on arrête la propagation, sinon reveal change de diapo.
+      el.addEventListener('keydown', function(e){
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault(); e.stopPropagation();
+          toggle(el.getAttribute('data-part'));
+        }
+      });
+    });
   })();
 
   // ---- Dilemmes du formateur : curseurs déplaçables sur chaque axe ----
