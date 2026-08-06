@@ -456,6 +456,49 @@
     border-left:4px solid #F2C14E; padding-left:12px; margin-top:12px; }
   .typo.show-moves .typo-moves{ display:block; }
 
+  /* ---- bonnes pratiques : cycle du projet + facteurs de réussite ----
+     Marges hautes/basses calées comme les deux cartes ci-dessus, sur la
+     frise de progression (0-65 px) et le pied de page (630-720 px).       */
+  .bp{ position:relative; width:100%; height:100%; overflow:hidden; box-sizing:border-box;
+    padding:74px 46px 104px; display:flex; flex-direction:column; color:#fff;
+    background:radial-gradient(circle at 72% 20%, #0f5350 0%, #0a3d3b 56%, #072e2c 100%); }
+  .bp-head{ flex:0 0 auto; margin-bottom:14px; }
+  .bp-head .eyebrow{ display:block; font-size:12px; font-weight:800; letter-spacing:.09em;
+    text-transform:uppercase; color:rgba(255,255,255,.6); margin-bottom:.35em; }
+  .bp-head h2{ margin:0; font-size:26px; font-weight:800; color:#fff; text-shadow:0 2px 16px rgba(8,40,39,.5); }
+
+  /* --- le déroulé des étapes, avec la maîtrise en boucle par-dessus --- */
+  .bp-sub{ font-size:12.5px; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+    color:rgba(255,255,255,.62); margin:0 0 8px; }
+  .bp-flow{ position:relative; height:174px; flex:0 0 auto; }
+  .bp-ctrl{ position:absolute; top:0; left:50%; transform:translateX(-50%); z-index:2;
+    background:#12A39A; color:#062522; border-radius:9px; padding:11px 34px;
+    font-size:19px; font-weight:800; box-shadow:0 8px 22px -12px rgba(0,0,0,.8); }
+  .bp-loop{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:1; }
+  .bp-loop > path{ fill:none; stroke:rgba(255,255,255,.75); stroke-width:3; stroke-linecap:round; }
+  .bp-row{ position:absolute; left:0; right:0; bottom:0; display:flex; align-items:center; }
+  .bp-step{ flex:1 1 0; background:#0B7A70; color:#fff; border-radius:9px; padding:15px 10px;
+    text-align:center; font-size:19px; font-weight:800; line-height:1.2;
+    box-shadow:0 8px 22px -14px rgba(0,0,0,.8); }
+  .bp-arrow{ flex:0 0 44px; display:flex; align-items:center; justify-content:center;
+    color:rgba(255,255,255,.8); }
+  .bp-arrow svg{ width:26px; height:16px; display:block; }
+
+  /* --- les six facteurs de réussite --- */
+  .bp-sub2{ margin-top:18px; }
+  .bp-keys{ flex:1 1 auto; display:grid; grid-template-columns:repeat(3,1fr);
+    grid-auto-rows:1fr; gap:11px; min-height:0; }
+  .bp-key{ position:relative; background:#0B7A70; border-radius:10px; padding:11px 14px 11px 46px;
+    display:flex; flex-direction:column; justify-content:center;
+    box-shadow:0 8px 22px -16px rgba(0,0,0,.8); }
+  .bp-key .n{ position:absolute; left:13px; top:50%; transform:translateY(-50%);
+    width:24px; height:24px; border-radius:50%; background:var(--rose); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:12.5px; font-weight:800; }
+  .bp-key b{ font-size:16px; font-weight:800; color:#fff; line-height:1.2; }
+  /* .93 et non .82 : composé sur le fond teal, le blanc à 82 % ne donnait
+     que 4.05:1, sous le seuil AA pour ce corps de texte.                   */
+  .bp-key span.d{ font-size:13px; font-weight:600; color:rgba(255,255,255,.93); line-height:1.3; margin-top:2px; }
+
   /* ---- tuiles outils ---- */
 
   /* ---- icônes par objectif ---- */
@@ -971,6 +1014,50 @@
             <li data-ico="processus"><strong>Découper &amp; planifier</strong>&nbsp;: des tâches concrètes, des échéances, un pilotage régulier.</li>
             <li data-ico="groupe"><strong>Se répartir &amp; communiquer</strong>&nbsp;: des rôles clairs et des points d'équipe fréquents.</li>
           </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06a · NOTION — cycle du projet & facteurs de réussite -->
+    <section data-screen-label="Étapes &amp; réussite" data-phase="3" data-state="dark">
+      <div class="bp">
+        <div class="bp-head">
+          <span class="eyebrow">Notion clé · comment réussir&nbsp;?</span>
+          <h2>Bonnes pratiques</h2>
+        </div>
+
+        <p class="bp-sub">Les étapes d'un projet</p>
+        <div class="bp-flow">
+          <div class="bp-ctrl">Maîtrise</div>
+          <svg class="bp-loop" viewBox="0 0 1188 174" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <marker id="bpArr" viewBox="0 0 10 10" refX="8.5" refY="5"
+                      markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 Z" fill="rgba(255,255,255,.75)"></path>
+              </marker>
+            </defs>
+            <path d="M525,50 C478,54 444,72 441,110" marker-end="url(#bpArr)"></path>
+            <path d="M747,110 C744,72 710,54 663,50" marker-end="url(#bpArr)"></path>
+          </svg>
+          <div class="bp-row">
+            <div class="bp-step">Avant-projet</div>
+            <span class="bp-arrow"><svg viewBox="0 0 26 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 8h22M17 2l6 6-6 6"/></svg></span>
+            <div class="bp-step">Planification</div>
+            <span class="bp-arrow"><svg viewBox="0 0 26 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 8h22M17 2l6 6-6 6"/></svg></span>
+            <div class="bp-step">Réalisation</div>
+            <span class="bp-arrow"><svg viewBox="0 0 26 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 8h22M17 2l6 6-6 6"/></svg></span>
+            <div class="bp-step">Clôture</div>
+          </div>
+        </div>
+
+        <p class="bp-sub bp-sub2">Six facteurs de réussite</p>
+        <div class="bp-keys">
+          <div class="bp-key"><span class="n">1</span><b>Soutien exécutif</b><span class="d">Management du projet</span></div>
+          <div class="bp-key"><span class="n">2</span><b>Maturité émotionnelle</b><span class="d">Liens entre les collaborateurs</span></div>
+          <div class="bp-key"><span class="n">3</span><b>Implication des utilisateurs</b><span class="d">Prise de décision</span></div>
+          <div class="bp-key"><span class="n">4</span><b>Gestion de projet</b><span class="d">Planifier, organiser, suivre</span></div>
+          <div class="bp-key"><span class="n">5</span><b>Objectifs clairs</b><span class="d">Stratégie globale, utilité</span></div>
+          <div class="bp-key"><span class="n">6</span><b>Décomposition</b><span class="d">Livrables pour chaque étape</span></div>
         </div>
       </div>
     </section>
