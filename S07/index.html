@@ -262,6 +262,108 @@
     display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background .15s; }
   .roomreveal .rr-close:hover{ background:rgba(255,255,255,.24); }
 
+  /* ---- carte sociodynamique des acteurs (d'Herbemont & César) ----
+     Grille 4×4 : synergie en ordonnée, antagonisme en abscisse.
+     Les zones sont muettes au départ ; un clic révèle couleur, intitulé,
+     valeurs d'axe concernées et fiche descriptive.                        */
+  .socio{ position:relative; width:100%; height:100%; overflow:hidden; box-sizing:border-box;
+    padding:26px 46px 20px; display:flex; flex-direction:column; color:#fff;
+    background:radial-gradient(circle at 74% 26%, #0f5350 0%, #0a3d3b 56%, #072e2c 100%); }
+  .socio-head{ flex:0 0 auto; margin-bottom:12px; }
+  .socio-head .eyebrow{ display:block; font-size:12px; font-weight:800; letter-spacing:.09em;
+    text-transform:uppercase; color:rgba(255,255,255,.6); margin-bottom:.35em; }
+  .socio-head h2{ margin:0; font-size:26px; font-weight:800; color:#fff; text-shadow:0 2px 16px rgba(8,40,39,.5); }
+  .socio-head .src{ font-size:12px; font-weight:600; color:rgba(255,255,255,.5); margin-left:.6em; }
+
+  .socio-main{ flex:1 1 auto; display:flex; gap:26px; align-items:flex-start; min-height:0; }
+
+  /* ---- repère et grille ---- */
+  .socio-chart{ flex:0 0 auto; display:grid; grid-template-columns:26px 62px 620px;
+    grid-template-rows:420px 30px; align-items:stretch; }
+  .socio-ytitle{ grid-column:1; grid-row:1; writing-mode:vertical-rl; transform:rotate(180deg);
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:800; color:rgba(255,255,255,.85); letter-spacing:.04em; }
+  .socio-yaxis{ grid-column:2; grid-row:1; display:flex; flex-direction:column-reverse;
+    justify-content:space-around; align-items:flex-end; padding-right:9px; }
+  .socio-ystep{ display:flex; align-items:center; gap:7px; }
+  .socio-ystep .lab{ font-size:11.5px; font-weight:700; color:rgba(255,255,255,.55); }
+  .socio-xaxis{ grid-column:3; grid-row:2; display:flex; justify-content:space-around;
+    align-items:center; padding-top:7px; }
+  .socio-xstep{ display:flex; align-items:center; gap:7px; }
+  .socio-xstep .lab{ font-size:11.5px; font-weight:700; color:rgba(255,255,255,.55); }
+  .socio-xtitle{ grid-column:3; grid-row:2; justify-self:end; align-self:center;
+    font-size:13px; font-weight:800; color:rgba(255,255,255,.85); }
+  .socio-badge{ width:23px; height:23px; border-radius:50%; display:flex; align-items:center;
+    justify-content:center; font-size:12px; font-weight:800;
+    background:rgba(255,255,255,.13); color:rgba(255,255,255,.6);
+    border:1.5px solid rgba(255,255,255,.2); transition:background .2s, color .2s, transform .2s; }
+  .socio-badge.on{ background:#fff; color:#0a3d3b; border-color:#fff; transform:scale(1.16); }
+
+  .socio-gridwrap{ grid-column:3; grid-row:1; position:relative; }
+  .socio-grid{ position:absolute; inset:0; display:grid;
+    grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(4,1fr); gap:5px; }
+
+  /* ---- zones ---- */
+  .socio-zone{ position:relative; appearance:none; font-family:var(--font); cursor:pointer;
+    border-radius:9px; border:1.5px dashed rgba(255,255,255,.26); background:rgba(255,255,255,.045);
+    color:transparent; font-size:14.5px; font-weight:800; line-height:1.25; padding:6px;
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    transition:background .35s, border-color .35s, color .3s, transform .15s, box-shadow .25s; }
+  .socio-zone:hover{ background:rgba(255,255,255,.13); border-color:rgba(255,255,255,.5); }
+  .socio-zone:focus-visible{ outline:3px solid #9ff0ed; outline-offset:2px; }
+  .socio-zone.on{ background:var(--c); border:1.5px solid var(--c); color:var(--fg,#fff);
+    box-shadow:0 10px 26px -14px rgba(0,0,0,.85); }
+  .socio-zone.on:hover{ transform:translateY(-2px); }
+  .socio-zone .zq{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-size:19px; font-weight:800; color:rgba(255,255,255,.3); transition:opacity .25s; }
+  .socio-zone.on .zq{ opacity:0; }
+  /* le triangle d'or : la cible, signalée dès qu'elle est révélée */
+  .socio-zone.is-target.on{ box-shadow:0 0 0 3px rgba(217,154,11,.45), 0 12px 30px -12px rgba(0,0,0,.85); }
+
+  /* ---- flèches de déplacement ---- */
+  .socio-arrows{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; opacity:0;
+    transition:opacity .4s ease; }
+  .socio.show-moves .socio-arrows{ opacity:1; }
+  /* « > path » et non « path » : sinon la pointe de flèche définie dans
+     <defs> hérite de fill:none et du tracé pointillé, et disparaît.        */
+  .socio-arrows > path{ fill:none; stroke:#F2C14E; stroke-width:3.4; stroke-linecap:round;
+    stroke-dasharray:var(--len,300); stroke-dashoffset:var(--len,300); }
+  .socio.show-moves .socio-arrows > path{ animation:socioDraw .9s ease forwards; }
+  .socio.show-moves .socio-arrows > path:nth-of-type(2){ animation-delay:.25s; }
+  .socio.show-moves .socio-arrows > path:nth-of-type(3){ animation-delay:.5s; }
+  @keyframes socioDraw{ to{ stroke-dashoffset:0; } }
+  @media(prefers-reduced-motion:reduce){
+    .socio.show-moves .socio-arrows > path{ animation:none; stroke-dashoffset:0; }
+  }
+
+  /* ---- panneau latéral ---- */
+  .socio-panel{ flex:1 1 auto; min-width:0; align-self:stretch; display:flex; flex-direction:column; }
+  .socio-ask{ font-size:15px; line-height:1.5; color:rgba(255,255,255,.9); }
+  .socio-ask p{ margin:0 0 .9em; }
+  .socio-ask strong{ color:#9ff0ed; }
+  .socio-card{ display:none; border-left:4px solid var(--c,#fff); padding:2px 0 2px 14px; }
+  .socio-card h3{ margin:0 0 .1em; font-size:20px; font-weight:800; color:#fff; }
+  .socio-card .coord{ display:block; font-size:11.5px; font-weight:700; letter-spacing:.05em;
+    text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:.6em; }
+  .socio-card p{ margin:0 0 .7em; font-size:14.5px; line-height:1.5; color:rgba(255,255,255,.88); }
+  .socio-card .todo{ font-size:14px; line-height:1.45; color:#9ff0ed; font-weight:700; }
+  .socio-card .todo::before{ content:"→ "; }
+  .socio.has-sel .socio-ask{ display:none; }
+  .socio.has-sel .socio-card.is-sel{ display:block; }
+
+  .socio-actions{ margin-top:auto; padding-top:14px; display:flex; flex-direction:column; gap:9px; }
+  .socio-btn{ appearance:none; cursor:pointer; font-family:var(--font); font-size:14px; font-weight:800;
+    color:#0a3d3b; background:#F2C14E; border:2px solid #F2C14E; border-radius:999px; padding:10px 18px;
+    display:inline-flex; align-items:center; justify-content:center; gap:9px;
+    transition:background .15s, transform .12s; }
+  .socio-btn:hover{ background:#fff; border-color:#fff; transform:translateY(-2px); }
+  .socio-btn.ghost{ background:transparent; color:rgba(255,255,255,.85); border-color:rgba(255,255,255,.35); }
+  .socio-btn.ghost:hover{ background:rgba(255,255,255,.14); color:#fff; border-color:rgba(255,255,255,.6); }
+  .socio-btn svg{ width:1.1em; height:1.1em; display:block; }
+  .socio-moves{ display:none; font-size:13.5px; line-height:1.45; color:#F2C14E; font-weight:700;
+    border-left:4px solid #F2C14E; padding-left:12px; margin-top:12px; }
+  .socio.show-moves .socio-moves{ display:block; }
+
   /* ---- tuiles outils ---- */
 
   /* ---- icônes par objectif ---- */
@@ -596,6 +698,15 @@
     html:not(.print-pdf) .bridge.gated .dimsgrid{ filter:none !important; opacity:1 !important; }
     html:not(.print-pdf) .bridge__col__details{ max-height:none !important; opacity:1 !important; margin-top:14px !important; }
     html:not(.print-pdf) .roomsteps .rscard.gated .rexbox{ display:block !important; }
+    /* Carte des acteurs : les zones ne se colorent qu'au clic. Sur papier on
+       les affiche toutes, et on garde les questions plutôt qu'une fiche.     */
+    html:not(.print-pdf) .socio-zone{ background:var(--c) !important; border:1.5px solid var(--c) !important;
+      color:var(--fg,#fff) !important; }
+    html:not(.print-pdf) .socio-zone .zq{ display:none !important; }
+    html:not(.print-pdf) .socio-card,
+    html:not(.print-pdf) .socio-actions,
+    html:not(.print-pdf) .socio-moves{ display:none !important; }
+    html:not(.print-pdf) .socio-ask{ display:block !important; }
 
     /* Repère de diapo, repris du mode lecture. */
     html:not(.print-pdf) .reveal .slides > section::after{
@@ -778,6 +889,134 @@
             <li data-ico="case"><strong>Le niveau d'incertitude</strong> appelle plus ou moins d'agilité et d'itérations.</li>
             <li data-ico="processus"><strong>Situer son projet</strong>, c'est choisir les bons outils de pilotage.</li>
           </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07b · NOTION — carte sociodynamique des acteurs -->
+    <section data-screen-label="Carte des acteurs" data-phase="3" data-state="dark">
+      <div class="socio">
+        <div class="socio-head">
+          <span class="eyebrow">Notion clé · analyse des acteurs</span>
+          <h2>Profil des acteurs de votre projet<span class="src">d'Herbemont &amp; César</span></h2>
+        </div>
+
+        <div class="socio-main">
+          <div class="socio-chart">
+            <div class="socio-ytitle">Synergie&nbsp;↑</div>
+
+            <div class="socio-yaxis">
+              <div class="socio-ystep"><span class="lab">Faible</span><span class="socio-badge" data-axis="y" data-v="1">1</span></div>
+              <div class="socio-ystep"><span class="lab">Moyenne</span><span class="socio-badge" data-axis="y" data-v="2">2</span></div>
+              <div class="socio-ystep"><span class="lab"></span><span class="socio-badge" data-axis="y" data-v="3">3</span></div>
+              <div class="socio-ystep"><span class="lab">Forte</span><span class="socio-badge" data-axis="y" data-v="4">4</span></div>
+            </div>
+
+            <div class="socio-gridwrap">
+              <div class="socio-grid">
+                <button class="socio-zone" type="button" data-k="engages" data-x="1" data-y="2,3,4"
+                        style="grid-area:1/1/4/2;--c:#0B7A70"><span class="zq">?</span>Engagés</button>
+                <button class="socio-zone is-target" type="button" data-k="triangle" data-x="2,3" data-y="4"
+                        style="grid-area:1/2/2/4;--c:#D99A0B;--fg:#201800">
+                  <span class="zq">?</span>Triangle d'or</button>
+                <button class="socio-zone" type="button" data-k="dechires" data-x="4" data-y="4"
+                        style="grid-area:1/4/2/5;--c:#6D4AA8"><span class="zq">?</span>Déchirés</button>
+                <button class="socio-zone" type="button" data-k="hesitants" data-x="2,3" data-y="2,3"
+                        style="grid-area:2/2/4/4;--c:#4F6E8A"><span class="zq">?</span>Hésitants</button>
+                <button class="socio-zone" type="button" data-k="revoltes" data-x="4" data-y="1,2,3"
+                        style="grid-area:2/4/5/5;--c:#8E1348"><span class="zq">?</span>Révoltés</button>
+                <button class="socio-zone" type="button" data-k="passifs" data-x="1" data-y="1"
+                        style="grid-area:4/1/5/2;--c:#5E6B76"><span class="zq">?</span>Passifs</button>
+                <button class="socio-zone" type="button" data-k="grognons" data-x="2" data-y="1"
+                        style="grid-area:4/2/5/3;--c:#8F6231"><span class="zq">?</span>Grognons</button>
+                <button class="socio-zone" type="button" data-k="opposants" data-x="3" data-y="1"
+                        style="grid-area:4/3/5/4;--c:#C0245E"><span class="zq">?</span>Opposants</button>
+              </div>
+
+              <svg class="socio-arrows" viewBox="0 0 620 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <defs>
+                  <marker id="socioArr" viewBox="0 0 10 10" refX="8.5" refY="5"
+                          markerWidth="5.2" markerHeight="5.2" orient="auto-start-reverse">
+                    <path d="M0,0 L10,5 L0,10 Z" fill="#F2C14E"></path>
+                  </marker>
+                </defs>
+                <path d="M95,338 Q168,300 246,234" marker-end="url(#socioArr)"></path>
+                <path d="M310,176 L310,98"        marker-end="url(#socioArr)"></path>
+                <path d="M102,126 Q178,64 248,56" marker-end="url(#socioArr)"></path>
+              </svg>
+            </div>
+
+            <div class="socio-xaxis">
+              <div class="socio-xstep"><span class="socio-badge" data-axis="x" data-v="1">1</span><span class="lab">Faible</span></div>
+              <div class="socio-xstep"><span class="socio-badge" data-axis="x" data-v="2">2</span><span class="lab"></span></div>
+              <div class="socio-xstep"><span class="socio-badge" data-axis="x" data-v="3">3</span><span class="lab">Moyen</span></div>
+              <div class="socio-xstep"><span class="socio-badge" data-axis="x" data-v="4">4</span><span class="lab">Fort</span></div>
+            </div>
+            <div class="socio-xtitle">Antagonisme&nbsp;→</div>
+          </div>
+
+          <div class="socio-panel">
+            <div class="socio-ask">
+              <p><strong>Où se trouvent</strong> les personnes qui gravitent autour de votre projet&nbsp;?</p>
+              <p><strong>Comment les déplacer&nbsp;?</strong></p>
+              <p style="font-size:13.5px;color:rgba(255,255,255,.55);">Cliquez sur une zone pour la découvrir.</p>
+            </div>
+
+            <div class="socio-card" data-card="engages" style="--c:#0B7A70">
+              <h3>Engagés</h3><span class="coord">Synergie 2–4 · Antagonisme 1</span>
+              <p>Favorables et actifs, mais peu critiques&nbsp;: ils suivent sans challenger le projet.</p>
+              <p class="todo">Précieux — à condition de ne pas prendre leur soutien pour une validation.</p>
+            </div>
+            <div class="socio-card" data-card="triangle" style="--c:#D99A0B">
+              <h3>Triangle d'or</h3><span class="coord">Synergie 4 · Antagonisme 2–3</span>
+              <p>Très engagés <em>et</em> critiques&nbsp;: ils contestent pour améliorer, pas pour bloquer.</p>
+              <p class="todo">C'est la cible&nbsp;: c'est vers eux qu'on cherche à déplacer les autres.</p>
+            </div>
+            <div class="socio-card" data-card="dechires" style="--c:#6D4AA8">
+              <h3>Déchirés</h3><span class="coord">Synergie 4 · Antagonisme 4</span>
+              <p>Beaucoup d'énergie, dans les deux sens à la fois&nbsp;: alliés passionnés et critiques virulents.</p>
+              <p class="todo">Énergie réelle mais instable — clarifier ce qui les tiraille.</p>
+            </div>
+            <div class="socio-card" data-card="hesitants" style="--c:#4F6E8A">
+              <h3>Hésitants</h3><span class="coord">Synergie 2–3 · Antagonisme 2–3</span>
+              <p>Partagés, ils attendent de voir laquelle des deux dynamiques l'emporte.</p>
+              <p class="todo">Cible prioritaire&nbsp;: un premier résultat concret les fait basculer.</p>
+            </div>
+            <div class="socio-card" data-card="revoltes" style="--c:#8E1348">
+              <h3>Révoltés</h3><span class="coord">Synergie 1–3 · Antagonisme 4</span>
+              <p>Opposition frontale et déterminée&nbsp;: toute leur énergie va contre le projet.</p>
+              <p class="todo">N'y investissez pas votre énergie&nbsp;: le retour est quasi nul.</p>
+            </div>
+            <div class="socio-card" data-card="passifs" style="--c:#5E6B76">
+              <h3>Passifs</h3><span class="coord">Synergie 1 · Antagonisme 1</span>
+              <p>Ni pour, ni contre, ni vraiment concernés. Souvent les plus nombreux.</p>
+              <p class="todo">Ne pas les oublier&nbsp;: ils suivent le mouvement collectif.</p>
+            </div>
+            <div class="socio-card" data-card="grognons" style="--c:#8F6231">
+              <h3>Grognons</h3><span class="coord">Synergie 1 · Antagonisme 2</span>
+              <p>Ils râlent, mais n'agissent pas contre&nbsp;: leur énergie reste verbale.</p>
+              <p class="todo">Écouter la plainte sans en faire un conflit.</p>
+            </div>
+            <div class="socio-card" data-card="opposants" style="--c:#C0245E">
+              <h3>Opposants</h3><span class="coord">Synergie 1 · Antagonisme 3</span>
+              <p>Contre le projet et ils le disent, avec une énergie déjà mobilisée.</p>
+              <p class="todo">Discuter le fond, sans chercher à les convertir.</p>
+            </div>
+
+            <p class="socio-moves">On ne déplace pas les révoltés&nbsp;: on fait grandir le triangle d'or en y amenant les passifs, les hésitants et les engagés.</p>
+
+            <div class="socio-actions">
+              <button class="socio-btn" type="button" id="socioMoves">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 L20 6"/><path d="M14 6h6v6"/></svg>
+                <span class="lbl-on">Comment les déplacer&nbsp;?</span>
+                <span class="lbl-off" hidden>Masquer les déplacements</span>
+              </button>
+              <button class="socio-btn ghost" type="button" id="socioAll">
+                <span class="lbl-on">Tout révéler</span>
+                <span class="lbl-off" hidden>Tout masquer</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1213,6 +1452,90 @@
       var cur0 = document.querySelector('.slides > section.present');
       window.__updateProgmap(cur0 ? secs.indexOf(cur0) : 0);
     })();
+  })();
+
+  // ---- Carte sociodynamique des acteurs ----
+  (function(){
+    var wrap = document.querySelector('.socio');
+    if(!wrap) return;
+    var zones   = Array.prototype.slice.call(wrap.querySelectorAll('.socio-zone'));
+    var badges  = Array.prototype.slice.call(wrap.querySelectorAll('.socio-badge'));
+    var cards   = Array.prototype.slice.call(wrap.querySelectorAll('.socio-card'));
+    var btnMove = wrap.querySelector('#socioMoves');
+    var btnAll  = wrap.querySelector('#socioAll');
+    var current = null;   // zone sélectionnée, ou null
+
+    // Longueur réelle de chaque flèche : sans cela le tracé progressif est faux.
+    Array.prototype.forEach.call(wrap.querySelectorAll('.socio-arrows > path'), function(p){
+      try{ p.style.setProperty('--len', p.getTotalLength()); }catch(e){}
+    });
+
+    function clearBadges(){ badges.forEach(function(b){ b.classList.remove('on'); }); }
+
+    function lightBadges(zone){
+      clearBadges();
+      ['x','y'].forEach(function(axis){
+        (zone.getAttribute('data-' + axis) || '').split(',').forEach(function(v){
+          v = v.trim(); if(!v) return;
+          var b = wrap.querySelector('.socio-badge[data-axis="' + axis + '"][data-v="' + v + '"]');
+          if(b) b.classList.add('on');
+        });
+      });
+    }
+
+    function showCard(key){
+      cards.forEach(function(c){ c.classList.toggle('is-sel', c.getAttribute('data-card') === key); });
+      wrap.classList.toggle('has-sel', !!key);
+    }
+
+    function select(zone){
+      if(current === zone){            // second clic : on désélectionne
+        zone.classList.remove('on');
+        zone.setAttribute('aria-pressed','false');
+        current = null; clearBadges(); showCard(null);
+        return;
+      }
+      // une seule zone mise en avant à la fois, mais on garde les autres révélées
+      if(current){ current.setAttribute('aria-pressed','false'); }
+      zone.classList.add('on');
+      zone.setAttribute('aria-pressed','true');
+      current = zone;
+      lightBadges(zone);
+      showCard(zone.getAttribute('data-k'));
+    }
+
+    zones.forEach(function(z){
+      z.setAttribute('aria-pressed','false');
+      z.addEventListener('click', function(){ select(z); });
+    });
+
+    function swapLabels(btn, on){
+      var a = btn.querySelector('.lbl-on'), b = btn.querySelector('.lbl-off');
+      if(a) a.hidden = on;
+      if(b) b.hidden = !on;
+      btn.setAttribute('aria-pressed', String(on));
+    }
+
+    function revealAll(on){
+      zones.forEach(function(z){ z.classList.toggle('on', on); });
+      swapLabels(btnAll, on);
+      if(!on){
+        current = null; clearBadges(); showCard(null);
+        zones.forEach(function(z){ z.setAttribute('aria-pressed','false'); });
+      }
+    }
+
+    btnAll.addEventListener('click', function(){
+      revealAll(!zones.every(function(z){ return z.classList.contains('on'); }));
+    });
+
+    btnMove.addEventListener('click', function(){
+      var on = !wrap.classList.contains('show-moves');
+      wrap.classList.toggle('show-moves', on);
+      swapLabels(btnMove, on);
+      // les flèches ne veulent rien dire sur une carte encore muette
+      if(on){ revealAll(true); }
+    });
   })();
 </script>
 </body>
