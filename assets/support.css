@@ -47,9 +47,12 @@ body.support-open .modebtn .lbl-pres{ display:inline; }
 }
 .topbtns .modebtn{ position:static; top:auto; right:auto; }
 
+/* « Imprimer » ne concerne que le support de cours : masqué en présentation.
+   Ctrl+P reste actif dans les deux modes et produit toujours le support A4. */
 .printbtn{
+  display:none;
   appearance:none; cursor:pointer; font-family:var(--font, system-ui, sans-serif);
-  display:inline-flex; align-items:center; gap:9px;
+  align-items:center; gap:9px;
   padding:9px 16px 9px 13px; border-radius:999px;
   border:1.5px solid rgba(0,133,127,.4); background:rgba(255,255,255,.92);
   backdrop-filter:blur(6px);
@@ -57,6 +60,7 @@ body.support-open .modebtn .lbl-pres{ display:inline; }
   box-shadow:0 2px 14px rgba(0,133,127,.18);
   transition:background .15s, border-color .15s, color .15s;
 }
+body.support-open .printbtn{ display:inline-flex; }
 .printbtn:hover{ background:var(--bg-teal, #EAF6F5); border-color:var(--teal-deep, #00857F); }
 .printbtn:focus-visible{ outline:3px solid var(--rose, #CF0063); outline-offset:2px; }
 .printbtn svg{ display:block; }
