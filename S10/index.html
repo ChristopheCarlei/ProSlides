@@ -34,7 +34,7 @@
   .reveal .slides{ text-align:left; }
   .reveal .slides section{ height:100%; padding:0; }
 
-  .brandstrip{ position:fixed; top:0; left:0; right:0; height:6px; background:var(--teal); z-index:40; pointer-events:none; }
+  .brandstrip{ position:fixed; top:0; left:0; right:0; height:6px; background:var(--teal); z-index:44; pointer-events:none; }
   .brandstrip::after{ content:""; position:absolute; left:0; top:6px; width:18vw; max-width:260px; height:3px; background:var(--rose); }
   body.dark-slide .brandstrip{ background:rgba(255,255,255,.9); }
   body.dark-slide .brandstrip::after{ background:var(--rose); }
@@ -479,6 +479,13 @@
 
   /* ---- frise de progression (barre haute, pleine largeur) ---- */
   .progmap{ position:fixed; top:0; left:0; right:0; z-index:42; pointer-events:none; padding:16px 190px 0 46px; }
+  /* Voile propre à la frise : les vidéos de fond sont trop claires par endroits
+     pour garantir la lisibilité des libellés. Il s'arrête sous le bandeau de
+     marque (z-index 44) et se fond dans la diapo. */
+  body.dark-slide .progmap::before{
+    content:""; position:absolute; inset:0 0 -26px 0; z-index:-1; pointer-events:none;
+    background:linear-gradient(180deg, rgba(8,44,43,.72) 0%, rgba(8,44,43,.46) 55%, rgba(8,44,43,0) 100%);
+  }
   body.cover-active .progmap{ display:none; }
   .progmap .pm-track{ display:flex; gap:26px; }
   .progmap .seg{ flex:1; min-width:0; display:flex; flex-direction:column; gap:9px; }
@@ -493,9 +500,9 @@
   .progmap .seg.on .lab{ color:var(--ink); font-weight:800; }
   .progmap .seg.on .bar::after{ background:var(--teal-deep); }
   /* sur fond sombre */
-  body.dark-slide .progmap .lab{ color:rgba(255,255,255,.55); }
+  body.dark-slide .progmap .lab{ color:rgba(255,255,255,.78); text-shadow:0 1px 2px rgba(0,0,0,.45); }
   body.dark-slide .progmap .seg.on .lab{ color:#fff; }
-  body.dark-slide .progmap .bar{ background:rgba(255,255,255,.2); }
+  body.dark-slide .progmap .bar{ background:rgba(255,255,255,.32); }
   body.dark-slide .progmap .bar::after{ background:#9ff0ed; }
   body.dark-slide .progmap .seg.on .bar::after{ background:#fff; }
 
