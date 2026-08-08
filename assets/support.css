@@ -1,0 +1,319 @@
+/* ============================================================================
+   Fichier      | assets/support.css
+   Projet       | ProSlides — Cours FPSE 752501
+   Créé         | 2026-08-06
+   Modifié      | 2026-08-06
+   Description  | Mode « Support de cours » : document A4 imprimable avec
+                | colonne de notes (Cornell). Remplace l'ancien mode lecture
+                | (diapos empilées). Ni image, ni vidéo, ni minuteur.
+   Dépendances  | assets/support.js · variables :root du deck · police TheSans
+   Chrome       | TESTÉ ✅ — affichage, console (0 erreur), bascule, rendu A4
+   ============================================================================ */
+
+/* ---------------------------------------------------------------------------
+   1. Bascule d'affichage
+   ------------------------------------------------------------------------ */
+
+.support-doc{ display:none; }
+
+html.support-open,
+body.support-open{
+  overflow:auto !important;
+  height:auto !important;
+  background:#E9EDEE !important;
+}
+body.support-open .reveal,
+body.support-open .progmap,
+body.support-open .deckfoot,
+body.support-open .kbdhint,
+body.support-open .reveal .backgrounds{ display:none !important; }
+
+body.support-open .support-doc{ display:block; }
+body.support-open .brandstrip{ position:fixed; }
+
+/* libellés du bouton de bascule */
+.modebtn .lbl-pres{ display:none; }
+body.support-open .modebtn .lbl-read{ display:none; }
+body.support-open .modebtn .lbl-pres{ display:inline; }
+
+/* ---------------------------------------------------------------------------
+   1bis. Barre de boutons en haut à droite (imprimer + bascule)
+   Le conteneur est créé par support.js ; .modebtn passe en flux normal.
+   ------------------------------------------------------------------------ */
+
+.topbtns{
+  position:fixed; top:16px; right:18px; z-index:60;
+  display:flex; align-items:center; gap:9px;
+}
+.topbtns .modebtn{ position:static; top:auto; right:auto; }
+
+.printbtn{
+  appearance:none; cursor:pointer; font-family:var(--font, system-ui, sans-serif);
+  display:inline-flex; align-items:center; gap:9px;
+  padding:9px 16px 9px 13px; border-radius:999px;
+  border:1.5px solid rgba(0,133,127,.4); background:rgba(255,255,255,.92);
+  backdrop-filter:blur(6px);
+  font-size:14px; font-weight:700; color:var(--teal-deep, #00857F);
+  box-shadow:0 2px 14px rgba(0,133,127,.18);
+  transition:background .15s, border-color .15s, color .15s;
+}
+.printbtn:hover{ background:var(--bg-teal, #EAF6F5); border-color:var(--teal-deep, #00857F); }
+.printbtn:focus-visible{ outline:3px solid var(--rose, #CF0063); outline-offset:2px; }
+.printbtn svg{ display:block; }
+
+/* ---------------------------------------------------------------------------
+   2. La feuille A4
+   ------------------------------------------------------------------------ */
+
+.support-doc{
+  --sup-ink:#111826;
+  --sup-muted:#5A6477;
+  --sup-rule:#D9DEE1;
+  --sup-teal:#00857F;
+  --sup-teal-ink:#0A4C4A;
+  --sup-rose:#CF0063;
+
+  box-sizing:border-box;
+  width:min(210mm, calc(100% - 24px));
+  margin:26px auto 60px;
+  padding:20mm 15mm 18mm;
+  background:#fff;
+  color:var(--sup-ink);
+  font-family:var(--font, system-ui, sans-serif);
+  font-size:10.8pt;
+  font-weight:400;
+  line-height:1.5;
+  text-align:left;
+  box-shadow:0 2px 4px rgba(16,24,40,.06), 0 26px 60px -34px rgba(16,24,40,.5);
+}
+.support-doc *{ box-sizing:border-box; }
+
+/* ---------------------------------------------------------------------------
+   3. En-tête du document
+   ------------------------------------------------------------------------ */
+
+.sup-cover{
+  padding-bottom:5mm;
+  margin-bottom:8mm;
+  border-bottom:2px solid var(--sup-teal);
+}
+.sup-cover .sup-course{
+  margin:0 0 2mm;
+  font-size:8pt; font-weight:800; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--sup-teal);
+}
+.sup-cover h1{
+  margin:0 0 2mm;
+  font-size:24pt; font-weight:800; letter-spacing:-.02em; line-height:1.05;
+  color:var(--sup-teal-ink); text-transform:none;
+}
+.sup-cover .sup-seance{
+  margin:0 0 1mm;
+  font-size:12pt; font-weight:700; color:var(--sup-ink);
+}
+.sup-cover .sup-meta{
+  margin:0;
+  font-size:9.5pt; color:var(--sup-muted);
+}
+.sup-cover .sup-meta span + span::before{ content:" · "; }
+
+/* ---------------------------------------------------------------------------
+   4. Bloc de contenu + colonne de notes (Cornell)
+   Par défaut un bloc occupe toute la largeur. La colonne de notes n'apparaît
+   que sur les blocs porteurs de contenu théorique, marqués data-notes.
+   ------------------------------------------------------------------------ */
+
+.sup-block{
+  display:grid;
+  grid-template-columns:1fr;
+  column-gap:7mm;
+  align-items:stretch;
+  margin:0 0 7mm;
+  padding-bottom:6mm;
+  border-bottom:1px solid var(--sup-rule);
+  break-inside:avoid;
+  page-break-inside:avoid;
+}
+.sup-block[data-notes="oui"],
+.sup-block[data-notes="lg"]{ grid-template-columns:1fr 58mm; }
+.sup-block:last-child{ border-bottom:0; }
+
+.sup-block > h2{
+  grid-column:1 / -1;
+  margin:0 0 4mm;
+  font-size:14pt; font-weight:800; letter-spacing:-.01em; line-height:1.2;
+  color:var(--sup-teal-ink); text-transform:none;
+}
+.sup-block > h2::after{
+  content:""; display:block; width:14mm; height:2.5px; margin-top:2mm;
+  background:var(--sup-rose); border-radius:2px;
+}
+
+.sup-content{ min-width:0; }
+.sup-content > *:first-child{ margin-top:0; }
+.sup-content > *:last-child{ margin-bottom:0; }
+
+.sup-notes{
+  position:relative;
+  min-height:34mm;
+  padding:5mm 0 0 5mm;
+  border-left:1px dashed #B9C1C5;
+  background-image:repeating-linear-gradient(
+    to bottom, transparent 0, transparent 7.4mm, #E6EAEC 7.4mm, #E6EAEC calc(7.4mm + 1px));
+  background-position:0 5mm;
+  background-repeat:repeat-y;
+}
+.sup-notes__lbl{
+  position:absolute; top:0; left:5mm;
+  font-size:7pt; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
+  color:#9AA3A9;
+}
+.sup-block[data-notes="lg"] .sup-notes{ min-height:60mm; }
+
+/* ---------------------------------------------------------------------------
+   5. Typographie interne
+   ------------------------------------------------------------------------ */
+
+.support-doc h3{
+  margin:5mm 0 2mm;
+  font-size:8.5pt; font-weight:800; letter-spacing:.11em; text-transform:uppercase;
+  color:var(--sup-teal);
+}
+.support-doc p{ margin:0 0 3mm; }
+.support-doc strong{ font-weight:700; color:var(--sup-teal-ink); }
+.support-doc em{ font-style:normal; font-weight:600; color:var(--sup-teal); }
+.support-doc a{ color:var(--sup-teal); text-decoration:none; border-bottom:1px solid #BFE0DE; }
+
+.support-doc ul, .support-doc ol{ margin:0 0 3mm; padding-left:5.5mm; }
+.support-doc li{ margin:0 0 1.6mm; }
+.support-doc ul{ list-style:none; padding-left:5mm; }
+.support-doc ul > li{ position:relative; }
+.support-doc ul > li::before{
+  content:""; position:absolute; left:-4.2mm; top:.62em;
+  width:1.6mm; height:1.6mm; border-radius:50%; background:var(--sup-teal);
+}
+.support-doc ol{ list-style:decimal; }
+.support-doc ol::marker, .support-doc ol > li::marker{ font-weight:800; color:var(--sup-teal); }
+
+/* objectifs numérotés */
+.sup-obj{ counter-reset:supobj; list-style:none !important; padding-left:0 !important; }
+.sup-obj > li{
+  counter-increment:supobj;
+  position:relative; padding-left:9mm; margin-bottom:3mm;
+}
+.sup-obj > li::before{
+  content:counter(supobj); position:absolute; left:0; top:-.05em;
+  width:6.2mm; height:6.2mm; border-radius:50%;
+  background:var(--sup-teal); color:#fff;
+  font-size:8.5pt; font-weight:800; line-height:6.2mm; text-align:center;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;
+}
+
+/* encart « à retenir » / définition */
+.sup-key{
+  margin:0 0 4mm; padding:3.5mm 4.5mm;
+  background:#F1F7F7; border-left:3px solid var(--sup-teal);
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;
+}
+.sup-key p:last-child{ margin-bottom:0; }
+.sup-key .sup-key__k{
+  display:block; margin-bottom:1.5mm;
+  font-size:8pt; font-weight:800; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--sup-teal);
+}
+
+/* deux colonnes comparatives */
+.sup-duo{ display:grid; grid-template-columns:1fr 1fr; gap:5mm; margin:0 0 4mm; }
+.sup-duo > div{ padding:3.5mm 4mm; border:1px solid var(--sup-rule); }
+.sup-duo h4{
+  margin:0 0 1.5mm; font-size:9.5pt; font-weight:800; color:var(--sup-teal-ink);
+}
+.sup-duo .sup-duo__q{ margin:0 0 2.5mm; font-size:9.5pt; font-style:italic; color:var(--sup-muted); }
+.sup-duo ul{ margin:0; }
+
+/* tableaux */
+.support-doc table{
+  width:100%; border-collapse:collapse; margin:0 0 4mm; font-size:9.5pt;
+}
+.support-doc th, .support-doc td{
+  padding:1.8mm 2.5mm; text-align:left; vertical-align:top;
+  border-bottom:1px solid var(--sup-rule);
+}
+.support-doc thead th{
+  font-size:8pt; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--sup-teal); border-bottom:1.5px solid var(--sup-teal);
+}
+.support-doc td.num{ white-space:nowrap; font-variant-numeric:tabular-nums; }
+
+/* page de notes libres en fin de document */
+.sup-freenotes{ break-before:page; page-break-before:always; }
+.sup-freenotes .sup-lines{
+  min-height:200mm;
+  background-image:repeating-linear-gradient(
+    to bottom, transparent 0, transparent 8.4mm, #E6EAEC 8.4mm, #E6EAEC calc(8.4mm + 1px));
+}
+
+/* pied du document */
+.sup-foot{
+  margin-top:8mm; padding-top:3mm; border-top:1px solid var(--sup-rule);
+  font-size:8pt; color:var(--sup-muted);
+  display:flex; justify-content:space-between; gap:6mm;
+}
+
+/* ---------------------------------------------------------------------------
+   6. Écrans étroits
+   ------------------------------------------------------------------------ */
+
+@media screen and (max-width:820px){
+  .support-doc{ padding:12mm 8mm; font-size:11pt; }
+  .sup-block{ grid-template-columns:1fr; }
+  .sup-notes{ margin-top:4mm; padding:5mm 0 0 0; border-left:0; border-top:1px dashed #B9C1C5; }
+  .sup-notes__lbl{ left:0; top:1mm; }
+  .sup-duo{ grid-template-columns:1fr; }
+}
+
+/* ---------------------------------------------------------------------------
+   7. Impression — A4
+   Ctrl+P imprime toujours le support, quel que soit le mode à l'écran.
+   Le chemin natif de reveal (?print-pdf) reste intact : règles préfixées
+   html:not(.print-pdf).
+   ------------------------------------------------------------------------ */
+
+/* Le chemin natif ?print-pdf de reveal ne doit jamais voir le support. */
+html.print-pdf .support-doc{ display:none !important; }
+
+@media print{
+  @page{ size:A4 portrait; margin:14mm 12mm 15mm; }
+
+  /* Commun aux deux chemins d'impression. */
+  .topbtns, .modebtn, .printbtn, .kbdhint{ display:none !important; }
+
+  html:not(.print-pdf), html:not(.print-pdf) body{
+    background:#fff !important; overflow:visible !important; height:auto !important;
+  }
+  html:not(.print-pdf) .reveal,
+  html:not(.print-pdf) .reveal .backgrounds,
+  html:not(.print-pdf) .progmap,
+  html:not(.print-pdf) .deckfoot,
+  html:not(.print-pdf) .brandstrip,
+  html:not(.print-pdf) .kbdhint,
+  html:not(.print-pdf) .topbtns,
+  html:not(.print-pdf) .modebtn,
+  html:not(.print-pdf) .printbtn,
+  html:not(.print-pdf) .timepanel,
+  html:not(.print-pdf) .reveal .controls,
+  html:not(.print-pdf) .reveal .progress,
+  html:not(.print-pdf) .reveal .slide-number{ display:none !important; }
+
+  html:not(.print-pdf) .support-doc{
+    display:block !important;
+    width:auto !important; margin:0 !important; padding:0 !important;
+    box-shadow:none !important; font-size:10.5pt;
+  }
+  html:not(.print-pdf) .sup-block{ margin-bottom:6mm; padding-bottom:5mm; }
+  html:not(.print-pdf) .sup-cover{ break-after:avoid; page-break-after:avoid; }
+  html:not(.print-pdf) .support-doc a{ border-bottom:0; color:inherit; }
+  html:not(.print-pdf) .support-doc a[href^="http"]::after{
+    content:" (" attr(href) ")"; font-size:8pt; color:var(--sup-muted);
+  }
+}

@@ -8,6 +8,7 @@
 
 <link rel="stylesheet" href="../assets/vendor/reveal/reset.min.css" />
 <link rel="stylesheet" href="../assets/vendor/reveal/reveal.min.css" />
+<link rel="stylesheet" href="../assets/support.css" />
 
 <style>
   /* ============================================================
@@ -356,7 +357,7 @@
 
   /* ---- frise de progression (barre haute, pleine largeur) ---- */
   .progmap{ position:fixed; top:0; left:0; right:0; z-index:42; pointer-events:none; padding:16px 190px 0 46px; }
-  body.reading .progmap, body.cover-active .progmap{ display:none; }
+  body.cover-active .progmap{ display:none; }
   .progmap .pm-track{ display:flex; gap:26px; }
   .progmap .seg{ flex:1; min-width:0; display:flex; flex-direction:column; gap:9px; }
   .progmap .lab{ display:flex; align-items:center; gap:8px; font-size:14px; font-weight:700;
@@ -466,8 +467,6 @@
   section[data-state="dark"] .pad strong{ color:#fff; }
   section[data-state="dark"] .pad em{ color:#9ff0ed; }
   section[data-state="dark"] .retenir .item{ color:#fff; }
-  /* en mode lecture, conserver le fond teal des slides sombres */
-  body.reading .reveal .slides > section[data-state="dark"]{ background:var(--teal-deep) !important; }
 
   .modebtn{
     position:fixed; top:16px; right:18px; z-index:60;
@@ -480,37 +479,14 @@
   }
   .modebtn:hover{ background:var(--bg-teal); border-color:var(--teal-deep); }
   .modebtn svg{ display:block; }
-  .modebtn .lbl-read{ display:inline; } .modebtn .lbl-pres{ display:none; }
-  body.reading .modebtn .lbl-read{ display:none; } body.reading .modebtn .lbl-pres{ display:inline; }
+  /* Les libellés du bouton sont pilotés par assets/support.css. */
 
-  /* MODE LECTURE DÉROULANTE */
-  body.reading, body.reading.reveal-viewport{ overflow:auto; background:var(--bg-soft) !important; }
-  body.reading .deckfoot{ display:none; }
   body.cover-active .deckfoot{ display:none; }
-  body.reading .brandstrip{ position:fixed; }
-  body.reading .reveal{ position:static !important; height:auto !important; width:auto !important; overflow:visible !important; transform:none !important; }
-  body.reading .reveal .slides{ position:static !important; left:0 !important; top:0 !important; width:auto !important; height:auto !important; transform:none !important; display:block !important; padding:34px 0 64px; box-sizing:border-box; }
-  body.reading .reveal .slides > section{
-    position:relative !important; display:block !important; visibility:visible !important; opacity:1 !important;
-    transform:none !important; pointer-events:auto !important; top:auto !important; left:auto !important;
-    width:min(1040px,92vw); aspect-ratio:16/9; height:auto !important; min-height:0 !important;
-    margin:0 auto 26px; border:1px solid var(--line); border-radius:18px; overflow:hidden;
-    background:#fff; box-shadow:0 1px 2px rgba(16,24,40,.04),0 18px 40px -26px rgba(16,24,40,.4);
-  }
-  body.reading .reveal .slides > section[hidden]{ display:block !important; }
-  body.reading .reveal .slides > section > *{ height:100%; }
-  body.reading .reveal .slides > section::after{
-    content:attr(data-screen-label); position:absolute; top:14px; right:18px; z-index:5;
-    font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
-    color:var(--muted); background:rgba(255,255,255,.85); padding:4px 10px; border-radius:999px;
-  }
-  body.reading .reveal .slides > section[data-state="dark"]::after{ color:#fff; background:rgba(255,255,255,.2); }
 
   .reveal .progress{ color:var(--teal); height:5px; }
   .reveal .controls{ color:var(--teal-deep); }
   .reveal .slide-number{ background:rgba(255,255,255,.0); color:var(--muted); font-family:var(--font); font-weight:800; font-size:14px; letter-spacing:.04em; left:50%; right:auto; top:auto; bottom:13px; transform:translateX(-50%); }
   body.dark-slide .reveal .slide-number{ color:rgba(255,255,255,.8); }
-  body.reading .reveal .slide-number{ display:none; }
 
   @media(prefers-reduced-motion:reduce){ *{animation:none !important} }
 
@@ -524,82 +500,9 @@
     padding:1px 7px; margin:0 1px; }
   body.dark-slide .kbdhint{ color:rgba(255,255,255,.7); }
   body.dark-slide .kbdhint kbd{ color:#fff; background:rgba(255,255,255,.14); border-color:rgba(255,255,255,.3); }
-  body.reading .kbdhint{ display:none; }
-
-  /* ---- IMPRESSION -------------------------------------------------------
-     Deux chemins coexistent :
-       · Ctrl+P            -> polycopié déroulant, une suite de diapos (ci-dessous)
-       · URL + ?print-pdf  -> rendu natif de reveal, une diapo par page
-     Les règles du polycopié sont donc préfixées html:not(.print-pdf)
-     pour laisser le second intact.                                          */
-  @media print{
-    /* Commun aux deux chemins. */
-    .brandstrip, .modebtn, .kbdhint, .reveal .controls, .reveal .progress, .reveal .slide-number{ display:none !important; }
-    .timepanel{ display:none !important; }
-    .progmap{ position:absolute; }
-
-    /* ---- Polycopié ---- */
-    html:not(.print-pdf), html:not(.print-pdf) body{ background:#fff !important; overflow:visible !important; height:auto !important; }
-
-    html:not(.print-pdf) .progmap, html:not(.print-pdf) .deckfoot, html:not(.print-pdf) .rhint, html:not(.print-pdf) .rclose, html:not(.print-pdf) .dimtoggle,
-    html:not(.print-pdf) .roomreveal, html:not(.print-pdf) .roomreveal-cta, html:not(.print-pdf) .reveal .backgrounds{ display:none !important; }
-
-    /* La mise en page déroulante s'applique quel que soit le mode affiché à
-       l'écran : l'étudiant·e obtient le même document depuis la présentation
-       comme depuis le mode lecture.                                          */
-    html:not(.print-pdf) .reveal{ position:static !important; height:auto !important; width:auto !important;
-      overflow:visible !important; transform:none !important; zoom:normal !important; }
-    html:not(.print-pdf) .reveal .slides{ position:static !important; left:0 !important; top:0 !important;
-      width:auto !important; height:auto !important; padding:0 !important;
-      transform:none !important; zoom:normal !important; display:block !important; }
-    html:not(.print-pdf) .reveal .slides > section,
-    html:not(.print-pdf) .reveal .slides > section[hidden]{
-      position:relative !important; display:block !important;
-      visibility:visible !important; opacity:1 !important;
-      transform:none !important; pointer-events:auto !important;
-      top:auto !important; left:auto !important;
-      width:100% !important; aspect-ratio:16/9;
-      height:auto !important; min-height:0 !important; max-height:none !important;
-      margin:0 0 6mm !important; padding:0 !important;
-      border:1px solid #D4D9E0 !important; border-radius:5px;
-      overflow:hidden !important; box-shadow:none !important;
-      break-inside:avoid; page-break-inside:avoid;
-    }
-    html:not(.print-pdf) .reveal .slides > section > *{ height:100%; }
-
-    /* Toutes les diapos sont en texte blanc. Sans impression des fonds, la
-       page sortirait vierge : on l'exige donc explicitement. Le fond retenu
-       est --teal-ink, plus sombre que celui de l'écran, pour rester lisible
-       y compris sur une imprimante noir et blanc.                           */
-    html:not(.print-pdf) .reveal .slides > section{
-      -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important;
-    }
-    html:not(.print-pdf) .reveal .slides > section[data-state="dark"]{ background:var(--teal-ink) !important; }
-    html:not(.print-pdf) .media-slot{ background-color:var(--teal-ink) !important; background-image:none !important; }
-    html:not(.print-pdf) .media-slot .ph{ display:none !important; }
-
-    /* Les vidéos ne s'impriment pas : on les retire pour laisser un aplat
-       propre plutôt qu'un rectangle vide. Les images sont conservées.       */
-    html:not(.print-pdf) .reveal video, html:not(.print-pdf) .reveal .scrim{ display:none !important; }
-
-    /* Un polycopié ne se clique pas : on déplie ce qui est replié ou flouté. */
-    html:not(.print-pdf) .bridge.gated .dimsgrid{ filter:none !important; opacity:1 !important; }
-    html:not(.print-pdf) .bridge__col__details{ max-height:none !important; opacity:1 !important; margin-top:14px !important; }
-    html:not(.print-pdf) .roomsteps .rscard.gated .rexbox{ display:block !important; }
-    /* Description repliée derrière « Afficher la description » : sur papier,
-       la diapo ne garderait que son titre. On la déplie.                     */
-    html:not(.print-pdf) .rt-body{ display:block !important; }
-    html:not(.print-pdf) .revealtext .rt-hint{ display:none !important; }
-
-    /* Repère de diapo, repris du mode lecture. */
-    html:not(.print-pdf) .reveal .slides > section::after{
-      content:attr(data-screen-label); position:absolute; top:3mm; right:4mm; z-index:5;
-      font-size:7.5pt; font-weight:800; letter-spacing:.09em; text-transform:uppercase;
-      color:#fff; background:rgba(255,255,255,.22); padding:1mm 2.5mm; border-radius:999px;
-      -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important;
-    }
-    html:not(.print-pdf) .reveal a{ text-decoration:none; }
-  }
+  /* Le mode support est géré par assets/support.css + assets/support.js.
+     L'impression (Ctrl+P) produit le support de cours A4, pas les diapos.
+     Le chemin natif ?print-pdf de reveal reste intact. */
 </style>
 <script src="../image-slot.js"></script>
 </head>
@@ -607,9 +510,9 @@
 
 <div class="brandstrip"></div>
 
-<button class="modebtn" id="modebtn" type="button" aria-pressed="false" aria-label="Passer en mode lecture (défilement vertical)">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18M3 12h18M3 19h18"/></svg>
-  <span class="lbl-read">Mode lecture</span>
+<button class="modebtn" id="modebtn" type="button" aria-pressed="false" aria-label="Afficher le support de cours imprimable">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h11l5 5v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><path d="M14 4v6h6M8 13h7M8 17h5"/></svg>
+  <span class="lbl-read">Support de cours</span>
   <span class="lbl-pres">Mode présentation</span>
 </button>
 
@@ -926,6 +829,124 @@
   </span>
 </div>
 
+<!-- ============================================================================
+     SUPPORT DE COURS — contenu rédigé, mode lecture / impression A4.
+     Indépendant des diapos : ni image, ni vidéo, ni activité chronométrée.
+     data-notes="oui|lg" : colonne de notes, réservée aux contenus théoriques.
+     ========================================================================= -->
+<template id="support-src">
+
+  <header class="sup-cover">
+    <p class="sup-course">Professionnalisation &amp; intervention · 752501</p>
+    <p class="sup-seance">Séance 03 — Mardi 9 mars 2027</p>
+    <h1>Mémoire &amp; collaboration</h1>
+    <p class="sup-meta">
+      <span>14h15 – 15h45</span><span>Salle MS 050 — laboratoire fond vert</span><span>Christophe Carlei</span><span>FPSE — Université de Genève</span>
+    </p>
+  </header>
+
+  <section class="sup-block">
+    <h2>La question de la séance</h2>
+    <p><strong>Comment fonctionne vraiment notre mémoire ?</strong></p>
+    <p>Pourquoi oublie-t-on un prénom en dix secondes, mais jamais une histoire marquante ? Cette séance répond en expérimentant une technique vieille de deux mille cinq cents ans, et lance la phase d'avant-projet.</p>
+  </section>
+
+  <section class="sup-block">
+    <h2>Objectifs pédagogiques</h2>
+    <p>À l'issue de cette séance, vous serez capable de&nbsp;:</p>
+    <ol class="sup-obj">
+      <li>Expliquer comment la mémoire visuelle encode les images et les histoires.</li>
+      <li>Décrire la méthode des loci — la Chambre romaine — et ses origines.</li>
+      <li>Mobiliser la technique en situation réelle, à voix haute et devant un public.</li>
+    </ol>
+  </section>
+
+  <section class="sup-block" data-notes="lg">
+    <h2>Le cerveau retient des images, pas des mots</h2>
+    <p>Les mots abstraits s'effacent vite ; les images fortes et les histoires, elles, s'ancrent durablement. Deux ingrédients expliquent cette différence.</p>
+    <div class="sup-duo">
+      <div>
+        <h4>L'image</h4>
+        <p class="sup-duo__q">Concrète, sensorielle, un peu absurde</p>
+        <p>Plus une image est vive et surprenante, mieux elle se grave. Une image banale se confond avec toutes les autres.</p>
+      </div>
+      <div>
+        <h4>L'histoire</h4>
+        <p class="sup-duo__q">Un lieu, une action, un objet</p>
+        <p>Mise en scène dans un décor connu, l'information cesse d'être une donnée isolée : elle prend place dans un récit.</p>
+      </div>
+    </div>
+    <h3>Ce que fait le cerveau visuel</h3>
+    <p>Après le traitement visuel primaire, l'information se répartit sur deux voies. L'une traite le <strong>« quoi »</strong> — perception des visages, des lieux, des objets. L'autre traite le <strong>« où »</strong> — distance, mouvement, localisation, action. L'<strong>hippocampe</strong> assemble ces éléments en une <em>carte cognitive</em> : c'est cette carte que les techniques de mémorisation exploitent.</p>
+  </section>
+
+  <section class="sup-block" data-notes="lg">
+    <h2>La méthode des loci</h2>
+    <p>Aussi appelée Chambre romaine ou palais de mémoire, la méthode consiste à ranger des informations dans un espace mental plutôt que dans une liste.</p>
+    <ol class="sup-obj">
+      <li><strong>Choisir un parcours de lieux familiers</strong> — une pièce, un trajet connu, un bâtiment que l'on peut visiter mentalement sans effort.</li>
+      <li><strong>Y déposer les images fortes à retenir</strong>, une par lieu, dans un ordre fixe.</li>
+      <li><strong>Reparcourir mentalement le lieu</strong> pour retrouver chaque information, dans l'ordre et sans notes.</li>
+    </ol>
+    <div class="sup-key">
+      <span class="sup-key__k">Transfert professionnel</span>
+      <p>La méthode ne sert pas qu'à retenir des prénoms : elle structure une intervention orale, une argumentation ou une séquence de formation que l'on doit dérouler sans support écrit.</p>
+    </div>
+  </section>
+
+  <section class="sup-block" data-notes="oui">
+    <h2>Aux origines de la technique</h2>
+    <div class="sup-duo">
+      <div>
+        <h4>Simonide de Céos</h4>
+        <p class="sup-duo__q">Grèce antique — le banquet effondré</p>
+        <p>Le poète quitte un banquet quelques instants avant que la salle ne s'effondre sur les convives. Seul rescapé, il identifie chaque victime en se rappelant <strong>la place que chacun occupait à table</strong>. De cette tragédie naît une intuition : la mémoire s'ancre dans les lieux.</p>
+      </div>
+      <div>
+        <h4>Cicéron</h4>
+        <p class="sup-duo__q">Rome antique — l'art oratoire</p>
+        <p>Cicéron reprend la technique pour ses plaidoiries : il associe chaque partie de son discours à <strong>une pièce de sa maison</strong>, puis parcourt mentalement ces lieux en parlant. Les idées défilent dans l'ordre, sans notes. La méthode des loci devient l'outil des grands orateurs.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sup-block">
+    <h2>Espace de collaboration et suite du projet</h2>
+    <h3>Microsoft Teams</h3>
+    <p>Tout le travail de groupe et les retours sur vos livrables passent désormais par <strong>Microsoft Teams</strong>. Assurez-vous d'y avoir accès et d'y retrouver l'équipe de votre projet.</p>
+    <h3>Lancement de l'avant-projet</h3>
+    <p>La phase d'avant-projet démarre. Le premier rendu est l'<strong>analyse de l'existant</strong>, d'abord menée individuellement : que sait-on déjà du besoin, du public et de ce qui a été fait ailleurs sur ce sujet ?</p>
+  </section>
+
+  <section class="sup-block" data-notes="oui">
+    <h2>À retenir</h2>
+    <ul>
+      <li>Le cerveau encode mieux les <strong>images fortes</strong> et les <strong>histoires</strong> que les mots abstraits.</li>
+      <li>La <strong>méthode des loci</strong> ancre l'information dans un parcours de lieux familiers.</li>
+      <li>Raconter <strong>à voix haute</strong> renforce la mémorisation : la performance orale fixe la technique.</li>
+    </ul>
+  </section>
+
+  <section class="sup-block">
+    <h2>Pour la prochaine séance</h2>
+    <p><strong>Séance 4 — Avant-projet &amp; IA</strong> · mardi 16 mars 2027, 14h15. <em>Attention : HEG — espace Nexus, et non M1140.</em></p>
+    <p><strong>Échéance du 16 mars :</strong> analyse de l'existant, version individuelle.</p>
+    <p><strong>À préparer :</strong> explorez la problématique de votre projet — avec ou sans intelligence artificielle. Si vous avez un usage de l'IA à partager, notez-le : la séance 4 y est consacrée.</p>
+  </section>
+
+  <section class="sup-block sup-freenotes">
+    <h2>Notes personnelles</h2>
+    <div class="sup-lines"></div>
+  </section>
+
+  <footer class="sup-foot">
+    <span>752501 · Professionnalisation &amp; intervention — Séance 03</span>
+    <span>FPSE — Université de Genève</span>
+  </footer>
+
+</template>
+
+<script src="../assets/support.js"></script>
 <script src="../assets/vendor/reveal/reveal.min.js"></script>
 <script>
   const deck = new Reveal({
@@ -946,11 +967,7 @@
   function applyCover(){
     var slides = document.querySelector('.reveal .slides');
     if(!slides) return;
-    if(document.body.classList.contains('reading')){
-      slides.style.transform=''; slides.style.left=''; slides.style.top='';
-      slides.style.right=''; slides.style.bottom=''; slides.style.transformOrigin='';
-      return;
-    }
+    if(document.body.classList.contains('support-open')) return;
     var vw = window.innerWidth, vh = window.innerHeight;
     if(!vw || !vh) return;   // viewport pas encore dimensionné : ne pas appliquer scale(0)
     var scale = Math.max(vw/1280, vh/720);
@@ -977,10 +994,10 @@
 
   function syncChrome(){
     const cur = deck.getCurrentSlide();
-    const reading = document.body.classList.contains('reading');
+    const support = document.body.classList.contains('support-open');
     const dark = cur && cur.getAttribute('data-state') === 'dark';
-    document.body.classList.toggle('dark-slide', !!dark && !reading);
-    document.body.classList.toggle('cover-active', !!(cur && cur.querySelector('.cover2')) && !reading);
+    document.body.classList.toggle('dark-slide', !!dark && !support);
+    document.body.classList.toggle('cover-active', !!(cur && cur.querySelector('.cover2')) && !support);
     // marqueur d'animation d'entrée
     document.querySelectorAll('.slides > section[data-deck-active]').forEach(function(s){ if(s!==cur) s.removeAttribute('data-deck-active'); });
     if(cur){ cur.removeAttribute('data-deck-active'); void cur.offsetWidth; cur.setAttribute('data-deck-active',''); }
@@ -1033,19 +1050,11 @@
     });
   });
 
-  const btn = document.getElementById('modebtn');
-  let reading = false;
-  btn.addEventListener('click', function(){
-    reading = !reading;
-    document.body.classList.toggle('reading', reading);
-    deck.configure({ controls: !reading, progress: !reading, keyboard: !reading });
-    btn.setAttribute('aria-pressed', String(reading));
-    btn.setAttribute('aria-label', reading ? 'Revenir au mode présentation' : 'Passer en mode lecture (défilement vertical)');
-    if(reading){
-      document.body.classList.remove('dark-slide');
-      applyCover();
-      window.scrollTo(0,0);
-    } else {
+  // Bascule présentation <-> support de cours (assets/support.js pilote le DOM).
+  document.addEventListener('support:change', function(e){
+    var open = e.detail.open;
+    deck.configure({ controls: !open, progress: !open, keyboard: !open });
+    if(!open){
       deck.layout();
       applyCover();
       setTimeout(syncChrome, 60);

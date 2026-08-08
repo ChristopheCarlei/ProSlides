@@ -8,6 +8,7 @@
 
 <link rel="stylesheet" href="../assets/vendor/reveal/reset.min.css" />
 <link rel="stylesheet" href="../assets/vendor/reveal/reveal.min.css" />
+<link rel="stylesheet" href="../assets/support.css" />
 
 <style>
   /* ============================================================
@@ -243,7 +244,7 @@
 
   /* ---- frise de progression (barre haute, pleine largeur) ---- */
   .progmap{ position:fixed; top:0; left:0; right:0; z-index:42; pointer-events:none; padding:16px 190px 0 46px; }
-  body.reading .progmap, body.cover-active .progmap{ display:none; }
+  body.cover-active .progmap{ display:none; }
   .progmap .pm-track{ display:flex; gap:26px; }
   .progmap .seg{ flex:1; min-width:0; display:flex; flex-direction:column; gap:9px; }
   .progmap .lab{ display:flex; align-items:center; gap:8px; font-size:14px; font-weight:700;
@@ -353,8 +354,6 @@
   section[data-state="dark"] .pad strong{ color:#fff; }
   section[data-state="dark"] .pad em{ color:#9ff0ed; }
   section[data-state="dark"] .retenir .item{ color:#fff; }
-  /* en mode lecture, conserver le fond teal des slides sombres */
-  body.reading .reveal .slides > section[data-state="dark"]{ background:var(--teal-deep) !important; }
 
   .modebtn{
     position:fixed; top:16px; right:18px; z-index:60;
@@ -367,37 +366,14 @@
   }
   .modebtn:hover{ background:var(--bg-teal); border-color:var(--teal-deep); }
   .modebtn svg{ display:block; }
-  .modebtn .lbl-read{ display:inline; } .modebtn .lbl-pres{ display:none; }
-  body.reading .modebtn .lbl-read{ display:none; } body.reading .modebtn .lbl-pres{ display:inline; }
+  /* Les libellés du bouton sont pilotés par assets/support.css. */
 
-  /* MODE LECTURE DÉROULANTE */
-  body.reading, body.reading.reveal-viewport{ overflow:auto; background:var(--bg-soft) !important; }
-  body.reading .deckfoot{ display:none; }
   body.cover-active .deckfoot{ display:none; }
-  body.reading .brandstrip{ position:fixed; }
-  body.reading .reveal{ position:static !important; height:auto !important; width:auto !important; overflow:visible !important; transform:none !important; }
-  body.reading .reveal .slides{ position:static !important; left:0 !important; top:0 !important; width:auto !important; height:auto !important; transform:none !important; display:block !important; padding:34px 0 64px; box-sizing:border-box; }
-  body.reading .reveal .slides > section{
-    position:relative !important; display:block !important; visibility:visible !important; opacity:1 !important;
-    transform:none !important; pointer-events:auto !important; top:auto !important; left:auto !important;
-    width:min(1040px,92vw); aspect-ratio:16/9; height:auto !important; min-height:0 !important;
-    margin:0 auto 26px; border:1px solid var(--line); border-radius:18px; overflow:hidden;
-    background:#fff; box-shadow:0 1px 2px rgba(16,24,40,.04),0 18px 40px -26px rgba(16,24,40,.4);
-  }
-  body.reading .reveal .slides > section[hidden]{ display:block !important; }
-  body.reading .reveal .slides > section > *{ height:100%; }
-  body.reading .reveal .slides > section::after{
-    content:attr(data-screen-label); position:absolute; top:14px; right:18px; z-index:5;
-    font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
-    color:var(--muted); background:rgba(255,255,255,.85); padding:4px 10px; border-radius:999px;
-  }
-  body.reading .reveal .slides > section[data-state="dark"]::after{ color:#fff; background:rgba(255,255,255,.2); }
 
   .reveal .progress{ color:var(--teal); height:5px; }
   .reveal .controls{ color:var(--teal-deep); }
   .reveal .slide-number{ background:rgba(255,255,255,.0); color:var(--muted); font-family:var(--font); font-weight:800; font-size:14px; letter-spacing:.04em; left:50%; right:auto; top:auto; bottom:13px; transform:translateX(-50%); }
   body.dark-slide .reveal .slide-number{ color:rgba(255,255,255,.8); }
-  body.reading .reveal .slide-number{ display:none; }
 
   @media(prefers-reduced-motion:reduce){ *{animation:none !important} }
 
@@ -411,87 +387,18 @@
     padding:1px 7px; margin:0 1px; }
   body.dark-slide .kbdhint{ color:rgba(255,255,255,.7); }
   body.dark-slide .kbdhint kbd{ color:#fff; background:rgba(255,255,255,.14); border-color:rgba(255,255,255,.3); }
-  body.reading .kbdhint{ display:none; }
-
-  /* ---- IMPRESSION -------------------------------------------------------
-     Deux chemins coexistent :
-       · Ctrl+P            -> polycopié déroulant, une suite de diapos (ci-dessous)
-       · URL + ?print-pdf  -> rendu natif de reveal, une diapo par page
-     Les règles du polycopié sont donc préfixées html:not(.print-pdf)
-     pour laisser le second intact.                                          */
-  @media print{
-    /* Commun aux deux chemins. */
-    .brandstrip, .modebtn, .kbdhint, .reveal .controls, .reveal .progress, .reveal .slide-number{ display:none !important; }
-    .timepanel{ display:none !important; }
-    .progmap{ position:absolute; }
-
-    /* ---- Polycopié ---- */
-    html:not(.print-pdf), html:not(.print-pdf) body{ background:#fff !important; overflow:visible !important; height:auto !important; }
-
-    html:not(.print-pdf) .progmap, html:not(.print-pdf) .deckfoot, html:not(.print-pdf) .rhint, html:not(.print-pdf) .rclose, html:not(.print-pdf) .dimtoggle,
-    html:not(.print-pdf) .roomreveal, html:not(.print-pdf) .roomreveal-cta, html:not(.print-pdf) .reveal .backgrounds{ display:none !important; }
-
-    /* La mise en page déroulante s'applique quel que soit le mode affiché à
-       l'écran : l'étudiant·e obtient le même document depuis la présentation
-       comme depuis le mode lecture.                                          */
-    html:not(.print-pdf) .reveal{ position:static !important; height:auto !important; width:auto !important;
-      overflow:visible !important; transform:none !important; zoom:normal !important; }
-    html:not(.print-pdf) .reveal .slides{ position:static !important; left:0 !important; top:0 !important;
-      width:auto !important; height:auto !important; padding:0 !important;
-      transform:none !important; zoom:normal !important; display:block !important; }
-    html:not(.print-pdf) .reveal .slides > section,
-    html:not(.print-pdf) .reveal .slides > section[hidden]{
-      position:relative !important; display:block !important;
-      visibility:visible !important; opacity:1 !important;
-      transform:none !important; pointer-events:auto !important;
-      top:auto !important; left:auto !important;
-      width:100% !important; aspect-ratio:16/9;
-      height:auto !important; min-height:0 !important; max-height:none !important;
-      margin:0 0 6mm !important; padding:0 !important;
-      border:1px solid #D4D9E0 !important; border-radius:5px;
-      overflow:hidden !important; box-shadow:none !important;
-      break-inside:avoid; page-break-inside:avoid;
-    }
-    html:not(.print-pdf) .reveal .slides > section > *{ height:100%; }
-
-    /* Toutes les diapos sont en texte blanc. Sans impression des fonds, la
-       page sortirait vierge : on l'exige donc explicitement. Le fond retenu
-       est --teal-ink, plus sombre que celui de l'écran, pour rester lisible
-       y compris sur une imprimante noir et blanc.                           */
-    html:not(.print-pdf) .reveal .slides > section{
-      -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important;
-    }
-    html:not(.print-pdf) .reveal .slides > section[data-state="dark"]{ background:var(--teal-ink) !important; }
-    html:not(.print-pdf) .media-slot{ background-color:var(--teal-ink) !important; background-image:none !important; }
-    html:not(.print-pdf) .media-slot .ph{ display:none !important; }
-
-    /* Les vidéos ne s'impriment pas : on les retire pour laisser un aplat
-       propre plutôt qu'un rectangle vide. Les images sont conservées.       */
-    html:not(.print-pdf) .reveal video, html:not(.print-pdf) .reveal .scrim{ display:none !important; }
-
-    /* Un polycopié ne se clique pas : on déplie ce qui est replié ou flouté. */
-    html:not(.print-pdf) .bridge.gated .dimsgrid{ filter:none !important; opacity:1 !important; }
-    html:not(.print-pdf) .bridge__col__details{ max-height:none !important; opacity:1 !important; margin-top:14px !important; }
-    html:not(.print-pdf) .roomsteps .rscard.gated .rexbox{ display:block !important; }
-
-    /* Repère de diapo, repris du mode lecture. */
-    html:not(.print-pdf) .reveal .slides > section::after{
-      content:attr(data-screen-label); position:absolute; top:3mm; right:4mm; z-index:5;
-      font-size:7.5pt; font-weight:800; letter-spacing:.09em; text-transform:uppercase;
-      color:#fff; background:rgba(255,255,255,.22); padding:1mm 2.5mm; border-radius:999px;
-      -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important;
-    }
-    html:not(.print-pdf) .reveal a{ text-decoration:none; }
-  }
+  /* Le mode support est géré par assets/support.css + assets/support.js.
+     L'impression (Ctrl+P) produit le support de cours A4, pas les diapos.
+     Le chemin natif ?print-pdf de reveal reste intact. */
 </style>
 </head>
 <body>
 
 <div class="brandstrip"></div>
 
-<button class="modebtn" id="modebtn" type="button" aria-pressed="false" aria-label="Passer en mode lecture (défilement vertical)">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18M3 12h18M3 19h18"/></svg>
-  <span class="lbl-read">Mode lecture</span>
+<button class="modebtn" id="modebtn" type="button" aria-pressed="false" aria-label="Afficher le support de cours imprimable">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h11l5 5v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><path d="M14 4v6h6M8 13h7M8 17h5"/></svg>
+  <span class="lbl-read">Support de cours</span>
   <span class="lbl-pres">Mode présentation</span>
 </button>
 
@@ -779,6 +686,171 @@ On pose ensemble les règles du jeu !</p>
   </span>
 </div>
 
+<!-- ============================================================================
+     SUPPORT DE COURS — contenu rédigé, mode lecture / impression A4.
+     Indépendant des diapos : ni image, ni vidéo, ni activité chronométrée.
+     Chaque .sup-block reçoit automatiquement une colonne de notes.
+     data-notes="lg"   colonne de notes agrandie
+     data-notes="none" bloc pleine largeur, sans colonne de notes
+     ========================================================================= -->
+<template id="support-src">
+
+  <header class="sup-cover">
+    <p class="sup-course">Professionnalisation &amp; intervention · 752501</p>
+    <p class="sup-seance">Séance 01 — Mardi 23 février 2027</p>
+    <h1>Cadre &amp; objectifs</h1>
+    <p class="sup-meta">
+      <span>14h15 – 15h45</span><span>Salle M1140</span><span>Christophe Carlei</span><span>FPSE — Université de Genève</span>
+    </p>
+  </header>
+
+  <section class="sup-block">
+    <h2>La question de la séance</h2>
+    <p><strong>D'où venez-vous, où voulez-vous aller ? Et qu'est-ce que la « professionnalisation » ?</strong></p>
+    <p>Cette première séance pose le cadre du cours et ouvre la notion qui lui donne son titre. Elle sert aussi à faire connaissance : la pédagogie par projet suppose de savoir avec qui l'on travaille et d'où chaque personne vient.</p>
+  </section>
+
+  <section class="sup-block">
+    <h2>Objectifs pédagogiques</h2>
+    <p>À l'issue de cette séance, vous serez capable de&nbsp;:</p>
+    <ol class="sup-obj">
+      <li>Situer votre parcours et vos attentes dans le collectif du cours.</li>
+      <li>Décrire le cadre du cours : déroulement, modalités d'évaluation et livrables attendus.</li>
+      <li>Définir la professionnalisation comme un processus et distinguer les deux grandes façons de l'étudier.</li>
+    </ol>
+  </section>
+
+  <section class="sup-block">
+    <h2>Le cadre du cours</h2>
+    <h3>Une pédagogie par projet</h3>
+    <p>Le cours ne suit pas une progression magistrale. Vous travaillez en groupe, sur un semestre, à la réalisation d'un livrable répondant à la <strong>demande réelle d'un commanditaire externe</strong> — association, service, institution de formation. Les apports théoriques viennent nourrir ce travail, pas l'inverse.</p>
+    <p>Les groupes se constituent librement à la séance 2, à quatre personnes au maximum. Ils n'existent pas encore aujourd'hui : la séance 1 sert à repérer les projets proposés et les personnes avec qui vous pourriez avancer.</p>
+
+    <h3>Un contrôle continu, sans examen</h3>
+    <p>La note finale est construite au fil du semestre. Il n'y a <em>pas d'examen terminal</em> : la présence et l'engagement en séance comptent, au même titre que les productions du groupe.</p>
+
+    <table>
+      <thead>
+        <tr><th>Ce qui est évalué</th><th class="num">Points</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Individuel</strong> — présence</td><td class="num">0.50</td></tr>
+        <tr><td><strong>Individuel</strong> — participation et partage</td><td class="num">0.50</td></tr>
+        <tr><td><strong>Individuel</strong> — implication dans le groupe</td><td class="num">0.50</td></tr>
+        <tr><td><strong>Groupe</strong> — prises de parole au fil des séances</td><td class="num">1.00</td></tr>
+        <tr><td><strong>Groupe</strong> — quatre rendus intermédiaires</td><td class="num">1.50</td></tr>
+        <tr><td><strong>Groupe</strong> — livrable final</td><td class="num">2.00</td></tr>
+        <tr><td><strong>Total</strong></td><td class="num"><strong>6.00</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div class="sup-key">
+      <span class="sup-key__k">À noter</span>
+      <p>Deux séances sont évaluées en tant que telles : la <strong>présentation intermédiaire</strong> du 20 avril et la <strong>démonstration du livrable</strong> du 25 mai.</p>
+    </div>
+  </section>
+
+  <section class="sup-block">
+    <h2>Calendrier des rendus</h2>
+    <table>
+      <thead>
+        <tr><th class="num">Date</th><th>Livrable attendu</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="num">2 mars</td><td>Constitution des groupes (Padlet)</td></tr>
+        <tr><td class="num">7 mars</td><td>Finalisation de la diapositive « prénom »</td></tr>
+        <tr><td class="num">16 mars</td><td>Analyse de l'existant — individuelle</td></tr>
+        <tr><td class="num">23 mars</td><td>Analyse de l'existant — collective</td></tr>
+        <tr><td class="num">6 avril</td><td>Analyse de l'existant en 180 secondes (une diapositive)</td></tr>
+        <tr><td class="num">13 avril</td><td>Dossier de faisabilité + une diapositive</td></tr>
+        <tr><td class="num">20 avril</td><td>Présentation intermédiaire <em>(évaluée)</em></td></tr>
+        <tr><td class="num">27 avril</td><td>Objectif &amp; livrable</td></tr>
+        <tr><td class="num">25 mai</td><td>Plan d'action + présentation du livrable <em>(évaluée)</em></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="sup-block" data-notes="lg">
+    <h2>La professionnalisation : de quoi parle-t-on ?</h2>
+    <div class="sup-key">
+      <span class="sup-key__k">Définition de travail</span>
+      <p>La professionnalisation désigne un <strong>processus</strong>, et non un état acquis une fois pour toutes : celui par lequel une activité se constitue en métier reconnu, et celui par lequel une personne construit ses compétences et son identité professionnelle en exerçant.</p>
+    </div>
+    <p>Deux conséquences pour la suite du cours&nbsp;:</p>
+    <ul>
+      <li>Personne n'est « professionnalisé » ou « non professionnalisé ». On l'est <em>plus ou moins</em>, et toujours en mouvement.</li>
+      <li>Le processus est à la fois <strong>collectif</strong> (ce que fait un groupe de métier) et <strong>individuel</strong> (ce que fait une personne au travail). Les deux échelles s'éclairent mutuellement.</li>
+    </ul>
+    <p>Les métiers de l'éducation et de la formation offrent un terrain particulièrement net : formation d'adultes, enseignement, ingénierie pédagogique, coordination de dispositifs n'ont ni le même degré de reconnaissance, ni les mêmes voies d'accès, ni les mêmes références partagées.</p>
+  </section>
+
+  <section class="sup-block" data-notes="lg">
+    <h2>Deux regards sur un même objet</h2>
+    <p>Un seul processus, deux façons de l'étudier — selon l'échelle à laquelle on se place.</p>
+    <div class="sup-duo">
+      <div>
+        <h4>Approches socio-historiques</h4>
+        <p class="sup-duo__q">Comment un métier devient-il une « profession » reconnue ?</p>
+        <p><strong>On dézoome sur le groupe.</strong></p>
+        <ul>
+          <li>Statut et reconnaissance sociale</li>
+          <li>Histoire et identité du métier</li>
+          <li>Enjeux socio-politiques, régulation de l'accès</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Analyse du travail</h4>
+        <p class="sup-duo__q">Qu'apprend-on réellement en travaillant ?</p>
+        <p><strong>On zoome sur l'activité.</strong></p>
+        <ul>
+          <li>Travail réel et travail prescrit</li>
+          <li>Compétences construites en situation</li>
+          <li>Développement professionnel de la personne</li>
+        </ul>
+      </div>
+    </div>
+    <p>Ces deux regards seront mobilisés tout au long du semestre : l'analyse de l'existant de votre projet gagne à interroger le groupe professionnel concerné <em>et</em> l'activité réelle des personnes qui l'exercent.</p>
+  </section>
+
+  <section class="sup-block">
+    <h2>Outils et ressources</h2>
+    <ul>
+      <li><strong>Beekee</strong> — partage en direct de contenus multimédias et commentaires. Utilisé en séance pour mettre en commun les productions.</li>
+      <li><strong>Moodle</strong> — descriptifs des projets, dépôt des rendus. L'inscription au cours se ferme après la séance 2.</li>
+      <li><strong>Syllabus du cours</strong> — <a href="https://syllabusprof.netlify.app/">syllabusprof.netlify.app</a></li>
+      <li><strong>Productions des promotions précédentes</strong> — <a href="https://prointer.netlify.app/">prointer.netlify.app</a> : podcast, vidéo, jeu sérieux, questionnaire, maquette web.</li>
+    </ul>
+  </section>
+
+  <section class="sup-block" data-notes="oui">
+    <h2>À retenir</h2>
+    <ul>
+      <li>Un cours en <strong>pédagogie active et par projet</strong>, évalué en contrôle continu, sans examen.</li>
+      <li>La <strong>présence et la participation</strong> aux séances font partie de la note.</li>
+      <li>La professionnalisation est un <strong>processus</strong>, pas un état figé — et elle s'étudie à deux échelles : le groupe professionnel et l'activité de travail.</li>
+    </ul>
+  </section>
+
+  <section class="sup-block">
+    <h2>Pour la prochaine séance</h2>
+    <p><strong>Séance 2 — Projets &amp; groupes</strong> · mardi 2 mars 2027, 14h15.</p>
+    <p><strong>À préparer :</strong> parcourir les projets proposés sur Moodle, repérer ceux qui vous intéressent et réfléchir aux personnes avec qui vous souhaiteriez travailler. La séance 2 est consacrée à la constitution des groupes.</p>
+    <p><strong>Échéance du 2 mars :</strong> constitution des groupes, déposée sur Padlet.</p>
+  </section>
+
+  <section class="sup-block sup-freenotes">
+    <h2>Notes personnelles</h2>
+    <div class="sup-lines"></div>
+  </section>
+
+  <footer class="sup-foot">
+    <span>752501 · Professionnalisation &amp; intervention — Séance 01</span>
+    <span>FPSE — Université de Genève</span>
+  </footer>
+
+</template>
+
+<script src="../assets/support.js"></script>
 <script src="../assets/vendor/reveal/reveal.min.js"></script>
 <script>
   const deck = new Reveal({
@@ -820,11 +892,7 @@ On pose ensemble les règles du jeu !</p>
   function applyCover(){
     var slides = document.querySelector('.reveal .slides');
     if(!slides) return;
-    if(document.body.classList.contains('reading')){
-      slides.style.transform=''; slides.style.left=''; slides.style.top='';
-      slides.style.right=''; slides.style.bottom=''; slides.style.transformOrigin='';
-      return;
-    }
+    if(document.body.classList.contains('support-open')) return;
     var scale = Math.max(window.innerWidth/1280, window.innerHeight/720);
     slides.style.left='50%'; slides.style.top='50%';
     slides.style.right='auto'; slides.style.bottom='auto';
@@ -835,10 +903,10 @@ On pose ensemble les règles du jeu !</p>
 
   function syncChrome(){
     const cur = deck.getCurrentSlide();
-    const reading = document.body.classList.contains('reading');
+    const support = document.body.classList.contains('support-open');
     const dark = cur && cur.getAttribute('data-state') === 'dark';
-    document.body.classList.toggle('dark-slide', !!dark && !reading);
-    document.body.classList.toggle('cover-active', !!(cur && cur.querySelector('.cover2')) && !reading);
+    document.body.classList.toggle('dark-slide', !!dark && !support);
+    document.body.classList.toggle('cover-active', !!(cur && cur.querySelector('.cover2')) && !support);
     // marqueur d'animation d'entrée
     document.querySelectorAll('.slides > section[data-deck-active]').forEach(function(s){ if(s!==cur) s.removeAttribute('data-deck-active'); });
     if(cur){ cur.removeAttribute('data-deck-active'); void cur.offsetWidth; cur.setAttribute('data-deck-active',''); }
@@ -880,19 +948,11 @@ On pose ensemble les règles du jeu !</p>
     });
   });
 
-  const btn = document.getElementById('modebtn');
-  let reading = false;
-  btn.addEventListener('click', function(){
-    reading = !reading;
-    document.body.classList.toggle('reading', reading);
-    deck.configure({ controls: !reading, progress: !reading, keyboard: !reading });
-    btn.setAttribute('aria-pressed', String(reading));
-    btn.setAttribute('aria-label', reading ? 'Revenir au mode présentation' : 'Passer en mode lecture (défilement vertical)');
-    if(reading){
-      document.body.classList.remove('dark-slide');
-      applyCover();
-      window.scrollTo(0,0);
-    } else {
+  // Bascule présentation <-> support de cours (assets/support.js pilote le DOM).
+  document.addEventListener('support:change', function(e){
+    var open = e.detail.open;
+    deck.configure({ controls: !open, progress: !open, keyboard: !open });
+    if(!open){
       deck.layout();
       applyCover();
       setTimeout(syncChrome, 60);

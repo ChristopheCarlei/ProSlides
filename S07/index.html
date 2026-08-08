@@ -8,6 +8,7 @@
 
 <link rel="stylesheet" href="../assets/vendor/reveal/reset.min.css" />
 <link rel="stylesheet" href="../assets/vendor/reveal/reveal.min.css" />
+<link rel="stylesheet" href="../assets/support.css" />
 
 <style>
   /* ============================================================
@@ -603,7 +604,7 @@
 
   /* ---- frise de progression (barre haute, pleine largeur) ---- */
   .progmap{ position:fixed; top:0; left:0; right:0; z-index:42; pointer-events:none; padding:16px 190px 0 46px; }
-  body.reading .progmap, body.cover-active .progmap{ display:none; }
+  body.cover-active .progmap{ display:none; }
   .progmap .pm-track{ display:flex; gap:26px; }
   .progmap .seg{ flex:1; min-width:0; display:flex; flex-direction:column; gap:9px; }
   .progmap .lab{ display:flex; align-items:center; gap:8px; font-size:14px; font-weight:700;
@@ -713,8 +714,6 @@
   section[data-state="dark"] .pad strong{ color:#fff; }
   section[data-state="dark"] .pad em{ color:#9ff0ed; }
   section[data-state="dark"] .retenir .item{ color:#fff; }
-  /* en mode lecture, conserver le fond teal des slides sombres */
-  body.reading .reveal .slides > section[data-state="dark"]{ background:var(--teal-deep) !important; }
 
   .modebtn{
     position:fixed; top:16px; right:18px; z-index:60;
@@ -727,37 +726,14 @@
   }
   .modebtn:hover{ background:var(--bg-teal); border-color:var(--teal-deep); }
   .modebtn svg{ display:block; }
-  .modebtn .lbl-read{ display:inline; } .modebtn .lbl-pres{ display:none; }
-  body.reading .modebtn .lbl-read{ display:none; } body.reading .modebtn .lbl-pres{ display:inline; }
+  /* Les libellés du bouton sont pilotés par assets/support.css. */
 
-  /* MODE LECTURE DÉROULANTE */
-  body.reading, body.reading.reveal-viewport{ overflow:auto; background:var(--bg-soft) !important; }
-  body.reading .deckfoot{ display:none; }
   body.cover-active .deckfoot{ display:none; }
-  body.reading .brandstrip{ position:fixed; }
-  body.reading .reveal{ position:static !important; height:auto !important; width:auto !important; overflow:visible !important; transform:none !important; }
-  body.reading .reveal .slides{ position:static !important; left:0 !important; top:0 !important; width:auto !important; height:auto !important; transform:none !important; display:block !important; padding:34px 0 64px; box-sizing:border-box; }
-  body.reading .reveal .slides > section{
-    position:relative !important; display:block !important; visibility:visible !important; opacity:1 !important;
-    transform:none !important; pointer-events:auto !important; top:auto !important; left:auto !important;
-    width:min(1040px,92vw); aspect-ratio:16/9; height:auto !important; min-height:0 !important;
-    margin:0 auto 26px; border:1px solid var(--line); border-radius:18px; overflow:hidden;
-    background:#fff; box-shadow:0 1px 2px rgba(16,24,40,.04),0 18px 40px -26px rgba(16,24,40,.4);
-  }
-  body.reading .reveal .slides > section[hidden]{ display:block !important; }
-  body.reading .reveal .slides > section > *{ height:100%; }
-  body.reading .reveal .slides > section::after{
-    content:attr(data-screen-label); position:absolute; top:14px; right:18px; z-index:5;
-    font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
-    color:var(--muted); background:rgba(255,255,255,.85); padding:4px 10px; border-radius:999px;
-  }
-  body.reading .reveal .slides > section[data-state="dark"]::after{ color:#fff; background:rgba(255,255,255,.2); }
 
   .reveal .progress{ color:var(--teal); height:5px; }
   .reveal .controls{ color:var(--teal-deep); }
   .reveal .slide-number{ background:rgba(255,255,255,.0); color:var(--muted); font-family:var(--font); font-weight:800; font-size:14px; letter-spacing:.04em; left:50%; right:auto; top:auto; bottom:13px; transform:translateX(-50%); }
   body.dark-slide .reveal .slide-number{ color:rgba(255,255,255,.8); }
-  body.reading .reveal .slide-number{ display:none; }
 
   @media(prefers-reduced-motion:reduce){ *{animation:none !important} }
 
@@ -771,96 +747,9 @@
     padding:1px 7px; margin:0 1px; }
   body.dark-slide .kbdhint{ color:rgba(255,255,255,.7); }
   body.dark-slide .kbdhint kbd{ color:#fff; background:rgba(255,255,255,.14); border-color:rgba(255,255,255,.3); }
-  body.reading .kbdhint{ display:none; }
-
-  /* ---- IMPRESSION -------------------------------------------------------
-     Deux chemins coexistent :
-       · Ctrl+P            -> polycopié déroulant, une suite de diapos (ci-dessous)
-       · URL + ?print-pdf  -> rendu natif de reveal, une diapo par page
-     Les règles du polycopié sont donc préfixées html:not(.print-pdf)
-     pour laisser le second intact.                                          */
-  @media print{
-    /* Commun aux deux chemins. */
-    .brandstrip, .modebtn, .kbdhint, .reveal .controls, .reveal .progress, .reveal .slide-number{ display:none !important; }
-    .timepanel{ display:none !important; }
-    .progmap{ position:absolute; }
-
-    /* ---- Polycopié ---- */
-    html:not(.print-pdf), html:not(.print-pdf) body{ background:#fff !important; overflow:visible !important; height:auto !important; }
-
-    html:not(.print-pdf) .progmap, html:not(.print-pdf) .deckfoot, html:not(.print-pdf) .rhint, html:not(.print-pdf) .rclose, html:not(.print-pdf) .dimtoggle,
-    html:not(.print-pdf) .roomreveal, html:not(.print-pdf) .roomreveal-cta, html:not(.print-pdf) .reveal .backgrounds{ display:none !important; }
-
-    /* La mise en page déroulante s'applique quel que soit le mode affiché à
-       l'écran : l'étudiant·e obtient le même document depuis la présentation
-       comme depuis le mode lecture.                                          */
-    html:not(.print-pdf) .reveal{ position:static !important; height:auto !important; width:auto !important;
-      overflow:visible !important; transform:none !important; zoom:normal !important; }
-    html:not(.print-pdf) .reveal .slides{ position:static !important; left:0 !important; top:0 !important;
-      width:auto !important; height:auto !important; padding:0 !important;
-      transform:none !important; zoom:normal !important; display:block !important; }
-    html:not(.print-pdf) .reveal .slides > section,
-    html:not(.print-pdf) .reveal .slides > section[hidden]{
-      position:relative !important; display:block !important;
-      visibility:visible !important; opacity:1 !important;
-      transform:none !important; pointer-events:auto !important;
-      top:auto !important; left:auto !important;
-      width:100% !important; aspect-ratio:16/9;
-      height:auto !important; min-height:0 !important; max-height:none !important;
-      margin:0 0 6mm !important; padding:0 !important;
-      border:1px solid #D4D9E0 !important; border-radius:5px;
-      overflow:hidden !important; box-shadow:none !important;
-      break-inside:avoid; page-break-inside:avoid;
-    }
-    html:not(.print-pdf) .reveal .slides > section > *{ height:100%; }
-
-    /* Toutes les diapos sont en texte blanc. Sans impression des fonds, la
-       page sortirait vierge : on l'exige donc explicitement. Le fond retenu
-       est --teal-ink, plus sombre que celui de l'écran, pour rester lisible
-       y compris sur une imprimante noir et blanc.                           */
-    html:not(.print-pdf) .reveal .slides > section{
-      -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important;
-    }
-    html:not(.print-pdf) .reveal .slides > section[data-state="dark"]{ background:var(--teal-ink) !important; }
-    html:not(.print-pdf) .media-slot{ background-color:var(--teal-ink) !important; background-image:none !important; }
-    html:not(.print-pdf) .media-slot .ph{ display:none !important; }
-
-    /* Les vidéos ne s'impriment pas : on les retire pour laisser un aplat
-       propre plutôt qu'un rectangle vide. Les images sont conservées.       */
-    html:not(.print-pdf) .reveal video, html:not(.print-pdf) .reveal .scrim{ display:none !important; }
-
-    /* Un polycopié ne se clique pas : on déplie ce qui est replié ou flouté. */
-    html:not(.print-pdf) .bridge.gated .dimsgrid{ filter:none !important; opacity:1 !important; }
-    html:not(.print-pdf) .bridge__col__details{ max-height:none !important; opacity:1 !important; margin-top:14px !important; }
-    html:not(.print-pdf) .roomsteps .rscard.gated .rexbox{ display:block !important; }
-    /* Carte des acteurs : les zones ne se colorent qu'au clic. Sur papier on
-       les affiche toutes, et on garde les questions plutôt qu'une fiche.     */
-    html:not(.print-pdf) .socio-zone{ background:var(--c) !important; border:1.5px solid var(--c) !important;
-      color:var(--fg,#fff) !important; }
-    html:not(.print-pdf) .socio-zone .zq{ display:none !important; }
-    html:not(.print-pdf) .socio-card,
-    html:not(.print-pdf) .socio-actions,
-    html:not(.print-pdf) .socio-moves{ display:none !important; }
-    html:not(.print-pdf) .socio-ask{ display:block !important; }
-    /* Matrice de projets : même logique que la carte ci-dessus. */
-    html:not(.print-pdf) .typo-zone{ background:var(--c) !important; border:1.5px solid var(--c) !important; }
-    html:not(.print-pdf) .typo-zone .zn,
-    html:not(.print-pdf) .typo-zone .zr{ color:var(--fg,#fff) !important; }
-    html:not(.print-pdf) .typo-zone .zq{ display:none !important; }
-    html:not(.print-pdf) .typo-card,
-    html:not(.print-pdf) .typo-actions,
-    html:not(.print-pdf) .typo-moves{ display:none !important; }
-    html:not(.print-pdf) .typo-ask{ display:block !important; }
-
-    /* Repère de diapo, repris du mode lecture. */
-    html:not(.print-pdf) .reveal .slides > section::after{
-      content:attr(data-screen-label); position:absolute; top:3mm; right:4mm; z-index:5;
-      font-size:7.5pt; font-weight:800; letter-spacing:.09em; text-transform:uppercase;
-      color:#fff; background:rgba(255,255,255,.22); padding:1mm 2.5mm; border-radius:999px;
-      -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important;
-    }
-    html:not(.print-pdf) .reveal a{ text-decoration:none; }
-  }
+  /* Le mode support est géré par assets/support.css + assets/support.js.
+     L'impression (Ctrl+P) produit le support de cours A4, pas les diapos.
+     Le chemin natif ?print-pdf de reveal reste intact. */
 </style>
 <script src="../image-slot.js"></script>
 </head>
@@ -868,9 +757,9 @@
 
 <div class="brandstrip"></div>
 
-<button class="modebtn" id="modebtn" type="button" aria-pressed="false" aria-label="Passer en mode lecture (défilement vertical)">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18M3 12h18M3 19h18"/></svg>
-  <span class="lbl-read">Mode lecture</span>
+<button class="modebtn" id="modebtn" type="button" aria-pressed="false" aria-label="Afficher le support de cours imprimable">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h11l5 5v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><path d="M14 4v6h6M8 13h7M8 17h5"/></svg>
+  <span class="lbl-read">Support de cours</span>
   <span class="lbl-pres">Mode présentation</span>
 </button>
 
@@ -1403,6 +1292,135 @@
   </span>
 </div>
 
+<!-- ============================================================================
+     SUPPORT DE COURS — contenu rédigé, mode lecture / impression A4.
+     Indépendant des diapos : ni image, ni vidéo, ni activité chronométrée.
+     data-notes="oui|lg" : colonne de notes, réservée aux contenus théoriques.
+     ========================================================================= -->
+<template id="support-src">
+
+  <header class="sup-cover">
+    <p class="sup-course">Professionnalisation &amp; intervention · 752501</p>
+    <p class="sup-seance">Séance 07 — Mardi 13 avril 2027</p>
+    <h1>Gestion de projet &amp; planification</h1>
+    <p class="sup-meta">
+      <span>14h15 – 15h45</span><span>Salle M1140</span><span>Christophe Carlei</span><span>FPSE — Université de Genève</span>
+    </p>
+  </header>
+
+  <section class="sup-block">
+    <h2>La question de la séance</h2>
+    <p><strong>Quelles bonnes pratiques ? Comment réussir la conduite de son projet ?</strong></p>
+    <p>À mi-parcours, le projet cesse d'être une intention pour devenir un chantier à piloter. Cette séance donne les repères et les outils pour organiser le travail jusqu'au livrable final.</p>
+  </section>
+
+  <section class="sup-block">
+    <h2>Objectifs pédagogiques</h2>
+    <p>À l'issue de cette séance, vous serez capable de&nbsp;:</p>
+    <ol class="sup-obj">
+      <li>Choisir et tester des outils de gestion adaptés à votre projet.</li>
+      <li>Organiser le travail, suivre l'avancement des tâches et planifier le livrable.</li>
+      <li>Situer votre projet dans une typologie et cartographier ses parties prenantes.</li>
+    </ol>
+  </section>
+
+  <section class="sup-block" data-notes="lg">
+    <h2>Les bonnes pratiques de gestion</h2>
+    <ul>
+      <li><strong>Un cap clair</strong> — objectifs, périmètre et livrables définis dès le départ. Ce qui n'est pas dans le périmètre doit être dit explicitement.</li>
+      <li><strong>Découper et planifier</strong> — des tâches concrètes, des échéances, un pilotage régulier. Une tâche que l'on ne sait pas estimer est une tâche trop grosse.</li>
+      <li><strong>Se répartir et communiquer</strong> — des rôles clairs et des points d'équipe fréquents. La plupart des projets échouent sur la coordination, pas sur la technique.</li>
+    </ul>
+    <h3>Les quatre étapes d'un projet</h3>
+    <p>Avant-projet → planification → réalisation → clôture. La maîtrise est maximale au début, quand tout est encore modifiable, et diminue à mesure que les décisions s'accumulent : d'où l'importance du cadrage initial.</p>
+    <h3>Six facteurs de réussite</h3>
+    <ol class="sup-obj">
+      <li><strong>Soutien exécutif</strong> — le projet est porté par une instance qui décide.</li>
+      <li><strong>Maturité émotionnelle</strong> — la qualité des liens entre les personnes qui collaborent.</li>
+      <li><strong>Implication des utilisateurs</strong> — celles et ceux à qui le livrable est destiné participent aux décisions.</li>
+      <li><strong>Gestion de projet</strong> — planifier, organiser, suivre.</li>
+      <li><strong>Objectifs clairs</strong> — une stratégie globale et une utilité identifiable.</li>
+      <li><strong>Décomposition</strong> — des livrables intermédiaires pour chaque étape.</li>
+    </ol>
+  </section>
+
+  <section class="sup-block">
+    <h2>Où se trouve votre projet ? La matrice de Turner &amp; Cochrane</h2>
+    <p>Deux questions suffisent à situer un projet : <em>le quoi</em> est-il défini (les objectifs) et <em>le comment</em> est-il défini (les méthodes) ? Quatre configurations en découlent, et chacune appelle un pilotage différent.</p>
+    <table>
+      <thead>
+        <tr><th>Configuration</th><th>Objectifs / Méthodes</th><th>Comment piloter</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Terre</strong> — le chef d'orchestre</td><td>Définis / définies</td><td>Par le planning : découper, jalonner, tenir les délais. Cas des projets d'ingénierie ou de construction.</td></tr>
+        <tr><td><strong>Eau</strong> — le coach</td><td>Définis / à inventer</td><td>Par étapes : prototyper, tester, ajuster la méthode en avançant. Typique du développement de produit.</td></tr>
+        <tr><td><strong>Feu</strong> — le sculpteur</td><td>À préciser / définies</td><td>Par les usages : faire émerger le besoin par itérations avec les personnes concernées. Cas des systèmes d'information.</td></tr>
+        <tr><td><strong>Air</strong> — l'équilibriste</td><td>À préciser / à inventer</td><td>Par la vision : avancer à petits pas et sécuriser chaque acquis. Recherche, conduite du changement — le plus incertain.</td></tr>
+      </tbody>
+    </table>
+    <p>Un projet ne reste pas dans sa case. En clarifiant d'abord les objectifs, puis les méthodes, on le fait glisser vers <strong>Terre</strong> : là où il devient réellement pilotable.</p>
+  </section>
+
+  <section class="sup-block">
+    <h2>La carte des acteurs</h2>
+    <p>Modèle d'Herbemont &amp; César. Chaque personne qui gravite autour du projet se situe sur deux axes : sa <strong>synergie</strong> — l'énergie qu'elle met <em>pour</em> — et son <strong>antagonisme</strong> — l'énergie qu'elle met <em>contre</em>. Les deux peuvent être élevés en même temps.</p>
+    <table>
+      <thead>
+        <tr><th>Profil</th><th>Position</th><th>Ce que cela implique</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Triangle d'or</strong></td><td>Synergie forte, antagonisme moyen</td><td>Très engagés et critiques : ils contestent pour améliorer, pas pour bloquer. C'est la cible.</td></tr>
+        <tr><td><strong>Engagés</strong></td><td>Synergie moyenne à forte, antagonisme faible</td><td>Favorables et actifs, mais peu critiques. Précieux — à condition de ne pas prendre leur soutien pour une validation.</td></tr>
+        <tr><td><strong>Hésitants</strong></td><td>Synergie et antagonisme moyens</td><td>Partagés, ils attendent de voir. Cible prioritaire : un premier résultat concret les fait basculer.</td></tr>
+        <tr><td><strong>Déchirés</strong></td><td>Synergie forte, antagonisme fort</td><td>Beaucoup d'énergie dans les deux sens. Réelle mais instable — clarifier ce qui les tiraille.</td></tr>
+        <tr><td><strong>Passifs</strong></td><td>Synergie et antagonisme faibles</td><td>Ni pour, ni contre, ni concernés. Souvent les plus nombreux : ils suivent le mouvement collectif.</td></tr>
+        <tr><td><strong>Grognons</strong></td><td>Antagonisme faible</td><td>Ils râlent sans agir contre. Écouter la plainte sans en faire un conflit.</td></tr>
+        <tr><td><strong>Opposants</strong></td><td>Antagonisme moyen</td><td>Contre le projet et ils le disent. Discuter le fond, sans chercher à les convertir.</td></tr>
+        <tr><td><strong>Révoltés</strong></td><td>Antagonisme fort</td><td>Opposition frontale et déterminée. N'y investissez pas votre énergie : le retour est quasi nul.</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Stratégie :</strong> on ne déplace pas les révoltés. On fait grandir le triangle d'or en y amenant les passifs, les hésitants et les engagés.</p>
+  </section>
+
+  <section class="sup-block">
+    <h2>Outils et ressources</h2>
+    <ul>
+      <li><strong>Kanban</strong> — visualiser les tâches et leur avancement par colonnes : à faire, en cours, terminé.</li>
+      <li><strong>Diagramme de Gantt</strong> — planifier dans le temps, repérer les dépendances et le chemin critique.</li>
+      <li><strong>Miro</strong> — support commun où le groupe pilote l'ensemble.</li>
+    </ul>
+  </section>
+
+  <section class="sup-block" data-notes="oui">
+    <h2>À retenir</h2>
+    <ul>
+      <li>Une gestion de projet réussie part d'un <strong>cap clair</strong> et de tâches découpées.</li>
+      <li>Les <strong>outils de pilotage</strong> — Kanban, Gantt — rendent l'avancement visible et partagé.</li>
+      <li>Situer son projet dans la <strong>matrice objectifs / méthodes</strong> indique par quoi le clarifier en premier.</li>
+      <li>L'<strong>analyse des parties prenantes</strong> aide à embarquer les bonnes personnes, et à ne pas s'épuiser sur les autres.</li>
+    </ul>
+  </section>
+
+  <section class="sup-block">
+    <h2>Pour la prochaine séance</h2>
+    <p><strong>Séance 8 — Présentations intermédiaires</strong> · mardi 20 avril 2027, 14h15, salle M1140. <em>Séance évaluée.</em></p>
+    <p><strong>Échéance du 20 avril :</strong> présentation intermédiaire de l'avant-projet, 5 minutes par groupe.</p>
+    <p><strong>À préparer :</strong> répétez le passage en tenant le temps, et mettez en place vos outils de pilotage — ils seront visibles dans la présentation.</p>
+  </section>
+
+  <section class="sup-block sup-freenotes">
+    <h2>Notes personnelles</h2>
+    <div class="sup-lines"></div>
+  </section>
+
+  <footer class="sup-foot">
+    <span>752501 · Professionnalisation &amp; intervention — Séance 07</span>
+    <span>FPSE — Université de Genève</span>
+  </footer>
+
+</template>
+
+<script src="../assets/support.js"></script>
 <script src="../assets/vendor/reveal/reveal.min.js"></script>
 <script>
   const deck = new Reveal({
@@ -1423,11 +1441,7 @@
   function applyCover(){
     var slides = document.querySelector('.reveal .slides');
     if(!slides) return;
-    if(document.body.classList.contains('reading')){
-      slides.style.transform=''; slides.style.left=''; slides.style.top='';
-      slides.style.right=''; slides.style.bottom=''; slides.style.transformOrigin='';
-      return;
-    }
+    if(document.body.classList.contains('support-open')) return;
     var vw = window.innerWidth, vh = window.innerHeight;
     if(!vw || !vh) return;   // viewport pas encore dimensionné : ne pas appliquer scale(0)
     var scale = Math.max(vw/1280, vh/720);
@@ -1454,10 +1468,10 @@
 
   function syncChrome(){
     const cur = deck.getCurrentSlide();
-    const reading = document.body.classList.contains('reading');
+    const support = document.body.classList.contains('support-open');
     const dark = cur && cur.getAttribute('data-state') === 'dark';
-    document.body.classList.toggle('dark-slide', !!dark && !reading);
-    document.body.classList.toggle('cover-active', !!(cur && cur.querySelector('.cover2')) && !reading);
+    document.body.classList.toggle('dark-slide', !!dark && !support);
+    document.body.classList.toggle('cover-active', !!(cur && cur.querySelector('.cover2')) && !support);
     // marqueur d'animation d'entrée
     document.querySelectorAll('.slides > section[data-deck-active]').forEach(function(s){ if(s!==cur) s.removeAttribute('data-deck-active'); });
     if(cur){ cur.removeAttribute('data-deck-active'); void cur.offsetWidth; cur.setAttribute('data-deck-active',''); }
@@ -1510,19 +1524,11 @@
     });
   });
 
-  const btn = document.getElementById('modebtn');
-  let reading = false;
-  btn.addEventListener('click', function(){
-    reading = !reading;
-    document.body.classList.toggle('reading', reading);
-    deck.configure({ controls: !reading, progress: !reading, keyboard: !reading });
-    btn.setAttribute('aria-pressed', String(reading));
-    btn.setAttribute('aria-label', reading ? 'Revenir au mode présentation' : 'Passer en mode lecture (défilement vertical)');
-    if(reading){
-      document.body.classList.remove('dark-slide');
-      applyCover();
-      window.scrollTo(0,0);
-    } else {
+  // Bascule présentation <-> support de cours (assets/support.js pilote le DOM).
+  document.addEventListener('support:change', function(e){
+    var open = e.detail.open;
+    deck.configure({ controls: !open, progress: !open, keyboard: !open });
+    if(!open){
       deck.layout();
       applyCover();
       setTimeout(syncChrome, 60);

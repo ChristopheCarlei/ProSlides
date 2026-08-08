@@ -8,6 +8,7 @@
 
 <link rel="stylesheet" href="../assets/vendor/reveal/reset.min.css" />
 <link rel="stylesheet" href="../assets/vendor/reveal/reveal.min.css" />
+<link rel="stylesheet" href="../assets/support.css" />
 
 <style>
   /* ============================================================
@@ -366,7 +367,7 @@
 
   /* ---- frise de progression (barre haute, pleine largeur) ---- */
   .progmap{ position:fixed; top:0; left:0; right:0; z-index:42; pointer-events:none; padding:16px 190px 0 46px; }
-  body.reading .progmap, body.cover-active .progmap{ display:none; }
+  body.cover-active .progmap{ display:none; }
   .progmap .pm-track{ display:flex; gap:26px; }
   .progmap .seg{ flex:1; min-width:0; display:flex; flex-direction:column; gap:9px; }
   .progmap .lab{ display:flex; align-items:center; gap:8px; font-size:14px; font-weight:700;
@@ -476,8 +477,6 @@
   section[data-state="dark"] .pad strong{ color:#fff; }
   section[data-state="dark"] .pad em{ color:#9ff0ed; }
   section[data-state="dark"] .retenir .item{ color:#fff; }
-  /* en mode lecture, conserver le fond teal des slides sombres */
-  body.reading .reveal .slides > section[data-state="dark"]{ background:var(--teal-deep) !important; }
 
   .modebtn{
     position:fixed; top:16px; right:18px; z-index:60;
@@ -490,37 +489,14 @@
   }
   .modebtn:hover{ background:var(--bg-teal); border-color:var(--teal-deep); }
   .modebtn svg{ display:block; }
-  .modebtn .lbl-read{ display:inline; } .modebtn .lbl-pres{ display:none; }
-  body.reading .modebtn .lbl-read{ display:none; } body.reading .modebtn .lbl-pres{ display:inline; }
+  /* Les libellés du bouton sont pilotés par assets/support.css. */
 
-  /* MODE LECTURE DÉROULANTE */
-  body.reading, body.reading.reveal-viewport{ overflow:auto; background:var(--bg-soft) !important; }
-  body.reading .deckfoot{ display:none; }
   body.cover-active .deckfoot{ display:none; }
-  body.reading .brandstrip{ position:fixed; }
-  body.reading .reveal{ position:static !important; height:auto !important; width:auto !important; overflow:visible !important; transform:none !important; }
-  body.reading .reveal .slides{ position:static !important; left:0 !important; top:0 !important; width:auto !important; height:auto !important; transform:none !important; display:block !important; padding:34px 0 64px; box-sizing:border-box; }
-  body.reading .reveal .slides > section{
-    position:relative !important; display:block !important; visibility:visible !important; opacity:1 !important;
-    transform:none !important; pointer-events:auto !important; top:auto !important; left:auto !important;
-    width:min(1040px,92vw); aspect-ratio:16/9; height:auto !important; min-height:0 !important;
-    margin:0 auto 26px; border:1px solid var(--line); border-radius:18px; overflow:hidden;
-    background:#fff; box-shadow:0 1px 2px rgba(16,24,40,.04),0 18px 40px -26px rgba(16,24,40,.4);
-  }
-  body.reading .reveal .slides > section[hidden]{ display:block !important; }
-  body.reading .reveal .slides > section > *{ height:100%; }
-  body.reading .reveal .slides > section::after{
-    content:attr(data-screen-label); position:absolute; top:14px; right:18px; z-index:5;
-    font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
-    color:var(--muted); background:rgba(255,255,255,.85); padding:4px 10px; border-radius:999px;
-  }
-  body.reading .reveal .slides > section[data-state="dark"]::after{ color:#fff; background:rgba(255,255,255,.2); }
 
   .reveal .progress{ color:var(--teal); height:5px; }
   .reveal .controls{ color:var(--teal-deep); }
   .reveal .slide-number{ background:rgba(255,255,255,.0); color:var(--muted); font-family:var(--font); font-weight:800; font-size:14px; letter-spacing:.04em; left:50%; right:auto; top:auto; bottom:13px; transform:translateX(-50%); }
   body.dark-slide .reveal .slide-number{ color:rgba(255,255,255,.8); }
-  body.reading .reveal .slide-number{ display:none; }
 
   @media(prefers-reduced-motion:reduce){ *{animation:none !important} }
 
@@ -534,78 +510,9 @@
     padding:1px 7px; margin:0 1px; }
   body.dark-slide .kbdhint{ color:rgba(255,255,255,.7); }
   body.dark-slide .kbdhint kbd{ color:#fff; background:rgba(255,255,255,.14); border-color:rgba(255,255,255,.3); }
-  body.reading .kbdhint{ display:none; }
-
-  /* ---- IMPRESSION -------------------------------------------------------
-     Deux chemins coexistent :
-       · Ctrl+P            -> polycopié déroulant, une suite de diapos (ci-dessous)
-       · URL + ?print-pdf  -> rendu natif de reveal, une diapo par page
-     Les règles du polycopié sont donc préfixées html:not(.print-pdf)
-     pour laisser le second intact.                                          */
-  @media print{
-    /* Commun aux deux chemins. */
-    .brandstrip, .modebtn, .kbdhint, .reveal .controls, .reveal .progress, .reveal .slide-number{ display:none !important; }
-    .timepanel{ display:none !important; }
-    .progmap{ position:absolute; }
-
-    /* ---- Polycopié ---- */
-    html:not(.print-pdf), html:not(.print-pdf) body{ background:#fff !important; overflow:visible !important; height:auto !important; }
-
-    html:not(.print-pdf) .progmap, html:not(.print-pdf) .deckfoot, html:not(.print-pdf) .rhint, html:not(.print-pdf) .rclose, html:not(.print-pdf) .dimtoggle,
-    html:not(.print-pdf) .roomreveal, html:not(.print-pdf) .roomreveal-cta, html:not(.print-pdf) .reveal .backgrounds{ display:none !important; }
-
-    /* La mise en page déroulante s'applique quel que soit le mode affiché à
-       l'écran : l'étudiant·e obtient le même document depuis la présentation
-       comme depuis le mode lecture.                                          */
-    html:not(.print-pdf) .reveal{ position:static !important; height:auto !important; width:auto !important;
-      overflow:visible !important; transform:none !important; zoom:normal !important; }
-    html:not(.print-pdf) .reveal .slides{ position:static !important; left:0 !important; top:0 !important;
-      width:auto !important; height:auto !important; padding:0 !important;
-      transform:none !important; zoom:normal !important; display:block !important; }
-    html:not(.print-pdf) .reveal .slides > section,
-    html:not(.print-pdf) .reveal .slides > section[hidden]{
-      position:relative !important; display:block !important;
-      visibility:visible !important; opacity:1 !important;
-      transform:none !important; pointer-events:auto !important;
-      top:auto !important; left:auto !important;
-      width:100% !important; aspect-ratio:16/9;
-      height:auto !important; min-height:0 !important; max-height:none !important;
-      margin:0 0 6mm !important; padding:0 !important;
-      border:1px solid #D4D9E0 !important; border-radius:5px;
-      overflow:hidden !important; box-shadow:none !important;
-      break-inside:avoid; page-break-inside:avoid;
-    }
-    html:not(.print-pdf) .reveal .slides > section > *{ height:100%; }
-
-    /* Toutes les diapos sont en texte blanc. Sans impression des fonds, la
-       page sortirait vierge : on l'exige donc explicitement. Le fond retenu
-       est --teal-ink, plus sombre que celui de l'écran, pour rester lisible
-       y compris sur une imprimante noir et blanc.                           */
-    html:not(.print-pdf) .reveal .slides > section{
-      -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important;
-    }
-    html:not(.print-pdf) .reveal .slides > section[data-state="dark"]{ background:var(--teal-ink) !important; }
-    html:not(.print-pdf) .media-slot{ background-color:var(--teal-ink) !important; background-image:none !important; }
-    html:not(.print-pdf) .media-slot .ph{ display:none !important; }
-
-    /* Les vidéos ne s'impriment pas : on les retire pour laisser un aplat
-       propre plutôt qu'un rectangle vide. Les images sont conservées.       */
-    html:not(.print-pdf) .reveal video, html:not(.print-pdf) .reveal .scrim{ display:none !important; }
-
-    /* Un polycopié ne se clique pas : on déplie ce qui est replié ou flouté. */
-    html:not(.print-pdf) .bridge.gated .dimsgrid{ filter:none !important; opacity:1 !important; }
-    html:not(.print-pdf) .bridge__col__details{ max-height:none !important; opacity:1 !important; margin-top:14px !important; }
-    html:not(.print-pdf) .roomsteps .rscard.gated .rexbox{ display:block !important; }
-
-    /* Repère de diapo, repris du mode lecture. */
-    html:not(.print-pdf) .reveal .slides > section::after{
-      content:attr(data-screen-label); position:absolute; top:3mm; right:4mm; z-index:5;
-      font-size:7.5pt; font-weight:800; letter-spacing:.09em; text-transform:uppercase;
-      color:#fff; background:rgba(255,255,255,.22); padding:1mm 2.5mm; border-radius:999px;
-      -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important;
-    }
-    html:not(.print-pdf) .reveal a{ text-decoration:none; }
-  }
+  /* Le mode support est géré par assets/support.css + assets/support.js.
+     L'impression (Ctrl+P) produit le support de cours A4, pas les diapos.
+     Le chemin natif ?print-pdf de reveal reste intact. */
 </style>
 <script src="../image-slot.js"></script>
 </head>
@@ -613,9 +520,9 @@
 
 <div class="brandstrip"></div>
 
-<button class="modebtn" id="modebtn" type="button" aria-pressed="false" aria-label="Passer en mode lecture (défilement vertical)">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18M3 12h18M3 19h18"/></svg>
-  <span class="lbl-read">Mode lecture</span>
+<button class="modebtn" id="modebtn" type="button" aria-pressed="false" aria-label="Afficher le support de cours imprimable">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h11l5 5v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><path d="M14 4v6h6M8 13h7M8 17h5"/></svg>
+  <span class="lbl-read">Support de cours</span>
   <span class="lbl-pres">Mode présentation</span>
 </button>
 
@@ -855,6 +762,103 @@
   </span>
 </div>
 
+<!-- ============================================================================
+     SUPPORT DE COURS — contenu rédigé, mode lecture / impression A4.
+     Indépendant des diapos : ni image, ni vidéo, ni activité chronométrée.
+     data-notes="oui|lg" : colonne de notes, réservée aux contenus théoriques.
+     ========================================================================= -->
+<template id="support-src">
+
+  <header class="sup-cover">
+    <p class="sup-course">Professionnalisation &amp; intervention · 752501</p>
+    <p class="sup-seance">Séance 13 — Mardi 25 mai 2027</p>
+    <h1>Démonstration des projets</h1>
+    <p class="sup-meta">
+      <span>14h15 – 16h10</span><span>Salle M1140</span><span>Démonstration évaluée</span><span>Christophe Carlei</span>
+    </p>
+  </header>
+
+  <section class="sup-block">
+    <h2>La question de la séance</h2>
+    <p><strong>Qu'avez-vous construit, et pour qui ?</strong></p>
+    <p>Dernière séance du semestre. Le moment de faire vivre votre livrable à celles et ceux à qui il est destiné — commanditaires compris.</p>
+  </section>
+
+  <section class="sup-block">
+    <h2>Objectifs pédagogiques</h2>
+    <p>À l'issue de cette séance, vous aurez&nbsp;:</p>
+    <ol class="sup-obj">
+      <li>Fait expérimenter votre livrable aux autres, en 10 minutes.</li>
+      <li>Rendu la démonstration interactive et impliquante.</li>
+      <li>Reçu un feedback final de vos pairs et des commanditaires.</li>
+    </ol>
+  </section>
+
+  <section class="sup-block">
+    <h2>Une démonstration évaluée</h2>
+    <div class="sup-key">
+      <span class="sup-key__k">Contrôle continu</span>
+      <p>Cette démonstration constitue la <strong>note finale</strong> du travail de groupe. Elle se déroule devant les pairs, les commanditaires et l'enseignant, sur la base de la grille d'évaluation.</p>
+    </div>
+    <h3>Déroulement</h3>
+    <table>
+      <thead>
+        <tr><th class="num">Durée</th><th>Séquence</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="num">10 min</td><td>Démonstration du livrable par le groupe</td></tr>
+        <tr><td class="num">5 min</td><td>Retours croisés : pairs, commanditaires, enseignant</td></tr>
+      </tbody>
+    </table>
+    <p>La séance est prolongée jusqu'à <strong>16h10</strong> et se termine par un goûter partagé avec les commanditaires.</p>
+  </section>
+
+  <section class="sup-block" data-notes="oui">
+    <h2>Faire expérimenter plutôt que décrire</h2>
+    <p>La différence entre une présentation et une démonstration tient en une phrase : dans l'une, on parle du livrable ; dans l'autre, on le met entre les mains du public.</p>
+    <ul>
+      <li><strong>Montrer en action</strong> — faire fonctionner le livrable devant l'auditoire plutôt qu'en énumérer les caractéristiques.</li>
+      <li><strong>Impliquer le public</strong> — donner un rôle : tester, répondre, manipuler, choisir. Une salle passive n'évalue pas un livrable, elle écoute un exposé.</li>
+      <li><strong>Situer le destinataire</strong> — rappeler pour qui l'objet a été conçu et quel problème il résout. C'est ce qui permet au public de juger la pertinence, pas seulement la finition.</li>
+      <li><strong>Assumer les limites</strong> — dire ce qui n'a pas pu être fait et pourquoi. C'est un signe de maîtrise, pas d'échec.</li>
+    </ul>
+  </section>
+
+  <section class="sup-block" data-notes="oui">
+    <h2>Le développement professionnel est un processus</h2>
+    <p>Le semestre s'ouvrait sur une définition : la professionnalisation est un <strong>processus</strong>, pas un état acquis. Il se referme sur la même idée, cette fois éprouvée.</p>
+    <p>Ce que vous avez construit compte. Mais ce qui restera dans quelques années tient davantage à ce que le chemin vous a appris : cadrer un besoin flou, travailler avec un commanditaire réel, arbitrer entre qualité, coûts et délais, tenir une équipe, recevoir des retours et en faire quelque chose, présenter sous contrainte de temps.</p>
+    <p>Aucune de ces compétences ne s'apprend en une fois. Toutes se retravaillent — c'est précisément ce que veut dire « processus ».</p>
+  </section>
+
+  <section class="sup-block" data-notes="oui">
+    <h2>À retenir</h2>
+    <ul>
+      <li>Un livrable prend vie quand on le <strong>fait expérimenter</strong>, pas seulement décrire.</li>
+      <li>Le <strong>développement professionnel</strong> est un processus, pas une destination.</li>
+      <li>Le <strong>feedback</strong> des pairs et des commanditaires clôt le projet autant qu'il le nourrit.</li>
+    </ul>
+  </section>
+
+  <section class="sup-block">
+    <h2>Clôture du semestre</h2>
+    <p>Merci et bravo à toutes et à tous pour vos projets.</p>
+    <p>La séance se termine par un <strong>goûter</strong>, partagé avec les commanditaires — l'occasion d'échanger autrement qu'en situation d'évaluation.</p>
+  </section>
+
+  <section class="sup-block sup-freenotes">
+    <h2>Notes personnelles</h2>
+    <div class="sup-lines"></div>
+  </section>
+
+  <footer class="sup-foot">
+    <span>752501 · Professionnalisation &amp; intervention — Séance 13</span>
+    <span>FPSE — Université de Genève</span>
+  </footer>
+
+</template>
+
+<script src="../assets/support.js"></script>
 <script src="../assets/vendor/reveal/reveal.min.js"></script>
 <script>
   const deck = new Reveal({
@@ -875,11 +879,7 @@
   function applyCover(){
     var slides = document.querySelector('.reveal .slides');
     if(!slides) return;
-    if(document.body.classList.contains('reading')){
-      slides.style.transform=''; slides.style.left=''; slides.style.top='';
-      slides.style.right=''; slides.style.bottom=''; slides.style.transformOrigin='';
-      return;
-    }
+    if(document.body.classList.contains('support-open')) return;
     var vw = window.innerWidth, vh = window.innerHeight;
     if(!vw || !vh) return;   // viewport pas encore dimensionné : ne pas appliquer scale(0)
     var scale = Math.max(vw/1280, vh/720);
@@ -906,10 +906,10 @@
 
   function syncChrome(){
     const cur = deck.getCurrentSlide();
-    const reading = document.body.classList.contains('reading');
+    const support = document.body.classList.contains('support-open');
     const dark = cur && cur.getAttribute('data-state') === 'dark';
-    document.body.classList.toggle('dark-slide', !!dark && !reading);
-    document.body.classList.toggle('cover-active', !!(cur && cur.querySelector('.cover2')) && !reading);
+    document.body.classList.toggle('dark-slide', !!dark && !support);
+    document.body.classList.toggle('cover-active', !!(cur && cur.querySelector('.cover2')) && !support);
     // marqueur d'animation d'entrée
     document.querySelectorAll('.slides > section[data-deck-active]').forEach(function(s){ if(s!==cur) s.removeAttribute('data-deck-active'); });
     if(cur){ cur.removeAttribute('data-deck-active'); void cur.offsetWidth; cur.setAttribute('data-deck-active',''); }
@@ -962,19 +962,11 @@
     });
   });
 
-  const btn = document.getElementById('modebtn');
-  let reading = false;
-  btn.addEventListener('click', function(){
-    reading = !reading;
-    document.body.classList.toggle('reading', reading);
-    deck.configure({ controls: !reading, progress: !reading, keyboard: !reading });
-    btn.setAttribute('aria-pressed', String(reading));
-    btn.setAttribute('aria-label', reading ? 'Revenir au mode présentation' : 'Passer en mode lecture (défilement vertical)');
-    if(reading){
-      document.body.classList.remove('dark-slide');
-      applyCover();
-      window.scrollTo(0,0);
-    } else {
+  // Bascule présentation <-> support de cours (assets/support.js pilote le DOM).
+  document.addEventListener('support:change', function(e){
+    var open = e.detail.open;
+    deck.configure({ controls: !open, progress: !open, keyboard: !open });
+    if(!open){
       deck.layout();
       applyCover();
       setTimeout(syncChrome, 60);
