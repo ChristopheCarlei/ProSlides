@@ -239,40 +239,46 @@
     text-transform:uppercase; color:rgba(255,255,255,.62); margin-bottom:.45em; }
   .dil-title h2{ margin:0; font-size:29px; font-weight:800; color:#fff;
     text-shadow:0 2px 16px rgba(8,40,39,.5); }
-  .dil-hint{ font-size:12px; color:rgba(255,255,255,.5); margin:.45em 0 0; }
+  .dil-hint{ font-size:13.5px; font-weight:600; color:rgba(255,255,255,.72); margin:.5em 0 0; }
 
   .dil-list{ flex:1 1 auto; display:flex; flex-direction:column; justify-content:center; gap:17px; min-height:0; }
   .dil-row{ --ol:0; --or:0; --fg:#fff; }
   .dil-head{ background:var(--c); color:var(--fg); border-radius:7px;
     padding:8px 18px; text-align:center; font-size:18.5px; font-weight:800; line-height:1.25;
     box-shadow:0 6px 18px -10px rgba(0,0,0,.7); transition:background .2s; }
-  .dil-head em{ font-style:italic; font-weight:700; opacity:.9; }
+  /* Sans cette reprise, le « ou » hérite du teal de .reveal em : illisible sur
+     une barre teal, très faible sur les autres. */
+  .dil-head em{ font-style:italic; font-weight:700; color:inherit; opacity:.72; }
   .dil-head .t-full, .dil-head .t-left, .dil-head .t-right{ display:none; }
   .dil-row.is-center .dil-head .t-full{ display:inline; }
   .dil-row.is-left   .dil-head .t-left{ display:inline; }
   .dil-row.is-right  .dil-head .t-right{ display:inline; }
 
   .dil-body{ display:grid; grid-template-columns:242px 1fr 242px; align-items:center; gap:16px; margin-top:8px; }
-  .dil-col{ display:flex; flex-direction:column; gap:7px; }
+  /* Cadre fantôme : au repos, on voit qu'il y a un pôle à découvrir de chaque
+     côté. La pastille colorée vient le recouvrir quand le curseur s'en approche. */
+  .dil-col{ position:relative; display:flex; flex-direction:column; gap:7px; }
+  .dil-col::before{ content:""; position:absolute; inset:0; border-radius:6px;
+    border:1.5px dashed rgba(255,255,255,.24); background:rgba(255,255,255,.045); }
   .dil-col--r{ align-items:flex-end; }
   /* Pas de transition sur l'opacité : elle suit directement la position du
      curseur, un fondu la ferait traîner derrière le geste. */
-  .dil-pole{ background:var(--c); color:var(--fg); border-radius:6px; padding:7px 13px;
-    font-size:14.5px; font-weight:700; line-height:1.25; width:100%; box-sizing:border-box; }
+  .dil-pole{ position:relative; background:var(--c); color:var(--fg); border-radius:6px; padding:7px 13px;
+    font-size:15.5px; font-weight:700; line-height:1.25; width:100%; box-sizing:border-box; }
   .dil-col--l .dil-pole{ opacity:var(--ol); }
   .dil-col--r .dil-pole{ opacity:var(--or); text-align:right; }
 
   .dil-track{ position:relative; height:30px; cursor:pointer; touch-action:none; }
-  .dil-track::before{ content:""; position:absolute; left:0; right:0; top:50%; height:5px;
-    transform:translateY(-50%); background:var(--c); border-radius:3px; opacity:.85; }
+  .dil-track::before{ content:""; position:absolute; left:0; right:0; top:50%; height:7px;
+    transform:translateY(-50%); background:var(--c); border-radius:4px; opacity:.9; }
   /* pointes de flèche aux deux extrémités, comme sur le modèle */
   .dil-track::after{ content:""; position:absolute; left:0; right:0; top:50%; height:13px; transform:translateY(-50%);
     background:
       linear-gradient(45deg, var(--c) 0 50%, transparent 50%) left center / 9px 13px no-repeat,
       linear-gradient(-45deg, var(--c) 0 50%, transparent 50%) right center / 9px 13px no-repeat;
     opacity:.85; }
-  .dil-thumb{ position:absolute; top:50%; left:50%; width:24px; height:24px; margin:-12px 0 0 -12px;
-    border-radius:50%; background:#fff; border:3px solid var(--c); cursor:grab; touch-action:none;
+  .dil-thumb{ position:absolute; top:50%; left:50%; width:28px; height:28px; margin:-14px 0 0 -14px;
+    border-radius:50%; background:#fff; border:3.5px solid var(--c); cursor:grab; touch-action:none;
     box-shadow:0 4px 14px -4px rgba(0,0,0,.75); transition:transform .12s, box-shadow .12s; }
   .dil-thumb:hover{ transform:scale(1.12); }
   .dil-thumb:focus-visible{ outline:3px solid #9ff0ed; outline-offset:3px; }
@@ -453,7 +459,11 @@
      sur le même panneau translucide que la description — 0,78 d'opacité, soit
      5,5:1 même sur les pixels les plus clairs du plan. */
   .mediafull.origine .overlay{ align-items:flex-start; }
-  .origine .op{ box-sizing:border-box; max-width:64ch; padding:24px 30px 26px; border-radius:16px;
+  /* Le sculpteur et la statue occupent la gauche et le centre du plan :
+     l'encart se range à droite pour les dégager. */
+  .mediafull.origine .overlay{ align-items:flex-end; }
+  .origine .op h2{ font-size:34px; line-height:1.1; }
+  .origine .op{ box-sizing:border-box; width:min(470px, 100%); max-width:none; padding:24px 30px 26px; border-radius:16px;
     background:rgba(10,76,74,.78); backdrop-filter:blur(7px); -webkit-backdrop-filter:blur(7px);
     box-shadow:0 18px 46px -20px rgba(0,0,0,.72); }
   .origine .op .revealtext{ margin-top:.35em; }

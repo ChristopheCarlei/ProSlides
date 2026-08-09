@@ -249,25 +249,29 @@
   .socio-main{ flex:0 0 auto; display:flex; gap:26px; align-items:flex-start; }
 
   /* ---- repère et grille ---- */
-  .socio-chart{ flex:0 0 auto; display:grid; grid-template-columns:26px 62px 620px;
-    grid-template-rows:420px 28px 20px; align-items:stretch; }
+  .socio-chart{ flex:0 0 auto; display:grid; grid-template-columns:26px 116px 566px;
+    grid-template-rows:418px 30px 22px; align-items:stretch; }
   .socio-ytitle{ grid-column:1; grid-row:1; writing-mode:vertical-rl; transform:rotate(180deg);
     display:flex; align-items:center; justify-content:center;
-    font-size:13px; font-weight:800; color:rgba(255,255,255,.85); letter-spacing:.04em; }
+    font-size:15.5px; font-weight:800; color:#fff; letter-spacing:.05em;
+    text-shadow:0 1px 6px rgba(0,0,0,.55); }
   .socio-yaxis{ grid-column:2; grid-row:1; display:flex; flex-direction:column-reverse;
     justify-content:space-around; align-items:flex-end; padding-right:9px; }
   .socio-ystep{ display:flex; align-items:center; gap:7px; }
-  .socio-ystep .lab{ font-size:11.5px; font-weight:700; color:rgba(255,255,255,.55); }
+  .socio-ystep .lab{ font-size:13.5px; font-weight:800; color:rgba(255,255,255,.86);
+    text-shadow:0 1px 5px rgba(0,0,0,.5); white-space:nowrap; }
   .socio-xaxis{ grid-column:3; grid-row:2; display:flex; justify-content:space-around;
     align-items:center; padding-top:7px; }
   .socio-xstep{ display:flex; align-items:center; gap:7px; }
-  .socio-xstep .lab{ font-size:11.5px; font-weight:700; color:rgba(255,255,255,.55); }
+  .socio-xstep .lab{ font-size:13.5px; font-weight:800; color:rgba(255,255,255,.86);
+    text-shadow:0 1px 5px rgba(0,0,0,.5); white-space:nowrap; }
   .socio-xtitle{ grid-column:3; grid-row:3; text-align:center;
-    font-size:13px; font-weight:800; color:rgba(255,255,255,.85); }
-  .socio-badge{ width:23px; height:23px; border-radius:50%; display:flex; align-items:center;
-    justify-content:center; font-size:12px; font-weight:800;
-    background:rgba(255,255,255,.13); color:rgba(255,255,255,.6);
-    border:1.5px solid rgba(255,255,255,.2); transition:background .2s, color .2s, transform .2s; }
+    font-size:15.5px; font-weight:800; color:#fff; letter-spacing:.05em;
+    text-shadow:0 1px 6px rgba(0,0,0,.55); }
+  .socio-badge{ width:25px; height:25px; border-radius:50%; display:flex; align-items:center;
+    justify-content:center; font-size:13px; font-weight:800; flex:none;
+    background:rgba(255,255,255,.2); color:rgba(255,255,255,.9);
+    border:1.5px solid rgba(255,255,255,.36); transition:background .2s, color .2s, transform .2s; }
   .socio-badge.on{ background:#fff; color:#0a3d3b; border-color:#fff; transform:scale(1.16); }
 
   .socio-gridwrap{ grid-column:3; grid-row:1; position:relative; }
@@ -300,8 +304,16 @@
   .socio-arrows > path{ fill:none; stroke:#F2C14E; stroke-width:3.4; stroke-linecap:round;
     stroke-dasharray:var(--len,300); stroke-dashoffset:var(--len,300); }
   .socio.show-moves .socio-arrows > path{ animation:socioDraw .9s ease forwards; }
-  .socio.show-moves .socio-arrows > path:nth-of-type(2){ animation-delay:.25s; }
-  .socio.show-moves .socio-arrows > path:nth-of-type(3){ animation-delay:.5s; }
+  .socio.show-moves .socio-arrows > path:nth-of-type(2){ animation-delay:.15s; }
+  .socio.show-moves .socio-arrows > path:nth-of-type(3){ animation-delay:.3s; }
+  .socio.show-moves .socio-arrows > path:nth-of-type(4){ animation-delay:.45s; }
+  .socio.show-moves .socio-arrows > path:nth-of-type(5){ animation-delay:.6s; }
+  /* Pointillés = mouvement incertain. Ils ne peuvent pas suivre l'animation de
+     tracé, qui repose justement sur stroke-dasharray : ils apparaissent avec
+     l'opacité du calque. */
+  .socio-arrows > path.dash{ stroke-dasharray:9 7; stroke-dashoffset:0; }
+  .socio.show-moves .socio-arrows > path.dash{
+    animation:none; stroke-dasharray:9 7; stroke-dashoffset:0; opacity:.9; }
   @keyframes socioDraw{ to{ stroke-dashoffset:0; } }
   @media(prefers-reduced-motion:reduce){
     .socio.show-moves .socio-arrows > path{ animation:none; stroke-dashoffset:0; }
@@ -309,6 +321,16 @@
 
   /* ---- panneau latéral ---- */
   .socio-panel{ flex:1 1 auto; min-width:0; align-self:stretch; display:flex; flex-direction:column; }
+
+  /* Précisions d'axe : ce que veut dire la position de la zone cliquée. */
+  .socio-axinfo{ display:none; flex-direction:column; gap:5px; margin-top:11px;
+    padding-top:10px; border-top:1px solid rgba(255,255,255,.14); }
+  .socio.has-sel .socio-axinfo{ display:flex; }
+  .socio-axinfo .ax{ margin:0; display:flex; align-items:baseline; gap:9px;
+    font-size:13.5px; line-height:1.35; }
+  .socio-axinfo .k{ flex:none; width:86px; font-size:10.5px; font-weight:800; letter-spacing:.07em;
+    text-transform:uppercase; color:rgba(255,255,255,.5); }
+  .socio-axinfo .v{ font-weight:700; color:#9ff0ed; }
   .socio-ask{ font-size:15px; line-height:1.5; color:rgba(255,255,255,.9); }
   .socio-ask p{ margin:0 0 .9em; }
   .socio-ask strong{ color:#9ff0ed; }
@@ -351,20 +373,22 @@
   .typo-head .src{ font-size:12px; font-weight:600; color:rgba(255,255,255,.5); margin-left:.6em; }
 
   .typo-main{ flex:0 0 auto; display:flex; gap:26px; align-items:flex-start; }
-  .typo-chart{ flex:0 0 auto; display:grid; grid-template-columns:26px 96px 620px;
-    grid-template-rows:420px 28px 20px; align-items:stretch; }
+  .typo-chart{ flex:0 0 auto; display:grid; grid-template-columns:30px 108px 604px;
+    grid-template-rows:418px 30px 22px; align-items:stretch; }
   .typo-ytitle{ grid-column:1; grid-row:1; writing-mode:vertical-rl; transform:rotate(180deg);
     display:flex; align-items:center; justify-content:center;
-    font-size:13px; font-weight:800; color:rgba(255,255,255,.85); text-align:center; }
+    font-size:15.5px; font-weight:800; color:#fff; letter-spacing:.05em; text-align:center;
+    text-shadow:0 1px 6px rgba(0,0,0,.55); }
   .typo-yaxis{ grid-column:2; grid-row:1; display:flex; flex-direction:column;
     justify-content:space-around; align-items:flex-end; padding-right:11px; }
   .typo-xaxis{ grid-column:3; grid-row:2; display:flex; justify-content:space-around;
     align-items:center; padding-top:6px; }
   .typo-xtitle{ grid-column:3; grid-row:3; text-align:center;
-    font-size:13px; font-weight:800; color:rgba(255,255,255,.85); }
-  .typo-badge{ padding:4px 13px; border-radius:999px; font-size:12.5px; font-weight:800; letter-spacing:.04em;
-    background:rgba(255,255,255,.13); color:rgba(255,255,255,.6);
-    border:1.5px solid rgba(255,255,255,.2); transition:background .2s, color .2s, transform .2s; }
+    font-size:15.5px; font-weight:800; color:#fff; letter-spacing:.05em;
+    text-shadow:0 1px 6px rgba(0,0,0,.55); }
+  .typo-badge{ padding:5px 14px; border-radius:999px; font-size:13.5px; font-weight:800; letter-spacing:.05em;
+    background:rgba(255,255,255,.2); color:rgba(255,255,255,.92);
+    border:1.5px solid rgba(255,255,255,.36); transition:background .2s, color .2s, transform .2s; }
   .typo-badge.on{ background:#fff; color:#0a3d3b; border-color:#fff; transform:scale(1.1); }
 
   .typo-gridwrap{ grid-column:3; grid-row:1; position:relative; }
@@ -465,6 +489,36 @@
   /* .93 et non .82 : composé sur le fond teal, le blanc à 82 % ne donnait
      que 4.05:1, sous le seuil AA pour ce corps de texte.                   */
   .bp-key span.d{ font-size:13px; font-weight:600; color:rgba(255,255,255,.93); line-height:1.3; margin-top:2px; }
+
+  /* ---- révélation au clic (même langage que .socio-zone / .typo-zone) ----
+     Fermées, les boîtes gardent leur place : seul le texte passe en
+     transparent. Les étapes se découvrent nues ; les six facteurs portent un
+     « ? » qui signale qu'il y a quelque chose à découvrir. */
+  .bp-ctrl, .bp-step, .bp-key{ appearance:none; font-family:var(--font); cursor:pointer;
+    border:1.5px solid transparent;
+    transition:background .3s, border-color .3s, color .3s, box-shadow .25s, transform .15s; }
+  .bp-ctrl:focus-visible, .bp-step:focus-visible, .bp-key:focus-visible{
+    outline:3px solid #9ff0ed; outline-offset:3px; }
+
+  .bp-ctrl:not(.on), .bp-step:not(.on), .bp-key:not(.on){
+    background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.28);
+    border-style:dashed; box-shadow:none; color:transparent; }
+  .bp-ctrl:not(.on):hover, .bp-step:not(.on):hover, .bp-key:not(.on):hover{
+    background:rgba(255,255,255,.13); border-color:rgba(255,255,255,.5); }
+  .bp-key:not(.on) b, .bp-key:not(.on) span.d{ color:transparent; }
+  .bp-ctrl.on:hover, .bp-step.on:hover, .bp-key.on:hover{ transform:translateY(-2px); }
+
+  .bp-key{ text-align:left; }
+  .bp-key .zq{ position:absolute; right:12px; top:50%; transform:translateY(-50%);
+    width:26px; height:26px; border-radius:50%; border:1.5px solid rgba(255,255,255,.42);
+    display:flex; align-items:center; justify-content:center;
+    font-size:15px; font-weight:800; color:rgba(255,255,255,.6);
+    transition:opacity .25s; pointer-events:none; }
+  .bp-key.on .zq{ opacity:0; }
+
+  .bp-subrow{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:18px; }
+  .bp-subrow .bp-sub2{ margin:0; }
+  .bp-all{ flex:0 0 auto; font-size:12.5px; padding:7px 14px; }
 
   /* ---- tuiles outils ---- */
 
@@ -841,7 +895,7 @@
 
         <p class="bp-sub">Les étapes d'un projet</p>
         <div class="bp-flow">
-          <div class="bp-ctrl">Maîtrise</div>
+          <button class="bp-ctrl" type="button">Maîtrise</button>
           <svg class="bp-loop" viewBox="0 0 1188 174" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <defs>
               <marker id="bpArr" viewBox="0 0 10 10" refX="8.5" refY="5"
@@ -853,24 +907,30 @@
             <path d="M747,110 C744,72 710,54 663,50" marker-end="url(#bpArr)"></path>
           </svg>
           <div class="bp-row">
-            <div class="bp-step">Avant-projet</div>
+            <button class="bp-step" type="button">Avant-projet</button>
             <span class="bp-arrow"><svg viewBox="0 0 26 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 8h22M17 2l6 6-6 6"/></svg></span>
-            <div class="bp-step">Planification</div>
+            <button class="bp-step" type="button">Planification</button>
             <span class="bp-arrow"><svg viewBox="0 0 26 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 8h22M17 2l6 6-6 6"/></svg></span>
-            <div class="bp-step">Réalisation</div>
+            <button class="bp-step" type="button">Réalisation</button>
             <span class="bp-arrow"><svg viewBox="0 0 26 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 8h22M17 2l6 6-6 6"/></svg></span>
-            <div class="bp-step">Clôture</div>
+            <button class="bp-step" type="button">Clôture</button>
           </div>
         </div>
 
-        <p class="bp-sub bp-sub2">Six facteurs de réussite</p>
+        <div class="bp-subrow">
+          <p class="bp-sub bp-sub2">Six facteurs de réussite</p>
+          <button class="socio-btn ghost bp-all" type="button" id="bpAll">
+            <span class="lbl-on">Tout révéler</span>
+            <span class="lbl-off" hidden>Tout masquer</span>
+          </button>
+        </div>
         <div class="bp-keys">
-          <div class="bp-key"><span class="n">1</span><b>Soutien exécutif</b><span class="d">Management du projet</span></div>
-          <div class="bp-key"><span class="n">2</span><b>Maturité émotionnelle</b><span class="d">Liens entre les collaborateurs</span></div>
-          <div class="bp-key"><span class="n">3</span><b>Implication des utilisateurs</b><span class="d">Prise de décision</span></div>
-          <div class="bp-key"><span class="n">4</span><b>Gestion de projet</b><span class="d">Planifier, organiser, suivre</span></div>
-          <div class="bp-key"><span class="n">5</span><b>Objectifs clairs</b><span class="d">Stratégie globale, utilité</span></div>
-          <div class="bp-key"><span class="n">6</span><b>Décomposition</b><span class="d">Livrables pour chaque étape</span></div>
+          <button class="bp-key" type="button"><span class="n">1</span><b>Soutien exécutif</b><span class="d">Management du projet</span><span class="zq" aria-hidden="true">?</span></button>
+          <button class="bp-key" type="button"><span class="n">2</span><b>Maturité émotionnelle</b><span class="d">Liens entre les collaborateurs</span><span class="zq" aria-hidden="true">?</span></button>
+          <button class="bp-key" type="button"><span class="n">3</span><b>Implication des utilisateurs</b><span class="d">Prise de décision</span><span class="zq" aria-hidden="true">?</span></button>
+          <button class="bp-key" type="button"><span class="n">4</span><b>Gestion de projet</b><span class="d">Planifier, organiser, suivre</span><span class="zq" aria-hidden="true">?</span></button>
+          <button class="bp-key" type="button"><span class="n">5</span><b>Objectifs clairs</b><span class="d">Stratégie globale, utilité</span><span class="zq" aria-hidden="true">?</span></button>
+          <button class="bp-key" type="button"><span class="n">6</span><b>Décomposition</b><span class="d">Livrables pour chaque étape</span><span class="zq" aria-hidden="true">?</span></button>
         </div>
       </div>
     </section>
@@ -1010,9 +1070,9 @@
             <div class="socio-ytitle">Synergie</div>
 
             <div class="socio-yaxis">
-              <div class="socio-ystep"><span class="lab">Faible</span><span class="socio-badge" data-axis="y" data-v="1">1</span></div>
-              <div class="socio-ystep"><span class="lab">Moyenne</span><span class="socio-badge" data-axis="y" data-v="2">2</span></div>
-              <div class="socio-ystep"><span class="lab"></span><span class="socio-badge" data-axis="y" data-v="3">3</span></div>
+              <div class="socio-ystep"><span class="lab">Quasi-nulle</span><span class="socio-badge" data-axis="y" data-v="1">1</span></div>
+              <div class="socio-ystep"><span class="lab">Faible</span><span class="socio-badge" data-axis="y" data-v="2">2</span></div>
+              <div class="socio-ystep"><span class="lab">Moyenne</span><span class="socio-badge" data-axis="y" data-v="3">3</span></div>
               <div class="socio-ystep"><span class="lab">Forte</span><span class="socio-badge" data-axis="y" data-v="4">4</span></div>
             </div>
 
@@ -1037,22 +1097,31 @@
                         style="grid-area:4/3/5/4;--c:#C0245E"><span class="zq">?</span>Opposants</button>
               </div>
 
-              <svg class="socio-arrows" viewBox="0 0 620 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Repère calé sur la grille réelle : 566 x 418, 4 colonnes de 137,75 px
+                   et 4 rangées de 100,75 px, gouttière de 5 px. Toutes les flèches
+                   convergent vers le triangle d'or (rangée 1, colonnes 2-3).
+                   Trait plein : déplacement à jouer. Pointillés : mouvement
+                   incertain, sur lequel il ne faut pas miser. -->
+              <svg class="socio-arrows" viewBox="0 0 566 418" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <defs>
                   <marker id="socioArr" viewBox="0 0 10 10" refX="8.5" refY="5"
                           markerWidth="5.2" markerHeight="5.2" orient="auto-start-reverse">
                     <path d="M0,0 L10,5 L0,10 Z" fill="#F2C14E"></path>
                   </marker>
                 </defs>
-                <path d="M95,338 Q168,300 246,234" marker-end="url(#socioArr)"></path>
-                <path d="M310,176 L310,98"        marker-end="url(#socioArr)"></path>
-                <path d="M102,126 Q178,64 248,56" marker-end="url(#socioArr)"></path>
+                <path d="M104,120 Q126,84 140,66"   marker-end="url(#socioArr)"></path>
+                <path d="M96,338 Q150,238 192,110"  marker-end="url(#socioArr)"></path>
+                <path d="M212,324 Q220,214 234,108" marker-end="url(#socioArr)"></path>
+                <path d="M283,148 L283,108"         marker-end="url(#socioArr)"></path>
+                <path d="M354,324 Q348,214 332,108" marker-end="url(#socioArr)"></path>
+                <path class="dash" d="M472,248 Q440,150 428,80" marker-end="url(#socioArr)"></path>
+                <path class="dash" d="M466,46 L432,46"          marker-end="url(#socioArr)"></path>
               </svg>
             </div>
 
             <div class="socio-xaxis">
-              <div class="socio-xstep"><span class="socio-badge" data-axis="x" data-v="1">1</span><span class="lab">Faible</span></div>
-              <div class="socio-xstep"><span class="socio-badge" data-axis="x" data-v="2">2</span><span class="lab"></span></div>
+              <div class="socio-xstep"><span class="socio-badge" data-axis="x" data-v="1">1</span><span class="lab">Quasi-nul</span></div>
+              <div class="socio-xstep"><span class="socio-badge" data-axis="x" data-v="2">2</span><span class="lab">Faible</span></div>
               <div class="socio-xstep"><span class="socio-badge" data-axis="x" data-v="3">3</span><span class="lab">Moyen</span></div>
               <div class="socio-xstep"><span class="socio-badge" data-axis="x" data-v="4">4</span><span class="lab">Fort</span></div>
             </div>
@@ -1107,7 +1176,12 @@
               <p class="todo">Discuter le fond, sans chercher à les convertir.</p>
             </div>
 
-            <p class="socio-moves">On ne déplace pas les révoltés&nbsp;: on fait grandir le triangle d'or en y amenant les passifs, les hésitants et les engagés.</p>
+            <div class="socio-axinfo" aria-live="polite">
+              <p class="ax"><span class="k">Synergie</span><span class="v" data-ax="y"></span></p>
+              <p class="ax"><span class="k">Antagonisme</span><span class="v" data-ax="x"></span></p>
+            </div>
+
+            <p class="socio-moves">Pour déplacer les acteurs, vous devez activer vos alliés (triangle d'or) pour créer une dynamique de succès visible. Ce mouvement de réussite paralyse les opposants et entraîne la masse des passifs par mimétisme vers l'adhésion au projet.</p>
 
             <div class="socio-actions">
               <button class="socio-btn" type="button" id="socioMoves">
@@ -1715,11 +1789,39 @@
         wrap.classList.toggle('has-sel', !!key);
       }
 
+      /* Ce que dit la position de la zone sur chaque axe. Une zone qui couvre
+         les deux moitiés d'un axe — les hésitants, le triangle d'or — reçoit
+         les deux libellés : c'est précisément ce qui les caractérise. */
+      var AXLIB = {
+        y: { bas:"Ne prend pas d'initiatives", haut:"Prend des initiatives" },
+        x: { bas:"Cherche l'accord",           haut:"Cherche à imposer sa solution" }
+      };
+      var axinfo = wrap.querySelector('.' + p + '-axinfo');
+
+      function libelleAxe(axe, valeurs){
+        var moy = valeurs.reduce(function(a,b){ return a+b; }, 0) / valeurs.length;
+        if(moy < 2.5) return AXLIB[axe].bas;
+        if(moy > 2.5) return AXLIB[axe].haut;
+        return AXLIB[axe].bas + ' / ' + AXLIB[axe].haut;
+      }
+      function majAxinfo(zone){
+        if(!axinfo) return;
+        ['y','x'].forEach(function(axe){
+          var el = axinfo.querySelector('.v[data-ax="' + axe + '"]');
+          if(!el) return;
+          if(!zone){ el.textContent = ''; return; }
+          var vals = (zone.getAttribute('data-' + axe) || '').split(',')
+            .map(function(v){ return parseInt(v, 10); })
+            .filter(function(v){ return !isNaN(v); });
+          el.textContent = vals.length ? libelleAxe(axe, vals) : '';
+        });
+      }
+
       function select(zone){
         if(current === zone){            // second clic : on désélectionne
           zone.classList.remove('on');
           zone.setAttribute('aria-pressed','false');
-          current = null; clearBadges(); showCard(null);
+          current = null; clearBadges(); showCard(null); majAxinfo(null);
           return;
         }
         // une seule zone mise en avant à la fois, mais on garde les autres révélées
@@ -1729,6 +1831,7 @@
         current = zone;
         lightBadges(zone);
         showCard(zone.getAttribute('data-k'));
+        majAxinfo(zone);
       }
 
       zones.forEach(function(z){
@@ -1747,7 +1850,7 @@
         zones.forEach(function(z){ z.classList.toggle('on', on); });
         swapLabels(btnAll, on);
         if(!on){
-          current = null; clearBadges(); showCard(null);
+          current = null; clearBadges(); showCard(null); majAxinfo(null);
           zones.forEach(function(z){ z.setAttribute('aria-pressed','false'); });
         }
       }
@@ -1767,6 +1870,48 @@
 
     initMap('socio');
     initMap('typo');
+  })();
+
+  // ---- « Étapes & réussite » : le contenu se découvre boîte par boîte ----
+  (function(){
+    var bp = document.querySelector('.bp');
+    if(!bp) return;
+    var boites = Array.prototype.slice.call(bp.querySelectorAll('.bp-ctrl, .bp-step, .bp-key'));
+    var btn = document.getElementById('bpAll');
+
+    function toutOuvert(){
+      return boites.every(function(b){ return b.classList.contains('on'); });
+    }
+    function syncBouton(){
+      if(!btn) return;
+      var t = toutOuvert();
+      var a = btn.querySelector('.lbl-on'), z = btn.querySelector('.lbl-off');
+      if(a) a.hidden = t;
+      if(z) z.hidden = !t;
+      btn.setAttribute('aria-pressed', String(t));
+    }
+
+    boites.forEach(function(b){
+      b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', function(){
+        var on = !b.classList.contains('on');
+        b.classList.toggle('on', on);
+        b.setAttribute('aria-pressed', String(on));
+        syncBouton();
+      });
+    });
+
+    if(btn){
+      btn.addEventListener('click', function(){
+        var on = !toutOuvert();
+        boites.forEach(function(b){
+          b.classList.toggle('on', on);
+          b.setAttribute('aria-pressed', String(on));
+        });
+        syncBouton();
+      });
+    }
+    syncBouton();
   })();
 </script>
 </body>

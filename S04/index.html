@@ -198,11 +198,15 @@
   .roomsteps .rscard .rex b{ color:#fff; }
 
   /* ---- révélation grand format de la scène (fin des 3 étapes) ---- */
+  /* Même habillage que les pastilles « Afficher… » des autres séances
+     (.revealtext .rt-hint) : teal translucide au repos, rose au survol. */
   .roomreveal-cta{ align-self:center; margin-top:24px; display:inline-flex; align-items:center; gap:12px;
-    cursor:pointer; appearance:none; font-family:var(--font); font-size:17px; font-weight:800; letter-spacing:.01em;
-    color:#fff; background:var(--rose); border:2px solid var(--rose); border-radius:999px; padding:13px 26px;
-    box-shadow:0 12px 34px -14px rgba(207,0,99,.8); transition:background .15s,border-color .15s,transform .12s; }
-  .roomreveal-cta:hover{ background:var(--rose-deep); border-color:var(--rose-deep); transform:translateY(-2px); }
+    cursor:pointer; appearance:none; font-family:var(--font); font-size:17px; font-weight:800; letter-spacing:.02em;
+    color:#fff; background:rgba(10,76,74,.55); border:0; border-radius:999px; padding:14px 28px;
+    backdrop-filter:blur(4px); box-shadow:0 6px 20px -8px rgba(0,0,0,.6);
+    transition:background .15s, transform .12s; }
+  .roomreveal-cta:hover{ background:var(--rose); transform:translateY(-2px); }
+  .roomreveal-cta:focus-visible{ outline:3px solid #9ff0ed; outline-offset:3px; }
   .roomreveal-cta svg{ width:1.25em; height:1.25em; display:block; }
   .roomreveal{ position:absolute; inset:0; z-index:6; display:none; flex-direction:column; align-items:center;
     justify-content:center; gap:20px; padding:3% 4%; background:rgba(6,38,37,.94); cursor:pointer; }
