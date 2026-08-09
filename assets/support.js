@@ -137,6 +137,21 @@
     bar.appendChild(modeBtn);
   }
 
+  /* --- repères de zone de sécurité ---------------------------------------- */
+
+  /* ?safe dans l'URL, ou la touche G, affiche le cadre de la zone de sécurité
+     du canvas (voir assets/deck.css). Outil de contrôle, jamais visible en
+     séance. */
+  function safeGuides() {
+    var actif = /[?&]safe(=|&|$)/.test(location.search);
+    document.documentElement.classList.toggle('safeguides', actif);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'g' && !e.ctrlKey && !e.altKey && !e.metaKey) {
+        document.documentElement.classList.toggle('safeguides');
+      }
+    });
+  }
+
   /* --- initialisation ----------------------------------------------------- */
 
   function init() {
@@ -150,6 +165,7 @@
       btn.addEventListener('click', function () { setOpen(!open); });
     }
     addPrintButton(btn);
+    safeGuides();
 
     /* Échap ferme le support. */
     document.addEventListener('keydown', function (e) {

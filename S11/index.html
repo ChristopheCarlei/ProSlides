@@ -8,53 +8,19 @@
 
 <link rel="stylesheet" href="../assets/vendor/reveal/reset.min.css" />
 <link rel="stylesheet" href="../assets/vendor/reveal/reveal.min.css" />
+<link rel="stylesheet" href="../assets/deck.css" />
 <link rel="stylesheet" href="../assets/support.css" />
 
 <style>
+  /* Habillage commun (police, palette, bandeau, frise, pied, boutons) :
+     déplacé dans assets/deck.css — une seule copie pour les 13 séances. */
   /* ============================================================
      FPSE · Séance 01 — Cadre & Objectifs  (thème reveal.js)
      ============================================================ */
-  @font-face{font-family:"TheSans";src:url("../assets/fonts/TheSansOsF-Light.otf") format("opentype");font-weight:300;font-display:swap}
-  @font-face{font-family:"TheSans";src:url("../assets/fonts/TheSansOsF-Plain.otf") format("opentype");font-weight:400;font-display:swap}
-  @font-face{font-family:"TheSans";src:url("../assets/fonts/TheSansOsF-SemiBold.otf") format("opentype");font-weight:600;font-display:swap}
-  @font-face{font-family:"TheSans";src:url("../assets/fonts/TheSansOsF-Bold.otf") format("opentype");font-weight:700;font-display:swap}
-  @font-face{font-family:"TheSans";src:url("../assets/fonts/TheSansOsF-ExtraBold.otf") format("opentype");font-weight:800;font-display:swap}
-
-  :root{
-    --teal:#00B1AE; --teal-deep:#00857F; --teal-ink:#0A4C4A;
-    --rose:#CF0063; --rose-deep:#A8004F;
-    --ink:#172033; --muted:#5A6477;
-    --line:#E4E7EC; --line-strong:#D4D9E0;
-    --bg:#FFFFFF; --bg-soft:#F6F8F8; --bg-teal:#EAF6F5;
-    --font:"TheSans",system-ui,-apple-system,"Segoe UI",sans-serif;
-  }
 
   .reveal{ font-family:var(--font); color:var(--ink); font-weight:400; font-size:34px; }
-  html, body, .reveal-viewport{ background:var(--teal-ink) !important; }
   .reveal .slides{ text-align:left; }
   .reveal .slides section{ height:100%; padding:0; }
-
-  .brandstrip{ position:fixed; top:0; left:0; right:0; height:6px; background:var(--teal); z-index:44; pointer-events:none; }
-  .brandstrip::after{ content:""; position:absolute; left:0; top:6px; width:18vw; max-width:260px; height:3px; background:var(--rose); }
-  body.dark-slide .brandstrip{ background:rgba(255,255,255,.9); }
-  body.dark-slide .brandstrip::after{ background:var(--rose); }
-
-  .deckfoot{
-    position:fixed; left:0; right:0; bottom:0; z-index:40;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:14px 40px; pointer-events:none;
-    font-size:14px; font-weight:600; letter-spacing:.02em; color:var(--muted);
-  }
-  .deckfoot .ftag{ display:inline-flex; align-items:center; gap:10px; white-space:nowrap; }
-  .deckfoot .ftag b{ color:var(--teal-deep); font-weight:800; letter-spacing:.04em; }
-  .deckfoot .flogos{ display:flex; align-items:center; gap:18px; }
-  .deckfoot .flogos img{ height:34px; width:auto; display:block; opacity:.95; }
-  body.dark-slide .deckfoot{ color:rgba(255,255,255,.9); }
-  body.dark-slide .deckfoot .ftag b{ color:#fff; }
-  body.dark-slide .deckfoot .flogos img.fpse{ filter:brightness(0) invert(1); opacity:.95; }
-  .deckfoot .flogos .afordens--white{ display:none; }
-  body.dark-slide .deckfoot .flogos .afordens--color{ display:none; }
-  body.dark-slide .deckfoot .flogos .afordens--white{ display:block; }
 
   .eyebrow{
     display:inline-block; font-size:.46em; font-weight:800; letter-spacing:.14em;
@@ -161,7 +127,7 @@
   .mediafull.content--diagram .scrim{ background:linear-gradient(180deg, rgba(10,76,74,.58) 0%, rgba(10,76,74,.72) 100%); }
 
   /* ---- schéma « Pont » sur la professionnalisation ---- */
-  .bridge{ box-sizing:border-box; height:100%; padding:62px 80px 96px; display:flex; flex-direction:column; }
+  .bridge{ box-sizing:border-box; height:100%; padding:var(--safe-t) var(--safe-x) var(--safe-b); display:flex; flex-direction:column; }
   .bridge__head{ text-align:center; }
   .bridge__head .eyebrow{ display:block; margin-bottom:8px; }
   .bridge__head h2{ font-size:46px; font-weight:800; letter-spacing:-.022em; line-height:1.04; margin:0; }
@@ -265,7 +231,7 @@
 
   /* ---- dilemmes du formateur : curseurs déplaçables sur un axe ---- */
   .dil-wrap{ position:relative; width:100%; height:100%; overflow:hidden;
-    box-sizing:border-box; padding:34px 54px 26px;
+    box-sizing:border-box; padding:var(--safe-t) var(--safe-x) var(--safe-b);
     display:flex; flex-direction:column; color:#fff;
     background:radial-gradient(circle at 70% 22%, #0f5350 0%, #0a3d3b 55%, #072e2c 100%); }
   .dil-title{ text-align:center; flex:0 0 auto; margin-bottom:16px; }
@@ -321,7 +287,7 @@
   .ice-wrap{ position:relative; width:100%; height:100%; overflow:hidden;
     background:radial-gradient(circle at 74% 16%, #0f5350 0%, #0a3d3b 55%, #062725 100%); }
   .ice-canvas{ position:absolute; left:0; top:0; width:1280px; height:720px; transform-origin:top left;
-    box-sizing:border-box; padding:70px 54px 92px; display:flex; flex-direction:column; color:#fff; }
+    box-sizing:border-box; padding:var(--safe-t) var(--safe-x) var(--safe-b); display:flex; flex-direction:column; color:#fff; }
   .ice-head{ flex:0 0 auto; text-align:center; margin-bottom:13px; }
   .ice-head .eyebrow{ display:block; font-size:12.5px; font-weight:800; letter-spacing:.09em;
     text-transform:uppercase; color:rgba(255,255,255,.62); margin-bottom:.4em; }
@@ -523,33 +489,11 @@
   @media(prefers-reduced-motion:reduce){ .brainmap .bg-dorsal, .brainmap .bg-ventral, .brainmap .barrows path{ transition:none; } }
 
   /* ---- frise de progression (barre haute, pleine largeur) ---- */
-  .progmap{ position:fixed; top:0; left:0; right:0; z-index:42; pointer-events:none; padding:16px 190px 0 46px; }
   /* Voile propre à la frise : les vidéos de fond sont trop claires par endroits
      pour garantir la lisibilité des libellés. Il s'arrête sous le bandeau de
      marque (z-index 44) et se fond dans la diapo. */
-  body.dark-slide .progmap::before{
-    content:""; position:absolute; inset:0 0 -26px 0; z-index:-1; pointer-events:none;
-    background:linear-gradient(180deg, rgba(8,44,43,.72) 0%, rgba(8,44,43,.46) 55%, rgba(8,44,43,0) 100%);
-  }
-  body.cover-active .progmap{ display:none; }
-  .progmap .pm-track{ display:flex; gap:26px; }
-  .progmap .seg{ flex:1; min-width:0; display:flex; flex-direction:column; gap:9px; }
-  .progmap .lab{ display:flex; align-items:center; gap:8px; font-size:14px; font-weight:700;
-    color:var(--muted); white-space:nowrap; transition:color .3s; }
-  .progmap .lab svg{ width:16px; height:16px; flex:none; display:block; }
-  .progmap .lab .t{ overflow:hidden; text-overflow:ellipsis; }
-  .progmap .bar{ position:relative; height:4px; border-radius:999px; background:var(--line); overflow:hidden; }
-  .progmap .bar::after{ content:""; position:absolute; inset:0; width:calc(var(--fill,0) * 100%);
-    background:var(--teal-deep); transition:width .45s cubic-bezier(.4,0,.2,1); }
   /* états — seule l'étape active ressort */
-  .progmap .seg.on .lab{ color:var(--ink); font-weight:800; }
-  .progmap .seg.on .bar::after{ background:var(--teal-deep); }
   /* sur fond sombre */
-  body.dark-slide .progmap .lab{ color:rgba(255,255,255,.78); text-shadow:0 1px 2px rgba(0,0,0,.45); }
-  body.dark-slide .progmap .seg.on .lab{ color:#fff; }
-  body.dark-slide .progmap .bar{ background:rgba(255,255,255,.32); }
-  body.dark-slide .progmap .bar::after{ background:#9ff0ed; }
-  body.dark-slide .progmap .seg.on .bar::after{ background:#fff; }
 
   /* ---- animations d'entrée douces ---- */
   @media(prefers-reduced-motion:no-preference){
@@ -600,7 +544,7 @@
   .timepanel.tt-flash .tt-disc{ animation:ttFlash .7s ease; }
   @keyframes ttFlash{ 0%,100%{ box-shadow:0 0 0 0 rgba(207,0,99,0); } 30%{ box-shadow:0 0 0 14px rgba(207,0,99,.45); } }
   @media(prefers-reduced-motion:reduce){ .timepanel.tt-flash .tt-disc{ animation:none; outline:4px solid var(--rose); } }
-  .timepanel{ position:absolute; z-index:4; top:50%; right:6%; transform:translateY(-50%);
+  .timepanel{ position:absolute; z-index:4; top:50%; right:var(--safe-x); transform:translateY(-50%);
     display:flex; flex-direction:column; align-items:center; gap:16px; cursor:pointer; }
   .tt-disc{ position:relative; width:230px; height:230px; border-radius:50%;
     background:conic-gradient(var(--rose) var(--tt-deg,360deg), rgba(255,255,255,.16) var(--tt-deg,360deg));
@@ -642,38 +586,11 @@
   section[data-state="dark"] .pad em{ color:#9ff0ed; }
   section[data-state="dark"] .retenir .item{ color:#fff; }
 
-  .modebtn{
-    position:fixed; top:16px; right:18px; z-index:60;
-    appearance:none; cursor:pointer; font-family:var(--font);
-    display:inline-flex; align-items:center; gap:9px;
-    padding:9px 16px 9px 13px; border-radius:999px;
-    border:1.5px solid rgba(0,133,127,.4); background:rgba(255,255,255,.92);
-    backdrop-filter:blur(6px); font-size:14px; font-weight:700; color:var(--teal-deep);
-    box-shadow:0 2px 14px rgba(0,133,127,.18); transition:background .15s,border-color .15s,color .15s;
-  }
-  .modebtn:hover{ background:var(--bg-teal); border-color:var(--teal-deep); }
-  .modebtn svg{ display:block; }
   /* Les libellés du bouton sont pilotés par assets/support.css. */
-
-  body.cover-active .deckfoot{ display:none; }
-
-  .reveal .progress{ color:var(--teal); height:5px; }
-  .reveal .controls{ color:var(--teal-deep); }
-  .reveal .slide-number{ background:rgba(255,255,255,.0); color:var(--muted); font-family:var(--font); font-weight:800; font-size:14px; letter-spacing:.04em; left:50%; right:auto; top:auto; bottom:13px; transform:translateX(-50%); }
-  body.dark-slide .reveal .slide-number{ color:rgba(255,255,255,.8); }
 
   @media(prefers-reduced-motion:reduce){ *{animation:none !important} }
 
   /* ---- indice de navigation clavier (discret, bas-gauche) ---- */
-  .kbdhint{ position:fixed; left:18px; bottom:14px; z-index:55; display:flex; gap:12px; align-items:center;
-    font-size:11px; font-weight:600; color:var(--muted); pointer-events:none;
-    opacity:1; transition:opacity .5s ease; }
-  .kbdhint.hide{ opacity:0; }
-  .kbdhint kbd{ font-family:var(--font); font-size:11px; font-weight:700; color:var(--ink);
-    background:#fff; border:1px solid var(--line-strong); border-bottom-width:2px; border-radius:6px;
-    padding:1px 7px; margin:0 1px; }
-  body.dark-slide .kbdhint{ color:rgba(255,255,255,.7); }
-  body.dark-slide .kbdhint kbd{ color:#fff; background:rgba(255,255,255,.14); border-color:rgba(255,255,255,.3); }
   /* Le mode support est géré par assets/support.css + assets/support.js.
      L'impression (Ctrl+P) produit le support de cours A4, pas les diapos.
      Le chemin natif ?print-pdf de reveal reste intact. */

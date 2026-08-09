@@ -1,0 +1,151 @@
+/* ============================================================================
+   Fichier      | assets/deck.css
+   Projet       | ProSlides — Cours FPSE 752501
+   Créé         | 2026-08-09
+   Modifié      | 2026-08-09
+   Description  | Habillage commun aux 13 diaporamas : police, palette, bandeau
+                | de marque, frise de progression, pied de page, boutons et
+                | indices clavier. Extrait des 13 fichiers où il était dupliqué
+                | à l'identique — toute correction se fait désormais ici.
+   Dépendances  | reveal.js (chargé avant) · assets/fonts/ · assets/support.css
+   Chrome       | navigateur de référence
+   ============================================================================ */
+
+  @font-face{font-family:"TheSans";src:url("fonts/TheSansOsF-Light.otf") format("opentype");font-weight:300;font-display:swap}
+  @font-face{font-family:"TheSans";src:url("fonts/TheSansOsF-Plain.otf") format("opentype");font-weight:400;font-display:swap}
+  @font-face{font-family:"TheSans";src:url("fonts/TheSansOsF-SemiBold.otf") format("opentype");font-weight:600;font-display:swap}
+  @font-face{font-family:"TheSans";src:url("fonts/TheSansOsF-Bold.otf") format("opentype");font-weight:700;font-display:swap}
+  @font-face{font-family:"TheSans";src:url("fonts/TheSansOsF-ExtraBold.otf") format("opentype");font-weight:800;font-display:swap}
+  :root{
+    --teal:#00B1AE; --teal-deep:#00857F; --teal-ink:#0A4C4A;
+    --rose:#CF0063; --rose-deep:#A8004F;
+    --ink:#172033; --muted:#5A6477;
+    --line:#E4E7EC; --line-strong:#D4D9E0;
+    --bg:#FFFFFF; --bg-soft:#F6F8F8; --bg-teal:#EAF6F5;
+    --font:"TheSans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  }
+  html, body, .reveal-viewport{ background:var(--teal-ink) !important; }
+  .brandstrip{ position:fixed; top:0; left:0; right:0; height:6px; background:var(--teal); z-index:44; pointer-events:none; }
+  .brandstrip::after{ content:""; position:absolute; left:0; top:6px; width:18vw; max-width:260px; height:3px; background:var(--rose); }
+  body.dark-slide .brandstrip{ background:rgba(255,255,255,.9); }
+  body.dark-slide .brandstrip::after{ background:var(--rose); }
+  .deckfoot{
+    position:fixed; left:0; right:0; bottom:0; z-index:40;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 40px; pointer-events:none;
+    font-size:14px; font-weight:600; letter-spacing:.02em; color:var(--muted);
+  }
+  .deckfoot .ftag{ display:inline-flex; align-items:center; gap:10px; white-space:nowrap; }
+  .deckfoot .ftag b{ color:var(--teal-deep); font-weight:800; letter-spacing:.04em; }
+  .deckfoot .flogos{ display:flex; align-items:center; gap:18px; }
+  .deckfoot .flogos img{ height:34px; width:auto; display:block; opacity:.95; }
+  body.dark-slide .deckfoot{ color:rgba(255,255,255,.9); }
+  body.dark-slide .deckfoot .ftag b{ color:#fff; }
+  body.dark-slide .deckfoot .flogos img.fpse{ filter:brightness(0) invert(1); opacity:.95; }
+  .deckfoot .flogos .afordens--white{ display:none; }
+  body.dark-slide .deckfoot .flogos .afordens--color{ display:none; }
+  body.dark-slide .deckfoot .flogos .afordens--white{ display:block; }
+  .progmap{ position:fixed; top:0; left:0; right:0; z-index:42; pointer-events:none; padding:16px 190px 0 46px; }
+  body.dark-slide .progmap::before{
+    content:""; position:absolute; inset:0 0 -26px 0; z-index:-1; pointer-events:none;
+    background:linear-gradient(180deg, rgba(8,44,43,.72) 0%, rgba(8,44,43,.46) 55%, rgba(8,44,43,0) 100%);
+  }
+  body.cover-active .progmap{ display:none; }
+  .progmap .pm-track{ display:flex; gap:26px; }
+  .progmap .seg{ flex:1; min-width:0; display:flex; flex-direction:column; gap:9px; }
+  .progmap .lab{ display:flex; align-items:center; gap:8px; font-size:14px; font-weight:700;
+    color:var(--muted); white-space:nowrap; transition:color .3s; }
+  .progmap .lab svg{ width:16px; height:16px; flex:none; display:block; }
+  .progmap .lab .t{ overflow:hidden; text-overflow:ellipsis; }
+  .progmap .bar{ position:relative; height:4px; border-radius:999px; background:var(--line); overflow:hidden; }
+  .progmap .bar::after{ content:""; position:absolute; inset:0; width:calc(var(--fill,0) * 100%);
+    background:var(--teal-deep); transition:width .45s cubic-bezier(.4,0,.2,1); }
+  .progmap .seg.on .lab{ color:var(--ink); font-weight:800; }
+  .progmap .seg.on .bar::after{ background:var(--teal-deep); }
+  body.dark-slide .progmap .lab{ color:rgba(255,255,255,.78); text-shadow:0 1px 2px rgba(0,0,0,.45); }
+  body.dark-slide .progmap .seg.on .lab{ color:#fff; }
+  body.dark-slide .progmap .bar{ background:rgba(255,255,255,.32); }
+  body.dark-slide .progmap .bar::after{ background:#9ff0ed; }
+  body.dark-slide .progmap .seg.on .bar::after{ background:#fff; }
+  .modebtn{
+    position:fixed; top:16px; right:18px; z-index:60;
+    appearance:none; cursor:pointer; font-family:var(--font);
+    display:inline-flex; align-items:center; gap:9px;
+    padding:9px 16px 9px 13px; border-radius:999px;
+    border:1.5px solid rgba(0,133,127,.4); background:rgba(255,255,255,.92);
+    backdrop-filter:blur(6px); font-size:14px; font-weight:700; color:var(--teal-deep);
+    box-shadow:0 2px 14px rgba(0,133,127,.18); transition:background .15s,border-color .15s,color .15s;
+  }
+  .modebtn:hover{ background:var(--bg-teal); border-color:var(--teal-deep); }
+  .modebtn svg{ display:block; }
+  body.cover-active .deckfoot{ display:none; }
+  .reveal .progress{ color:var(--teal); height:5px; }
+  .reveal .controls{ color:var(--teal-deep); }
+  .reveal .slide-number{ background:rgba(255,255,255,.0); color:var(--muted); font-family:var(--font); font-weight:800; font-size:14px; letter-spacing:.04em; left:50%; right:auto; top:auto; bottom:13px; transform:translateX(-50%); }
+  body.dark-slide .reveal .slide-number{ color:rgba(255,255,255,.8); }
+  .kbdhint{ position:fixed; left:18px; bottom:14px; z-index:55; display:flex; gap:12px; align-items:center;
+    font-size:11px; font-weight:600; color:var(--muted); pointer-events:none;
+    opacity:1; transition:opacity .5s ease; }
+  .kbdhint.hide{ opacity:0; }
+  .kbdhint kbd{ font-family:var(--font); font-size:11px; font-weight:700; color:var(--ink);
+    background:#fff; border:1px solid var(--line-strong); border-bottom-width:2px; border-radius:6px;
+    padding:1px 7px; margin:0 1px; }
+  body.dark-slide .kbdhint{ color:rgba(255,255,255,.7); }
+  body.dark-slide .kbdhint kbd{ color:#fff; background:rgba(255,255,255,.14); border-color:rgba(255,255,255,.3); }
+
+/* ============================================================================
+   CORRECTIONS DE DESIGN — 2026-08-09
+   ============================================================================ */
+
+/* ---------------------------------------------------------------------------
+   1. Police de l'habillage
+   .progmap et .deckfoot vivent hors de .reveal : ils n'héritaient d'aucune
+   famille et tombaient sur la serif par défaut du navigateur.
+   ------------------------------------------------------------------------ */
+
+.progmap, .deckfoot, .brandstrip{ font-family:var(--font); }
+
+/* ---------------------------------------------------------------------------
+   2. Voile du pied de page
+   Symétrique de celui de la frise : le pied et le numéro de diapo sont posés
+   sur les vidéos de fond, dont la luminosité varie d'une image à l'autre.
+   ------------------------------------------------------------------------ */
+
+body.dark-slide .deckfoot::before{
+  content:""; position:absolute; inset:-30px 0 0 0; z-index:-1; pointer-events:none;
+  background:linear-gradient(0deg, rgba(8,44,43,.72) 0%, rgba(8,44,43,.46) 55%, rgba(8,44,43,0) 100%);
+}
+body.dark-slide .reveal .slide-number{ color:rgba(255,255,255,.92); text-shadow:0 1px 2px rgba(0,0,0,.45); }
+body.dark-slide .deckfoot{ text-shadow:0 1px 2px rgba(0,0,0,.4); }
+
+/* ---------------------------------------------------------------------------
+   3. Zone de sécurité du canvas
+   La mise à l'échelle « cover » rogne le canvas 1280×720 dès que l'écran n'est
+   pas en 16/9. Rogne latéral, en pixels canvas et par côté :
+
+       16/10 (1920×1200)   64 px        3/2 (1500×1000)   100 px
+       4/3   (1024×768)   160 px        16/9              0 px
+
+   Le rogne vertical n'apparaît que sur les écrans plus larges que le 16/9
+   (21/9 : 90 px en haut et en bas) — rare sur un vidéoprojecteur.
+   D'où des marges dissymétriques : le latéral est le risque réel.
+
+   S'y ajoutent les bandes réservées à l'habillage : frise 0→65 px,
+   pied de page 630→720 px.
+
+   Repères de contrôle : ajouter ?safe à l'URL, ou appuyer sur G.
+   ------------------------------------------------------------------------ */
+
+:root{ --safe-x:96px; --safe-t:72px; --safe-b:96px; }
+
+html.safeguides .reveal .slides::after{
+  content:""; position:absolute; z-index:99; pointer-events:none;
+  left:var(--safe-x); right:var(--safe-x); top:var(--safe-t); bottom:var(--safe-b);
+  outline:2px dashed rgba(207,0,99,.85); outline-offset:0;
+}
+html.safeguides .reveal .slides::before{
+  content:"zone de sécurité"; position:absolute; z-index:99; pointer-events:none;
+  left:calc(var(--safe-x) + 6px); bottom:calc(var(--safe-b) + 5px);
+  font:800 11px/1 var(--font); letter-spacing:.12em; text-transform:uppercase;
+  color:var(--rose); opacity:.75;
+}
