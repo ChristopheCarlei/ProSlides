@@ -33,9 +33,22 @@
     main.appendChild(tpl.content.cloneNode(true));
 
     Array.prototype.forEach.call(main.querySelectorAll('.sup-block'), decorate);
+    addRunningFooter(main);
 
     document.body.appendChild(main);
     return main;
+  }
+
+  /* Bandeau répété au bas de chaque page imprimée : Chrome reproduit les
+     éléments position:fixed sur toutes les pages. */
+  function addRunningFooter(main) {
+    var src = main.querySelector('.sup-foot');
+    if (!src || main.querySelector('.sup-runfoot')) return;
+    var f = document.createElement('div');
+    f.className = 'sup-runfoot';
+    f.setAttribute('aria-hidden', 'true');
+    f.innerHTML = src.innerHTML;
+    main.appendChild(f);
   }
 
   /* Chaque bloc devient une grille : titre pleine largeur, contenu à gauche,

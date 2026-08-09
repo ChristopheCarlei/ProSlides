@@ -287,7 +287,10 @@ body.support-open .printbtn{ display:inline-flex; }
 html.print-pdf .support-doc{ display:none !important; }
 
 @media print{
-  @page{ size:A4 portrait; margin:14mm 12mm 15mm; }
+  /* La marge basse est élargie pour loger le bandeau répété : un élément
+     position:fixed reste dans la boîte de contenu, il faut donc le descendre
+     dans la marge pour qu'il ne recouvre pas les dernières lignes. */
+  @page{ size:A4 portrait; margin:14mm 12mm 22mm; }
 
   /* Commun aux deux chemins d'impression. */
   .topbtns, .modebtn, .printbtn, .kbdhint{ display:none !important; }
@@ -315,9 +318,55 @@ html.print-pdf .support-doc{ display:none !important; }
     box-shadow:none !important; font-size:10.5pt;
   }
   html:not(.print-pdf) .sup-block{ margin-bottom:6mm; padding-bottom:5mm; }
+
+  /* Bandeau répété au bas de chaque page. Le pied de fin de document est
+     masqué : il ferait doublon avec la dernière répétition. */
+  html:not(.print-pdf) .sup-runfoot{
+    display:flex; justify-content:space-between; gap:6mm;
+    position:fixed; left:0; right:0; bottom:-13mm;
+    padding-top:2mm; border-top:1px solid var(--sup-rule);
+    font-size:7.5pt; color:var(--sup-muted);
+  }
+  html:not(.print-pdf) .sup-foot{ display:none; }
   html:not(.print-pdf) .sup-cover{ break-after:avoid; page-break-after:avoid; }
   html:not(.print-pdf) .support-doc a{ border-bottom:0; color:inherit; }
   html:not(.print-pdf) .support-doc a[href^="http"]::after{
     content:" (" attr(href) ")"; font-size:8pt; color:var(--sup-muted);
   }
 }
+
+/* ---------------------------------------------------------------------------
+   8. Rappel d'échéance en tête de support
+   Les évaluations 2026 pointaient le calendrier des livrables comme le point
+   faible du cours : l'échéance suivante figure désormais dès la première page.
+   ------------------------------------------------------------------------ */
+
+.support-doc .sup-deadline{
+  display:flex; align-items:baseline; gap:3mm;
+  margin:5mm 0 0; padding:3mm 4mm;
+  background:#FDF0F6; border-left:3px solid var(--sup-rose);
+  font-size:10pt;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;
+}
+.support-doc .sup-deadline b{
+  flex:none; font-size:8pt; font-weight:800; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--sup-rose);
+}
+.support-doc .sup-deadline span{ color:var(--sup-ink); }
+.support-doc .sup-deadline .d{ font-weight:700; }
+
+/* ---------------------------------------------------------------------------
+   9. Blocs comparatifs dans une colonne à notes
+   Deux colonnes dans les 128 mm restants donnent des cartes de 60 mm : le
+   texte se hache. On les empile.
+   ------------------------------------------------------------------------ */
+
+.sup-block[data-notes="oui"] .sup-duo,
+.sup-block[data-notes="lg"] .sup-duo{ grid-template-columns:1fr; gap:3.5mm; }
+
+/* ---------------------------------------------------------------------------
+   10. Pied de page répété à l'impression
+   Chrome répète les éléments position:fixed sur chaque page imprimée.
+   ------------------------------------------------------------------------ */
+
+.sup-runfoot{ display:none; }
