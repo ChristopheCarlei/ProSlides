@@ -158,10 +158,16 @@
   .dimsgrid .dcard .dn svg{ width:20px; height:20px; display:block; }
   .dimsgrid .dcard .dt{ font-size:19px; font-weight:700; color:#fff; line-height:1.25; }
   .bridge.gated .dimsgrid{ filter:blur(16px); opacity:.32; pointer-events:none; user-select:none; transition:filter .4s ease, opacity .4s ease; }
-  .dimtoggle{ align-self:center; margin:14px 0 4px; width:46px; height:46px; border-radius:50%; border:1.5px solid rgba(255,255,255,.4); background:rgba(255,255,255,.08); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; appearance:none; transition:background .15s; }
-  .dimtoggle:hover{ background:rgba(255,255,255,.2); }
-  .dimtoggle .dtarrow{ width:20px; height:20px; display:block; transition:transform .3s ease; }
-  .bridge:not(.gated) .dimtoggle .dtarrow{ transform:rotate(180deg); }
+  .dimtoggle{ align-self:center; margin:16px 0 4px; padding:12px 26px; border-radius:999px;
+    border:1.5px solid rgba(255,255,255,.45); background:rgba(255,255,255,.1); color:#fff;
+    display:inline-flex; align-items:center; cursor:pointer; appearance:none;
+    font-family:var(--font); font-size:19px; font-weight:700; letter-spacing:.01em; line-height:1;
+    transition:background .15s, border-color .15s; }
+  .dimtoggle:hover{ background:rgba(255,255,255,.22); border-color:rgba(255,255,255,.75); }
+  .dimtoggle:focus-visible{ outline:3px solid #9ff0ed; outline-offset:3px; }
+  .dimtoggle .lbl-hide{ display:none; }
+  .bridge:not(.gated) .dimtoggle .lbl-show{ display:none; }
+  .bridge:not(.gated) .dimtoggle .lbl-hide{ display:inline; }
 
   /* ---- continuum moins prof. / plus prof. par dimension ---- */
   .continuum{ display:flex; flex-direction:column; gap:7px; margin-top:18px; }
@@ -473,7 +479,7 @@
           <div class="bridge__head">
             <span class="eyebrow">Notion clé</span>
             <h2>Les dimensions de la professionnalisation</h2>
-            <button class="dimtoggle" type="button" onclick="this.closest('.bridge').classList.toggle('gated')" aria-label="Afficher ou masquer les dimensions"><svg class="dtarrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+            <button class="dimtoggle" type="button" onclick="this.closest('.bridge').classList.toggle('gated')" aria-label="Afficher ou masquer les dimensions"><span class="lbl-show">Afficher les dimensions</span><span class="lbl-hide">Masquer les dimensions</span></button>
           </div>
           <div class="dimsgrid">
             <div class="dcard"><span class="dn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.5 13 13l-3.5 1.5L11 11z"/></svg></span><span class="dt">Autonomie</span></div>

@@ -269,10 +269,14 @@
     color:rgba(255,255,255,.72); margin:0 0 .5em; }
   .tri-head h2{ margin:0 0 .4em; font-size:36px; font-weight:800; color:#fff; text-shadow:0 2px 18px rgba(8,40,39,.45); }
   .tri-head p{ margin:0; font-size:15.5px; line-height:1.5; color:rgba(255,255,255,.85); max-width:26ch; }
-  .tri-svg{ position:absolute; right:3%; top:50%; transform:translateY(-50%); width:min(50vw,600px); height:auto; }
+  /* right:3% laissait le libellé « Délais » à 61 px du bord : hors zone de sécurité. */
+  .tri-svg{ position:absolute; right:var(--safe-x); top:50%; transform:translateY(-50%); width:min(50vw,580px); height:auto; }
   .tri-svg .tri-axis{ stroke:rgba(255,255,255,.55); stroke-width:3; stroke-linecap:round; fill:none; }
   .tri-svg .tri-fill{ fill:rgba(0,177,174,.34); stroke:var(--teal); stroke-width:2.5; stroke-linejoin:round; }
-  .tri-svg .tri-handle{ fill:#fff; stroke:var(--teal-deep); stroke-width:3; cursor:grab; r:14; transition:r .15s; touch-action:none; }
+  /* Le remplissage et le contour sont posés par le script : blanc au milieu de
+     l'axe, puis vers le vert ou le rouge selon la position (voir plus bas). */
+  .tri-svg .tri-handle{ fill:#fff; stroke:var(--teal-deep); stroke-width:3; cursor:grab; r:14;
+    transition:r .15s, fill .18s linear, stroke .18s linear; touch-action:none; }
   .tri-svg .tri-handle:hover{ r:17; }
   .tri-svg .tri-handle.grabbing{ r:18; cursor:grabbing; }
   .tri-svg .tri-center{ fill:rgba(255,255,255,.5); }
@@ -1370,12 +1374,40 @@
     ];
     var poly = svg.querySelector('.tri-fill');
 
+    /* ---- code couleur ------------------------------------------------------
+       Chaque sommet part du milieu de son axe, en blanc : aucun arbitrage
+       n'est encore fait. En s'éloignant du centre, la couleur dit ce que le
+       déplacement coûte au projet.
+         · coûts et délais : vers la pointe = plus cher, plus long -> rouge
+                             vers le 0     = maîtrisé              -> vert
+         · qualité         : l'inverse, la pointe est le cas favorable
+       --------------------------------------------------------------------- */
+    var BLANC=[255,255,255], ROUGE=[229,72,77], VERT=[45,197,124], SOMBRE=[10,76,74];
+    function melange(a,b,t){
+      return [Math.round(a[0]+(b[0]-a[0])*t),
+              Math.round(a[1]+(b[1]-a[1])*t),
+              Math.round(a[2]+(b[2]-a[2])*t)];
+    }
+    var rgb = function(c){ return 'rgb('+c[0]+','+c[1]+','+c[2]+')'; };
+
+    function couleurSommet(ax){
+      var k = (ax.r/MAXR - 0.5) * 2;          // −1 au 0, 0 au milieu, +1 à la pointe
+      var defavorable = ax.inverse ? -k : k;  // la qualité se lit à l'envers
+      var t = Math.min(1, Math.abs(defavorable));
+      return melange(BLANC, defavorable >= 0 ? ROUGE : VERT, t);
+    }
+
     function render(){
       var pts = [];
       axes.forEach(function(ax){
         var x = CX + ax.dx*ax.r, y = CY + ax.dy*ax.r;
         ax.handle.setAttribute('cx', x);
         ax.handle.setAttribute('cy', y);
+        /* style en ligne, et non attribut de présentation : la règle CSS
+           .tri-handle{fill:#fff} l'emporterait sinon. */
+        var c = couleurSommet(ax);
+        ax.handle.style.fill = rgb(c);
+        ax.handle.style.stroke = rgb(melange(c, SOMBRE, 0.45));
         pts.push(x+','+y);
       });
       poly.setAttribute('points', pts.join(' '));
@@ -1383,7 +1415,8 @@
 
     axes.forEach(function(ax){
       ax.handle = svg.querySelector('.tri-handle[data-axis="'+ax.key+'"]');
-      ax.r = 180; // position initiale (78 % de l'axe)
+      ax.inverse = (ax.key === 'qualite');
+      ax.r = MAXR/2; // position initiale : milieu de l'axe, sommet blanc
     });
     render();
 
