@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="../assets/vendor/reveal/reveal.min.css" />
 <link rel="stylesheet" href="../assets/deck.css" />
 <link rel="stylesheet" href="../assets/support.css" />
+<link rel="stylesheet" href="../assets/elearn.css" />
 
 <style>
   /* Habillage commun (police, palette, bandeau, frise, pied, boutons) :
@@ -1048,7 +1049,219 @@
 
 </template>
 
+<!-- ==========================================================================
+     MODE E-LEARNING — parcours d'auto-test (assets/elearn.js + elearn.css)
+     Rédigé indépendamment des diapos et du support : troisième contenu, à
+     maintenir en parallèle. Types : qcm · paires · tri · ordre.
+     ========================================================================== -->
+<template id="elearn-src">
+
+  <div class="el-meta" data-seance="10" data-titre="Observation &amp; jugement">
+    <p>Huit activités&nbsp;: distinguer observer, interpréter et évaluer, comprendre d'où vient un jugement, formuler un retour constructif — plus deux rappels.</p>
+    <p>Chaque réponse est commentée&nbsp;: on vous dit pourquoi elle tient, ou ce qui lui manque. Vous pouvez réessayer autant de fois que nécessaire.</p>
+  </div>
+
+  <article class="el-q" data-type="tri" data-src="S10" data-titre="Observer, interpréter, évaluer">
+    <p class="el-stem">Classez chaque énoncé selon l'opération qu'il réalise.</p>
+    <p class="el-hint">Le test&nbsp;: c'est une observation si deux personnes présentes dans la salle en conviendraient sans discussion.</p>
+    <ol class="el-bins">
+      <li data-bin="obs"><span class="el-lbl">Observer</span></li>
+      <li data-bin="int"><span class="el-lbl">Interpréter</span></li>
+      <li data-bin="eva"><span class="el-lbl">Évaluer</span></li>
+    </ol>
+    <ul class="el-cards">
+      <li data-bin="obs">
+        <span class="el-lbl">«&nbsp;Trois élèves n'ont pas ouvert leur cahier pendant la consigne.&nbsp;»</span>
+        <span class="el-fb"><p><strong>Observation</strong> — un fait visible et vérifiable, sur lequel deux témoins s'accorderaient sans argumenter.</p></span>
+      </li>
+      <li data-bin="int">
+        <span class="el-lbl">«&nbsp;Ils n'avaient peut-être pas compris la consigne.&nbsp;»</span>
+        <span class="el-fb"><p><strong>Interprétation</strong> — une hypothèse qui donne du sens au fait. Le «&nbsp;peut-être&nbsp;» la signale honnêtement comme telle.</p></span>
+      </li>
+      <li data-bin="eva">
+        <span class="el-lbl">«&nbsp;La consigne n'était pas claire.&nbsp;»</span>
+        <span class="el-fb"><p><strong>Évaluation</strong> — un jugement de valeur adossé à une norme implicite de ce qu'est une consigne claire.</p></span>
+      </li>
+      <li data-bin="obs">
+        <span class="el-lbl">«&nbsp;L'enseignante a répété la consigne deux fois.&nbsp;»</span>
+        <span class="el-fb"><p><strong>Observation</strong> — dénombrable, donc vérifiable. Personne n'aurait à argumenter pour l'établir.</p></span>
+      </li>
+      <li data-bin="int">
+        <span class="el-lbl">«&nbsp;Le groupe semblait démobilisé en fin de séance.&nbsp;»</span>
+        <span class="el-fb"><p><strong>Interprétation</strong> — «&nbsp;semblait démobilisé&nbsp;» n'est pas observable&nbsp;: c'est une lecture d'indices, et deux observateurs pourraient en discuter.</p></span>
+      </li>
+      <li data-bin="eva">
+        <span class="el-lbl">«&nbsp;Cette séquence était trop longue.&nbsp;»</span>
+        <span class="el-fb"><p><strong>Évaluation</strong> — «&nbsp;trop&nbsp;» mesure un écart à une norme. Sa version observable serait&nbsp;: «&nbsp;la séquence a duré vingt-huit minutes&nbsp;».</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S10" data-titre="Le test de l'observation">
+    <p class="el-stem">Comment savoir si un énoncé est bien une observation&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Si deux personnes présentes dans la salle en conviendraient sans discussion</span>
+        <span class="el-fb"><p>C'est le test de la séance, et il est redoutablement efficace. <strong>Dès qu'il faut argumenter, on est déjà dans l'interprétation ou l'évaluation.</strong></p></span>
+      </li>
+      <li>
+        <span class="el-lbl">S'il ne contient aucun adjectif</span>
+        <span class="el-fb"><p>Utile comme indice, insuffisant comme critère&nbsp;: «&nbsp;l'ambiance s'est dégradée&nbsp;» n'a pas d'adjectif et n'est pas une observation.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">S'il est formulé au passé composé</span>
+        <span class="el-fb"><p>La forme grammaticale ne dit rien&nbsp;: «&nbsp;la consigne n'a pas été claire&nbsp;» est au passé composé et reste un jugement.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Si la personne observée est d'accord avec lui</span>
+        <span class="el-fb"><p>Son accord porte souvent sur le fond, pas sur le statut de l'énoncé. Le test se joue entre <strong>deux témoins</strong> de la même scène.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="paires" data-src="S10"
+           data-col-a="La source" data-col-b="Ce qu'elle apporte au jugement"
+           data-titre="D'où vient un jugement">
+    <p class="el-stem">Trois sources alimentent tout jugement, et une quatrième notion en découle. Retrouvez chacune.</p>
+    <p class="el-hint">Touchez une vignette à gauche, puis sa description à droite.</p>
+    <ul class="el-pairs">
+      <li data-ico="🧱" data-tint="#0C7C63">
+        <span class="el-lbl">Le cadre de référence</span>
+        <span class="el-match">Mes valeurs, mon expérience, mes normes implicites de ce qu'est «&nbsp;une bonne séance&nbsp;».</span>
+        <span class="el-fb"><p><strong>Cadre de référence</strong> — la source la plus invisible, parce qu'elle passe pour du bon sens.</p></span>
+      </li>
+      <li data-ico="🌍" data-tint="#2A6FB5">
+        <span class="el-lbl">Le contexte</span>
+        <span class="el-match">La situation, les contraintes, et surtout tout ce que je ne vois pas depuis ma position.</span>
+        <span class="el-fb"><p><strong>Contexte</strong> — d'où le réflexe d'<em>interroger avant de conclure</em>&nbsp;: la personne observée détient ce que l'observation ne montre pas.</p></span>
+      </li>
+      <li data-ico="👁️" data-tint="#A8004F">
+        <span class="el-lbl">Le point de vue</span>
+        <span class="el-match">Un même fait est jugé différemment selon qui regarde.</span>
+        <span class="el-fb"><p><strong>Point de vue</strong> — les lectures d'Isabelle, de Béatrice et de la tutrice sur le même entretien le montrent&nbsp;: une situation identique se raconte différemment selon la position occupée.</p></span>
+      </li>
+      <li data-ico="🛡️" data-tint="#9A6300">
+        <span class="el-lbl">La posture défensive</span>
+        <span class="el-match">Ce que déclenche un retour formulé comme un jugement&nbsp;: la personne argumente et n'écoute plus.</span>
+        <span class="el-fb"><p><strong>Posture défensive</strong> — son opposé est la posture d'apprentissage, qu'ouvre un retour ancré dans les faits.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S10" data-titre="Juger précède observer">
+    <p class="el-stem">Quel rapport le jugement entretient-il avec l'observation&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Juger est immédiat et naturel&nbsp;: le jugement précède l'observation plutôt qu'il ne la suit</span>
+        <span class="el-fb"><p>C'est le point contre-intuitif de la séance. Juger est notre <strong>façon ordinaire d'appréhender le monde</strong>. Observer n'est donc pas l'état de départ auquel on ajouterait un jugement&nbsp;: c'est une discipline qu'il faut installer contre la pente naturelle.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">On observe d'abord, puis on juge&nbsp;: c'est l'ordre naturel</span>
+        <span class="el-fb"><p>C'est l'intuition courante, et elle est démentie. Si l'ordre était celui-là, observer sans juger serait facile — or c'est précisément ce qui demande un effort.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Le jugement ne survient que chez les personnes peu formées à l'observation</span>
+        <span class="el-fb"><p>La formation change la <em>conscience</em> du jugement, pas son caractère immédiat. Personne n'observe depuis nulle part.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Les deux sont indépendants&nbsp;: on peut faire l'un sans jamais faire l'autre</span>
+        <span class="el-fb"><p>Ils sont au contraire imbriqués. Tout l'exercice consiste à <strong>repérer les niveaux</strong> pour ne pas donner un jugement pour un fait.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="ordre" data-src="S10" data-titre="Formuler un retour constructif">
+    <p class="el-stem">Remettez dans l'ordre les quatre temps d'un retour constructif.</p>
+    <p class="el-hint">Glissez les rangées, ou utilisez les flèches.</p>
+    <ol class="el-seq">
+      <li>
+        <span class="el-lbl">Partir du fait — ancrer le retour dans un moment identifiable</span>
+        <span class="el-fb">
+          <p>Chaque étape prépare la suivante&nbsp;:</p>
+          <ul>
+            <li><strong>Partir du fait</strong> — un moment identifiable, pas une impression générale.</li>
+            <li><strong>Expliciter l'interprétation</strong> — la donner comme hypothèse&nbsp;: «&nbsp;je me suis demandé si…&nbsp;».</li>
+            <li><strong>Interroger avant de conclure</strong> — la personne observée détient des éléments que l'observation ne montre pas.</li>
+            <li><strong>Viser l'action suivante</strong> — un retour utile ouvre une piste, il ne clôt pas un dossier.</li>
+          </ul>
+        </span>
+      </li>
+      <li><span class="el-lbl">Expliciter l'interprétation — la donner comme hypothèse, pas comme constat</span></li>
+      <li><span class="el-lbl">Interroger avant de conclure — demander ce que l'observation ne montre pas</span></li>
+      <li><span class="el-lbl">Viser l'action suivante — ouvrir une piste plutôt que clore un dossier</span></li>
+    </ol>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S10" data-titre="Revenir au travail réel">
+    <p class="el-stem">Sortir du jugement passe par trois étapes. Que signifie «&nbsp;décrire le travail réel&nbsp;»&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Décrire l'activité telle qu'elle se fait, avec ses contraintes, avant de la juger</span>
+        <span class="el-fb"><p>Oui — et vous reconnaissez le couple <strong>travail réel / travail prescrit</strong> de la séance 1. Les trois étapes sont&nbsp;: repérer les niveaux d'analyse, revenir à l'activité incarnée, décrire le travail réel.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Décrire ce que la personne aurait dû faire selon les prescriptions</span>
+        <span class="el-fb"><p>C'est le travail <em>prescrit</em>, exactement l'inverse. Partir des prescriptions revient à mesurer un écart&nbsp;: on est déjà dans l'évaluation.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Décrire uniquement les gestes visibles, sans tenir compte du contexte</span>
+        <span class="el-fb"><p>Les contraintes font partie du travail réel. S'en tenir au visible, c'est juger l'iceberg par sa pointe — vous y viendrez en séance 11.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Demander à la personne d'évaluer elle-même sa séance</span>
+        <span class="el-fb"><p>L'auto-évaluation est autre chose. Ici il s'agit de <strong>décrire</strong> l'activité avant que quiconque ne la juge.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S09" data-titre="Rappel — le réflexe de la source">
+    <p class="el-stem">Rappel de la séance 9&nbsp;: quel réflexe critique s'applique aussi à un retour d'observation&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Distinguer corrélation et causalité&nbsp;: deux choses observées ensemble ne s'expliquent pas forcément l'une par l'autre</span>
+        <span class="el-fb"><p>Le transfert est direct&nbsp;: «&nbsp;trois élèves n'ont pas ouvert leur cahier <em>parce que</em> la consigne n'était pas claire&nbsp;» enchaîne un fait et une cause supposée. C'est une <strong>interprétation</strong>, à donner comme hypothèse.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Se méfier des recettes simples&nbsp;: un bon retour doit être compliqué</span>
+        <span class="el-fb"><p>Le réflexe existe, mais la conclusion est fausse&nbsp;: un retour utile est <strong>précis</strong>, pas compliqué. Se méfier des recettes vise les affirmations trop commodes, pas la clarté.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Aucun&nbsp;: les neuro-mythes concernent le cerveau, pas l'observation</span>
+        <span class="el-fb"><p>Les quatre réflexes ont été présentés comme <strong>transférables à toute controverse professionnelle</strong> — l'observation en fait partie.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Demander la source&nbsp;: exiger une référence scientifique pour chaque retour</span>
+        <span class="el-fb"><p>Trop littéral. Ce qui se transfère, c'est de demander <strong>sur quoi</strong> l'affirmation repose — ici&nbsp;: quel moment précis a été observé.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S06" data-titre="Rappel — précis, équilibré, bienveillant">
+    <p class="el-stem">Rappel de la séance 6&nbsp;: en quoi les trois règles du feedback rejoignent-elles la distinction travaillée aujourd'hui&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">«&nbsp;Précis&nbsp;» revient à partir d'un fait observable plutôt que d'une impression générale</span>
+        <span class="el-fb"><p>Les deux séances disent la même chose de deux façons. Un retour <strong>précis</strong> s'ancre dans un moment identifiable&nbsp;; un retour vague est presque toujours un jugement déguisé.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">«&nbsp;Bienveillant&nbsp;» revient à ne formuler que des observations positives</span>
+        <span class="el-fb"><p>Non&nbsp;: bienveillant signifie que le retour porte sur <strong>la production, jamais sur la personne</strong>. Un point à travailler reste bienveillant s'il vise le travail.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">«&nbsp;Équilibré&nbsp;» revient à donner autant d'observations que d'interprétations</span>
+        <span class="el-fb"><p>L'équilibre porte sur <strong>un point fort et un point à travailler</strong>, pas sur un dosage entre niveaux d'analyse.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Les trois règles ne concernent que l'oral&nbsp;; l'observation relève de l'écrit</span>
+        <span class="el-fb"><p>La distinction n'est pas là. Les mêmes principes valent quel que soit le support&nbsp;: c'est le <strong>niveau d'analyse</strong> qui change tout.</p></span>
+      </li>
+    </ul>
+  </article>
+
+</template>
+
 <script src="../assets/support.js"></script>
+<script src="../assets/elearn.js"></script>
 <script src="../assets/vendor/reveal/reveal.min.js"></script>
 <script>
   const deck = new Reveal({
@@ -1157,8 +1370,10 @@
     });
   });
 
-  // Bascule présentation <-> support de cours (assets/support.js pilote le DOM).
-  document.addEventListener('support:change', function(e){
+  // Les deux modes annexes (support de cours, e-learning) masquent les diapos :
+  // sans cette reconfiguration, le clavier de reveal continue de tourner
+  // derrière l'écran affiché, et la mise en page est périmée au retour.
+  function surModeAnnexe(e){
     var open = e.detail.open;
     deck.configure({ controls: !open, progress: !open, keyboard: !open });
     if(!open){
@@ -1166,7 +1381,9 @@
       applyCover();
       setTimeout(syncChrome, 60);
     }
-  });
+  }
+  document.addEventListener('support:change', surModeAnnexe);
+  document.addEventListener('elearn:change', surModeAnnexe);
 </script>
 <script>
   // ---- minuteur d'activité type Time Timer (enchaîne les étapes) ----

@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="../assets/vendor/reveal/reveal.min.css" />
 <link rel="stylesheet" href="../assets/deck.css" />
 <link rel="stylesheet" href="../assets/support.css" />
+<link rel="stylesheet" href="../assets/elearn.css" />
 
 <style>
   /* Habillage commun (police, palette, bandeau, frise, pied, boutons) :
@@ -1291,7 +1292,250 @@
 
 </template>
 
+<!-- ==========================================================================
+     MODE E-LEARNING — parcours d'auto-test (assets/elearn.js + elearn.css)
+     Rédigé indépendamment des diapos et du support : troisième contenu, à
+     maintenir en parallèle. Types : qcm · paires · tri · ordre.
+     Dernière séance de contenu : le parcours fait aussi office de révision
+     générale du semestre. Les chiffres de la courbe de l'oubli reprennent
+     ceux du support de cours — les modifier ensemble (voir CLAUDE.md §7bis).
+     ========================================================================== -->
+<template id="elearn-src">
+
+  <div class="el-meta" data-seance="12" data-titre="Controverses &amp; apprentissage">
+    <p>Neuf activités&nbsp;: à quoi sert la mémoire, la courbe de l'oubli, les émotions dans l'apprentissage — et une révision générale du semestre.</p>
+    <p>Chaque réponse est commentée&nbsp;: on vous dit pourquoi elle tient, ou ce qui lui manque. Vous pouvez réessayer autant de fois que nécessaire.</p>
+  </div>
+
+  <article class="el-q" data-type="qcm" data-src="S12" data-titre="À quoi sert la mémoire">
+    <p class="el-stem">La séance 3 a montré <em>comment</em> la mémoire encode. Reste le <em>pourquoi</em>. À quoi sert-elle&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">À anticiper le futur&nbsp;: chaque souvenir sert à préparer une décision</span>
+        <span class="el-fb"><p>C'est le renversement de la séance. Alain Berthoz la décrit comme un <strong>instrument de prédiction</strong>&nbsp;; Paul Frankland comme un dispositif destiné à optimiser la prise de décision plutôt qu'à transmettre de l'information à travers le temps.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">À conserver le passé le plus fidèlement possible</span>
+        <span class="el-fb"><p>C'est l'intuition courante, et elle est renversée&nbsp;: si la mémoire archivait, l'oubli serait une <em>défaillance</em>. Or il est le fonctionnement normal d'un système qui <strong>trie en fonction de l'utilité future</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">À transmettre de l'information aux générations suivantes</span>
+        <span class="el-fb"><p>C'est le rôle de la culture et de l'écrit, pas de la mémoire individuelle. Frankland écarte explicitement cette lecture.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">À libérer de l'attention pour les tâches en cours</span>
+        <span class="el-fb"><p>Cela décrit plutôt l'automatisation. La question posée ici est <strong>anthropologique</strong>&nbsp;: où chasser la prochaine saison, quel outil refaire, de quoi se méfier.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S12" data-titre="La courbe de l'oubli">
+    <p class="el-stem">Un contenu appris une seule fois, sans reprise. Que dit la courbe de l'oubli d'Ebbinghaus&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">La chute est très rapide au début puis ralentit, et elle se stabilise autour de 21 % plutôt que de tendre vers zéro</span>
+        <span class="el-fb"><p>Les deux points sont là. 58 % après 20 minutes, 44 % après une heure&nbsp;: <strong>l'essentiel se perd dans la première heure</strong>. Puis 34 % à un jour, 25 % à six jours, 21 % à un mois — cela <strong>se stabilise</strong>.<br>Ebbinghaus, 1885, méthode des économies&nbsp;; réplication Murre &amp; Dros, <em>PLOS ONE</em>, 2015.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">La perte est régulière&nbsp;: on oublie à peu près autant chaque jour</span>
+        <span class="el-fb"><p>Pas du tout&nbsp;: on passe de 100 % à 44 % en une heure, puis il faut un mois pour descendre de 34 % à 21 %. La courbe est <strong>très pentue au début</strong>, presque plate ensuite.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Sans reprise, on finit par tout oublier&nbsp;: la courbe tend vers zéro</span>
+        <span class="el-fb"><p>C'est l'erreur la plus fréquente. Il reste environ <strong>21 % après un mois</strong>, et la courbe se stabilise. Un fond subsiste, même sans aucune reprise.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">L'essentiel se perd après plusieurs jours, pas avant</span>
+        <span class="el-fb"><p>Bien plus tôt&nbsp;: il ne reste que <strong>58 % au bout de vingt minutes</strong>. C'est ce qui rend la première reprise si rentable.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S12" data-titre="L'apprentissage distribué">
+    <p class="el-stem">Une seule séance intensive, ou cinq reprises brèves espacées&nbsp;? Que reste-t-il un mois plus tard&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Environ 94 % avec cinq reprises espacées, contre environ 14 % avec une seule séance intensive</span>
+        <span class="el-fb"><p>L'écart est spectaculaire. À chaque rappel, la rétention <strong>repart de 100 %</strong> et la courbe qui suit descend moins vite. Ce qui se travaille n'est donc pas la capacité de mémoire, c'est le <strong>rythme des reprises</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Le résultat est comparable&nbsp;: seul le temps total passé compte</span>
+        <span class="el-fb"><p>C'est l'illusion la plus coûteuse en révision. À temps égal, <strong>réviser régulièrement et brièvement bat systématiquement le bloc unique</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">La séance intensive est meilleure&nbsp;: la concentration y est plus forte</span>
+        <span class="el-fb"><p>La concentration ne compense pas la courbe&nbsp;: environ <strong>14 %</strong> après un mois. Chaque reprise, elle, réinitialise la rétention.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Les reprises espacées ne servent que pour les contenus techniques</span>
+        <span class="el-fb"><p>L'effet ne dépend pas du type de contenu&nbsp;: c'est un mécanisme de la mémoire, pas une méthode de discipline particulière.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="tri" data-src="S12" data-titre="Techniques qui marchent, techniques qui rassurent">
+    <p class="el-stem">Les techniques d'apprentissage ne se valent pas. Classez-les.</p>
+    <p class="el-hint">Le piège&nbsp;: certaines donnent une impression de maîtrise sans les résultats correspondants.</p>
+    <ol class="el-bins">
+      <li data-bin="robuste"><span class="el-lbl">Effets robustes</span></li>
+      <li data-bin="illusion"><span class="el-lbl">Impression de maîtrise</span></li>
+    </ol>
+    <ul class="el-cards">
+      <li data-bin="robuste">
+        <span class="el-lbl">Se tester sur le contenu</span>
+        <span class="el-fb"><p><strong>Robuste</strong> — c'est d'ailleurs ce que vous êtes en train de faire. Se tester produit des effets bien supérieurs à la relecture.</p></span>
+      </li>
+      <li data-bin="robuste">
+        <span class="el-lbl">Espacer les reprises dans le temps</span>
+        <span class="el-fb"><p><strong>Robuste</strong> — l'apprentissage distribué&nbsp;: cinq reprises brèves laissent environ 94 % du contenu un mois plus tard.</p></span>
+      </li>
+      <li data-bin="illusion">
+        <span class="el-lbl">Relire ses notes plusieurs fois</span>
+        <span class="el-fb"><p><strong>Impression de maîtrise</strong> — la familiarité du texte se confond facilement avec sa connaissance.</p></span>
+      </li>
+      <li data-bin="illusion">
+        <span class="el-lbl">Surligner les passages importants</span>
+        <span class="el-fb"><p><strong>Impression de maîtrise</strong> — surligner donne le sentiment d'avoir traité le contenu, alors qu'on l'a surtout parcouru.</p></span>
+      </li>
+      <li data-bin="illusion">
+        <span class="el-lbl">Tout réviser la veille, en une longue session</span>
+        <span class="el-fb"><p><strong>Impression de maîtrise</strong> — la rétention est excellente le lendemain, et il n'en reste qu'environ 14 % un mois plus tard.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S12" data-titre="Émotions et accès à la compétence">
+    <p class="el-stem">Un groupe très compétent se présente mal devant un jury. Comment la séance analyse-t-elle cela&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Ce qui se joue sous pression n'est pas la compétence, mais l'accès à cette compétence</span>
+        <span class="el-fb"><p>C'est la formule de la séance, et elle rejoint l'agilité mentale travaillée en séance 5. D'où l'intérêt, pour qui forme, de traiter le <strong>climat émotionnel du groupe comme une variable pédagogique</strong> à part entière — pas comme un supplément d'ambiance.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Que la compétence n'était pas réellement acquise&nbsp;: l'évaluation l'a révélé</span>
+        <span class="el-fb"><p>C'est précisément la lecture que la séance conteste. Les émotions ne sont pas un révélateur neutre&nbsp;: elles <strong>modifient l'attention et la mémorisation</strong>, donc ce qui peut être mobilisé sur le moment.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Que les émotions sont un bruit parasite autour de l'apprentissage</span>
+        <span class="el-fb"><p>C'est la phrase que la séance renverse&nbsp;: les émotions <strong>font partie</strong> de l'apprentissage. Évaluation, mise en compétition ou réussite inattendue modifient l'envie même de recommencer.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Que le groupe manquait de préparation</span>
+        <span class="el-fb"><p>Possible, mais ce n'est pas ce que le cas illustre. L'hypothèse posée est celle d'un groupe <em>compétent</em>&nbsp;: c'est l'accès qui a été entravé.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S12" data-titre="La posture attendue au terme du cours">
+    <p class="el-stem">Des controverses professionnelles restent ouvertes dans le champ. Quelle posture le cours attend-il&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Savoir situer un débat, reconnaître ce qui est établi et ce qui ne l'est pas, et se tenir informé</span>
+        <span class="el-fb"><p>C'est bien cela&nbsp;: <strong>pas de détenir les bonnes réponses</strong>. Un champ vivant est un champ où l'on débat&nbsp;: l'absence de consensus n'est pas une faiblesse, c'est un signe d'activité.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Choisir une position et la défendre avec constance</span>
+        <span class="el-fb"><p>Défendre une position est utile en séance 9 comme exercice&nbsp;; mais s'y tenir <em>par principe</em> revient à confondre conviction et connaissance.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Attendre qu'un consensus se dégage avant de se prononcer</span>
+        <span class="el-fb"><p>Sur beaucoup de questions, il ne se dégagera pas. Il faut donc pouvoir <strong>travailler dans l'incertitude</strong> en la nommant.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Considérer que toutes les positions se valent, faute de preuve définitive</span>
+        <span class="el-fb"><p>Certainement pas&nbsp;: distinguer ce qui est établi de ce qui ne l'est pas est justement la compétence visée. L'absence de consensus n'abolit pas les faits.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="paires" data-old
+           data-src-label="Rappel · tout le semestre"
+           data-col-a="La notion" data-col-b="Ce qu'elle désigne"
+           data-titre="Révision générale — cinq notions du semestre">
+    <p class="el-stem">Cinq notions travaillées depuis février. Retrouvez ce que chacune désigne.</p>
+    <p class="el-hint">Touchez une vignette à gauche, puis sa description à droite.</p>
+    <ul class="el-pairs">
+      <li data-ico="🔺" data-tint="#A8004F">
+        <span class="el-lbl">Triangle de Martin Barnes</span>
+        <span class="el-match">Qualité, coûts et délais s'arbitrent en permanence&nbsp;: on ne les maximise pas tous les trois.</span>
+        <span class="el-fb"><p><strong>Triangle de Barnes</strong> — séance 4.</p></span>
+      </li>
+      <li data-ico="🧊" data-tint="#2A6FB5">
+        <span class="el-lbl">Iceberg de l'activité</span>
+        <span class="el-match">La partie visible n'est que la pointe&nbsp;: le métier se joue dans les compromis invisibles de l'extérieur.</span>
+        <span class="el-fb"><p><strong>Iceberg de l'activité</strong> — séance 11. Évaluer sans déficit consiste à croiser efficacité objective et subjective.</p></span>
+      </li>
+      <li data-ico="🏛️" data-tint="#5B3E8E">
+        <span class="el-lbl">Méthode des loci</span>
+        <span class="el-match">Ranger des informations dans un parcours de lieux familiers plutôt que dans une liste.</span>
+        <span class="el-fb"><p><strong>Méthode des loci</strong> — séance 3, de Simonide de Céos à Cicéron.</p></span>
+      </li>
+      <li data-ico="👑" data-tint="#0C7C63">
+        <span class="el-lbl">Triangle d'or</span>
+        <span class="el-match">Synergie forte, antagonisme moyen&nbsp;: ils contestent pour améliorer, pas pour bloquer.</span>
+        <span class="el-fb"><p><strong>Triangle d'or</strong> — séance 7, carte des acteurs d'Herbemont &amp; César.</p></span>
+      </li>
+      <li data-ico="🗿" data-tint="#9A6300">
+        <span class="el-lbl">Effet Pygmalion</span>
+        <span class="el-match">Attendre beaucoup d'une personne la fait effectivement progresser davantage.</span>
+        <span class="el-fb"><p><strong>Effet Pygmalion</strong> — séance 11, Rosenthal et Jacobson, 1968. Son revers est l'effet Golem.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S11" data-titre="Rappel — évaluer sans déficit">
+    <p class="el-stem">Rappel de la séance 11&nbsp;: qu'est-ce qu'une évaluation non déficitaire&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Une évaluation qui part de ce qui fonctionne et valorise les progrès, plutôt que les écarts à une norme</span>
+        <span class="el-fb"><p>Oui&nbsp;: <strong>un regard qui fait grandir plutôt qu'il ne sanctionne</strong>. Concrètement, cela suppose de croiser efficacité objective et efficacité subjective au lieu de s'arrêter à la première.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Une évaluation qui ne relève aucun point faible</span>
+        <span class="el-fb"><p>Ce n'est pas une évaluation complaisante. Elle <strong>change de point de départ</strong>&nbsp;: les ressources et les progrès d'abord, ce qui n'empêche pas de nommer ce qui manque.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Une évaluation menée par la personne elle-même plutôt que par un tiers</span>
+        <span class="el-fb"><p>C'est l'auto-évaluation, autre chose. Le «&nbsp;non déficitaire&nbsp;» qualifie le <strong>regard porté</strong>, pas qui le porte.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Une évaluation sans note chiffrée</span>
+        <span class="el-fb"><p>La présence ou non d'un chiffre ne change pas la nature du regard&nbsp;: on peut noter en valorisant les progrès, ou commenter en ne relevant que les manques.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="ordre" data-old
+           data-src-label="Rappel · tout le semestre"
+           data-titre="Révision générale — le fil du semestre">
+    <p class="el-stem">Remettez les grandes étapes du semestre dans l'ordre où elles ont été travaillées.</p>
+    <p class="el-hint">Glissez les rangées, ou utilisez les flèches.</p>
+    <ol class="el-seq">
+      <li>
+        <span class="el-lbl">Définir la professionnalisation et constituer les groupes</span>
+        <span class="el-fb">
+          <p>Le semestre suit la logique d'un projet&nbsp;:</p>
+          <ul>
+            <li><strong>Séances 1–2</strong> — cadre, professionnalisation, constitution des groupes.</li>
+            <li><strong>Séances 3–4</strong> — mémoire, puis cadrage de l'avant-projet.</li>
+            <li><strong>Séances 5–6</strong> — agilité mentale, communication et feedback.</li>
+            <li><strong>Séances 7–8</strong> — pilotage du projet, puis présentation intermédiaire.</li>
+            <li><strong>Séances 9–11</strong> — regard critique, observation, biais et jugement.</li>
+          </ul>
+          <p>Ce n'est pas un empilement&nbsp;: chaque bloc outille le suivant.</p>
+        </span>
+      </li>
+      <li><span class="el-lbl">Cadrer l'avant-projet et analyser l'existant</span></li>
+      <li><span class="el-lbl">Travailler l'agilité mentale, la communication et le feedback</span></li>
+      <li><span class="el-lbl">Piloter le projet et présenter l'avant-projet</span></li>
+      <li><span class="el-lbl">Déconstruire les croyances, observer sans juger, repérer ses biais</span></li>
+    </ol>
+  </article>
+
+</template>
+
 <script src="../assets/support.js"></script>
+<script src="../assets/elearn.js"></script>
 <script src="../assets/vendor/reveal/reveal.min.js"></script>
 <script>
   const deck = new Reveal({
@@ -1395,8 +1639,10 @@
     });
   });
 
-  // Bascule présentation <-> support de cours (assets/support.js pilote le DOM).
-  document.addEventListener('support:change', function(e){
+  // Les deux modes annexes (support de cours, e-learning) masquent les diapos :
+  // sans cette reconfiguration, le clavier de reveal continue de tourner
+  // derrière l'écran affiché, et la mise en page est périmée au retour.
+  function surModeAnnexe(e){
     var open = e.detail.open;
     deck.configure({ controls: !open, progress: !open, keyboard: !open });
     if(!open){
@@ -1404,7 +1650,9 @@
       applyCover();
       setTimeout(syncChrome, 60);
     }
-  });
+  }
+  document.addEventListener('support:change', surModeAnnexe);
+  document.addEventListener('elearn:change', surModeAnnexe);
 </script>
 <script>
   // ---- minuteur d'activité type Time Timer (enchaîne les étapes) ----

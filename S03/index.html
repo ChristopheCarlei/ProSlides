@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="../assets/vendor/reveal/reveal.min.css" />
 <link rel="stylesheet" href="../assets/deck.css" />
 <link rel="stylesheet" href="../assets/support.css" />
+<link rel="stylesheet" href="../assets/elearn.css" />
 
 <style>
   /* Habillage commun (police, palette, bandeau, frise, pied, boutons) :
@@ -871,7 +872,191 @@
 
 </template>
 
+<!-- ==========================================================================
+     MODE E-LEARNING — parcours d'auto-test (assets/elearn.js + elearn.css)
+     Rédigé indépendamment des diapos et du support : troisième contenu, à
+     maintenir en parallèle. Types : qcm · paires · tri · ordre.
+     ========================================================================== -->
+<template id="elearn-src">
+
+  <div class="el-meta" data-seance="03" data-titre="Mémoire &amp; collaboration">
+    <p>Sept activités&nbsp;: le fonctionnement de la mémoire visuelle, la méthode des loci et ses origines, plus deux rappels des séances 1 et 2.</p>
+    <p>Chaque réponse est commentée&nbsp;: on vous dit pourquoi elle tient, ou ce qui lui manque. Vous pouvez réessayer autant de fois que nécessaire.</p>
+  </div>
+
+  <article class="el-q" data-type="qcm" data-src="S03" data-titre="Pourquoi les images tiennent mieux">
+    <p class="el-stem">Pourquoi retient-on une histoire marquante et pas un prénom entendu dix secondes plus tôt&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Parce que le cerveau encode mieux les images fortes et les récits que les mots abstraits</span>
+        <span class="el-fb"><p>Oui. Deux ingrédients font la différence&nbsp;: une <strong>image</strong> concrète, sensorielle et un peu absurde, et une <strong>histoire</strong> qui la met en scène dans un décor connu.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Parce qu'une histoire est plus longue, donc la trace mémorielle est plus grosse</span>
+        <span class="el-fb"><p>Ce n'est pas une affaire de volume. Une image <strong>banale</strong> se confond avec toutes les autres, quelle que soit sa longueur&nbsp;; c'est la vivacité et la surprise qui gravent.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Parce que les prénoms sont stockés dans une zone différente, moins performante</span>
+        <span class="el-fb"><p>Il n'y a pas de «&nbsp;zone des prénoms&nbsp;» déficiente. Un prénom est simplement une <strong>donnée isolée</strong>&nbsp;: rien ne l'accroche. C'est la forme qu'on lui donne qui change tout.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Parce que l'émotion d'une histoire empêche le cerveau d'oublier quoi que ce soit</span>
+        <span class="el-fb"><p>Trop fort&nbsp;: l'oubli reste la règle — vous le verrez chiffré en séance 12. Ce qui se joue ici est plus modeste&nbsp;: une information mise en récit <strong>résiste mieux</strong>, elle ne devient pas indélébile.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="ordre" data-src="S03" data-titre="Les trois temps de la méthode des loci">
+    <p class="el-stem">Remettez dans l'ordre les trois temps de la méthode des loci.</p>
+    <p class="el-hint">Glissez les rangées, ou utilisez les flèches.</p>
+    <ol class="el-seq">
+      <li>
+        <span class="el-lbl">Choisir un parcours de lieux familiers, que l'on peut visiter mentalement sans effort</span>
+        <span class="el-fb">
+          <p>La méthode consiste à ranger des informations dans un <strong>espace mental</strong> plutôt que dans une liste.</p>
+          <ul>
+            <li><strong>Choisir un parcours</strong> — une pièce, un trajet connu, un bâtiment familier.</li>
+            <li><strong>Y déposer les images</strong> — une par lieu, dans un ordre fixe.</li>
+            <li><strong>Reparcourir le lieu</strong> — pour retrouver chaque information, dans l'ordre et sans notes.</li>
+          </ul>
+          <p>Transfert professionnel&nbsp;: la méthode ne sert pas qu'aux prénoms. Elle structure une intervention orale ou une séquence de formation que l'on doit dérouler sans support écrit.</p>
+        </span>
+      </li>
+      <li><span class="el-lbl">Y déposer les images fortes à retenir, une par lieu, dans un ordre fixe</span></li>
+      <li><span class="el-lbl">Reparcourir mentalement le lieu pour retrouver chaque information</span></li>
+    </ol>
+  </article>
+
+  <article class="el-q" data-type="paires" data-src="S03"
+           data-col-a="La notion" data-col-b="Ce qu'elle désigne"
+           data-titre="Mémoire visuelle et origines de la méthode">
+    <p class="el-stem">Quatre éléments vus aujourd'hui. Retrouvez ce que chacun désigne.</p>
+    <p class="el-hint">Touchez une vignette à gauche, puis sa description à droite.</p>
+    <ul class="el-pairs">
+      <li data-ico="🏛️" data-tint="#5B3E8E">
+        <span class="el-lbl">Simonide de Céos</span>
+        <span class="el-match">Seul rescapé d'un banquet effondré, il identifie les victimes par la place que chacune occupait à table.</span>
+        <span class="el-fb"><p><strong>Simonide de Céos</strong> — de cette tragédie naît l'intuition fondatrice&nbsp;: la mémoire s'ancre dans les lieux.</p></span>
+      </li>
+      <li data-ico="🗣️" data-tint="#A8004F">
+        <span class="el-lbl">Cicéron</span>
+        <span class="el-match">Il associe chaque partie de sa plaidoirie à une pièce de sa maison, puis parcourt ces lieux en parlant.</span>
+        <span class="el-fb"><p><strong>Cicéron</strong> — la méthode des loci devient l'outil des grands orateurs&nbsp;: les idées défilent dans l'ordre, sans notes.</p></span>
+      </li>
+      <li data-ico="🧭" data-tint="#0C7C63">
+        <span class="el-lbl">L'hippocampe</span>
+        <span class="el-match">Il assemble les éléments perçus en une carte cognitive — celle que les techniques de mémorisation exploitent.</span>
+        <span class="el-fb"><p><strong>Hippocampe</strong> — c'est le point de convergence des deux voies visuelles, et la raison pour laquelle un ancrage spatial fonctionne si bien.</p></span>
+      </li>
+      <li data-ico="👁️" data-tint="#2A6FB5">
+        <span class="el-lbl">Les deux voies visuelles</span>
+        <span class="el-match">L'une traite le «&nbsp;quoi&nbsp;» — visages, lieux, objets&nbsp;; l'autre le «&nbsp;où&nbsp;» — distance, mouvement, localisation.</span>
+        <span class="el-fb"><p><strong>Les deux voies</strong> — après le traitement visuel primaire, l'information se répartit entre elles avant d'être assemblée.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S03" data-titre="À quoi sert vraiment la méthode">
+    <p class="el-stem">Au-delà des prénoms, à quoi la méthode des loci sert-elle dans un contexte professionnel&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">À structurer une intervention orale ou une séquence de formation que l'on doit dérouler sans support écrit</span>
+        <span class="el-fb"><p>C'est le transfert visé. C'est aussi l'usage qu'en faisait Cicéron&nbsp;: <strong>tenir l'ordre d'un propos</strong> sans notes, en parcourant mentalement un lieu connu.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">À mémoriser des documents entiers mot à mot</span>
+        <span class="el-fb"><p>Ce n'est pas sa force. Elle ancre des <strong>points de passage</strong> dans un ordre, pas un texte littéral — et l'ordre est justement ce qui manque le plus quand on parle sans notes.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">À travailler la mémoire comme un muscle, pour augmenter sa capacité générale</span>
+        <span class="el-fb"><p>La méthode ne change pas la capacité de mémoire&nbsp;: elle change la <strong>forme donnée à l'information</strong>. Vous verrez en séance 12 que ce qui se travaille vraiment, c'est le rythme des reprises.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">À remplacer les supports visuels lors d'une présentation</span>
+        <span class="el-fb"><p>Les deux ne s'opposent pas. La méthode aide l'oratrice ou l'orateur à tenir son fil&nbsp;; le support, lui, s'adresse au public — vous y reviendrez en séance 6.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="tri" data-src="S03" data-titre="Une image qui s'ancre ou qui s'efface">
+    <p class="el-stem">Pour retenir le prénom «&nbsp;Margot&nbsp;», laquelle de ces associations a des chances de tenir&nbsp;?</p>
+    <p class="el-hint">Le critère&nbsp;: concrète, sensorielle, un peu absurde — ou banale et interchangeable.</p>
+    <ol class="el-bins">
+      <li data-bin="ancre"><span class="el-lbl">S'ancre</span></li>
+      <li data-bin="efface"><span class="el-lbl">S'efface</span></li>
+    </ol>
+    <ul class="el-cards">
+      <li data-bin="ancre">
+        <span class="el-lbl">Une marmotte géante en gothique, assise sur les marches d'Uni Mail</span>
+        <span class="el-fb"><p><strong>S'ancre</strong> — image concrète, incongrue, et posée dans un lieu précis que l'on peut revisiter mentalement.</p></span>
+      </li>
+      <li data-bin="efface">
+        <span class="el-lbl">Se répéter «&nbsp;Margot, Margot, Margot&nbsp;» une dizaine de fois</span>
+        <span class="el-fb"><p><strong>S'efface</strong> — la répétition ne change pas la nature de l'information&nbsp;: elle reste une donnée abstraite, sans accroche.</p></span>
+      </li>
+      <li data-bin="efface">
+        <span class="el-lbl">Se dire «&nbsp;Margot, c'est un joli prénom&nbsp;»</span>
+        <span class="el-fb"><p><strong>S'efface</strong> — un jugement n'est ni une image ni un lieu. Rien à revisiter, donc rien à retrouver.</p></span>
+      </li>
+      <li data-bin="ancre">
+        <span class="el-lbl">Une marguerite qui pousse dans un gobelet, sur le comptoir de la cafétéria</span>
+        <span class="el-fb"><p><strong>S'ancre</strong> — «&nbsp;Mar&nbsp;» + «&nbsp;go&nbsp;» rendus visuels, et un lieu familier qui donne le repère spatial.</p></span>
+      </li>
+      <li data-bin="efface">
+        <span class="el-lbl">Noter le prénom dans son téléphone pour le relire plus tard</span>
+        <span class="el-fb"><p><strong>S'efface</strong> — de la mémoire, en tout cas. C'est utile, mais on a délégué&nbsp;: rien n'a été encodé.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S02" data-titre="Rappel — la Chambre romaine">
+    <p class="el-stem">Rappel de la séance 2&nbsp;: dans la Chambre romaine, à quoi sert le lieu&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">À donner un repère spatial que l'on peut reparcourir pour retrouver les informations dans l'ordre</span>
+        <span class="el-fb"><p>Oui. Le lieu est ce qui transforme une collection d'images en <strong>série ordonnée</strong>&nbsp;: on le reparcourt, et chaque étape rend son contenu.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">À rendre l'histoire plus jolie et plus agréable à raconter</span>
+        <span class="el-fb"><p>L'agrément n'est pas le critère. Le lieu a une fonction précise&nbsp;: <strong>ancrer</strong> et <strong>ordonner</strong>. Une histoire plaisante mais sans décor connu perd cet appui.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">À remplacer l'image, une fois celle-ci construite</span>
+        <span class="el-fb"><p>Les trois temps s'ajoutent, ils ne se remplacent pas&nbsp;: image, <em>puis</em> lieu, <em>puis</em> histoire qui relie les deux.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">À vérifier que le prénom a bien été décomposé en syllabes</span>
+        <span class="el-fb"><p>La décomposition appartient au premier temps. Le lieu vient <strong>après</strong>, pour situer les images obtenues.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S01" data-titre="Rappel — l'analyse de l'existant">
+    <p class="el-stem">Rappel du cadre&nbsp;: la phase d'avant-projet démarre. En quoi consiste l'analyse de l'existant&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Faire le point sur ce qu'on sait déjà du besoin, du public, et de ce qui a été fait ailleurs sur ce sujet</span>
+        <span class="el-fb"><p>C'est cela. Le premier rendu est <strong>individuel</strong> (16 mars), puis vient la version <strong>collective</strong> du groupe (23 mars).</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Décrire la solution que le groupe compte produire</span>
+        <span class="el-fb"><p>Trop tôt&nbsp;: le livrable ne s'arrête qu'au rendu «&nbsp;objectif &amp; livrable&nbsp;» du 27 avril. L'analyse de l'existant regarde <strong>ce qui est déjà là</strong>, pas ce qu'on va faire.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Dresser la liste des outils numériques que le groupe va utiliser</span>
+        <span class="el-fb"><p>C'est une question d'organisation interne, pas d'analyse. L'existant porte sur le <strong>besoin, le public et les réponses déjà apportées</strong> ailleurs.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Recenser les membres du groupe et leurs compétences respectives</span>
+        <span class="el-fb"><p>Utile pour se répartir le travail — c'était le propos de la séance 2 — mais ce n'est pas l'objet du rendu.</p></span>
+      </li>
+    </ul>
+  </article>
+
+</template>
+
 <script src="../assets/support.js"></script>
+<script src="../assets/elearn.js"></script>
 <script src="../assets/vendor/reveal/reveal.min.js"></script>
 <script>
   const deck = new Reveal({
@@ -975,8 +1160,10 @@
     });
   });
 
-  // Bascule présentation <-> support de cours (assets/support.js pilote le DOM).
-  document.addEventListener('support:change', function(e){
+  // Les deux modes annexes (support de cours, e-learning) masquent les diapos :
+  // sans cette reconfiguration, le clavier de reveal continue de tourner
+  // derrière l'écran affiché, et la mise en page est périmée au retour.
+  function surModeAnnexe(e){
     var open = e.detail.open;
     deck.configure({ controls: !open, progress: !open, keyboard: !open });
     if(!open){
@@ -984,7 +1171,9 @@
       applyCover();
       setTimeout(syncChrome, 60);
     }
-  });
+  }
+  document.addEventListener('support:change', surModeAnnexe);
+  document.addEventListener('elearn:change', surModeAnnexe);
 </script>
 <script>
   // ---- minuteur d'activité type Time Timer (enchaîne les étapes) ----

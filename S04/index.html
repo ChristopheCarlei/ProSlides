@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="../assets/vendor/reveal/reveal.min.css" />
 <link rel="stylesheet" href="../assets/deck.css" />
 <link rel="stylesheet" href="../assets/support.css" />
+<link rel="stylesheet" href="../assets/elearn.css" />
 
 <style>
   /* Habillage commun (police, palette, bandeau, frise, pied, boutons) :
@@ -1035,7 +1036,214 @@
 
 </template>
 
+<!-- ==========================================================================
+     MODE E-LEARNING — parcours d'auto-test (assets/elearn.js + elearn.css)
+     Rédigé indépendamment des diapos et du support : troisième contenu, à
+     maintenir en parallèle. Types : qcm · paires · tri · ordre.
+     ========================================================================== -->
+<template id="elearn-src">
+
+  <div class="el-meta" data-seance="04" data-titre="Avant-projet &amp; IA">
+    <p>Huit activités&nbsp;: la définition d'un projet, le triangle qualité-coûts-délais, ce que l'IA permet — et deux rappels des séances précédentes.</p>
+    <p>Chaque réponse est commentée&nbsp;: on vous dit pourquoi elle tient, ou ce qui lui manque. Vous pouvez réessayer autant de fois que nécessaire.</p>
+  </div>
+
+  <article class="el-q" data-type="qcm" data-src="S04" data-titre="Qu'est-ce qu'un projet">
+    <p class="el-stem">Un service d'accueil assure chaque semaine la même permanence, sans date de fin prévue. Est-ce un projet&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Non&nbsp;: il manque le caractère unique et les dates de début et de fin</span>
+        <span class="el-fb"><p>Exactement. Trois mots de la définition tranchent&nbsp;: <strong>unique</strong> — ce n'est pas une activité de routine&nbsp;; <strong>dates</strong> — il a une fin, sinon c'est un service&nbsp;; <strong>exigences spécifiques</strong> — quelqu'un attend quelque chose de précis.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Oui&nbsp;: dès lors qu'il y a des activités coordonnées, c'est un projet</span>
+        <span class="el-fb"><p>La coordination ne suffit pas&nbsp;: une activité de routine est coordonnée elle aussi. Ce qui manque ici, c'est l'<strong>unicité</strong> et la <strong>fin</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Oui, à condition qu'un budget lui soit attribué</span>
+        <span class="el-fb"><p>Le budget est une contrainte parmi d'autres (délais, coûts, ressources), pas le critère qui fait le projet.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Impossible à dire sans connaître le nombre de personnes impliquées</span>
+        <span class="el-fb"><p>La taille n'entre pas dans la définition. Un projet peut être mené à deux&nbsp;; une permanence hebdomadaire à trente reste un <strong>service</strong>.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S04" data-titre="Le triangle de Martin Barnes">
+    <p class="el-stem">Votre commanditaire veut un livrable plus abouti, sans décaler la date ni ajouter de moyens. Que dit le triangle de Martin Barnes&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Que les trois composantes ne se maximisent pas ensemble&nbsp;: il faut expliciter la priorité et assumer le compromis</span>
+        <span class="el-fb"><p>Oui. Qualité, coûts et délais s'arbitrent <strong>en permanence</strong>. Fixer les priorités — et accepter ce qu'elles impliquent — fait partie du travail de cadrage, pas d'un échec de négociation.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Qu'il faut d'abord améliorer la qualité, les deux autres suivront</span>
+        <span class="el-fb"><p>Il n'y a pas de composante prioritaire par nature. Augmenter la qualité à moyens et délais constants revient mécaniquement à <strong>réduire le périmètre</strong> — c'est cela qu'il faut poser sur la table.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Que le triangle ne s'applique qu'aux projets industriels, pas aux projets de formation</span>
+        <span class="el-fb"><p>L'arbitrage vaut pour tout projet. Votre semestre en est un&nbsp;: la date du 25 mai est fixe, votre temps est limité, donc c'est le <strong>périmètre du livrable</strong> qui s'ajuste.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Qu'une demande de ce type doit être refusée</span>
+        <span class="el-fb"><p>Rien n'oblige à refuser&nbsp;: il s'agit de <strong>rendre le compromis visible</strong>. «&nbsp;Oui, si l'on retire ceci&nbsp;» est une réponse professionnelle&nbsp;; «&nbsp;oui&nbsp;» tout court n'en est pas une.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S04" data-titre="Le taux de réussite des projets">
+    <p class="el-stem">Sur 50 000 projets étudiés entre 2015 et 2020, quelle part atteint sa cible — délais, budget et résultat satisfaisant&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Environ un tiers&nbsp;: 34,65 % de succès, 46,53 % en difficulté et 18,81 % d'échecs</span>
+        <span class="el-fb"><p>C'est cela — <strong>deux projets sur trois n'atteignent pas leur cible</strong>. Et la cause la plus fréquemment citée n'est pas technique&nbsp;: c'est un cadrage insuffisant au départ. D'où l'importance de l'avant-projet.<br>Source&nbsp;: CHAOS 2020, The Standish Group International.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Environ trois quarts&nbsp;: l'échec reste marginal</span>
+        <span class="el-fb"><p>Bien plus bas&nbsp;: <strong>34,65 %</strong>. Ce sont les projets «&nbsp;en difficulté&nbsp;» — livrés, mais hors délais, hors budget ou en deçà des attentes — qui forment la plus grosse part, à 46,53 %.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Environ la moitié</span>
+        <span class="el-fb"><p>Encore optimiste. Le succès plein est à <strong>34,65 %</strong>&nbsp;; s'y ajoutent 46,53 % de projets livrés mais dégradés, et 18,81 % d'abandons purs.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Moins de 10 %&nbsp;: la quasi-totalité des projets échoue</span>
+        <span class="el-fb"><p>Trop sombre&nbsp;: 18,81 % seulement sont abandonnés ou jamais utilisés. Le vrai enseignement n'est pas que tout échoue, c'est que la <strong>zone grise est énorme</strong>.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="tri" data-src="S04" data-titre="Comprendre ou prioriser">
+    <p class="el-stem">L'avant-projet se joue en deux temps. Classez chaque action.</p>
+    <p class="el-hint">Comprendre&nbsp;: cerner le besoin et le contexte. Prioriser&nbsp;: choisir une direction claire.</p>
+    <ol class="el-bins">
+      <li data-bin="comp"><span class="el-lbl">Comprendre</span></li>
+      <li data-bin="prio"><span class="el-lbl">Prioriser</span></li>
+    </ol>
+    <ul class="el-cards">
+      <li data-bin="comp">
+        <span class="el-lbl">Identifier le problème que le commanditaire cherche à résoudre</span>
+        <span class="el-fb"><p><strong>Comprendre</strong> — c'est la première question de l'avant-projet, avant même celle du public.</p></span>
+      </li>
+      <li data-bin="comp">
+        <span class="el-lbl">Recenser ce qui s'est déjà fait sur ce sujet, ici ou ailleurs</span>
+        <span class="el-fb"><p><strong>Comprendre</strong> — c'est exactement l'objet de votre analyse de l'existant.</p></span>
+      </li>
+      <li data-bin="prio">
+        <span class="el-lbl">Décider ce que le groupe laisse délibérément de côté</span>
+        <span class="el-fb"><p><strong>Prioriser</strong> — et c'est la partie la plus difficile&nbsp;: <em>tout traiter revient à ne rien traiter</em>.</p></span>
+      </li>
+      <li data-bin="comp">
+        <span class="el-lbl">Déterminer à quel public le livrable s'adresse</span>
+        <span class="el-fb"><p><strong>Comprendre</strong> — «&nbsp;pour quel public&nbsp;?&nbsp;» fait partie du cadrage du besoin.</p></span>
+      </li>
+      <li data-bin="prio">
+        <span class="el-lbl">Choisir par quoi le groupe commence</span>
+        <span class="el-fb"><p><strong>Prioriser</strong> — un bon avant-projet, c'est savoir par où commencer.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="paires" data-src="S04"
+           data-col-a="L'outil" data-col-b="Ce pour quoi il est utile"
+           data-titre="Quatre outils d'IA">
+    <p class="el-stem">Quatre outils présentés en séance. Retrouvez l'usage de chacun.</p>
+    <p class="el-hint">Touchez une vignette à gauche, puis sa description à droite.</p>
+    <ul class="el-pairs">
+      <li data-ico="🔎" data-tint="#2A6FB5">
+        <span class="el-lbl">Perplexity</span>
+        <span class="el-match">Recherche en ligne avec les sources citées.</span>
+        <span class="el-fb"><p><strong>Perplexity</strong> — pratique quand la traçabilité compte&nbsp;: c'est la source citée qui permet de vérifier, pas la formulation de la réponse.</p></span>
+      </li>
+      <li data-ico="📓" data-tint="#0C7C63">
+        <span class="el-lbl">NotebookLM</span>
+        <span class="el-match">Interrogation d'un corpus de documents que vous fournissez vous-même.</span>
+        <span class="el-fb"><p><strong>NotebookLM</strong> — il travaille sur <em>vos</em> documents. Utile pour l'analyse de l'existant, une fois la matière collectée.</p></span>
+      </li>
+      <li data-ico="✍️" data-tint="#A8004F">
+        <span class="el-lbl">Claude</span>
+        <span class="el-match">Rédaction, analyse de documents, structuration d'idées.</span>
+        <span class="el-fb"><p><strong>Claude</strong> — pour mettre en forme et organiser une matière que vous maîtrisez déjà.</p></span>
+      </li>
+      <li data-ico="💡" data-tint="#9A6300">
+        <span class="el-lbl">ChatGPT</span>
+        <span class="el-match">Exploration généraliste, reformulation, génération de pistes.</span>
+        <span class="el-fb"><p><strong>ChatGPT</strong> — utile pour démarrer quand on part de zéro et qu'il faut des questions à creuser.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S04" data-titre="La règle de travail sur l'IA">
+    <p class="el-stem">Un groupe remet au commanditaire une analyse produite en grande partie par une IA, sans l'avoir vérifiée. Où est le problème&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">L'IA fait gagner du temps sur la collecte et la mise en forme, pas sur le jugement — et c'est le jugement du groupe qui est engagé</span>
+        <span class="el-fb"><p>C'est la règle de travail de la séance&nbsp;: <strong>ce que vous rendez à un commanditaire engage votre analyse, pas celle d'un modèle</strong>. Un outil qui formule bien n'a pas nécessairement raison.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Il n'y a pas de problème si le rendu est de bonne qualité</span>
+        <span class="el-fb"><p>La qualité apparente est précisément le piège&nbsp;: une réponse bien tournée peut être fausse. Sans vérification des sources, personne ne peut le savoir — vous non plus.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Le problème est d'avoir utilisé l'IA&nbsp;; il fallait s'en passer</span>
+        <span class="el-fb"><p>L'usage n'est pas en cause, il est même encouragé pour <strong>explorer vite</strong> et <strong>analyser l'existant</strong>. Ce qui manque, c'est l'étape de vérification et de décision.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Le problème est juridique&nbsp;: il fallait citer l'outil utilisé</span>
+        <span class="el-fb"><p>La transparence est saine, mais elle ne règle rien&nbsp;: citer l'outil ne rend pas l'analyse juste. L'enjeu est de <strong>croiser les réponses et décider soi-même</strong>.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S03" data-titre="Rappel — la méthode des loci">
+    <p class="el-stem">Rappel de la séance 3&nbsp;: sur quoi repose la méthode des loci&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Sur le rangement des informations dans un parcours de lieux familiers, plutôt que dans une liste</span>
+        <span class="el-fb"><p>Oui&nbsp;: un <strong>espace mental</strong> à la place d'une liste. On y dépose des images fortes, une par lieu, puis on reparcourt le trajet pour les retrouver dans l'ordre.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Sur la répétition espacée des informations à retenir</span>
+        <span class="el-fb"><p>C'est une autre technique — vous la verrez chiffrée en séance 12 sous le nom d'<strong>apprentissage distribué</strong>. Les loci jouent sur l'encodage, pas sur le rythme des reprises.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Sur l'association de chaque information à une couleur</span>
+        <span class="el-fb"><p>Le support de l'ancrage est <strong>spatial</strong>&nbsp;: un lieu qu'on peut visiter mentalement, ce qui donne aussi l'ordre de la série.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Sur l'écoute répétée d'un enregistrement de la liste</span>
+        <span class="el-fb"><p>Rien de tel dans la méthode. Ce qui compte, c'est l'<strong>image</strong> et le <strong>lieu</strong> — deux mille cinq cents ans avant l'enregistrement.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S02" data-titre="Rappel — décrire un métier">
+    <p class="el-stem">Rappel de la séance 2&nbsp;: un métier très autonome mais faiblement rémunéré et sans corporation. Que peut-on en dire&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Qu'il se situe différemment selon les dimensions&nbsp;: haut sur l'autonomie, bas sur la rémunération et l'organisation collective</span>
+        <span class="el-fb"><p>C'est tout l'intérêt des neuf dimensions&nbsp;: elles rendent visible le <strong>déséquilibre</strong>, là où un jugement global l'écraserait. Beaucoup de métiers de la formation ressemblent à cela.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Qu'il n'est pas professionnalisé, puisque deux dimensions sur trois sont basses</span>
+        <span class="el-fb"><p>On ne compte pas les dimensions pour trancher. Chacune se lit <strong>pour elle-même</strong>&nbsp;: le métier est fortement professionnalisé <em>sur l'autonomie</em>, et faiblement ailleurs.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Que la description est contradictoire&nbsp;: l'autonomie suppose la reconnaissance</span>
+        <span class="el-fb"><p>Aucune contradiction&nbsp;: les dimensions sont <strong>indépendantes</strong>. On peut disposer d'une grande latitude d'action sans que le groupe soit organisé ni bien payé.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Qu'il faut attendre qu'il obtienne un ordre professionnel pour se prononcer</span>
+        <span class="el-fb"><p>Rien n'oblige à attendre. La grille sert justement à décrire un métier <strong>tel qu'il est</strong>, à un moment donné du processus.</p></span>
+      </li>
+    </ul>
+  </article>
+
+</template>
+
 <script src="../assets/support.js"></script>
+<script src="../assets/elearn.js"></script>
 <script src="../assets/vendor/reveal/reveal.min.js"></script>
 <script>
   const deck = new Reveal({
@@ -1139,8 +1347,10 @@
     });
   });
 
-  // Bascule présentation <-> support de cours (assets/support.js pilote le DOM).
-  document.addEventListener('support:change', function(e){
+  // Les deux modes annexes (support de cours, e-learning) masquent les diapos :
+  // sans cette reconfiguration, le clavier de reveal continue de tourner
+  // derrière l'écran affiché, et la mise en page est périmée au retour.
+  function surModeAnnexe(e){
     var open = e.detail.open;
     deck.configure({ controls: !open, progress: !open, keyboard: !open });
     if(!open){
@@ -1148,7 +1358,9 @@
       applyCover();
       setTimeout(syncChrome, 60);
     }
-  });
+  }
+  document.addEventListener('support:change', surModeAnnexe);
+  document.addEventListener('elearn:change', surModeAnnexe);
 </script>
 <script>
   // ---- minuteur d'activité type Time Timer (enchaîne les étapes) ----

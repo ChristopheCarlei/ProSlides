@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="../assets/vendor/reveal/reveal.min.css" />
 <link rel="stylesheet" href="../assets/deck.css" />
 <link rel="stylesheet" href="../assets/support.css" />
+<link rel="stylesheet" href="../assets/elearn.css" />
 
 <style>
   /* Habillage commun (police, palette, bandeau, frise, pied, boutons) :
@@ -911,7 +912,200 @@
 
 </template>
 
+<!-- ==========================================================================
+     MODE E-LEARNING — parcours d'auto-test (assets/elearn.js + elearn.css)
+     Rédigé indépendamment des diapos et du support : troisième contenu, à
+     maintenir en parallèle. Types : qcm · paires · tri · ordre.
+     ========================================================================== -->
+<template id="elearn-src">
+
+  <div class="el-meta" data-seance="02" data-titre="Projets &amp; groupes">
+    <p>Sept activités&nbsp;: les dimensions de la professionnalisation, la Chambre romaine, et un rappel de la séance 1.</p>
+    <p>Chaque réponse est commentée&nbsp;: on vous dit pourquoi elle tient, ou ce qui lui manque. Vous pouvez réessayer autant de fois que nécessaire.</p>
+  </div>
+
+  <article class="el-q" data-type="qcm" data-src="S02" data-titre="À quoi servent les neuf dimensions">
+    <p class="el-stem">Pourquoi décrire la professionnalisation sur neuf dimensions plutôt que d'un seul bloc&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Parce que dire qu'un métier est «&nbsp;professionnalisé&nbsp;» ne veut rien dire tant qu'on ne précise pas sur quoi on le juge</span>
+        <span class="el-fb"><p>C'est exactement l'argument. Les neuf dimensions rendent la notion <strong>descriptible</strong>&nbsp;: un métier peut être très autonome et mal rémunéré, ou fortement réglementé sans corporation.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Pour calculer un score global et classer les métiers entre eux</span>
+        <span class="el-fb"><p>Ce n'est pas un palmarès. Chaque dimension se lit <strong>pour elle-même</strong>&nbsp;; les additionner ferait perdre l'information utile, qui est justement le déséquilibre entre elles.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Parce qu'un métier doit satisfaire les neuf pour être une profession</span>
+        <span class="el-fb"><p>Aucune dimension ne fonctionne en tout ou rien, et il n'y a pas de seuil à franchir. Chacune est <strong>un axe gradué</strong>, du moins au plus professionnalisant.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Parce que chaque métier n'est concerné que par une seule d'entre elles</span>
+        <span class="el-fb"><p>Toutes les dimensions concernent tous les métiers&nbsp;: c'est la <em>position</em> sur chaque axe qui varie, pas la pertinence de l'axe.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="paires" data-src="S02"
+           data-col-a="La dimension" data-col-b="Ce qu'elle interroge"
+           data-titre="Cinq dimensions de la professionnalisation">
+    <p class="el-stem">Cinq des neuf dimensions. Retrouvez ce que chacune interroge.</p>
+    <p class="el-hint">Touchez une vignette à gauche, puis sa description à droite.</p>
+    <ul class="el-pairs">
+      <li data-ico="🎚️" data-tint="#0C7C63">
+        <span class="el-lbl">Autonomie</span>
+        <span class="el-match">La marge de manœuvre dont on dispose sur les objectifs et sur les moyens.</span>
+        <span class="el-fb"><p><strong>Autonomie</strong> — de «&nbsp;tâches prescrites, peu d'initiative&nbsp;» à «&nbsp;liberté sur les objectifs et les moyens&nbsp;».</p></span>
+      </li>
+      <li data-ico="🚪" data-tint="#2A6FB5">
+        <span class="el-lbl">Accès à l'exercice</span>
+        <span class="el-match">Les conditions à remplir pour entrer dans le métier.</span>
+        <span class="el-fb"><p><strong>Accès à l'exercice</strong> — de «&nbsp;accessible sans formation&nbsp;» à «&nbsp;diplôme et cadre légal requis&nbsp;».</p></span>
+      </li>
+      <li data-ico="⚖️" data-tint="#A8004F">
+        <span class="el-lbl">Éthique et déontologie</span>
+        <span class="el-match">Qui définit les règles de l'exercice&nbsp;: la hiérarchie, ou les pairs&nbsp;?</span>
+        <span class="el-fb"><p><strong>Éthique et déontologie</strong> — de «&nbsp;règles imposées par la hiérarchie&nbsp;» à «&nbsp;cadre construit par les pairs&nbsp;».</p></span>
+      </li>
+      <li data-ico="🤝" data-tint="#9A6300">
+        <span class="el-lbl">Association professionnelle</span>
+        <span class="el-match">Le degré d'organisation collective du groupe de métier.</span>
+        <span class="el-fb"><p><strong>Association professionnelle</strong> — de «&nbsp;association syndicale sans corporation&nbsp;» à «&nbsp;corporation, voire ordre professionnel&nbsp;».</p></span>
+      </li>
+      <li data-ico="📚" data-tint="#5B3E8E">
+        <span class="el-lbl">Savoir et corpus de formation</span>
+        <span class="el-match">L'existence de savoirs formalisés, transmis ailleurs que sur le tas.</span>
+        <span class="el-fb"><p><strong>Savoir et corpus de formation</strong> — de «&nbsp;savoir-faire acquis sur le tas&nbsp;» à «&nbsp;savoirs formalisés et formation tertiaire&nbsp;».</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="tri" data-src="S02" data-titre="Lire un axe gradué">
+    <p class="el-stem">Chaque énoncé décrit une situation. Placez-la du côté le moins ou le plus professionnalisant de son axe.</p>
+    <p class="el-hint">Rappel&nbsp;: aucune dimension ne fonctionne en tout ou rien.</p>
+    <ol class="el-bins">
+      <li data-bin="moins"><span class="el-lbl">Moins professionnalisant</span></li>
+      <li data-bin="plus"><span class="el-lbl">Plus professionnalisant</span></li>
+    </ol>
+    <ul class="el-cards">
+      <li data-bin="plus">
+        <span class="el-lbl">La responsabilité des actes est individuelle, avec obligation de résultat</span>
+        <span class="el-fb"><p><strong>Plus professionnalisant</strong> — à l'autre bout de l'axe, la responsabilité est assumée par l'employeur.</p></span>
+      </li>
+      <li data-bin="moins">
+        <span class="el-lbl">Les formations continues sont organisées par l'employeur et obligatoires</span>
+        <span class="el-fb"><p><strong>Moins professionnalisant</strong> — le pôle opposé est celui de formations <em>conçues par les pairs</em>.</p></span>
+      </li>
+      <li data-bin="moins">
+        <span class="el-lbl">L'activité est faiblement rémunérée et ne permet pas d'en vivre</span>
+        <span class="el-fb"><p><strong>Moins professionnalisant</strong> — pouvoir en faire son activité principale marque l'autre extrémité de l'axe.</p></span>
+      </li>
+      <li data-bin="plus">
+        <span class="el-lbl">Le statut du métier est reconnu comme spécifique et légitime</span>
+        <span class="el-fb"><p><strong>Plus professionnalisant</strong> — c'est la dimension «&nbsp;identité professionnelle et sociale&nbsp;».</p></span>
+      </li>
+      <li data-bin="moins">
+        <span class="el-lbl">Le travail consiste en tâches prescrites laissant peu d'initiative</span>
+        <span class="el-fb"><p><strong>Moins professionnalisant</strong> — axe de l'autonomie, pôle bas.</p></span>
+      </li>
+      <li data-bin="plus">
+        <span class="el-lbl">L'entrée dans le métier suppose un diplôme et un cadre légal</span>
+        <span class="el-fb"><p><strong>Plus professionnalisant</strong> — axe de l'accès à l'exercice de l'activité.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="ordre" data-src="S02" data-titre="Les trois temps de la Chambre romaine">
+    <p class="el-stem">Remettez dans l'ordre les trois temps de la Chambre romaine.</p>
+    <p class="el-hint">Glissez les rangées, ou utilisez les flèches.</p>
+    <ol class="el-seq">
+      <li>
+        <span class="el-lbl">Rendre le prénom visuel — le décomposer en sons, puis en images concrètes</span>
+        <span class="el-fb">
+          <p>L'ordre n'est pas indifférent&nbsp;: chaque temps fournit la matière du suivant.</p>
+          <ul>
+            <li><strong>Rendre visuel</strong> — Christophe → Christ + off.</li>
+            <li><strong>Ancrer dans un lieu</strong> — Uni Dufour, un endroit réel et connu.</li>
+            <li><strong>Créer une histoire</strong> — de nuit, devant Uni Dufour, je traîne une énorme croix qui racle le bitume, puis j'appuie sur un bouton et tout s'éteint.</li>
+          </ul>
+          <p>Un prénom seul est une donnée abstraite, sans accroche. Transformé en image, situé, mis en récit, il devient un <strong>souvenir</strong> — et les souvenirs se rappellent bien mieux que les données.</p>
+        </span>
+      </li>
+      <li><span class="el-lbl">Ancrer la personne dans un lieu réel et connu</span></li>
+      <li><span class="el-lbl">Créer une histoire reliant le lieu et les images</span></li>
+    </ol>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S02" data-titre="Pourquoi la technique fonctionne">
+    <p class="el-stem">Pourquoi la Chambre romaine fonctionne-t-elle mieux que la répétition d'une liste de prénoms&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Parce qu'elle transforme une donnée abstraite en souvenir&nbsp;: une image, un lieu, un récit</span>
+        <span class="el-fb"><p>Oui. Un prénom nu n'a <strong>aucune accroche</strong>. Une fois imagé, situé et mis en récit, il cesse d'être une donnée à retenir pour devenir un souvenir à retrouver.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Parce qu'elle occupe le cerveau plus longtemps, donc la trace est plus profonde</span>
+        <span class="el-fb"><p>Ce n'est pas la durée qui compte, mais la <strong>forme</strong> donnée à l'information. Une répétition longue reste une répétition de données abstraites.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Parce qu'elle convient aux personnes de profil «&nbsp;visuel&nbsp;»</span>
+        <span class="el-fb"><p>Attention&nbsp;: les styles d'apprentissage sont un neuro-mythe, et vous y reviendrez en séance 9. La technique ne s'adresse pas à un profil, elle exploite un fonctionnement <strong>commun</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Parce qu'elle range les prénoms par ordre alphabétique dans la mémoire</span>
+        <span class="el-fb"><p>Le rangement est <strong>spatial</strong>, pas alphabétique&nbsp;: c'est le parcours de lieux qui donne l'ordre et permet de reparcourir la série sans rien oublier.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S01" data-titre="Rappel — un processus, pas un état">
+    <p class="el-stem">Rappel de la séance 1&nbsp;: à quelles deux échelles le processus de professionnalisation se joue-t-il&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">À l'échelle collective — ce que fait un groupe de métier — et à l'échelle individuelle — ce qu'une personne construit en exerçant</span>
+        <span class="el-fb"><p>C'est cela, et <strong>les deux échelles s'éclairent mutuellement</strong>. C'est pourquoi l'analyse de l'existant de votre projet gagne à interroger le groupe professionnel concerné <em>et</em> l'activité réelle des personnes.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">À l'échelle du diplôme et à celle de l'expérience acquise</span>
+        <span class="el-fb"><p>Ce sont deux marqueurs, pas les deux échelles. La distinction porte sur le <strong>groupe de métier</strong> d'un côté, la <strong>personne au travail</strong> de l'autre.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">À l'échelle nationale et à l'échelle internationale</span>
+        <span class="el-fb"><p>La distinction n'est pas géographique. Elle oppose ce qui se joue pour un <strong>groupe professionnel</strong> et ce qui se joue pour une <strong>personne</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">À l'échelle de la formation initiale et à celle de la formation continue</span>
+        <span class="el-fb"><p>Ce sont des moments du parcours, pas des échelles d'analyse. Relisez le couple <strong>collectif / individuel</strong>.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S01" data-titre="Rappel — les deux regards">
+    <p class="el-stem">Rappel de la séance 1&nbsp;: «&nbsp;Quel écart y a-t-il entre ce qu'on demande à ces formateurs et ce qu'ils font réellement&nbsp;?&nbsp;» De quel regard cette question relève-t-elle&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">De l'analyse du travail — on zoome sur l'activité</span>
+        <span class="el-fb"><p>Oui&nbsp;: le couple <strong>travail réel / travail prescrit</strong> est la marque de fabrique de ce regard. On y observe ce qui se construit en situation.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Des approches socio-historiques — on dézoome sur le groupe</span>
+        <span class="el-fb"><p>Ce regard-là porterait plutôt sur le statut, la reconnaissance ou les conditions d'accès au métier. Ici, la question vise ce que les personnes <em>font</em>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Des deux à parts égales&nbsp;: la question est trop générale pour trancher</span>
+        <span class="el-fb"><p>Elle est pourtant nette&nbsp;: dès qu'on parle d'écart entre prescrit et réel, on est dans l'<strong>analyse du travail</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">D'aucun des deux&nbsp;: c'est une question de gestion, pas de professionnalisation</span>
+        <span class="el-fb"><p>C'est au contraire une question centrale&nbsp;: c'est dans cet écart que se construisent les compétences et l'identité professionnelle.</p></span>
+      </li>
+    </ul>
+  </article>
+
+</template>
+
 <script src="../assets/support.js"></script>
+<script src="../assets/elearn.js"></script>
 <script src="../assets/vendor/reveal/reveal.min.js"></script>
 <script>
   const deck = new Reveal({
@@ -1015,8 +1209,10 @@
     });
   });
 
-  // Bascule présentation <-> support de cours (assets/support.js pilote le DOM).
-  document.addEventListener('support:change', function(e){
+  // Les deux modes annexes (support de cours, e-learning) masquent les diapos :
+  // sans cette reconfiguration, le clavier de reveal continue de tourner
+  // derrière l'écran affiché, et la mise en page est périmée au retour.
+  function surModeAnnexe(e){
     var open = e.detail.open;
     deck.configure({ controls: !open, progress: !open, keyboard: !open });
     if(!open){
@@ -1024,7 +1220,9 @@
       applyCover();
       setTimeout(syncChrome, 60);
     }
-  });
+  }
+  document.addEventListener('support:change', surModeAnnexe);
+  document.addEventListener('elearn:change', surModeAnnexe);
 </script>
 <script>
   // ---- minuteur d'activité type Time Timer (enchaîne les étapes) ----

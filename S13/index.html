@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="../assets/vendor/reveal/reveal.min.css" />
 <link rel="stylesheet" href="../assets/deck.css" />
 <link rel="stylesheet" href="../assets/support.css" />
+<link rel="stylesheet" href="../assets/elearn.css" />
 
 <style>
   /* Habillage commun (police, palette, bandeau, frise, pied, boutons) :
@@ -783,7 +784,200 @@
 
 </template>
 
+<!-- ==========================================================================
+     MODE E-LEARNING — parcours d'auto-test (assets/elearn.js + elearn.css)
+     Rédigé indépendamment des diapos et du support : troisième contenu, à
+     maintenir en parallèle. Types : qcm · paires · tri · ordre.
+     Séance de clôture, peu de théorie propre : le parcours porte sur la
+     démonstration et sert de révision finale du semestre.
+     ========================================================================== -->
+<template id="elearn-src">
+
+  <div class="el-meta" data-seance="13" data-titre="Démonstration des projets">
+    <p>Sept activités&nbsp;: ce qui distingue une démonstration d'une présentation, et une dernière traversée du semestre.</p>
+    <p>Chaque réponse est commentée&nbsp;: on vous dit pourquoi elle tient, ou ce qui lui manque. Vous pouvez réessayer autant de fois que nécessaire.</p>
+  </div>
+
+  <article class="el-q" data-type="qcm" data-src="S13" data-titre="Démontrer plutôt que présenter">
+    <p class="el-stem">Qu'est-ce qui distingue une démonstration d'une présentation&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Dans l'une on parle du livrable&nbsp;; dans l'autre on le met entre les mains du public</span>
+        <span class="el-fb"><p>Toute la différence tient dans cette phrase. Une salle passive n'évalue pas un livrable&nbsp;: <strong>elle écoute un exposé</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">La démonstration est simplement plus longue&nbsp;: 10 minutes contre 5</span>
+        <span class="el-fb"><p>La durée change, mais ce n'est pas ce qui fait la démonstration. On peut parler dix minutes d'un livrable sans jamais le faire fonctionner.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">La démonstration s'adresse aux commanditaires, la présentation aux pairs</span>
+        <span class="el-fb"><p>Les deux publics sont présents dans les deux cas. Ce qui change, c'est le <strong>rôle donné au public</strong>&nbsp;: tester, manipuler, choisir — plutôt qu'écouter.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">La démonstration est évaluée, la présentation ne l'est pas</span>
+        <span class="el-fb"><p>Les deux le sont&nbsp;: la présentation intermédiaire du 20 avril donnait la note intermédiaire, la démonstration donne la note finale.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="tri" data-src="S13" data-titre="Faire expérimenter, ou décrire">
+    <p class="el-stem">Classez ces choix de démonstration.</p>
+    <p class="el-hint">Le critère&nbsp;: le public reste-t-il spectateur, ou devient-il acteur&nbsp;?</p>
+    <ol class="el-bins">
+      <li data-bin="exp"><span class="el-lbl">Fait expérimenter</span></li>
+      <li data-bin="dec"><span class="el-lbl">Se contente de décrire</span></li>
+    </ol>
+    <ul class="el-cards">
+      <li data-bin="exp">
+        <span class="el-lbl">Faire fonctionner le livrable devant l'auditoire</span>
+        <span class="el-fb"><p><strong>Fait expérimenter</strong> — montrer en action plutôt qu'énumérer des caractéristiques.</p></span>
+      </li>
+      <li data-bin="dec">
+        <span class="el-lbl">Énumérer les fonctionnalités une par une</span>
+        <span class="el-fb"><p><strong>Décrit</strong> — c'est un catalogue&nbsp;: le public n'a rien à faire de ce qu'il entend.</p></span>
+      </li>
+      <li data-bin="exp">
+        <span class="el-lbl">Donner un rôle au public&nbsp;: tester, répondre, manipuler, choisir</span>
+        <span class="el-fb"><p><strong>Fait expérimenter</strong> — impliquer le public est la deuxième règle de la démonstration.</p></span>
+      </li>
+      <li data-bin="exp">
+        <span class="el-lbl">Rappeler pour qui l'objet a été conçu et quel problème il résout</span>
+        <span class="el-fb"><p><strong>Fait expérimenter</strong> — situer le destinataire est ce qui permet au public de juger la <em>pertinence</em>, pas seulement la finition.</p></span>
+      </li>
+      <li data-bin="dec">
+        <span class="el-lbl">Projeter des captures d'écran commentées du livrable</span>
+        <span class="el-fb"><p><strong>Décrit</strong> — une image du livrable n'est pas le livrable. Si la démonstration en direct est risquée, mieux vaut un extrait filmé du fonctionnement réel.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S13" data-titre="Assumer les limites">
+    <p class="el-stem">Une fonctionnalité prévue n'a pas pu être réalisée. Que faire pendant la démonstration&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Le dire, et expliquer pourquoi&nbsp;: c'est un signe de maîtrise, pas d'échec</span>
+        <span class="el-fb"><p>C'est la quatrième règle de la démonstration. Nommer ce qui n'a pas pu être fait, et pourquoi, montre que le groupe a <strong>arbitré en connaissance de cause</strong> — exactement ce que le triangle qualité-coûts-délais impose.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Ne pas l'évoquer&nbsp;: personne ne remarquera l'absence</span>
+        <span class="el-fb"><p>Le commanditaire, lui, la remarquera — c'est son besoin. Et la découvrir après coup coûte bien plus cher que de l'annoncer.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Présenter la fonctionnalité comme si elle existait, en la simulant</span>
+        <span class="el-fb"><p>Cela revient à faire une démonstration de quelque chose qui n'est pas là. C'est aussi la meilleure façon de perdre la confiance du commanditaire.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Expliquer que le délai imparti était de toute façon irréaliste</span>
+        <span class="el-fb"><p>Assumer une limite n'est pas la même chose que la reporter sur le cadre. Dire <em>ce qui</em> n'a pas été fait et <em>pourquoi</em> suffit&nbsp;; en faire un grief affaiblit le propos.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S13" data-titre="Ce qui reste du semestre">
+    <p class="el-stem">Le semestre s'ouvrait sur une définition et se referme sur la même. Laquelle&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">La professionnalisation est un processus, pas un état acquis — et aucune de ces compétences ne s'apprend en une fois</span>
+        <span class="el-fb"><p>C'est la boucle du cours, cette fois <strong>éprouvée</strong>&nbsp;: cadrer un besoin flou, travailler avec un commanditaire réel, arbitrer, tenir une équipe, recevoir des retours, présenter sous contrainte de temps. Toutes se retravaillent — c'est précisément ce que veut dire «&nbsp;processus&nbsp;».</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Un projet réussi est un projet livré dans les délais et le budget</span>
+        <span class="el-fb"><p>C'est la définition du succès dans les chiffres CHAOS de la séance 4, pas le fil du cours. Ce qui restera tient davantage à <strong>ce que le chemin vous a appris</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">La qualité d'un livrable se juge à sa finition</span>
+        <span class="el-fb"><p>C'est justement ce que la démonstration cherche à dépasser&nbsp;: situer le destinataire permet de juger la <strong>pertinence</strong>, pas seulement la finition.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Un bon professionnel est celui qui maîtrise les outils de son métier</span>
+        <span class="el-fb"><p>Les outils s'apprennent&nbsp;; ils ne définissent pas la professionnalisation, qui se joue sur neuf dimensions et à deux échelles — collective et individuelle.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="paires" data-old
+           data-src-label="Rappel · tout le semestre"
+           data-col-a="La notion" data-col-b="Ce qu'elle désigne"
+           data-titre="Dernière traversée — cinq notions">
+    <p class="el-stem">Cinq notions du semestre, une dernière fois.</p>
+    <p class="el-hint">Touchez une vignette à gauche, puis sa description à droite.</p>
+    <ul class="el-pairs">
+      <li data-ico="🧭" data-tint="#9A6300">
+        <span class="el-lbl">Matrice de Turner &amp; Cochrane</span>
+        <span class="el-match">Objectifs définis&nbsp;? méthodes définies&nbsp;? Quatre configurations — Terre, Eau, Feu, Air — et quatre pilotages.</span>
+        <span class="el-fb"><p><strong>Turner &amp; Cochrane</strong> — séance 7. Elle indique par quoi clarifier en premier pour rendre un projet pilotable.</p></span>
+      </li>
+      <li data-ico="⚡" data-tint="#5B3E8E">
+        <span class="el-lbl">Biais cognitif</span>
+        <span class="el-match">Un raccourci de traitement automatique&nbsp;: utile pour décider vite, trompeur quand il fallait ralentir.</span>
+        <span class="el-fb"><p><strong>Biais cognitif</strong> — séance 11. Invisible de l'intérieur, il se loge dans nos certitudes&nbsp;: d'où la stratégie de le nommer.</p></span>
+      </li>
+      <li data-ico="📉" data-tint="#A8004F">
+        <span class="el-lbl">Courbe de l'oubli</span>
+        <span class="el-match">Sans reprise, il reste 58 % après vingt minutes et environ 21 % après un mois — la chute ralentit puis se stabilise.</span>
+        <span class="el-fb"><p><strong>Courbe de l'oubli</strong> — séance 12, Ebbinghaus 1885. Oublier n'est pas un défaut&nbsp;: c'est un système qui trie.</p></span>
+      </li>
+      <li data-ico="🔬" data-tint="#0C7C63">
+        <span class="el-lbl">Analyse du travail</span>
+        <span class="el-match">On zoome sur l'activité&nbsp;: travail réel et travail prescrit, compétences construites en situation.</span>
+        <span class="el-fb"><p><strong>Analyse du travail</strong> — séance 1. L'un des deux regards sur la professionnalisation, avec les approches socio-historiques.</p></span>
+      </li>
+      <li data-ico="🎭" data-tint="#2A6FB5">
+        <span class="el-lbl">État agile</span>
+        <span class="el-match">Accueillir l'imprévu et ajuster&nbsp;: le plan devient une hypothèse de travail, révisable.</span>
+        <span class="el-fb"><p><strong>État agile</strong> — séance 5. C'est un état, pas un trait de caractère — et il se travaille.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S12" data-titre="Rappel — faire durer ce qui a été appris">
+    <p class="el-stem">Rappel de la séance 12&nbsp;: comment retenir durablement ce que ce semestre vous a appris&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">En espaçant de brèves reprises dans le temps, et en se testant plutôt qu'en relisant</span>
+        <span class="el-fb"><p>Les deux techniques aux effets les plus robustes. Cinq reprises espacées laissent environ <strong>94 %</strong> du contenu un mois plus tard, contre <strong>14 %</strong> pour une seule séance intensive.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">En relisant l'ensemble des supports de cours une dernière fois, en une session</span>
+        <span class="el-fb"><p>C'est exactement la combinaison la moins efficace&nbsp;: relire donne une <strong>impression de maîtrise</strong>, et le bloc unique laisse environ 14 % un mois plus tard.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">En surlignant les passages essentiels pour les retrouver plus tard</span>
+        <span class="el-fb"><p>Surligner donne le sentiment d'avoir traité le contenu alors qu'on l'a surtout parcouru. Les effets robustes sont ailleurs&nbsp;: <strong>se tester, espacer</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">En comptant sur la pratique&nbsp;: ce qui est utile reviendra tout seul</span>
+        <span class="el-fb"><p>La pratique aide, mais elle ne remplace pas la reprise&nbsp;: la mémoire trie en fonction de l'utilité future, et <strong>ce qui n'est jamais réactivé est éliminé</strong>.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S10" data-titre="Rappel — un dernier retour">
+    <p class="el-stem">Rappel de la séance 10&nbsp;: vous donnez un retour final à un autre groupe sur sa démonstration. Par quoi commencer&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Par un fait&nbsp;: un moment identifiable de la démonstration</span>
+        <span class="el-fb"><p>Oui — puis expliciter son interprétation <em>comme hypothèse</em>, interroger avant de conclure, et viser l'action suivante. Un retour ancré dans les faits ouvre une <strong>posture d'apprentissage</strong>&nbsp;; formulé comme un jugement, il déclenche une posture défensive.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Par une appréciation générale, pour mettre le groupe à l'aise</span>
+        <span class="el-fb"><p>Une impression générale n'est pas exploitable. La bienveillance passe par la <strong>précision</strong>, pas par le préambule.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Par ce qui a manqué&nbsp;: c'est le plus utile pour progresser</span>
+        <span class="el-fb"><p>C'est un regard déficitaire — celui que la séance 11 invite à quitter. Partir de <strong>ce qui fonctionne</strong> n'empêche pas de nommer ce qui manque ensuite.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Par la comparaison avec les autres groupes passés avant</span>
+        <span class="el-fb"><p>Comparer déplace le retour vers un classement. Le retour porte sur <strong>cette production</strong> et sur le besoin auquel elle répond.</p></span>
+      </li>
+    </ul>
+  </article>
+
+</template>
+
 <script src="../assets/support.js"></script>
+<script src="../assets/elearn.js"></script>
 <script src="../assets/vendor/reveal/reveal.min.js"></script>
 <script>
   const deck = new Reveal({
@@ -887,8 +1081,10 @@
     });
   });
 
-  // Bascule présentation <-> support de cours (assets/support.js pilote le DOM).
-  document.addEventListener('support:change', function(e){
+  // Les deux modes annexes (support de cours, e-learning) masquent les diapos :
+  // sans cette reconfiguration, le clavier de reveal continue de tourner
+  // derrière l'écran affiché, et la mise en page est périmée au retour.
+  function surModeAnnexe(e){
     var open = e.detail.open;
     deck.configure({ controls: !open, progress: !open, keyboard: !open });
     if(!open){
@@ -896,7 +1092,9 @@
       applyCover();
       setTimeout(syncChrome, 60);
     }
-  });
+  }
+  document.addEventListener('support:change', surModeAnnexe);
+  document.addEventListener('elearn:change', surModeAnnexe);
 </script>
 <script>
   // ---- minuteur d'activité type Time Timer (enchaîne les étapes) ----

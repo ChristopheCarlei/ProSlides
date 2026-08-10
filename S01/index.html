@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="../assets/vendor/reveal/reveal.min.css" />
 <link rel="stylesheet" href="../assets/deck.css" />
 <link rel="stylesheet" href="../assets/support.css" />
+<link rel="stylesheet" href="../assets/elearn.css" />
 
 <style>
   /* Habillage commun (police, palette, bandeau, frise, pied, boutons) :
@@ -775,7 +776,179 @@ On pose ensemble les règles du jeu !</p>
 
 </template>
 
+<!-- ==========================================================================
+     MODE E-LEARNING — parcours d'auto-test (assets/elearn.js + elearn.css)
+     Rédigé indépendamment des diapos et du support : troisième contenu, à
+     maintenir en parallèle. Types : qcm · paires · tri · ordre.
+     Première séance : aucun rappel possible, tout porte sur S01.
+     ========================================================================== -->
+<template id="elearn-src">
+
+  <div class="el-meta" data-seance="01" data-titre="Cadre &amp; objectifs">
+    <p>Six activités pour vérifier que le cadre du cours est clair et que la notion de professionnalisation est bien posée.</p>
+    <p>Chaque réponse est commentée&nbsp;: on vous dit pourquoi elle tient, ou ce qui lui manque. Vous pouvez réessayer autant de fois que nécessaire.</p>
+  </div>
+
+  <article class="el-q" data-type="qcm" data-src="S01" data-titre="La professionnalisation, un processus">
+    <p class="el-stem">«&nbsp;La professionnalisation est un processus, et non un état acquis une fois pour toutes.&nbsp;» Qu'est-ce que cela implique&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Personne n'est «&nbsp;professionnalisé&nbsp;» ou «&nbsp;non professionnalisé&nbsp;»&nbsp;: on l'est plus ou moins, et toujours en mouvement</span>
+        <span class="el-fb"><p>Exactement. C'est une <strong>question de degré et de mouvement</strong>, pas une frontière. La même idée vaut pour un groupe de métier et pour une personne au travail.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Le processus s'achève avec l'obtention du diplôme qui donne accès au métier</span>
+        <span class="el-fb"><p>Le diplôme est une étape, pas un point d'arrivée. Le processus continue tant que la personne exerce&nbsp;: c'est précisément ce que veut dire <strong>«&nbsp;pas un état acquis une fois pour toutes&nbsp;»</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">La notion ne concerne que les métiers déjà reconnus comme des professions</span>
+        <span class="el-fb"><p>C'est l'inverse&nbsp;: les métiers de l'éducation et de la formation intéressent justement parce qu'ils n'ont <strong>ni le même degré de reconnaissance, ni les mêmes voies d'accès</strong>. Le processus se lit surtout là où il est inachevé.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Elle se mesure au nombre d'années d'expérience dans le métier</span>
+        <span class="el-fb"><p>L'ancienneté ne suffit pas. Le processus est <strong>à la fois collectif</strong> — ce que fait un groupe de métier — <strong>et individuel</strong> — ce qu'une personne construit en exerçant.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="tri" data-src="S01" data-titre="Deux regards sur un même objet">
+    <p class="el-stem">Chaque question ci-dessous relève d'un des deux regards sur la professionnalisation. Classez-les.</p>
+    <p class="el-hint">Le repère&nbsp;: dézoome-t-on sur le groupe, ou zoome-t-on sur l'activité&nbsp;?</p>
+    <ol class="el-bins">
+      <li data-bin="socio"><span class="el-lbl">Approches socio-historiques</span></li>
+      <li data-bin="trav"><span class="el-lbl">Analyse du travail</span></li>
+    </ol>
+    <ul class="el-cards">
+      <li data-bin="socio">
+        <span class="el-lbl">«&nbsp;Quel diplôme faut-il pour exercer&nbsp;?&nbsp;»</span>
+        <span class="el-fb"><p><strong>Socio-historique</strong> — les conditions d'accès relèvent de la régulation du groupe professionnel.</p></span>
+      </li>
+      <li data-bin="socio">
+        <span class="el-lbl">«&nbsp;Comment ce métier a-t-il obtenu sa reconnaissance&nbsp;?&nbsp;»</span>
+        <span class="el-fb"><p><strong>Socio-historique</strong> — histoire et identité du métier, enjeux socio-politiques.</p></span>
+      </li>
+      <li data-bin="trav">
+        <span class="el-lbl">«&nbsp;Qu'est-ce que cette personne apprend en faisant son travail&nbsp;?&nbsp;»</span>
+        <span class="el-fb"><p><strong>Analyse du travail</strong> — le développement professionnel se joue dans l'exercice lui-même.</p></span>
+      </li>
+      <li data-bin="trav">
+        <span class="el-lbl">«&nbsp;Quel écart y a-t-il entre le travail prescrit et le travail réel&nbsp;?&nbsp;»</span>
+        <span class="el-fb"><p><strong>Analyse du travail</strong> — c'est même son couple de notions le plus caractéristique.</p></span>
+      </li>
+      <li data-bin="socio">
+        <span class="el-lbl">«&nbsp;Ce groupe dispose-t-il d'une association ou d'un ordre&nbsp;?&nbsp;»</span>
+        <span class="el-fb"><p><strong>Socio-historique</strong> — l'organisation collective est un marqueur classique de la reconnaissance d'une profession.</p></span>
+      </li>
+      <li data-bin="trav">
+        <span class="el-lbl">«&nbsp;Quelles compétences se construisent en situation&nbsp;?&nbsp;»</span>
+        <span class="el-fb"><p><strong>Analyse du travail</strong> — on regarde l'activité réelle, pas le statut du métier.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S01" data-titre="Comment la note est construite">
+    <p class="el-stem">Comment la note finale du cours est-elle construite&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">En contrôle continu sur 6 points&nbsp;: 1,5 point individuel et 4,5 points pour le groupe, sans examen terminal</span>
+        <span class="el-fb"><p>C'est cela. Côté individuel&nbsp;: présence, participation et implication dans le groupe, 0,5 point chacune. Côté groupe&nbsp;: prises de parole (1), quatre rendus intermédiaires (1,5) et livrable final (2).</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Par un examen écrit organisé en fin de semestre</span>
+        <span class="el-fb"><p>Il n'y a <strong>pas d'examen</strong>. La note se construit au fil des séances&nbsp;: c'est ce qui donne son poids à la présence et à l'engagement.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Uniquement sur le livrable final remis au commanditaire</span>
+        <span class="el-fb"><p>Le livrable final ne pèse que 2 points sur 6. Les rendus intermédiaires, les prises de parole et la part individuelle comptent pour les 4 autres.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Sur la moyenne des rendus&nbsp;; la présence n'entre pas dans le calcul</span>
+        <span class="el-fb"><p>La présence est explicitement notée (0,5 point), tout comme la participation et l'implication dans le groupe. En pédagogie par projet, <strong>être là fait partie du travail</strong>.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="paires" data-src="S01"
+           data-col-a="La notion" data-col-b="Ce qu'elle désigne"
+           data-titre="Les notions du cadre">
+    <p class="el-stem">Quatre notions posées aujourd'hui. Retrouvez ce que chacune désigne.</p>
+    <p class="el-hint">Touchez une vignette à gauche, puis sa description à droite.</p>
+    <ul class="el-pairs">
+      <li data-ico="🎯" data-tint="#A8004F">
+        <span class="el-lbl">Commanditaire</span>
+        <span class="el-match">L'organisation extérieure qui adresse au groupe une demande réelle, et qui recevra le livrable.</span>
+        <span class="el-fb"><p><strong>Commanditaire</strong> — association, service ou institution de formation. C'est ce qui distingue ce cours d'un exercice&nbsp;: quelqu'un attend vraiment quelque chose.</p></span>
+      </li>
+      <li data-ico="🔭" data-tint="#2A6FB5">
+        <span class="el-lbl">Approches socio-historiques</span>
+        <span class="el-match">On dézoome sur le groupe&nbsp;: statut, reconnaissance sociale, histoire du métier, conditions d'accès.</span>
+        <span class="el-fb"><p><strong>Approches socio-historiques</strong> — la question directrice est «&nbsp;comment un métier devient-il une profession reconnue&nbsp;?&nbsp;».</p></span>
+      </li>
+      <li data-ico="🔬" data-tint="#0C7C63">
+        <span class="el-lbl">Analyse du travail</span>
+        <span class="el-match">On zoome sur l'activité&nbsp;: travail réel et travail prescrit, compétences construites en situation.</span>
+        <span class="el-fb"><p><strong>Analyse du travail</strong> — la question directrice est «&nbsp;qu'apprend-on réellement en travaillant&nbsp;?&nbsp;».</p></span>
+      </li>
+      <li data-ico="📈" data-tint="#9A6300">
+        <span class="el-lbl">Contrôle continu</span>
+        <span class="el-match">La note se construit au fil du semestre, sans épreuve terminale.</span>
+        <span class="el-fb"><p><strong>Contrôle continu</strong> — deux séances sont toutefois évaluées comme telles&nbsp;: la présentation intermédiaire du 20 avril et la démonstration du 25 mai.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="ordre" data-src="S01" data-titre="Le calendrier des rendus">
+    <p class="el-stem">Remettez les rendus du semestre dans l'ordre du calendrier.</p>
+    <p class="el-hint">Glissez les rangées, ou utilisez les flèches.</p>
+    <ol class="el-seq">
+      <li>
+        <span class="el-lbl">Constitution des groupes, sur Padlet</span>
+        <span class="el-fb">
+          <p>Le calendrier suit la logique du projet&nbsp;: on se constitue, on analyse, on juge de la faisabilité, on s'engage sur un livrable, on planifie.</p>
+          <ul>
+            <li><strong>2 mars</strong> — constitution des groupes (Padlet)</li>
+            <li><strong>16 mars</strong> — analyse de l'existant, individuelle</li>
+            <li><strong>23 mars</strong> — analyse de l'existant, collective</li>
+            <li><strong>13 avril</strong> — dossier de faisabilité</li>
+            <li><strong>27 avril</strong> — objectif &amp; livrable</li>
+            <li><strong>25 mai</strong> — plan d'action et présentation du livrable</li>
+          </ul>
+        </span>
+      </li>
+      <li><span class="el-lbl">Analyse de l'existant — version individuelle</span></li>
+      <li><span class="el-lbl">Analyse de l'existant — version collective</span></li>
+      <li><span class="el-lbl">Dossier de faisabilité</span></li>
+      <li><span class="el-lbl">Objectif &amp; livrable</span></li>
+      <li><span class="el-lbl">Plan d'action et présentation du livrable</span></li>
+    </ol>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S01" data-titre="La constitution des groupes">
+    <p class="el-stem">Quand les groupes de projet se constituent-ils, et selon quelle règle&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">À la séance 2, par libre choix, à quatre personnes au maximum</span>
+        <span class="el-fb"><p>Oui. Les groupes <strong>n'existent pas encore aujourd'hui</strong>&nbsp;: la séance 1 sert à repérer les projets proposés et les personnes avec qui vous pourriez avancer.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Dès aujourd'hui, par tirage au sort</span>
+        <span class="el-fb"><p>Ni aujourd'hui, ni par tirage au sort. Le choix est libre, et il se fait à la séance suivante — le temps de parcourir les projets déposés sur Moodle.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">À la séance 2, mais l'enseignant répartit les groupes selon les projets</span>
+        <span class="el-fb"><p>La date est juste, la modalité non&nbsp;: la constitution est <strong>libre</strong>. À vous de vous accorder sur le projet et les personnes.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">À la séance 3, une fois l'analyse de l'existant rendue</span>
+        <span class="el-fb"><p>Trop tard&nbsp;: la constitution des groupes est elle-même une échéance, fixée au <strong>2 mars</strong>. L'inscription Moodle ferme d'ailleurs à l'issue de la séance 2.</p></span>
+      </li>
+    </ul>
+  </article>
+
+</template>
+
 <script src="../assets/support.js"></script>
+<script src="../assets/elearn.js"></script>
 <script src="../assets/vendor/reveal/reveal.min.js"></script>
 <script>
   const deck = new Reveal({
@@ -873,8 +1046,10 @@ On pose ensemble les règles du jeu !</p>
     });
   });
 
-  // Bascule présentation <-> support de cours (assets/support.js pilote le DOM).
-  document.addEventListener('support:change', function(e){
+  // Les deux modes annexes (support de cours, e-learning) masquent les diapos :
+  // sans cette reconfiguration, le clavier de reveal continue de tourner
+  // derrière l'écran affiché, et la mise en page est périmée au retour.
+  function surModeAnnexe(e){
     var open = e.detail.open;
     deck.configure({ controls: !open, progress: !open, keyboard: !open });
     if(!open){
@@ -882,7 +1057,9 @@ On pose ensemble les règles du jeu !</p>
       applyCover();
       setTimeout(syncChrome, 60);
     }
-  });
+  }
+  document.addEventListener('support:change', surModeAnnexe);
+  document.addEventListener('elearn:change', surModeAnnexe);
 </script>
 <script>
   // ---- minuteur d'activité type Time Timer (enchaîne les étapes) ----

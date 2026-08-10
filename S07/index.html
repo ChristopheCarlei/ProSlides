@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="../assets/vendor/reveal/reveal.min.css" />
 <link rel="stylesheet" href="../assets/deck.css" />
 <link rel="stylesheet" href="../assets/support.css" />
+<link rel="stylesheet" href="../assets/elearn.css" />
 
 <style>
   /* Habillage commun (police, palette, bandeau, frise, pied, boutons) :
@@ -1419,7 +1420,220 @@
 
 </template>
 
+<!-- ==========================================================================
+     MODE E-LEARNING — parcours d'auto-test (assets/elearn.js + elearn.css)
+     Rédigé indépendamment des diapos et du support : troisième contenu, à
+     maintenir en parallèle. Types : qcm · paires · tri · ordre.
+     ========================================================================== -->
+<template id="elearn-src">
+
+  <div class="el-meta" data-seance="07" data-titre="Gestion de projet &amp; planification">
+    <p>Huit activités&nbsp;: les étapes d'un projet, la matrice de Turner &amp; Cochrane, la carte des acteurs — et deux rappels des séances 4 et 6.</p>
+    <p>Chaque réponse est commentée&nbsp;: on vous dit pourquoi elle tient, ou ce qui lui manque. Vous pouvez réessayer autant de fois que nécessaire.</p>
+  </div>
+
+  <article class="el-q" data-type="ordre" data-src="S07" data-titre="Les quatre étapes d'un projet">
+    <p class="el-stem">Remettez dans l'ordre les quatre étapes d'un projet.</p>
+    <p class="el-hint">Glissez les rangées, ou utilisez les flèches.</p>
+    <ol class="el-seq">
+      <li>
+        <span class="el-lbl">Avant-projet</span>
+        <span class="el-fb">
+          <p>Avant-projet → planification → réalisation → clôture.</p>
+          <p>Le point essentiel n'est pas la liste, c'est ce qu'elle implique&nbsp;: <strong>la maîtrise est maximale au début</strong>, quand tout est encore modifiable, et diminue à mesure que les décisions s'accumulent. D'où le poids du cadrage initial — et le fait que deux projets sur trois échouent faute de l'avoir fait.</p>
+        </span>
+      </li>
+      <li><span class="el-lbl">Planification</span></li>
+      <li><span class="el-lbl">Réalisation</span></li>
+      <li><span class="el-lbl">Clôture</span></li>
+    </ol>
+  </article>
+
+  <article class="el-q" data-type="paires" data-src="S07"
+           data-col-a="La configuration" data-col-b="Comment la piloter"
+           data-titre="La matrice de Turner &amp; Cochrane">
+    <p class="el-stem">Quatre configurations de projet, selon que les objectifs et les méthodes sont définis ou non. Retrouvez le pilotage de chacune.</p>
+    <p class="el-hint">Touchez une vignette à gauche, puis sa description à droite.</p>
+    <ul class="el-pairs">
+      <li data-ico="🏔️" data-tint="#9A6300">
+        <span class="el-lbl">Terre — le chef d'orchestre</span>
+        <span class="el-match">Objectifs et méthodes définis&nbsp;: on pilote par le planning — découper, jalonner, tenir les délais.</span>
+        <span class="el-fb"><p><strong>Terre</strong> — cas des projets d'ingénierie ou de construction. C'est la case où un projet devient réellement pilotable.</p></span>
+      </li>
+      <li data-ico="💧" data-tint="#2A6FB5">
+        <span class="el-lbl">Eau — le coach</span>
+        <span class="el-match">Objectifs définis, méthodes à inventer&nbsp;: on pilote par étapes — prototyper, tester, ajuster en avançant.</span>
+        <span class="el-fb"><p><strong>Eau</strong> — typique du développement de produit&nbsp;: on sait où l'on va, pas encore comment.</p></span>
+      </li>
+      <li data-ico="🔥" data-tint="#A8004F">
+        <span class="el-lbl">Feu — le sculpteur</span>
+        <span class="el-match">Objectifs à préciser, méthodes définies&nbsp;: on pilote par les usages — faire émerger le besoin par itérations.</span>
+        <span class="el-fb"><p><strong>Feu</strong> — cas des systèmes d'information&nbsp;: l'outil existe, le besoin réel se découvre en le confrontant aux personnes concernées.</p></span>
+      </li>
+      <li data-ico="🌬️" data-tint="#5B3E8E">
+        <span class="el-lbl">Air — l'équilibriste</span>
+        <span class="el-match">Objectifs à préciser et méthodes à inventer&nbsp;: on pilote par la vision — avancer à petits pas et sécuriser chaque acquis.</span>
+        <span class="el-fb"><p><strong>Air</strong> — recherche, conduite du changement. Le plus incertain des quatre&nbsp;: beaucoup de projets étudiants démarrent ici.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S07" data-titre="Faire glisser son projet">
+    <p class="el-stem">Votre projet est dans la case «&nbsp;Air&nbsp;»&nbsp;: ni les objectifs ni les méthodes ne sont arrêtés. Que faire&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Clarifier d'abord les objectifs, puis les méthodes, pour faire glisser le projet vers «&nbsp;Terre&nbsp;»</span>
+        <span class="el-fb"><p>Oui. <strong>Un projet ne reste pas dans sa case.</strong> La matrice ne sert pas à étiqueter mais à indiquer <em>par quoi commencer</em>&nbsp;: les objectifs d'abord, car ce sont eux qui rendent les méthodes discutables.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Accepter la case et piloter par la vision jusqu'au bout</span>
+        <span class="el-fb"><p>Piloter par la vision est la bonne réponse <em>immédiate</em> — avancer à petits pas, sécuriser chaque acquis. Mais rester en Air toute la durée du projet, c'est renoncer à le rendre pilotable.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Choisir des méthodes précises tout de suite&nbsp;: cela fixera les objectifs</span>
+        <span class="el-fb"><p>L'ordre est inversé. Arrêter des méthodes sans objectif clair produit une belle mécanique qui répond à la mauvaise question&nbsp;: on glisse vers «&nbsp;Feu&nbsp;», pas vers «&nbsp;Terre&nbsp;».</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Changer de projet&nbsp;: cette configuration n'est pas viable en un semestre</span>
+        <span class="el-fb"><p>Elle est incertaine, pas impossible — et c'est le point de départ ordinaire d'une conduite du changement. Le travail consiste à en <strong>sortir</strong>, pas à l'éviter.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="tri" data-src="S07" data-titre="La carte des acteurs">
+    <p class="el-stem">Modèle d'Herbemont &amp; César&nbsp;: chaque personne se situe sur deux axes, la synergie — l'énergie qu'elle met <em>pour</em> — et l'antagonisme — l'énergie qu'elle met <em>contre</em>. Sur qui investir votre énergie&nbsp;?</p>
+    <p class="el-hint">La stratégie&nbsp;: faire grandir le triangle d'or.</p>
+    <ol class="el-bins">
+      <li data-bin="oui"><span class="el-lbl">Y investir son énergie</span></li>
+      <li data-bin="non"><span class="el-lbl">Ne pas s'y épuiser</span></li>
+    </ol>
+    <ul class="el-cards">
+      <li data-bin="oui">
+        <span class="el-lbl">Les hésitants — partagés, ils attendent de voir</span>
+        <span class="el-fb"><p><strong>Cible prioritaire</strong> — un premier résultat concret les fait basculer.</p></span>
+      </li>
+      <li data-bin="non">
+        <span class="el-lbl">Les révoltés — opposition frontale et déterminée</span>
+        <span class="el-fb"><p><strong>Ne pas s'y épuiser</strong> — le retour est quasi nul. On ne déplace pas les révoltés.</p></span>
+      </li>
+      <li data-bin="oui">
+        <span class="el-lbl">Le triangle d'or — très engagés et critiques à la fois</span>
+        <span class="el-fb"><p><strong>C'est la cible</strong> — ils contestent pour améliorer, pas pour bloquer. Tout l'enjeu est de faire grandir ce groupe.</p></span>
+      </li>
+      <li data-bin="oui">
+        <span class="el-lbl">Les passifs — ni pour, ni contre, ni concernés</span>
+        <span class="el-fb"><p><strong>À embarquer</strong> — souvent les plus nombreux, ils suivent le mouvement collectif. C'est un réservoir, pas une perte de temps.</p></span>
+      </li>
+      <li data-bin="non">
+        <span class="el-lbl">Les grognons — ils râlent sans jamais agir contre</span>
+        <span class="el-fb"><p><strong>Ne pas s'y épuiser</strong> — écouter la plainte, sans en faire un conflit. Leur antagonisme reste faible&nbsp;: ils ne bloquent rien.</p></span>
+      </li>
+      <li data-bin="oui">
+        <span class="el-lbl">Les engagés — favorables et actifs, mais peu critiques</span>
+        <span class="el-fb"><p><strong>Précieux</strong> — à condition de ne pas prendre leur soutien pour une validation&nbsp;: ils ne vous diront pas ce qui ne va pas.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S07" data-titre="Le piège des engagés">
+    <p class="el-stem">Un acteur soutient votre projet avec enthousiasme et ne formule jamais la moindre réserve. Quel est le risque&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Prendre son soutien pour une validation&nbsp;: il est favorable, mais il ne vous dira pas ce qui ne va pas</span>
+        <span class="el-fb"><p>C'est le piège des <strong>engagés</strong>. À l'inverse, le <strong>triangle d'or</strong> — synergie forte, antagonisme moyen — conteste pour améliorer&nbsp;: c'est lui qui fait progresser le projet.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Aucun&nbsp;: un soutien sans réserve est exactement ce qu'il faut viser</span>
+        <span class="el-fb"><p>La cible n'est pas l'unanimité bienveillante&nbsp;: c'est le <strong>triangle d'or</strong>, dont l'antagonisme moyen est précisément ce qui rend la critique utile.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Qu'il bascule brutalement dans l'opposition</span>
+        <span class="el-fb"><p>Ce profil-là — beaucoup d'énergie dans les deux sens — ce sont les <strong>déchirés</strong>, instables par nature. Les engagés, eux, restent favorables&nbsp;: le risque est leur silence critique.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Qu'il monopolise le temps de parole dans les réunions</span>
+        <span class="el-fb"><p>Ce n'est pas ce que la carte des acteurs cherche à repérer. Elle situe chacun sur <strong>synergie</strong> et <strong>antagonisme</strong>, pas sur le volume de participation.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="paires" data-src="S07"
+           data-col-a="L'outil" data-col-b="Ce qu'il rend visible"
+           data-titre="Kanban, Gantt et les bonnes pratiques">
+    <p class="el-stem">Quatre repères de pilotage. Retrouvez ce que chacun apporte.</p>
+    <p class="el-hint">Touchez une vignette à gauche, puis sa description à droite.</p>
+    <ul class="el-pairs">
+      <li data-ico="📋" data-tint="#0C7C63">
+        <span class="el-lbl">Kanban</span>
+        <span class="el-match">L'état d'avancement des tâches, par colonnes&nbsp;: à faire, en cours, terminé.</span>
+        <span class="el-fb"><p><strong>Kanban</strong> — son intérêt principal est de rendre l'avancement <em>visible par tout le groupe</em>, pas seulement par la personne qui pilote.</p></span>
+      </li>
+      <li data-ico="📊" data-tint="#2A6FB5">
+        <span class="el-lbl">Diagramme de Gantt</span>
+        <span class="el-match">La place des tâches dans le temps, leurs dépendances et le chemin critique.</span>
+        <span class="el-fb"><p><strong>Gantt</strong> — là où le Kanban montre l'état, le Gantt montre l'<em>enchaînement</em>&nbsp;: ce qui doit être fini pour que la suite démarre.</p></span>
+      </li>
+      <li data-ico="🧭" data-tint="#A8004F">
+        <span class="el-lbl">Un cap clair</span>
+        <span class="el-match">Objectifs, périmètre et livrables définis dès le départ — y compris ce qui en est exclu.</span>
+        <span class="el-fb"><p><strong>Un cap clair</strong> — ce qui n'est pas dans le périmètre doit être dit <em>explicitement</em>, sinon il y rentrera tout seul.</p></span>
+      </li>
+      <li data-ico="✂️" data-tint="#9A6300">
+        <span class="el-lbl">Découper et planifier</span>
+        <span class="el-match">Des tâches concrètes et estimables, des échéances, un pilotage régulier.</span>
+        <span class="el-fb"><p><strong>Découper</strong> — le test&nbsp;: une tâche que l'on ne sait pas estimer est une tâche trop grosse.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S07" data-titre="Sur quoi les projets échouent">
+    <p class="el-stem">Parmi les six facteurs de réussite, lequel de ces constats est le plus fidèle à ce qui a été dit&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">La plupart des projets échouent sur la coordination, pas sur la technique</span>
+        <span class="el-fb"><p>C'est le constat de la séance, et il rejoint les chiffres de la séance 4&nbsp;: la cause la plus citée n'est pas technique. D'où le poids de la <strong>maturité émotionnelle</strong> — la qualité des liens entre les personnes qui collaborent — parmi les facteurs de réussite.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Les projets échouent surtout par manque de compétences techniques dans l'équipe</span>
+        <span class="el-fb"><p>C'est l'intuition courante, et elle est démentie. Des rôles clairs et des points d'équipe fréquents pèsent davantage&nbsp;: <strong>la coordination avant la technique</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Les projets échouent surtout faute de budget suffisant</span>
+        <span class="el-fb"><p>Le budget est une contrainte du triangle, pas la cause dominante. Parmi les six facteurs, aucun n'est financier&nbsp;: soutien exécutif, maturité émotionnelle, implication des utilisateurs, gestion, objectifs clairs, décomposition.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Les projets échouent surtout parce que les utilisateurs changent d'avis</span>
+        <span class="el-fb"><p>L'implication des utilisateurs est justement un <strong>facteur de réussite</strong>&nbsp;: mieux vaut qu'ils participent aux décisions tôt que de découvrir le désaccord à la livraison.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S06" data-titre="Rappel — transformer un retour">
+    <p class="el-stem">Rappel de la séance 6&nbsp;: vous recevez un retour avec lequel vous n'êtes pas d'accord. Que faire sur le moment&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Écouter et noter sans se justifier&nbsp;: le tri vient ensuite, à froid</span>
+        <span class="el-fb"><p>Oui&nbsp;: <strong>un retour que l'on conteste sur le moment est un retour que l'on n'entend pas</strong>. Rien n'oblige à le suivre — mais le trier suppose de l'avoir d'abord reçu en entier.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Expliquer immédiatement pourquoi le choix critiqué était justifié</span>
+        <span class="el-fb"><p>C'est la réaction naturelle, et elle ferme l'écoute. Elle coupe aussi la parole à la personne qui allait peut-être dire l'essentiel après.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Le noter puis l'écarter&nbsp;: un retour contesté n'est pas fiable</span>
+        <span class="el-fb"><p>Écarter d'avance revient à ne trier que ce qui plaît. Le signal utile est ailleurs&nbsp;: ce qui <strong>revient chez plusieurs personnes</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Demander à la personne de reformuler jusqu'à ce que ce soit acceptable</span>
+        <span class="el-fb"><p>Demander une précision est légitime&nbsp;; négocier la formulation jusqu'à neutraliser la critique ne l'est pas.</p></span>
+      </li>
+    </ul>
+  </article>
+
+</template>
+
 <script src="../assets/support.js"></script>
+<script src="../assets/elearn.js"></script>
 <script src="../assets/vendor/reveal/reveal.min.js"></script>
 <script>
   const deck = new Reveal({
@@ -1523,8 +1737,10 @@
     });
   });
 
-  // Bascule présentation <-> support de cours (assets/support.js pilote le DOM).
-  document.addEventListener('support:change', function(e){
+  // Les deux modes annexes (support de cours, e-learning) masquent les diapos :
+  // sans cette reconfiguration, le clavier de reveal continue de tourner
+  // derrière l'écran affiché, et la mise en page est périmée au retour.
+  function surModeAnnexe(e){
     var open = e.detail.open;
     deck.configure({ controls: !open, progress: !open, keyboard: !open });
     if(!open){
@@ -1532,7 +1748,9 @@
       applyCover();
       setTimeout(syncChrome, 60);
     }
-  });
+  }
+  document.addEventListener('support:change', surModeAnnexe);
+  document.addEventListener('elearn:change', surModeAnnexe);
 </script>
 <script>
   // ---- minuteur d'activité type Time Timer (enchaîne les étapes) ----

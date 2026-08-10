@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="../assets/vendor/reveal/reveal.min.css" />
 <link rel="stylesheet" href="../assets/deck.css" />
 <link rel="stylesheet" href="../assets/support.css" />
+<link rel="stylesheet" href="../assets/elearn.css" />
 
 <style>
   /* Habillage commun (police, palette, bandeau, frise, pied, boutons) :
@@ -805,7 +806,204 @@
 
 </template>
 
+<!-- ==========================================================================
+     MODE E-LEARNING — parcours d'auto-test (assets/elearn.js + elearn.css)
+     Rédigé indépendamment des diapos et du support : troisième contenu, à
+     maintenir en parallèle. Types : qcm · paires · tri · ordre.
+     Séance évaluée, peu de théorie propre : le parcours porte surtout sur le
+     traitement du feedback et sur la révision de l'avant-projet.
+     ========================================================================== -->
+<template id="elearn-src">
+
+  <div class="el-meta" data-seance="08" data-titre="Présentations intermédiaires">
+    <p>Sept activités&nbsp;: transformer un retour en décision, et réviser tout ce que l'avant-projet a mobilisé depuis février.</p>
+    <p>Chaque réponse est commentée&nbsp;: on vous dit pourquoi elle tient, ou ce qui lui manque. Vous pouvez réessayer autant de fois que nécessaire.</p>
+  </div>
+
+  <article class="el-q" data-type="ordre" data-src="S08" data-titre="Transformer un retour en décision">
+    <p class="el-stem">Remettez dans l'ordre les trois temps du traitement d'un feedback.</p>
+    <p class="el-hint">Glissez les rangées, ou utilisez les flèches.</p>
+    <ol class="el-seq">
+      <li>
+        <span class="el-lbl">Écouter — noter sans se justifier</span>
+        <span class="el-fb">
+          <p>Trois temps distincts, à ne pas confondre&nbsp;:</p>
+          <ul>
+            <li><strong>Écouter</strong> — répondre pendant le retour, c'est cesser de l'entendre.</li>
+            <li><strong>Trier</strong> — tous les retours ne se valent pas. Repérer ce qui revient chez plusieurs personnes&nbsp;: c'est là qu'est le signal.</li>
+            <li><strong>Décider</strong> — traduire les retours retenus en actions concrètes, avec une échéance.</li>
+          </ul>
+          <p><strong>Un retour sans décision est un retour perdu.</strong></p>
+        </span>
+      </li>
+      <li><span class="el-lbl">Trier — repérer ce qui revient chez plusieurs personnes</span></li>
+      <li><span class="el-lbl">Décider — traduire en actions concrètes, avec une échéance</span></li>
+    </ol>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S08" data-titre="Le statut des retours du commanditaire">
+    <p class="el-stem">Votre commanditaire formule une réserve que personne d'autre n'a soulevée. Comment la traiter&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">À part&nbsp;: c'est la personne qui recevra le livrable, son retour ne se traite pas comme un avis parmi d'autres</span>
+        <span class="el-fb"><p>C'est le point de vigilance de la séance. La règle du «&nbsp;ce qui revient chez plusieurs personnes&nbsp;» sert à trier les avis <em>de même statut</em>&nbsp;; le commanditaire, lui, a un <strong>statut particulier</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Comme les autres&nbsp;: un seul avis isolé n'est pas un signal</span>
+        <span class="el-fb"><p>La règle du signal vaut entre pairs. Appliquée au commanditaire, elle conduirait à écarter précisément la personne <strong>pour qui le livrable est fait</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">L'appliquer telle quelle, sans discussion</span>
+        <span class="el-fb"><p>Le statut particulier n'est pas une injonction. Il justifie d'en <strong>discuter le fond</strong> plutôt que de la noyer dans la masse — pas de renoncer à votre analyse.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">La mettre de côté jusqu'au rendu final</span>
+        <span class="el-fb"><p>Différer, c'est laisser un désaccord se découvrir à la livraison. Un retour n'a de valeur que <strong>transformé en décision</strong>, avec une échéance.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="tri" data-src="S08" data-titre="Ce qui est observé aujourd'hui">
+    <p class="el-stem">La présentation est évaluée sur trois plans. Classez ces éléments.</p>
+    <p class="el-hint">Le fond, la forme, la gestion du temps.</p>
+    <ol class="el-bins">
+      <li data-bin="fond"><span class="el-lbl">Le fond</span></li>
+      <li data-bin="forme"><span class="el-lbl">La forme</span></li>
+      <li data-bin="temps"><span class="el-lbl">La gestion du temps</span></li>
+    </ol>
+    <ul class="el-cards">
+      <li data-bin="fond">
+        <span class="el-lbl">La clarté du besoin exprimé par le commanditaire</span>
+        <span class="el-fb"><p><strong>Le fond</strong> — avec la qualité de l'analyse de l'existant et la cohérence de la direction retenue.</p></span>
+      </li>
+      <li data-bin="forme">
+        <span class="el-lbl">Le non-verbal&nbsp;: voix, regard, posture</span>
+        <span class="el-fb"><p><strong>La forme</strong> — le non-verbal porte le message autant que les mots, comme vu en séance 6.</p></span>
+      </li>
+      <li data-bin="temps">
+        <span class="el-lbl">Cinq minutes, ni plus ni moins</span>
+        <span class="el-fb"><p><strong>La gestion du temps</strong> — et c'est bien «&nbsp;ni plus ni moins&nbsp;»&nbsp;: finir en deux minutes n'est pas mieux que déborder.</p></span>
+      </li>
+      <li data-bin="fond">
+        <span class="el-lbl">La cohérence de la direction retenue par le groupe</span>
+        <span class="el-fb"><p><strong>Le fond</strong> — c'est le volet «&nbsp;prioriser&nbsp;» de l'avant-projet&nbsp;: avoir choisi, et pouvoir le justifier.</p></span>
+      </li>
+      <li data-bin="forme">
+        <span class="el-lbl">La qualité du support projeté</span>
+        <span class="el-fb"><p><strong>La forme</strong> — une idée par diapositive, lisible de loin.</p></span>
+      </li>
+      <li data-bin="fond">
+        <span class="el-lbl">La qualité de l'analyse de l'existant</span>
+        <span class="el-fb"><p><strong>Le fond</strong> — c'est le cœur de ce que la phase d'avant-projet devait produire.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="paires" data-old
+           data-src-label="Rappel · séances 4 à 7"
+           data-col-a="La notion" data-col-b="Ce qu'elle désigne"
+           data-titre="Révision de la phase d'avant-projet">
+    <p class="el-stem">Cinq notions mobilisées depuis la séance 4. Retrouvez ce que chacune désigne.</p>
+    <p class="el-hint">Touchez une vignette à gauche, puis sa description à droite.</p>
+    <ul class="el-pairs">
+      <li data-ico="🔺" data-tint="#A8004F">
+        <span class="el-lbl">Triangle de Martin Barnes</span>
+        <span class="el-match">Qualité, coûts et délais s'arbitrent en permanence&nbsp;: on ne les maximise pas tous les trois.</span>
+        <span class="el-fb"><p><strong>Triangle de Barnes</strong> — séance 4. Fixer les priorités et assumer les compromis fait partie du cadrage.</p></span>
+      </li>
+      <li data-ico="🧭" data-tint="#9A6300">
+        <span class="el-lbl">Matrice de Turner &amp; Cochrane</span>
+        <span class="el-match">Deux questions — objectifs définis&nbsp;? méthodes définies&nbsp;? — donnent quatre configurations et quatre pilotages.</span>
+        <span class="el-fb"><p><strong>Turner &amp; Cochrane</strong> — séance 7. Terre, Eau, Feu, Air&nbsp;: la matrice indique par quoi clarifier en premier.</p></span>
+      </li>
+      <li data-ico="👑" data-tint="#0C7C63">
+        <span class="el-lbl">Triangle d'or</span>
+        <span class="el-match">Synergie forte, antagonisme moyen&nbsp;: ils contestent pour améliorer, pas pour bloquer.</span>
+        <span class="el-fb"><p><strong>Triangle d'or</strong> — séance 7, carte des acteurs. C'est la cible&nbsp;: on le fait grandir en y amenant passifs, hésitants et engagés.</p></span>
+      </li>
+      <li data-ico="🎚️" data-tint="#5B3E8E">
+        <span class="el-lbl">État agile</span>
+        <span class="el-match">Accueillir l'imprévu et ajuster&nbsp;: le plan devient une hypothèse de travail, révisable.</span>
+        <span class="el-fb"><p><strong>État agile</strong> — séance 5. C'est un état, pas un trait de caractère&nbsp;: il se travaille.</p></span>
+      </li>
+      <li data-ico="⏱️" data-tint="#2A6FB5">
+        <span class="el-lbl">Le format court</span>
+        <span class="el-match">Un exercice différent d'une présentation longue, pas une version raccourcie.</span>
+        <span class="el-fb"><p><strong>Format court</strong> — séance 6. Il impose de choisir un message principal et d'y subordonner tout le reste.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S07" data-titre="Rappel — situer son projet">
+    <p class="el-stem">Rappel de la séance 7&nbsp;: votre commanditaire sait précisément ce qu'il veut, mais personne ne sait encore comment y parvenir. Dans quelle case êtes-vous&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Eau — le coach&nbsp;: on pilote par étapes, en prototypant et en ajustant la méthode en avançant</span>
+        <span class="el-fb"><p>Oui&nbsp;: objectifs définis, méthodes à inventer. C'est la configuration typique du <strong>développement de produit</strong> — et de beaucoup de livrables de ce cours.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Feu — le sculpteur&nbsp;: on pilote par les usages</span>
+        <span class="el-fb"><p>C'est l'inverse&nbsp;: Feu correspond à des <em>méthodes définies</em> et des <em>objectifs à préciser</em>. Ici, l'objectif est clair.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Terre — le chef d'orchestre&nbsp;: on pilote par le planning</span>
+        <span class="el-fb"><p>Terre suppose que les <strong>deux</strong> soient définis. Planifier finement une méthode qu'on n'a pas encore trouvée revient à planifier du vide.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Air — l'équilibriste&nbsp;: on pilote par la vision</span>
+        <span class="el-fb"><p>Air, c'est quand <em>ni</em> les objectifs <em>ni</em> les méthodes ne sont arrêtés. Vous avez déjà franchi la première clarification.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S06" data-titre="Rappel — formuler un retour aux autres groupes">
+    <p class="el-stem">Rappel de la séance 6&nbsp;: vous allez donner un retour à un autre groupe. Quelle formulation est la plus utile&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">«&nbsp;À la deuxième diapositive, j'ai perdu le fil entre le besoin et votre proposition — en revanche l'exemple final était très parlant.&nbsp;»</span>
+        <span class="el-fb"><p>Les trois règles y sont&nbsp;: <strong>précis</strong> — un moment identifiable —, <strong>équilibré</strong> — un point à travailler et un point fort —, <strong>bienveillant</strong> — le retour porte sur la production, pas sur les personnes.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">«&nbsp;C'était très clair et bien mené, bravo à vous.&nbsp;»</span>
+        <span class="el-fb"><p>Agréable, mais inexploitable&nbsp;: rien n'est identifiable et il n'y a aucun point à travailler. Le feedback est un <strong>outil de progression</strong>, pas un encouragement.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">«&nbsp;Vous n'avez pas l'air très à l'aise à l'oral, il faudrait travailler ça.&nbsp;»</span>
+        <span class="el-fb"><p>Le retour porte ici sur <strong>les personnes</strong>, pas sur la production — et il reste vague. Une version utilisable viserait un moment&nbsp;: le débit, une transition, une réponse.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">«&nbsp;Je mettrais 4 sur 6&nbsp;: l'analyse est correcte mais la forme est moyenne.&nbsp;»</span>
+        <span class="el-fb"><p>Le feedback entre pairs n'est <strong>pas une note déguisée</strong>. Un chiffre situe sans jamais indiquer quoi changer.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S08" data-titre="À quoi sert la captation">
+    <p class="el-stem">Chaque passage est enregistré au Swivl. Pourquoi&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Pour que chaque groupe puisse se revoir et identifier ses axes de progrès</span>
+        <span class="el-fb"><p>C'est l'usage prévu. On perçoit très mal sa propre forme en situation&nbsp;: débit, regard, tics de langage. La captation donne accès à ce que le public a vu.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Pour permettre à l'enseignant de noter à froid, après la séance</span>
+        <span class="el-fb"><p>Ce n'est pas la finalité annoncée&nbsp;: l'enregistrement est là <strong>pour vous</strong>. Les retours, eux, se donnent en direct — enseignant, autres groupes et commanditaires quand c'est possible.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Pour diffuser les présentations aux commanditaires absents</span>
+        <span class="el-fb"><p>Ce n'est pas l'objet. Les commanditaires participent aux retours <em>lorsque c'est possible</em>&nbsp;; la captation sert au groupe qui s'est présenté.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Pour archiver les projets d'une promotion à l'autre</span>
+        <span class="el-fb"><p>L'archivage des projets existe (les productions des promotions précédentes sont en ligne), mais il ne passe pas par ces captations.</p></span>
+      </li>
+    </ul>
+  </article>
+
+</template>
+
 <script src="../assets/support.js"></script>
+<script src="../assets/elearn.js"></script>
 <script src="../assets/vendor/reveal/reveal.min.js"></script>
 <script>
   const deck = new Reveal({
@@ -909,8 +1107,10 @@
     });
   });
 
-  // Bascule présentation <-> support de cours (assets/support.js pilote le DOM).
-  document.addEventListener('support:change', function(e){
+  // Les deux modes annexes (support de cours, e-learning) masquent les diapos :
+  // sans cette reconfiguration, le clavier de reveal continue de tourner
+  // derrière l'écran affiché, et la mise en page est périmée au retour.
+  function surModeAnnexe(e){
     var open = e.detail.open;
     deck.configure({ controls: !open, progress: !open, keyboard: !open });
     if(!open){
@@ -918,7 +1118,9 @@
       applyCover();
       setTimeout(syncChrome, 60);
     }
-  });
+  }
+  document.addEventListener('support:change', surModeAnnexe);
+  document.addEventListener('elearn:change', surModeAnnexe);
 </script>
 <script>
   // ---- minuteur d'activité type Time Timer (enchaîne les étapes) ----

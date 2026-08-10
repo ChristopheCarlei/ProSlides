@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="../assets/vendor/reveal/reveal.min.css" />
 <link rel="stylesheet" href="../assets/deck.css" />
 <link rel="stylesheet" href="../assets/support.css" />
+<link rel="stylesheet" href="../assets/elearn.css" />
 
 <style>
   /* Habillage commun (police, palette, bandeau, frise, pied, boutons) :
@@ -790,7 +791,194 @@
 
 </template>
 
+<!-- ==========================================================================
+     MODE E-LEARNING — parcours d'auto-test (assets/elearn.js + elearn.css)
+     Rédigé indépendamment des diapos et du support : troisième contenu, à
+     maintenir en parallèle. Types : qcm · paires · tri · ordre.
+     ========================================================================== -->
+<template id="elearn-src">
+
+  <div class="el-meta" data-seance="06" data-titre="Communication &amp; feedback">
+    <p>Sept activités&nbsp;: construire un propos, faire un support qui sert le propos, donner et recevoir un retour — plus deux rappels.</p>
+    <p>Chaque réponse est commentée&nbsp;: on vous dit pourquoi elle tient, ou ce qui lui manque. Vous pouvez réessayer autant de fois que nécessaire.</p>
+  </div>
+
+  <article class="el-q" data-type="paires" data-src="S06"
+           data-col-a="Le plan" data-col-b="Ce qui s'y travaille"
+           data-titre="Les trois plans d'une prise de parole">
+    <p class="el-stem">Une prise de parole réussie se prépare sur trois plans. Retrouvez ce que chacun recouvre.</p>
+    <p class="el-hint">Touchez une vignette à gauche, puis sa description à droite.</p>
+    <ul class="el-pairs">
+      <li data-ico="🧩" data-tint="#0C7C63">
+        <span class="el-lbl">Le fond</span>
+        <span class="el-match">Une idée forte, un message clair, une structure simple.</span>
+        <span class="el-fb"><p><strong>Le fond</strong> — le test&nbsp;: si l'on ne peut pas résumer sa présentation en une phrase, elle n'est pas encore prête.</p></span>
+      </li>
+      <li data-ico="🎭" data-tint="#A8004F">
+        <span class="el-lbl">La forme</span>
+        <span class="el-match">Voix, rythme, regard, posture&nbsp;: le non-verbal porte le message autant que les mots.</span>
+        <span class="el-fb"><p><strong>La forme</strong> — un contenu juste, dit sans conviction, ne passe pas.</p></span>
+      </li>
+      <li data-ico="👥" data-tint="#2A6FB5">
+        <span class="el-lbl">Le public</span>
+        <span class="el-match">On parle pour être compris, pas pour tout dire.</span>
+        <span class="el-fb"><p><strong>Le public</strong> — ce qui compte n'est pas ce que l'on a préparé, mais ce que l'auditoire <em>repart avec</em>.</p></span>
+      </li>
+      <li data-ico="⏱️" data-tint="#9A6300">
+        <span class="el-lbl">Les 180 secondes</span>
+        <span class="el-match">Un exercice différent d'une présentation longue, pas une version raccourcie.</span>
+        <span class="el-fb"><p><strong>Le format court</strong> — il impose de choisir un message principal et de lui subordonner tout le reste.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S06" data-titre="La contrainte des 180 secondes">
+    <p class="el-stem">Vous avez préparé dix minutes de contenu et vous n'avez que trois minutes. Que faire&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Repartir d'un message principal et lui subordonner le reste&nbsp;: c'est un exercice différent, pas une version raccourcie</span>
+        <span class="el-fb"><p>C'est le point clé de la séance. Un format court ne s'obtient pas par soustraction&nbsp;: il se <strong>reconstruit</strong> autour d'une idée directrice.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Parler plus vite pour faire tenir l'ensemble</span>
+        <span class="el-fb"><p>Le débit ne crée pas de temps, et il dégrade la forme&nbsp;: rythme, respiration, regard. Le public repartira avec <em>moins</em>, pas plus.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Supprimer un tiers des diapositives et garder le même plan</span>
+        <span class="el-fb"><p>C'est traiter le court comme du long tronqué. Le plan lui-même doit changer&nbsp;: <strong>un message, puis ce qui le sert</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Mettre le contenu excédentaire sur les diapositives pour que le public le lise</span>
+        <span class="el-fb"><p>Doublement contre-productif&nbsp;: on lit plus vite qu'on écoute, donc un support chargé <strong>met le public en concurrence</strong> avec vous.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="tri" data-src="S06" data-titre="Un support qui sert le propos">
+    <p class="el-stem">Classez ces choix de support selon qu'ils servent le propos ou lui nuisent.</p>
+    <p class="el-hint">Le principe&nbsp;: le support appuie le propos, il ne le récite pas.</p>
+    <ol class="el-bins">
+      <li data-bin="sert"><span class="el-lbl">Sert le propos</span></li>
+      <li data-bin="nuit"><span class="el-lbl">Nuit au propos</span></li>
+    </ol>
+    <ul class="el-cards">
+      <li data-bin="sert">
+        <span class="el-lbl">Une idée par diapositive</span>
+        <span class="el-fb"><p><strong>Sert</strong> — c'est la règle de base&nbsp;: le support appuie, il ne récite pas.</p></span>
+      </li>
+      <li data-bin="nuit">
+        <span class="el-lbl">Une diapositive que l'on lit à voix haute</span>
+        <span class="el-fb"><p><strong>Nuit</strong> — une diapositive lue à voix haute est une diapositive de trop.</p></span>
+      </li>
+      <li data-bin="sert">
+        <span class="el-lbl">Peu de texte, des visuels forts</span>
+        <span class="el-fb"><p><strong>Sert</strong> — on lit plus vite qu'on écoute&nbsp;: un support sobre laisse l'attention disponible.</p></span>
+      </li>
+      <li data-bin="nuit">
+        <span class="el-lbl">Un corps de texte en petits caractères, illisible du fond de la salle</span>
+        <span class="el-fb"><p><strong>Nuit</strong> — ce qui n'est pas lisible du fond de la salle n'existe pas.</p></span>
+      </li>
+      <li data-bin="sert">
+        <span class="el-lbl">Une hiérarchie visuelle claire et un contraste suffisant</span>
+        <span class="el-fb"><p><strong>Sert</strong> — la lisibilité de loin est un critère à part entière, pas une coquetterie.</p></span>
+      </li>
+      <li data-bin="nuit">
+        <span class="el-lbl">Toutes les données de l'analyse, pour ne rien oublier</span>
+        <span class="el-fb"><p><strong>Nuit</strong> — un support chargé met le public en concurrence avec l'oratrice ou l'orateur.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S06" data-titre="Trois règles du retour utile">
+    <p class="el-stem">«&nbsp;C'était bien dans l'ensemble, mais je n'ai pas trop accroché.&nbsp;» Que manque-t-il à ce retour&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">La précision&nbsp;: il faudrait pointer un moment, une formulation ou un choix identifiable</span>
+        <span class="el-fb"><p>Oui. Un retour utile est <strong>précis</strong> — un moment repérable plutôt qu'une impression globale —, <strong>équilibré</strong> — un point fort et un point à travailler — et <strong>bienveillant</strong> — il porte sur la production, jamais sur la personne.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Rien&nbsp;: le retour est bienveillant, c'est l'essentiel</span>
+        <span class="el-fb"><p>La bienveillance est nécessaire mais pas suffisante. Sans précision, la personne ne sait pas <strong>quoi faire</strong> de ce qu'elle vient d'entendre.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Une note chiffrée, pour situer le niveau</span>
+        <span class="el-fb"><p>Le feedback entre pairs n'est <strong>pas une note déguisée</strong>&nbsp;: c'est un outil de progression. Un chiffre situe sans indiquer quoi changer.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Un point négatif&nbsp;: le retour est trop positif pour être utile</span>
+        <span class="el-fb"><p>L'équilibre compte — un point fort <em>et</em> un point à travailler — mais le défaut principal ici est ailleurs&nbsp;: rien n'est <strong>identifiable</strong>.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="ordre" data-src="S06" data-titre="Recevoir un retour">
+    <p class="el-stem">Remettez dans l'ordre la façon de recevoir un retour.</p>
+    <p class="el-hint">Glissez les rangées, ou utilisez les flèches.</p>
+    <ol class="el-seq">
+      <li>
+        <span class="el-lbl">Écouter, sans se justifier</span>
+        <span class="el-fb">
+          <p>L'ordre importe&nbsp;: se justifier pendant le retour, c'est cesser de l'entendre.</p>
+          <ul>
+            <li><strong>Écouter</strong> — un retour que l'on conteste sur le moment est un retour que l'on n'entend pas.</li>
+            <li><strong>Noter</strong> — garder trace, y compris de ce avec quoi on n'est pas d'accord.</li>
+            <li><strong>Trier ensuite</strong> — à froid, une fois le passage terminé.</li>
+          </ul>
+        </span>
+      </li>
+      <li><span class="el-lbl">Noter ce qui est dit</span></li>
+      <li><span class="el-lbl">Trier ensuite, à froid</span></li>
+    </ol>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S05" data-titre="Rappel — garder la tête froide">
+    <p class="el-stem">Rappel de la séance 5&nbsp;: une question difficile tombe pendant votre passage. Quelle réponse est la plus professionnelle&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Respirer, puis s'autoriser à dire «&nbsp;je reviens vers vous sur ce point&nbsp;»</span>
+        <span class="el-fb"><p>Oui&nbsp;: <strong>une seconde de latence vaut mieux qu'une réponse réflexe</strong>, et différer vaut mieux qu'improviser une réponse fragile. C'est le transfert direct de l'agilité mentale à la prise de parole.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Répondre immédiatement pour ne pas paraître déstabilisé</span>
+        <span class="el-fb"><p>C'est la réaction sous pression&nbsp;: les automatismes prennent le dessus sur le raisonnement. Une réponse rapide et fausse coûte plus cher qu'un délai assumé.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Renvoyer la question au reste du groupe pour gagner du temps</span>
+        <span class="el-fb"><p>Cela peut fonctionner si le groupe a préparé la réponse&nbsp;; sinon, on déplace le problème. La stratégie énoncée en séance est de <strong>respirer</strong>, puis de choisir.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Reprendre le plan initial pour reprendre le contrôle</span>
+        <span class="el-fb"><p>C'est l'état figé&nbsp;: on tente de sauver le plan coûte que coûte. Or le plan n'est qu'une <strong>hypothèse de travail</strong>, révisable.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S04" data-titre="Rappel — ce que l'avant-projet a produit">
+    <p class="el-stem">Rappel de la séance 4&nbsp;: que doit contenir l'analyse de l'existant que vous présentez aujourd'hui en 180 secondes&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Ce que l'on a compris du besoin, du contexte et du public, et ce qui s'est déjà fait ailleurs sur le sujet</span>
+        <span class="el-fb"><p>C'est le volet «&nbsp;comprendre&nbsp;» de l'avant-projet. Le volet «&nbsp;prioriser&nbsp;» — ce que le groupe laisse délibérément de côté — mérite d'y figurer aussi&nbsp;: <em>tout traiter revient à ne rien traiter</em>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">La description détaillée du livrable que le groupe va produire</span>
+        <span class="el-fb"><p>Trop tôt&nbsp;: le rendu «&nbsp;objectif &amp; livrable&nbsp;» est fixé au 27 avril. L'existant porte sur <strong>ce qui est déjà là</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Le planning des tâches et la répartition des rôles</span>
+        <span class="el-fb"><p>C'est de la planification, et vous l'outillerez en séance 7. L'analyse de l'existant est en amont.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Le budget prévisionnel du projet</span>
+        <span class="el-fb"><p>Les coûts sont une contrainte du triangle, mais ce n'est pas l'objet du rendu&nbsp;: on attend une <strong>lecture partagée de l'existant</strong>.</p></span>
+      </li>
+    </ul>
+  </article>
+
+</template>
+
 <script src="../assets/support.js"></script>
+<script src="../assets/elearn.js"></script>
 <script src="../assets/vendor/reveal/reveal.min.js"></script>
 <script>
   const deck = new Reveal({
@@ -894,8 +1082,10 @@
     });
   });
 
-  // Bascule présentation <-> support de cours (assets/support.js pilote le DOM).
-  document.addEventListener('support:change', function(e){
+  // Les deux modes annexes (support de cours, e-learning) masquent les diapos :
+  // sans cette reconfiguration, le clavier de reveal continue de tourner
+  // derrière l'écran affiché, et la mise en page est périmée au retour.
+  function surModeAnnexe(e){
     var open = e.detail.open;
     deck.configure({ controls: !open, progress: !open, keyboard: !open });
     if(!open){
@@ -903,7 +1093,9 @@
       applyCover();
       setTimeout(syncChrome, 60);
     }
-  });
+  }
+  document.addEventListener('support:change', surModeAnnexe);
+  document.addEventListener('elearn:change', surModeAnnexe);
 </script>
 <script>
   // ---- minuteur d'activité type Time Timer (enchaîne les étapes) ----

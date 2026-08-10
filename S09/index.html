@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="../assets/vendor/reveal/reveal.min.css" />
 <link rel="stylesheet" href="../assets/deck.css" />
 <link rel="stylesheet" href="../assets/support.css" />
+<link rel="stylesheet" href="../assets/elearn.css" />
 
 <style>
   /* Habillage commun (police, palette, bandeau, frise, pied, boutons) :
@@ -769,7 +770,218 @@
 
 </template>
 
+<!-- ==========================================================================
+     MODE E-LEARNING — parcours d'auto-test (assets/elearn.js + elearn.css)
+     Rédigé indépendamment des diapos et du support : troisième contenu, à
+     maintenir en parallèle. Types : qcm · paires · tri · ordre.
+     ========================================================================== -->
+<template id="elearn-src">
+
+  <div class="el-meta" data-seance="09" data-titre="Neuro-mythes">
+    <p>Huit activités&nbsp;: distinguer les neuro-mythes des faits établis, comprendre pourquoi ils tiennent, et deux rappels des séances précédentes.</p>
+    <p>Chaque réponse est commentée&nbsp;: on vous dit pourquoi elle tient, ou ce qui lui manque. Vous pouvez réessayer autant de fois que nécessaire.</p>
+  </div>
+
+  <article class="el-q" data-type="qcm" data-src="S09" data-titre="Ce qu'est un neuro-mythe">
+    <p class="el-stem">Qu'est-ce qu'un neuro-mythe, précisément&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Une croyance erronée sur le cerveau, souvent née d'une interprétation abusive d'un résultat scientifique réel</span>
+        <span class="el-fb"><p>Oui — et le mot important est <strong>réel</strong>. Le mythe n'est presque jamais inventé de toutes pièces&nbsp;: il est <em>déformé</em>, puis diffusé et durci jusqu'à passer pour une évidence professionnelle.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Une affirmation sur le cerveau inventée sans aucun fondement</span>
+        <span class="el-fb"><p>C'est justement ce qui les rend difficiles à déloger&nbsp;: il y a presque toujours un <strong>noyau de vérité</strong>. Sans lui, le mythe n'aurait pas trouvé preneur.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Une théorie scientifique dépassée par des travaux plus récents</span>
+        <span class="el-fb"><p>Ce serait le fonctionnement normal de la science. Un neuro-mythe n'a pas été <em>remplacé</em>&nbsp;: il n'a jamais dit ce que la recherche disait.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Une croyance populaire sur le cerveau qui ne circule pas chez les professionnels</span>
+        <span class="el-fb"><p>C'est l'inverse qui pose problème&nbsp;: ces croyances sont <strong>très ancrées chez les professionnels de l'éducation</strong>, et c'est pour cela qu'il vaut la peine de les reconnaître.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="tri" data-src="S09" data-titre="Mythe ou fait établi">
+    <p class="el-stem">Classez ces affirmations.</p>
+    <p class="el-hint">Attention&nbsp;: certaines sont fausses dans leur version populaire, mais reposent sur quelque chose de réel.</p>
+    <ol class="el-bins">
+      <li data-bin="mythe"><span class="el-lbl">Neuro-mythe</span></li>
+      <li data-bin="fait"><span class="el-lbl">Établi</span></li>
+    </ol>
+    <ul class="el-cards">
+      <li data-bin="mythe">
+        <span class="el-lbl">«&nbsp;On n'utilise que 10 % de son cerveau.&nbsp;»</span>
+        <span class="el-fb"><p><strong>Mythe</strong> — l'imagerie montre une activité répartie sur l'ensemble du cerveau. La lésion de n'importe quelle zone entraîne des effets, ce qui serait impossible si 90 % restait inactif.</p></span>
+      </li>
+      <li data-bin="mythe">
+        <span class="el-lbl">«&nbsp;Il y a des personnes à dominante cerveau gauche et d'autres à dominante cerveau droit.&nbsp;»</span>
+        <span class="el-fb"><p><strong>Mythe</strong> dans sa version populaire. Certaines fonctions <em>sont</em> latéralisées, notamment le langage — mais aucune personne n'est «&nbsp;à dominante&nbsp;»&nbsp;: les deux hémisphères travaillent en permanence de concert.</p></span>
+      </li>
+      <li data-bin="mythe">
+        <span class="el-lbl">«&nbsp;Adapter l'enseignement au style visuel, auditif ou kinesthésique améliore les apprentissages.&nbsp;»</span>
+        <span class="el-fb"><p><strong>Non étayé</strong> — les préférences déclarées existent, mais y adapter l'enseignement ne produit pas de gain mesurable.</p></span>
+      </li>
+      <li data-bin="fait">
+        <span class="el-lbl">Certaines fonctions cérébrales, comme le langage, sont latéralisées.</span>
+        <span class="el-fb"><p><strong>Établi</strong> — c'est précisément le noyau de vérité que le mythe «&nbsp;cerveau gauche / cerveau droit&nbsp;» a déformé.</p></span>
+      </li>
+      <li data-bin="fait">
+        <span class="el-lbl">Adapter le format au contenu fonctionne&nbsp;: une carte pour un trajet, un enregistrement pour une prononciation.</span>
+        <span class="el-fb"><p><strong>Établi</strong> — c'est la version défendable de l'intuition sur les «&nbsp;styles&nbsp;»&nbsp;: le format s'ajuste au <em>contenu</em>, pas à un profil de personne.</p></span>
+      </li>
+      <li data-bin="fait">
+        <span class="el-lbl">L'activité cérébrale se répartit sur l'ensemble du cerveau.</span>
+        <span class="el-fb"><p><strong>Établi</strong> — et c'est ce qui condamne le mythe des 10 %.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="paires" data-src="S09"
+           data-col-a="Le mécanisme" data-col-b="Comment il opère"
+           data-titre="Pourquoi les mythes persistent">
+    <p class="el-stem">Trois mécanismes expliquent la persistance des neuro-mythes, et un quatrième élément les combat. Retrouvez chacun.</p>
+    <p class="el-hint">Touchez une vignette à gauche, puis sa description à droite.</p>
+    <ul class="el-pairs">
+      <li data-ico="🌰" data-tint="#9A6300">
+        <span class="el-lbl">Un noyau de vérité déformé</span>
+        <span class="el-match">Il y a bien une spécialisation de certaines aires&nbsp;; il n'y a pas de «&nbsp;cerveau gauche&nbsp;» créatif opposé à un «&nbsp;cerveau droit&nbsp;» logique.</span>
+        <span class="el-fb"><p><strong>Noyau de vérité</strong> — c'est ce qui rend le mythe crédible&nbsp;: on ne peut pas le réfuter d'un bloc sans nier aussi ce qui est vrai.</p></span>
+      </li>
+      <li data-ico="🥄" data-tint="#A8004F">
+        <span class="el-lbl">Une utilité apparente</span>
+        <span class="el-match">Un mythe qui donne une recette simple pour enseigner se transmet mieux qu'un résultat nuancé.</span>
+        <span class="el-fb"><p><strong>Utilité apparente</strong> — d'où le réflexe critique&nbsp;: plus une affirmation est commode pour la pratique, plus elle mérite d'être vérifiée.</p></span>
+      </li>
+      <li data-ico="🎓" data-tint="#5B3E8E">
+        <span class="el-lbl">L'autorité du vocabulaire</span>
+        <span class="el-match">Un énoncé qui mentionne le cerveau paraît plus crédible, même quand le contenu ne le justifie pas.</span>
+        <span class="el-fb"><p><strong>Autorité du vocabulaire</strong> — le mot «&nbsp;neuro&nbsp;» fonctionne comme un label de sérieux, indépendamment de ce qui est affirmé.</p></span>
+      </li>
+      <li data-ico="🔗" data-tint="#0C7C63">
+        <span class="el-lbl">Corrélation n'est pas causalité</span>
+        <span class="el-match">Deux phénomènes qui varient ensemble n'entretiennent pas nécessairement de lien de cause à effet.</span>
+        <span class="el-fb"><p><strong>Corrélation / causalité</strong> — un des quatre réflexes critiques, transférable à toute controverse professionnelle.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S09" data-titre="Déconstruire sans opposer">
+    <p class="el-stem">Une collègue affirme en réunion que ses élèves «&nbsp;sont plutôt kinesthésiques&nbsp;». Quelle réponse est la plus professionnelle&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Demander d'où vient l'affirmation et ce que l'étude citée a réellement montré</span>
+        <span class="el-fb"><p>C'est le premier réflexe&nbsp;: <strong>demander la source</strong>. Déconstruire un neuro-mythe ne consiste pas à opposer une affirmation à une autre — sinon on ne fait qu'échanger des croyances.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Répondre que c'est faux, que les styles d'apprentissage n'existent pas</span>
+        <span class="el-fb"><p>Trop frontal et trop radical&nbsp;: les <strong>préférences déclarées existent bien</strong>. C'est leur usage comme recette d'enseignement qui n'est pas étayé. Une réfutation en bloc est facile à écarter.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Laisser dire&nbsp;: c'est une question d'opinion pédagogique</span>
+        <span class="el-fb"><p>Ce n'en est pas une&nbsp;: la question a été étudiée, et abondamment. Reconnaître les neuro-mythes <strong>fait partie du métier</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Proposer de faire passer un test de style d'apprentissage à la classe</span>
+        <span class="el-fb"><p>Cela mesurerait des préférences déclarées — qui existent — et donnerait au mythe l'apparence d'une donnée. C'est exactement le glissement à éviter.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="ordre" data-src="S09" data-titre="Quatre réflexes critiques">
+    <p class="el-stem">Remettez dans l'ordre les quatre réflexes critiques face à une affirmation professionnelle.</p>
+    <p class="el-hint">Glissez les rangées, ou utilisez les flèches.</p>
+    <ol class="el-seq">
+      <li>
+        <span class="el-lbl">Demander la source — d'où vient l'affirmation&nbsp;?</span>
+        <span class="el-fb">
+          <p>Quatre réflexes transférables à toute controverse professionnelle&nbsp;:</p>
+          <ul>
+            <li><strong>Demander la source</strong> — et ce que l'étude citée a réellement montré.</li>
+            <li><strong>Distinguer corrélation et causalité</strong> — varier ensemble n'est pas causer.</li>
+            <li><strong>Se méfier des recettes simples</strong> — plus une affirmation est commode, plus elle mérite d'être vérifiée.</li>
+            <li><strong>Accepter la nuance</strong> — «&nbsp;cela dépend du contenu et du contexte&nbsp;» est souvent la réponse juste, même si elle satisfait moins.</li>
+          </ul>
+        </span>
+      </li>
+      <li><span class="el-lbl">Distinguer corrélation et causalité</span></li>
+      <li><span class="el-lbl">Se méfier des recettes simples</span></li>
+      <li><span class="el-lbl">Accepter la nuance</span></li>
+    </ol>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S09" data-titre="La nuance comme réponse">
+    <p class="el-stem">«&nbsp;Cela dépend du contenu et du contexte.&nbsp;» Pourquoi cette réponse est-elle difficile à faire passer&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Parce qu'elle satisfait moins qu'une recette simple, alors qu'elle est souvent la réponse juste</span>
+        <span class="el-fb"><p>C'est exactement la tension. Et c'est le même mécanisme qui fait vivre les mythes&nbsp;: une <strong>utilité apparente</strong> — la recette — se transmet mieux qu'un résultat nuancé.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Parce qu'elle est trop technique pour un public non spécialiste</span>
+        <span class="el-fb"><p>Elle n'est pas technique&nbsp;: elle est <strong>inconfortable</strong>. Ce qu'on lui reproche, c'est de ne pas dire quoi faire lundi matin.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Parce qu'elle revient à éviter la question</span>
+        <span class="el-fb"><p>Ce n'est pas une esquive quand c'est vrai. Le travail consiste ensuite à préciser <em>de quoi</em> cela dépend — pas à trancher artificiellement.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Parce qu'elle ne s'appuie sur aucune donnée</span>
+        <span class="el-fb"><p>Au contraire&nbsp;: c'est souvent la formulation la plus fidèle aux données. Les résultats robustes sont rarement universels.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S03" data-titre="Rappel — mémoire et images">
+    <p class="el-stem">Rappel de la séance 3&nbsp;: la méthode des loci fonctionne. Est-ce compatible avec ce qui vient d'être dit sur les styles d'apprentissage&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Oui&nbsp;: elle exploite un fonctionnement commun à tout le monde, elle ne s'adresse pas à un profil de personne</span>
+        <span class="el-fb"><p>C'est la distinction décisive. Le mythe consiste à <strong>attribuer un style à une personne</strong>&nbsp;; les loci exploitent la façon dont la mémoire encode les images et les lieux — chez tout le monde.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Non&nbsp;: la méthode des loci est elle aussi un neuro-mythe</span>
+        <span class="el-fb"><p>Elle est employée depuis Simonide de Céos et Cicéron, et son efficacité ne repose sur aucune typologie de personnes. Rien à voir avec un neuro-mythe.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Oui, mais seulement pour les personnes à mémoire visuelle</span>
+        <span class="el-fb"><p>C'est précisément la formulation à éviter&nbsp;: elle réintroduit le profil individuel. Il n'y a pas de «&nbsp;personnes à mémoire visuelle&nbsp;» d'un côté et d'autres de l'autre.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">La question ne se pose pas&nbsp;: les deux domaines n'ont rien à voir</span>
+        <span class="el-fb"><p>Elle se pose au contraire très directement&nbsp;: les deux portent sur la mémoire et l'apprentissage. C'est le <em>niveau</em> de l'affirmation qui diffère.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S08" data-titre="Rappel — trier les retours">
+    <p class="el-stem">Rappel de la séance 8&nbsp;: parmi les retours reçus sur votre présentation intermédiaire, lesquels retenir&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Ceux qui reviennent chez plusieurs personnes — et ceux du commanditaire, quel que soit leur nombre</span>
+        <span class="el-fb"><p>Les deux règles se combinent&nbsp;: la répétition est le <strong>signal</strong> chez les pairs, et le commanditaire a un <strong>statut particulier</strong> puisqu'il recevra le livrable.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Tous&nbsp;: écarter un retour, c'est refuser d'entendre</span>
+        <span class="el-fb"><p>Écouter tous les retours, oui&nbsp;; tous les retenir, non. <strong>Tous les retours ne se valent pas</strong> — le tri est un temps à part entière.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Ceux formulés par l'enseignant, puisque c'est lui qui évalue</span>
+        <span class="el-fb"><p>Ce serait traiter le feedback comme une note déguisée. Les retours croisés — pairs, commanditaires, enseignant — valent par ce qu'ils permettent de <strong>décider</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Ceux avec lesquels le groupe est spontanément d'accord</span>
+        <span class="el-fb"><p>Ne garder que ce qui confirme ce qu'on pensait déjà revient à ne rien recevoir du tout — vous en verrez le mécanisme en séance 11.</p></span>
+      </li>
+    </ul>
+  </article>
+
+</template>
+
 <script src="../assets/support.js"></script>
+<script src="../assets/elearn.js"></script>
 <script src="../assets/vendor/reveal/reveal.min.js"></script>
 <script>
   const deck = new Reveal({
@@ -873,8 +1085,10 @@
     });
   });
 
-  // Bascule présentation <-> support de cours (assets/support.js pilote le DOM).
-  document.addEventListener('support:change', function(e){
+  // Les deux modes annexes (support de cours, e-learning) masquent les diapos :
+  // sans cette reconfiguration, le clavier de reveal continue de tourner
+  // derrière l'écran affiché, et la mise en page est périmée au retour.
+  function surModeAnnexe(e){
     var open = e.detail.open;
     deck.configure({ controls: !open, progress: !open, keyboard: !open });
     if(!open){
@@ -882,7 +1096,9 @@
       applyCover();
       setTimeout(syncChrome, 60);
     }
-  });
+  }
+  document.addEventListener('support:change', surModeAnnexe);
+  document.addEventListener('elearn:change', surModeAnnexe);
 </script>
 <script>
   // ---- minuteur d'activité type Time Timer (enchaîne les étapes) ----

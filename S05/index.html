@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="../assets/vendor/reveal/reveal.min.css" />
 <link rel="stylesheet" href="../assets/deck.css" />
 <link rel="stylesheet" href="../assets/support.css" />
+<link rel="stylesheet" href="../assets/elearn.css" />
 
 <style>
   /* Habillage commun (police, palette, bandeau, frise, pied, boutons) :
@@ -858,7 +859,196 @@
 
 </template>
 
+<!-- ==========================================================================
+     MODE E-LEARNING — parcours d'auto-test (assets/elearn.js + elearn.css)
+     Rédigé indépendamment des diapos et du support : troisième contenu, à
+     maintenir en parallèle. Types : qcm · paires · tri · ordre.
+     ========================================================================== -->
+<template id="elearn-src">
+
+  <div class="el-meta" data-seance="05" data-titre="Prise de parole &amp; agilité">
+    <p>Sept activités&nbsp;: surcharge cognitive, multi-tâche, états d'esprit — et deux rappels des séances 3 et 4.</p>
+    <p>Chaque réponse est commentée&nbsp;: on vous dit pourquoi elle tient, ou ce qui lui manque. Vous pouvez réessayer autant de fois que nécessaire.</p>
+  </div>
+
+  <article class="el-q" data-type="qcm" data-src="S05" data-titre="La surcharge cognitive">
+    <p class="el-stem">Que se passe-t-il quand la mémoire de travail dépasse le nombre d'éléments qu'elle peut traiter&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Elle ne ralentit pas progressivement&nbsp;: elle décroche</span>
+        <span class="el-fb"><p>C'est la caractéristique de la surcharge cognitive&nbsp;: le passage est <strong>brutal</strong>, pas graduel. On ne sent pas venir la limite, on la franchit.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Elle ralentit proportionnellement à la charge ajoutée</span>
+        <span class="el-fb"><p>Ce serait plus confortable, et ce serait plus facile à anticiper. Mais non&nbsp;: au-delà du seuil, elle <strong>décroche</strong> — d'où l'intérêt de réduire la charge <em>avant</em> d'y arriver.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Elle compense en transférant l'excédent vers la mémoire à long terme</span>
+        <span class="el-fb"><p>Il n'y a pas de déversoir automatique. L'excédent n'est pas stocké ailleurs&nbsp;: il est <strong>perdu</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Rien de particulier&nbsp;: la capacité s'adapte à la demande</span>
+        <span class="el-fb"><p>La capacité est au contraire <strong>très limitée</strong> et ne s'étend pas à la demande. Ce qui se travaille, c'est la façon de répartir la charge — prioriser, respirer, ajuster.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S05" data-titre="Le multi-tâche">
+    <p class="el-stem">«&nbsp;Je suis très bon en multi-tâche.&nbsp;» Que répondre&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Que le multi-tâche n'existe pas vraiment&nbsp;: c'est une alternance rapide entre tâches, et chaque bascule a un coût</span>
+        <span class="el-fb"><p>Oui. Le coût est le <strong>temps de reprendre le fil</strong>. Empilées, ces bascules dégradent à la fois la vitesse et la qualité — y compris chez celles et ceux qui se croient doués pour cela.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Que c'est possible, mais seulement pour deux tâches à la fois</span>
+        <span class="el-fb"><p>Le nombre n'est pas la question. Même à deux, il s'agit d'une <strong>alternance</strong>, pas d'un traitement simultané — et donc de bascules payantes.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Que cela dépend du niveau d'entraînement&nbsp;: cela se travaille</span>
+        <span class="el-fb"><p>L'entraînement rend certaines tâches automatiques, ce qui libère de la ressource. Mais il ne crée pas de simultanéité&nbsp;: la <strong>bascule reste coûteuse</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Que c'est vrai à condition que les tâches soient de nature différente</span>
+        <span class="el-fb"><p>La nature des tâches module le coût, elle ne le supprime pas. Ce que nous appelons multi-tâche reste une <strong>alternance rapide</strong>.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="tri" data-src="S05" data-titre="État figé ou état agile">
+    <p class="el-stem">Vous présentez devant un commanditaire et une question imprévue tombe. Classez ces réactions.</p>
+    <p class="el-hint">Rappel&nbsp;: ce n'est pas un trait de caractère fixe, c'est un état — et il se travaille.</p>
+    <ol class="el-bins">
+      <li data-bin="fige"><span class="el-lbl">État figé</span></li>
+      <li data-bin="agile"><span class="el-lbl">État agile</span></li>
+    </ol>
+    <ul class="el-cards">
+      <li data-bin="agile">
+        <span class="el-lbl">«&nbsp;Bonne question — je reviens vers vous sur ce point.&nbsp;»</span>
+        <span class="el-fb"><p><strong>Agile</strong> — s'autoriser à ne pas répondre tout de suite vaut mieux qu'improviser une réponse fragile.</p></span>
+      </li>
+      <li data-bin="fige">
+        <span class="el-lbl">Tenter de sauver le plan initial coûte que coûte</span>
+        <span class="el-fb"><p><strong>Figé</strong> — le plan devient un cadre rigide au lieu de rester une hypothèse de travail.</p></span>
+      </li>
+      <li data-bin="agile">
+        <span class="el-lbl">Respirer une seconde avant de répondre</span>
+        <span class="el-fb"><p><strong>Agile</strong> — une seconde de latence vaut mieux qu'une réponse réflexe. C'est exactement la stratégie «&nbsp;respirer&nbsp;».</p></span>
+      </li>
+      <li data-bin="fige">
+        <span class="el-lbl">Répondre à la sollicitation la plus bruyante plutôt qu'à la plus importante</span>
+        <span class="el-fb"><p><strong>Figé</strong> — c'est un des effets observés sous pression&nbsp;: le champ attentionnel se rétrécit et les automatismes prennent le dessus.</p></span>
+      </li>
+      <li data-bin="agile">
+        <span class="el-lbl">Accepter de modifier son plan en cours de route</span>
+        <span class="el-fb"><p><strong>Agile</strong> — l'agilité n'est pas l'absence de plan, c'est <em>sa révision assumée</em>.</p></span>
+      </li>
+      <li data-bin="fige">
+        <span class="el-lbl">Se bloquer et perdre ses moyens</span>
+        <span class="el-fb"><p><strong>Figé</strong> — on subit l'imprévu au lieu de l'accueillir. C'est un état, pas une fatalité.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="paires" data-src="S05"
+           data-col-a="La stratégie" data-col-b="Ce qu'elle veut dire"
+           data-titre="Trois stratégies d'agilité">
+    <p class="el-stem">Trois stratégies pour rester agile, et une notion. Retrouvez ce que chacune désigne.</p>
+    <p class="el-hint">Touchez une vignette à gauche, puis sa description à droite.</p>
+    <ul class="el-pairs">
+      <li data-ico="🎯" data-tint="#0C7C63">
+        <span class="el-lbl">Prioriser</span>
+        <span class="el-match">Traiter une chose à la fois&nbsp;: choisir, c'est déjà réduire la charge.</span>
+        <span class="el-fb"><p><strong>Prioriser</strong> — devant un public, cela se traduit par <em>un</em> message principal plutôt que six.</p></span>
+      </li>
+      <li data-ico="🌬️" data-tint="#2A6FB5">
+        <span class="el-lbl">Respirer</span>
+        <span class="el-match">Reprendre le contrôle avant de répondre à l'imprévu.</span>
+        <span class="el-fb"><p><strong>Respirer</strong> — une seconde de latence vaut mieux qu'une réponse réflexe.</p></span>
+      </li>
+      <li data-ico="🔄" data-tint="#A8004F">
+        <span class="el-lbl">Ajuster</span>
+        <span class="el-match">Accepter de changer de plan, sans le vivre comme un échec.</span>
+        <span class="el-fb"><p><strong>Ajuster</strong> — c'est précisément cela, l'agilité&nbsp;: pas l'absence de plan, mais sa révision assumée.</p></span>
+      </li>
+      <li data-ico="⚠️" data-tint="#9A6300">
+        <span class="el-lbl">Surcharge cognitive</span>
+        <span class="el-match">Au-delà d'un certain nombre d'éléments, la mémoire de travail ne ralentit pas&nbsp;: elle décroche.</span>
+        <span class="el-fb"><p><strong>Surcharge cognitive</strong> — c'est ce que les trois stratégies servent à prévenir.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S05" data-titre="Agilité et conception de formation">
+    <p class="el-stem">Pour qui intervient en formation, l'enjeu de l'agilité est double. Lequel&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Rester agile soi-même, et concevoir des dispositifs qui laissent de la place à l'imprévu du groupe</span>
+        <span class="el-fb"><p>C'est cela. L'agilité n'est pas qu'une compétence personnelle&nbsp;: elle se traduit aussi dans la <strong>conception</strong>, en ménageant du jeu pour ce qu'on n'avait pas prévu.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Rester agile soi-même, et apprendre aux participants à le devenir</span>
+        <span class="el-fb"><p>Séduisant, mais ce n'est pas le second volet énoncé. Il porte sur les <strong>dispositifs</strong>&nbsp;: leur laisser de la place pour l'imprévu du groupe.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Préparer chaque séance dans le détail, et prévoir un plan de secours</span>
+        <span class="el-fb"><p>Le plan de secours reste un plan&nbsp;: cela revient à anticiper des imprévus connus. L'agilité suppose de la <strong>marge</strong>, pas seulement des variantes.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Réduire la durée des séances pour limiter la surcharge du groupe</span>
+        <span class="el-fb"><p>Raccourcir n'est pas ménager de la place&nbsp;: une séance courte peut être tout aussi rigide.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S04" data-titre="Rappel — le triangle du projet">
+    <p class="el-stem">Rappel de la séance 4&nbsp;: quelles sont les trois composantes qui s'arbitrent en permanence dans un projet&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">La qualité, les coûts et les délais</span>
+        <span class="el-fb"><p>Oui — le triangle de <strong>Martin Barnes</strong>. On ne les maximise pas toutes les trois&nbsp;: fixer les priorités et assumer les compromis fait partie du cadrage.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Le budget, l'équipe et le commanditaire</span>
+        <span class="el-fb"><p>Ce sont des ressources et des parties prenantes, pas les trois composantes arbitrées. Il s'agit de <strong>qualité, coûts et délais</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">L'analyse, la réalisation et la clôture</span>
+        <span class="el-fb"><p>Ce sont des <em>étapes</em>&nbsp;; vous les verrez détaillées en séance 7. Le triangle porte sur ce qui s'arbitre <strong>tout au long</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Le périmètre, le risque et la communication</span>
+        <span class="el-fb"><p>Des préoccupations réelles de gestion de projet, mais pas le triangle&nbsp;: <strong>qualité, coûts, délais</strong>.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="el-q" data-type="qcm" data-src="S03" data-titre="Rappel — structurer un propos sans notes">
+    <p class="el-stem">Rappel de la séance 3&nbsp;: vous devez tenir trois minutes sans support écrit. Que propose la méthode des loci&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Associer chaque partie du propos à un lieu d'un parcours familier, puis le parcourir mentalement en parlant</span>
+        <span class="el-fb"><p>C'est exactement l'usage qu'en faisait <strong>Cicéron</strong> pour ses plaidoiries&nbsp;: les idées défilent dans l'ordre, sans notes.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Apprendre le texte par cœur en le relisant plusieurs fois</span>
+        <span class="el-fb"><p>La relecture donne surtout une impression de maîtrise — vous le verrez en séance 12. Et un texte appris mot à mot casse à la première question imprévue.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Réduire le propos à une seule idée pour ne rien avoir à retenir</span>
+        <span class="el-fb"><p>Réduire à un message principal est un bon conseil — c'est celui de la séance 6 — mais ce n'est pas la méthode des loci, qui sert justement à <strong>tenir un ordre</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Écrire des mots-clés sur une fiche et la consulter discrètement</span>
+        <span class="el-fb"><p>C'est une béquille externe. La méthode propose un <strong>support interne</strong>&nbsp;: un lieu que l'on visite mentalement, disponible en toutes circonstances.</p></span>
+      </li>
+    </ul>
+  </article>
+
+</template>
+
 <script src="../assets/support.js"></script>
+<script src="../assets/elearn.js"></script>
 <script src="../assets/vendor/reveal/reveal.min.js"></script>
 <script>
   const deck = new Reveal({
@@ -962,8 +1152,10 @@
     });
   });
 
-  // Bascule présentation <-> support de cours (assets/support.js pilote le DOM).
-  document.addEventListener('support:change', function(e){
+  // Les deux modes annexes (support de cours, e-learning) masquent les diapos :
+  // sans cette reconfiguration, le clavier de reveal continue de tourner
+  // derrière l'écran affiché, et la mise en page est périmée au retour.
+  function surModeAnnexe(e){
     var open = e.detail.open;
     deck.configure({ controls: !open, progress: !open, keyboard: !open });
     if(!open){
@@ -971,7 +1163,9 @@
       applyCover();
       setTimeout(syncChrome, 60);
     }
-  });
+  }
+  document.addEventListener('support:change', surModeAnnexe);
+  document.addEventListener('elearn:change', surModeAnnexe);
 </script>
 <script>
   // ---- minuteur d'activité type Time Timer (enchaîne les étapes) ----
