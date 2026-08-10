@@ -458,10 +458,13 @@
      le titre blanc à l'abri (contraste mesuré à 1,04). Le texte est donc posé
      sur le même panneau translucide que la description — 0,78 d'opacité, soit
      5,5:1 même sur les pixels les plus clairs du plan. */
-  .mediafull.origine .overlay{ align-items:flex-start; }
-  /* Le sculpteur et la statue occupent la gauche et le centre du plan :
-     l'encart se range à droite pour les dégager. */
+  /* Pygmalion : le sculpteur et la statue occupent la gauche et le centre du
+     plan, l'encart se range à droite pour les dégager. */
   .mediafull.origine .overlay{ align-items:flex-end; }
+  /* Golem : la silhouette est centrée et les chandeliers encadrent le plan.
+     L'encart passe à gauche — miroir de Pygmalion, les deux diapos se lisent
+     comme une paire. */
+  .mediafull.origine.golem .overlay{ align-items:flex-start; }
   .origine .op h2{ font-size:34px; line-height:1.1; }
   .origine .op{ box-sizing:border-box; width:min(470px, 100%); max-width:none; padding:24px 30px 26px; border-radius:16px;
     background:rgba(10,76,74,.78); backdrop-filter:blur(7px); -webkit-backdrop-filter:blur(7px);
@@ -992,6 +995,27 @@
       </div>
     </section>
 
+    <!-- 08bis · AUX ORIGINES — l'effet Golem, revers de Pygmalion.
+         Même gabarit que la diapo précédente ; l'encart passe à gauche
+         (.golem) pour dégager la silhouette, centrée dans le plan. -->
+    <section data-screen-label="Effet Golem" data-phase="3" data-state="dark">
+      <div class="mediafull content origine golem">
+        <div class="media-slot video">
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Golem.mp4"></video>
+        </div>
+        <div class="overlay">
+         <div class="op">
+          <span class="eyebrow">Le revers · légende du Golem</span>
+          <h2 style="max-width:20ch;margin-bottom:.15em;">Le Golem et la créature qu'on réduit en argile</h2>
+          <div class="revealtext" onclick="this.classList.toggle('open')">
+            <span class="rt-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>Afficher la description</span>
+          </div>
+          <p class="rt-body" style="text-align:left;">Dans la légende de Prague, le rabbin façonne dans l'argile<br />un serviteur sans parole ni volonté&nbsp;: obéir, rien d'autre.<br />Réduit à ce rôle, le <strong>Golem</strong> finit par tout détruire.<br />En 1982, <strong>Babad, Inbar et Rosenthal</strong> nomment l'envers de Pygmalion&nbsp;:<br />attendre peu d'une personne suffit à la faire réussir moins.<br />En classe&nbsp;: moins de temps pour répondre, des tâches allégées,<br />des retours plus pauvres — moins d'occasions d'apprendre.<br />Ce que l'on <em>renonce</em> à attendre façonne tout autant.</p>
+         </div>
+        </div>
+      </div>
+    </section>
+
     <!-- 09 · OUTILS & MATÉRIEL -->
     <section data-screen-label="Outils" data-phase="4" data-state="dark">
       <div class="mediafull content outils">
@@ -1165,6 +1189,17 @@
     <div class="sup-key">
       <span class="sup-key__k">Ce que cela change pour vous</span>
       <p>Les attentes que l'on projette sur une personne ne restent pas dans notre tête : elles modifient nos comportements — le temps qu'on lui accorde, les questions qu'on lui pose, les retours qu'on lui fait — et finissent par influencer ses résultats.</p>
+    </div>
+  </section>
+
+  <section class="sup-block" data-notes="oui">
+    <h2>L'effet Golem</h2>
+    <p>Dans la légende de Prague, le rabbin façonne dans l'argile un serviteur sans parole ni volonté : on n'attend de lui que d'obéir. Réduit à ce seul rôle, le <strong>Golem</strong> finit par tout détruire.</p>
+    <p>En <strong>1982</strong>, <strong>Babad, Inbar et Rosenthal</strong> donnent ce nom au revers de Pygmalion : attendre peu d'une personne suffit à la faire réussir moins. L'effet ne passe pas par un jugement dit à voix haute, mais par une accumulation de détails — moins de temps laissé pour répondre, des tâches allégées, des questions moins ouvertes, des retours plus pauvres. La personne reçoit moins d'occasions d'apprendre, progresse moins, et confirme le pronostic.</p>
+    <p>Les deux effets sont le même mécanisme, orienté dans deux directions. C'est pourquoi la vigilance porte moins sur ce que l'on pense d'une personne que sur ce que l'on <em>fait</em> en conséquence.</p>
+    <div class="sup-key">
+      <span class="sup-key__k">Ce que cela change pour vous</span>
+      <p>Une attente basse ne s'annonce pas : elle se repère dans les gestes. Combien de secondes laissez-vous à chacune et chacun pour répondre ? À qui posez-vous les questions difficiles ? De qui vous contentez-vous d'une réponse approximative ?</p>
     </div>
   </section>
 
