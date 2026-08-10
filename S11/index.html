@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="../assets/vendor/reveal/reveal.min.css" />
 <link rel="stylesheet" href="../assets/deck.css" />
 <link rel="stylesheet" href="../assets/support.css" />
+<link rel="stylesheet" href="../assets/elearn.css" />
 
 <style>
   /* Habillage commun (police, palette, bandeau, frise, pied, boutons) :
@@ -1265,7 +1266,266 @@
 
 </template>
 
+<!-- ==========================================================================
+     MODE E-LEARNING — parcours d'auto-test (assets/elearn.js + elearn.css)
+     Rédigé indépendamment des diapos et du support : c'est un troisième
+     contenu, à maintenir en parallèle des deux autres.
+     Types disponibles : qcm · paires · tri · ordre.
+     ========================================================================== -->
+<template id="elearn-src">
+
+  <div class="el-meta" data-seance="11" data-titre="Efficacité &amp; biais cognitifs">
+    <p>Neuf activités pour tester ce que vous retenez de la séance — et de celles qui l'ont précédée.</p>
+    <p>Chaque réponse est commentée&nbsp;: on vous dit pourquoi elle tient, ou ce qui lui manque. Vous pouvez réessayer autant de fois que nécessaire.</p>
+  </div>
+
+  <!-- 1 · S11 — définition du biais cognitif -->
+  <article class="el-q" data-type="qcm" data-src="S11" data-titre="Ce qui rend un biais difficile à contrer">
+    <p class="el-stem">« Se savoir biaisé ne suffit pas à ne plus l'être. » Qu'est-ce qui rend un biais cognitif si difficile à contrer&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Il agit sans qu'on en ait conscience, et il se loge justement dans nos certitudes</span>
+        <span class="el-fb"><p>C'est exactement la difficulté. Un biais est <strong>invisible de l'intérieur</strong> — il influence le jugement sans se signaler — et il prospère là où une conclusion nous paraît évidente&nbsp;: plus on est sûr, moins on examine.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Il ne touche que les personnes peu formées au domaine</span>
+        <span class="el-fb"><p>Non&nbsp;: un biais n'est pas un déficit de connaissance mais un <strong>mode de traitement automatique</strong>, commun à tout le monde. L'expertise change le contenu des raccourcis, pas le fait d'en prendre.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">C'est une erreur de raisonnement qu'un effort d'attention suffit à corriger</span>
+        <span class="el-fb"><p>L'effort d'attention ne suffit pas, et c'est tout le problème. C'est pourquoi la séance propose une autre stratégie&nbsp;: <strong>nommer</strong> les biais, pour pouvoir les repérer — chez soi, ou quand quelqu'un les repère à notre place.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Il n'apparaît qu'en situation de stress ou d'urgence</span>
+        <span class="el-fb"><p>L'urgence en accentue certains, mais le raccourci fonctionne en permanence. Il est d'ailleurs <strong>souvent utile</strong>&nbsp;: il permet de décider vite avec peu d'information. Il devient trompeur quand la situation demandait justement de ralentir.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <!-- 2 · S11 — appairement visuel des notions de la séance -->
+  <article class="el-q" data-type="paires" data-src="S11"
+           data-col-a="La notion" data-col-b="Ce qu'elle décrit"
+           data-titre="Les cinq notions de la séance">
+    <p class="el-stem">Reconstituez les cinq notions clés de la séance.</p>
+    <p class="el-hint">Touchez une vignette à gauche, puis sa description à droite.</p>
+    <ul class="el-pairs">
+      <li data-ico="⚡" data-tint="#5B3E8E">
+        <span class="el-lbl">Biais cognitif</span>
+        <span class="el-match">Un raccourci de traitement automatique&nbsp;: utile pour décider vite, trompeur quand il fallait ralentir.</span>
+        <span class="el-fb"><p><strong>Biais cognitif</strong> — la définition insiste sur les deux faces&nbsp;: le raccourci est d'abord une économie qui fonctionne, pas une défaillance.</p></span>
+      </li>
+      <li data-ico="🧊" data-tint="#00857F">
+        <span class="el-lbl">Iceberg de l'activité</span>
+        <span class="el-match">La partie visible n'est que la pointe&nbsp;: le métier se joue dans les compromis invisibles de l'extérieur.</span>
+        <span class="el-fb"><p><strong>Iceberg de l'activité</strong> — au-dessus, les prescriptions et le résultat observable&nbsp;; au-dessous, l'activité réelle, les conflits de logique arbitrés en situation et ce que cela coûte à la personne.</p></span>
+      </li>
+      <li data-ico="🗿" data-tint="#A8004F">
+        <span class="el-lbl">Effet Pygmalion</span>
+        <span class="el-match">Attendre beaucoup d'une personne la fait effectivement progresser davantage.</span>
+        <span class="el-fb"><p><strong>Effet Pygmalion</strong> — Rosenthal et Jacobson, 1968. Le sculpteur traite sa statue comme vivante, et elle s'anime&nbsp;: ce que l'on croit de l'autre finit par le façonner.</p></span>
+      </li>
+      <li data-ico="🏺" data-tint="#2A6FB5">
+        <span class="el-lbl">Effet Golem</span>
+        <span class="el-match">Attendre peu d'une personne suffit à la faire réussir moins, sans qu'un mot soit prononcé.</span>
+        <span class="el-fb"><p><strong>Effet Golem</strong> — Babad, Inbar et Rosenthal, 1982. Le même mécanisme que Pygmalion, orienté dans l'autre sens&nbsp;: il passe par des détails de comportement, pas par un jugement dit à voix haute.</p></span>
+      </li>
+      <li data-ico="🌱" data-tint="#9A6300">
+        <span class="el-lbl">Évaluation non déficitaire</span>
+        <span class="el-match">Partir de ce qui fonctionne et valoriser les progrès, plutôt que les écarts à une norme.</span>
+        <span class="el-fb"><p><strong>Évaluation non déficitaire</strong> — un regard qui fait grandir plutôt qu'il ne sanctionne. Concrètement&nbsp;: croiser efficacité objective et efficacité subjective au lieu de s'arrêter à la première.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <!-- 3 · S11 — les deux jugements d'efficacité -->
+  <article class="el-q" data-type="qcm" data-src="S11" data-titre="Efficacité objective et subjective">
+    <p class="el-stem">Après avoir observé une séance, une formatrice conclut&nbsp;: «&nbsp;l'objectif a été atteint dans le temps prévu&nbsp;». De quoi s'agit-il&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">D'un jugement d'efficacité objective — il manque ce que la séance a demandé à la personne</span>
+        <span class="el-fb"><p>Oui. Le constat porte sur le <strong>résultat observable</strong>, c'est-à-dire la pointe de l'iceberg. Il ne dit rien de l'<strong>efficacité subjective</strong>&nbsp;: les compromis opérés en direct, les conflits de logique arbitrés, le coût pour la personne.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">D'un jugement d'efficacité subjective — il manque le résultat observable</span>
+        <span class="el-fb"><p>C'est l'inverse. L'efficacité <em>subjective</em> concerne ce que l'activité demande à la personne qui la mène&nbsp;; ici, le propos ne porte que sur le résultat atteint et le temps tenu.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">D'une observation neutre — aucun jugement n'est porté</span>
+        <span class="el-fb"><p>«&nbsp;L'objectif a été atteint&nbsp;» suppose déjà un critère de réussite et son application. C'est un jugement — un jugement d'efficacité, adossé à la partie visible de l'activité.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">D'un jugement d'efficacité objective, et c'est suffisant pour évaluer la séance</span>
+        <span class="el-fb"><p>La première moitié est juste, la seconde est précisément ce que la séance conteste&nbsp;: <strong>évaluer sans déficit consiste à croiser les deux jugements d'efficacité</strong>, pas à s'en tenir au premier.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <!-- 4 · S10 — tri observer / interpréter / évaluer -->
+  <article class="el-q" data-type="tri" data-src="S10" data-titre="Observer, interpréter, évaluer">
+    <p class="el-stem">Classez chaque énoncé selon l'opération qu'il réalise.</p>
+    <p class="el-hint">Le test&nbsp;: c'est une observation si deux personnes présentes dans la salle en conviendraient sans discussion.</p>
+    <ol class="el-bins">
+      <li data-bin="obs"><span class="el-lbl">Observer</span></li>
+      <li data-bin="int"><span class="el-lbl">Interpréter</span></li>
+      <li data-bin="eva"><span class="el-lbl">Évaluer</span></li>
+    </ol>
+    <ul class="el-cards">
+      <li data-bin="obs">
+        <span class="el-lbl">«&nbsp;Trois élèves n'ont pas ouvert leur cahier pendant la consigne.&nbsp;»</span>
+        <span class="el-fb"><p><strong>Observation</strong> — un fait visible et vérifiable, sur lequel deux témoins s'accorderaient sans argumenter.</p></span>
+      </li>
+      <li data-bin="obs">
+        <span class="el-lbl">«&nbsp;La consigne a duré une minute quarante.&nbsp;»</span>
+        <span class="el-fb"><p><strong>Observation</strong> — une donnée mesurable. Rien n'y est encore interprété ni jugé.</p></span>
+      </li>
+      <li data-bin="int">
+        <span class="el-lbl">«&nbsp;Ils n'avaient peut-être pas compris la consigne.&nbsp;»</span>
+        <span class="el-fb"><p><strong>Interprétation</strong> — une hypothèse qui donne du sens au fait. Le «&nbsp;peut-être&nbsp;» la signale honnêtement comme telle.</p></span>
+      </li>
+      <li data-bin="int">
+        <span class="el-lbl">«&nbsp;Le groupe semblait fatigué en fin de séance.&nbsp;»</span>
+        <span class="el-fb"><p><strong>Interprétation</strong> — «&nbsp;semblait fatigué&nbsp;» n'est pas observable&nbsp;: c'est une lecture d'indices (postures, silences) et deux observateurs pourraient en discuter.</p></span>
+      </li>
+      <li data-bin="eva">
+        <span class="el-lbl">«&nbsp;La consigne n'était pas claire.&nbsp;»</span>
+        <span class="el-fb"><p><strong>Évaluation</strong> — un jugement de valeur adossé à une norme implicite de ce qu'est une consigne claire.</p></span>
+      </li>
+      <li data-bin="eva">
+        <span class="el-lbl">«&nbsp;Cette séquence était trop longue.&nbsp;»</span>
+        <span class="el-fb"><p><strong>Évaluation</strong> — «&nbsp;trop&nbsp;» mesure un écart à une norme. Sa version observable serait&nbsp;: «&nbsp;la séquence a duré vingt-huit minutes&nbsp;».</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <!-- 5 · S09 — neuro-mythe des styles d'apprentissage -->
+  <article class="el-q" data-type="qcm" data-src="S09" data-titre="Les styles d'apprentissage">
+    <p class="el-stem">«&nbsp;Chaque personne a son style d'apprentissage&nbsp;: visuelle, auditive ou kinesthésique.&nbsp;» Que dit la recherche&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Les préférences déclarées existent, mais y adapter l'enseignement n'améliore pas les apprentissages</span>
+        <span class="el-fb"><p>C'est la formulation exacte. L'affirmation n'est pas absurde — elle repose sur quelque chose de réel — mais la conséquence pédagogique qu'on en tire n'est <strong>pas étayée</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">C'est établi&nbsp;: adapter le format au style déclaré améliore nettement les résultats</span>
+        <span class="el-fb"><p>C'est précisément la partie que les études ne retrouvent pas. Ce qui fonctionne, c'est d'adapter le format <strong>au contenu</strong>&nbsp;: une carte pour un trajet, un enregistrement pour une prononciation.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">C'est entièrement faux&nbsp;: ces préférences n'existent pas</span>
+        <span class="el-fb"><p>Trop radical. Les préférences déclarées sont bien réelles&nbsp;; c'est leur usage comme recette d'enseignement qui ne tient pas. Un neuro-mythe a presque toujours un <strong>noyau de vérité déformé</strong>.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">La question n'a jamais été étudiée sérieusement</span>
+        <span class="el-fb"><p>Elle l'a été, et abondamment. C'est même ce qui permet de trancher&nbsp;: le premier réflexe critique de la séance 9 est de <strong>demander la source</strong> et de regarder ce que l'étude citée a réellement montré.</p></span>
+      </li>
+    </ul>
+    <div class="el-why"><p>Les trois mécanismes qui font tenir un neuro-mythe&nbsp;: un noyau de vérité déformé, une utilité apparente — la recette simple se transmet mieux que le résultat nuancé — et l'autorité du vocabulaire, un énoncé qui mentionne le cerveau paraissant plus crédible.</p></div>
+  </article>
+
+  <!-- 6 · S10 — remise en ordre d'un retour constructif -->
+  <article class="el-q" data-type="ordre" data-src="S10" data-titre="Formuler un retour constructif">
+    <p class="el-stem">Remettez dans l'ordre les quatre temps d'un retour constructif.</p>
+    <p class="el-hint">Glissez les rangées, ou utilisez les flèches.</p>
+    <ol class="el-seq">
+      <li>
+        <span class="el-lbl">Partir du fait — ancrer le retour dans un moment identifiable</span>
+        <span class="el-fb">
+          <p>L'ordre compte&nbsp;: chaque étape prépare la suivante.</p>
+          <ul>
+            <li><strong>Partir du fait</strong> — un moment identifiable, pas une impression générale.</li>
+            <li><strong>Expliciter l'interprétation</strong> — la donner comme hypothèse&nbsp;: «&nbsp;je me suis demandé si…&nbsp;».</li>
+            <li><strong>Interroger avant de conclure</strong> — la personne observée détient des éléments que l'observation ne montre pas.</li>
+            <li><strong>Viser l'action suivante</strong> — un retour utile ouvre une piste, il ne clôt pas un dossier.</li>
+          </ul>
+          <p>Un retour formulé comme un jugement déclenche une posture défensive&nbsp;; ancré dans les faits, il ouvre une posture d'apprentissage.</p>
+        </span>
+      </li>
+      <li><span class="el-lbl">Expliciter l'interprétation — la donner comme hypothèse, pas comme constat</span></li>
+      <li><span class="el-lbl">Interroger avant de conclure — demander ce que l'observation ne montre pas</span></li>
+      <li><span class="el-lbl">Viser l'action suivante — ouvrir une piste plutôt que clore un dossier</span></li>
+    </ol>
+  </article>
+
+  <!-- 7 · S11 — effet Golem -->
+  <article class="el-q" data-type="qcm" data-src="S11" data-titre="L'effet Golem en situation">
+    <p class="el-stem">Un tuteur pense d'un stagiaire qu'il «&nbsp;n'ira pas très loin&nbsp;». Il n'en dit rien à personne. Selon l'effet Golem, que se passe-t-il&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">Son comportement change malgré lui — moins de temps laissé pour répondre, des tâches allégées, des questions moins ouvertes — et le stagiaire progresse moins</span>
+        <span class="el-fb"><p>C'est le mécanisme exact. L'effet ne passe pas par une parole, mais par une <strong>accumulation de détails</strong>. Le stagiaire reçoit moins d'occasions d'apprendre, progresse moins, et confirme le pronostic.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Rien&nbsp;: tant que le jugement n'est pas exprimé, il reste sans effet</span>
+        <span class="el-fb"><p>C'est précisément ce que l'effet Golem dément. D'où le déplacement de vigilance proposé en séance&nbsp;: surveiller moins ce que l'on <em>pense</em> d'une personne que ce que l'on <strong>fait</strong> en conséquence.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Le stagiaire perçoit la défiance et compense en travaillant davantage</span>
+        <span class="el-fb"><p>Ce n'est pas ce qui est observé. L'effet est <strong>auto-réalisateur</strong>&nbsp;: l'attente basse réduit les occasions d'apprendre, et le résultat vient valider l'attente de départ.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Rien de tel&nbsp;: l'effet Golem décrit des attentes hautes qui font réussir</span>
+        <span class="el-fb"><p>Cela, c'est l'<strong>effet Pygmalion</strong> (Rosenthal &amp; Jacobson, 1968). Le Golem (Babad, Inbar &amp; Rosenthal, 1982) en est le revers&nbsp;: même mécanisme, orienté vers le bas.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <!-- 8 · S11 — ce que travaillent les dilemmes -->
+  <article class="el-q" data-type="qcm" data-src="S11" data-titre="Ce que travaillent les dilemmes">
+    <p class="el-stem">Sur les axes travaillés en séance — aider&nbsp;/&nbsp;évaluer, prescrire une solution&nbsp;/&nbsp;faire réfléchir au métier… — qu'est-ce qui se travaille exactement&nbsp;?</p>
+    <ul class="el-opts">
+      <li data-ok>
+        <span class="el-lbl">La conscience du curseur&nbsp;: savoir où l'on se place, et pourquoi, dans une situation donnée</span>
+        <span class="el-fb"><p>Oui. <strong>Aucun de ces axes n'a de bonne réponse fixe.</strong> Ce sont des exigences également légitimes entre lesquelles il faut arbitrer en situation — ce qui se professionnalise, c'est la lucidité sur cet arbitrage.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Trouver la position d'équilibre, au centre de chaque axe</span>
+        <span class="el-fb"><p>Le centre n'est pas une bonne réponse par défaut&nbsp;: face à une urgence réelle, se tenir au milieu de l'axe «&nbsp;urgence&nbsp;/&nbsp;long terme&nbsp;» n'aide personne. La position dépend de la situation.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Choisir une fois pour toutes le pôle qui correspond à son style d'accompagnement</span>
+        <span class="el-fb"><p>Un dilemme n'est pas une préférence personnelle à assumer. Les deux pôles restent légitimes&nbsp;; se fixer sur l'un revient à renoncer d'avance à l'autre, quelle que soit la situation.</p></span>
+      </li>
+      <li>
+        <span class="el-lbl">Les faire disparaître progressivement, avec l'expérience</span>
+        <span class="el-fb"><p>L'expérience change la façon d'arbitrer, pas l'existence de la tension. Accompagner, ce n'est pas appliquer une méthode&nbsp;: c'est <strong>arbitrer en permanence</strong> entre des exigences également légitimes.</p></span>
+      </li>
+    </ul>
+  </article>
+
+  <!-- 9 · révision transversale S03 → S10 -->
+  <article class="el-q" data-type="paires" data-old
+           data-src-label="Rappel · séances 3 à 10"
+           data-col-a="La notion" data-col-b="Ce qu'elle désigne"
+           data-titre="Révision transversale du semestre">
+    <p class="el-stem">Quatre notions vues depuis février. Retrouvez ce que chacune désigne.</p>
+    <p class="el-hint">Touchez une vignette à gauche, puis sa description à droite.</p>
+    <ul class="el-pairs">
+      <li data-ico="🏛️" data-tint="#5B3E8E">
+        <span class="el-lbl">Méthode des loci</span>
+        <span class="el-match">Ancrer une information dans un parcours de lieux familiers pour mieux la retrouver.</span>
+        <span class="el-fb"><p><strong>Méthode des loci</strong> — séance 3. Elle exploite le fait que le cerveau encode mieux les images fortes et les parcours que les mots abstraits.</p></span>
+      </li>
+      <li data-ico="📋" data-tint="#00857F">
+        <span class="el-lbl">Kanban</span>
+        <span class="el-match">Rendre l'avancement d'un projet visible et partagé, colonne par colonne.</span>
+        <span class="el-fb"><p><strong>Kanban</strong> — séance 7. Avec le Gantt, c'est un outil de pilotage&nbsp;: son intérêt principal est de rendre l'avancement <em>visible par tout le groupe</em>.</p></span>
+      </li>
+      <li data-ico="🧠" data-tint="#A8004F">
+        <span class="el-lbl">Neuro-mythe</span>
+        <span class="el-match">Une croyance sur le cerveau née d'un résultat réel, puis déformée jusqu'à passer pour une évidence.</span>
+        <span class="el-fb"><p><strong>Neuro-mythe</strong> — séance 9. Le «&nbsp;cerveau gauche&nbsp;/&nbsp;cerveau droit&nbsp;» en est l'exemple type&nbsp;: certaines fonctions sont bien latéralisées, mais personne n'est «&nbsp;à dominante droite&nbsp;».</p></span>
+      </li>
+      <li data-ico="🔭" data-tint="#2A6FB5">
+        <span class="el-lbl">Cadre de référence</span>
+        <span class="el-match">Mes valeurs, mon expérience et mes normes implicites — d'où part tout jugement que je porte.</span>
+        <span class="el-fb"><p><strong>Cadre de référence</strong> — séance 10. Avec le contexte et le point de vue, c'est l'une des trois sources du jugement&nbsp;: on ne juge jamais de nulle part.</p></span>
+      </li>
+    </ul>
+  </article>
+
+</template>
+
 <script src="../assets/support.js"></script>
+<script src="../assets/elearn.js"></script>
 <script src="../assets/vendor/reveal/reveal.min.js"></script>
 <script>
   const deck = new Reveal({
@@ -1370,7 +1630,10 @@
   });
 
   // Bascule présentation <-> support de cours (assets/support.js pilote le DOM).
-  document.addEventListener('support:change', function(e){
+  // Les deux modes annexes (support de cours, e-learning) masquent les diapos :
+  // sans cette reconfiguration, le clavier de reveal continue de tourner
+  // derrière l'écran affiché, et la mise en page est périmée au retour.
+  function surModeAnnexe(e){
     var open = e.detail.open;
     deck.configure({ controls: !open, progress: !open, keyboard: !open });
     if(!open){
@@ -1378,7 +1641,9 @@
       applyCover();
       setTimeout(syncChrome, 60);
     }
-  });
+  }
+  document.addEventListener('support:change', surModeAnnexe);
+  document.addEventListener('elearn:change', surModeAnnexe);
 </script>
 <script>
   // ---- minuteur d'activité type Time Timer (enchaîne les étapes) ----
