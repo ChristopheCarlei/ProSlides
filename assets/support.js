@@ -87,7 +87,16 @@
   function pauseMedia() {
     Array.prototype.forEach.call(
       document.querySelectorAll('.reveal video, .reveal audio'),
-      function (m) { try { m.pause(); } catch (e) {} }
+      function (m) {
+        /* Couper une lecture encore en attente rejette la promesse de play()
+           (AbortError) : on attend qu'elle aboutisse avant de mettre en pause. */
+        if (m.paused) return;
+        var stop = function () { try { m.pause(); } catch (e) {} };
+        try {
+          var p = m.play();
+          if (p && p.then) p.then(stop, stop); else stop();
+        } catch (e) { stop(); }
+      }
     );
   }
 

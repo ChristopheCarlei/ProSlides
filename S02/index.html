@@ -1166,10 +1166,19 @@
     if(cur){ var ret = cur.querySelector('.retenir'); if(ret){ ret.classList.remove('go'); setTimeout(function(){ ret.classList.add('go'); }, 200); } }
     // gérer les vidéos de fond : pause hors de la slide courante + reduced-motion
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Couper une vidéo dont le play() est encore en attente rejette sa promesse
+    // (AbortError non capturé) : on attend que la lecture aboutisse avant de
+    // mettre en pause, et on laisse tranquille ce qui n'a jamais démarré.
+    var couper = function(v){
+      if(v.paused) return;
+      var stop = function(){ try{ v.pause(); }catch(e){} };
+      try{ var p = v.play(); if(p && p.then) p.then(stop, stop); else stop(); }
+      catch(e){ stop(); }
+    };
     document.querySelectorAll('.slides > section video').forEach(function(v){
       var inCur = cur && cur.contains(v);
       if(inCur && !reduce){ var p = v.play(); if(p && p.catch) p.catch(function(){}); }
-      else { try{ v.pause(); }catch(e){} }
+      else { couper(v); }
     });
     applyCover();
   }
