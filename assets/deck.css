@@ -234,3 +234,94 @@ body.support-open .mg-wrap, body.elearn-open .mg-wrap{ display:none !important; 
    disparaîtrait dans ces modes et on ne pourrait plus en sortir.
    ------------------------------------------------------------------------ */
 body:not(.support-open):not(.elearn-open):not(.cover-active) .topbtns{ display:none; }
+
+/* ---------------------------------------------------------------------------
+   Gabarit « personnage » — une figure du champ par séance
+
+   Portrait à gauche, fiche à droite. Composant partagé par les 13 séances :
+   il vit ici et nulle part ailleurs, comme le reste de l'habillage commun.
+
+   Pour l'utiliser, copier le bloc de balisage documenté dans S12/index.html
+   (diapo « Personnage ») et remplacer le contenu. Trois points d'attention :
+     · l'attribut id de <image-slot> doit être unique dans tout le dépôt —
+       convention retenue : perso-s01 … perso-s13 ;
+     · la photo se dépose dans assets/portraits/ et se référence par src ;
+       tant qu'elle manque, l'emplacement affiche une vignette d'attente ;
+     · .perso-credit porte le crédit photo, obligatoire pour un portrait de
+       personne réelle. Ne pas publier une photo sans en avoir le droit.
+
+   Le préfixe est « perso- » : surtout pas « ad- », filtré en dur par les
+   bloqueurs de publicité (voir le CLAUDE.md du projet).
+   ------------------------------------------------------------------------ */
+.perso{
+  position:relative; width:100%; height:100%; overflow:hidden; box-sizing:border-box;
+  padding:var(--safe-t) var(--safe-x) var(--safe-b);
+  display:flex; align-items:center; gap:44px; color:#fff;
+  background:radial-gradient(circle at 20% 12%, #14514e 0%, #0a3d3b 55%, #062a29 100%);
+}
+
+/* ---- colonne portrait ---- */
+.perso-portrait{ flex:0 0 358px; width:358px; display:flex; flex-direction:column; gap:11px; }
+.perso-cadre{
+  position:relative; width:358px; height:446px; border-radius:18px; overflow:hidden;
+  border:1.5px solid rgba(159,240,237,.34); background:rgba(255,255,255,.06);
+  box-shadow:0 26px 60px -28px rgba(0,0,0,.85);
+}
+.perso-cadre image-slot, .perso-cadre img{
+  display:block; width:100%; height:100%; object-fit:cover;
+}
+/* Filet rose sous le portrait : reprend l'accent de marque du bandeau. */
+.perso-cadre::after{
+  content:""; position:absolute; left:0; right:0; bottom:0; height:5px;
+  background:var(--rose); pointer-events:none;
+}
+.perso-credit{ margin:0; font-size:11.5px; line-height:1.35; color:rgba(255,255,255,.6); }
+
+/* ---- colonne fiche ---- */
+.perso-fiche{ flex:1 1 auto; min-width:0; }
+.perso-fiche .eyebrow{
+  display:block; font-size:12.5px; font-weight:800; letter-spacing:.09em;
+  text-transform:uppercase; color:rgba(255,255,255,.62); margin-bottom:.45em;
+}
+.perso-fiche h2{
+  margin:0 0 .12em; font-size:32px; font-weight:800; line-height:1.05; color:#fff;
+  text-shadow:0 2px 18px rgba(8,40,39,.5);
+}
+.perso-meta{
+  margin:0 0 .45em; font-size:15px; font-weight:700; line-height:1.35; color:#9ff0ed;
+}
+.perso-lead{ margin:0 0 10px; font-size:15px; line-height:1.42; color:rgba(255,255,255,.92); }
+.perso-lead strong{ color:#fff; }
+
+/* ---- les apports ----
+   Budget de la colonne : 552 px utiles. Le gabarit tient avec un chapô de
+   deux lignes et TROIS apports d'environ 110 caractères de description. Au
+   quatrième apport, ou avec un chapô de quatre lignes, la fiche passe sous
+   les bandes réservées — vérifier à la capture avant de publier. */
+.perso-apports{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:7px; }
+.perso-apports li{
+  display:grid; grid-template-columns:26px 1fr; align-items:start; gap:13px;
+  padding:7px 15px; border-radius:11px;
+  background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.16);
+}
+.perso-apports li::before{
+  content:counter(perso-n); counter-increment:perso-n;
+  width:26px; height:26px; border-radius:50%; background:var(--rose); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-size:13px; font-weight:800; line-height:1;
+}
+.perso-apports{ counter-reset:perso-n; }
+/* La puce ::before, .k et .d font trois enfants pour deux colonnes : sans
+   grid-column explicite, .d retombe en rangée 2 dans la colonne de 26 px et
+   le texte se casse à un mot par ligne. */
+.perso-apports .k{ grid-column:2; display:block; font-size:15px; font-weight:800; color:#fff; line-height:1.2; }
+.perso-apports .d{ grid-column:2; display:block; margin-top:2px; font-size:13.5px; line-height:1.36; color:rgba(255,255,255,.9); }
+/* .reveal em impose var(--teal-deep), illisible sur ce fond sombre. Deux
+   classes dans le sélecteur, et non une : à spécificité égale c'est l'ordre
+   des feuilles qui tranche, et le <style> des séances est chargé APRÈS
+   deck.css — une règle « .perso-apports em » perdait donc le duel. */
+.perso .perso-apports em, .perso .perso-lead em{ color:#9ff0ed; font-style:italic; font-weight:700; }
+
+.perso-src{ margin:9px 0 0; font-size:12px; line-height:1.4; color:rgba(255,255,255,.68); }
+/* Deux classes ici aussi : même duel de spécificité avec .reveal em. */
+.perso .perso-src em{ color:inherit; font-style:italic; }
