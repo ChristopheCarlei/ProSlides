@@ -239,16 +239,20 @@
     text-transform:uppercase; color:rgba(255,255,255,.62); margin-bottom:.45em; }
   .dil-title h2{ margin:0; font-size:29px; font-weight:800; color:#fff;
     text-shadow:0 2px 16px rgba(8,40,39,.5); }
-  .dil-hint{ font-size:13.5px; font-weight:600; color:rgba(255,255,255,.72); margin:.5em 0 0; }
+  .dil-hint{ font-size:13.5px; font-weight:600; color:rgba(255,255,255,.86); margin:.5em 0 0; }
 
   .dil-list{ flex:1 1 auto; display:flex; flex-direction:column; justify-content:center; gap:17px; min-height:0; }
-  .dil-row{ --ol:0; --or:0; --fg:#fff; }
+  /* Les quatre axes portent une teinte claire et une encre sombre : sur ce fond
+     vert nuit, un aplat foncé + texte blanc plafonnait à 4,9:1 (barre bleue).
+     Teinte claire + encre sombre monte à 8:1 et au-delà, et rend les quatre
+     rangées homogènes — auparavant deux étaient claires, deux foncées. */
+  .dil-row{ --ol:0; --or:0; --fg:#0B2136; }
   .dil-head{ background:var(--c); color:var(--fg); border-radius:7px;
     padding:8px 18px; text-align:center; font-size:18.5px; font-weight:800; line-height:1.25;
     box-shadow:0 6px 18px -10px rgba(0,0,0,.7); transition:background .2s; }
   /* Sans cette reprise, le « ou » hérite du teal de .reveal em : illisible sur
      une barre teal, très faible sur les autres. */
-  .dil-head em{ font-style:italic; font-weight:700; color:inherit; opacity:.72; }
+  .dil-head em{ font-style:italic; font-weight:700; color:inherit; opacity:.82; }
   .dil-head .t-full, .dil-head .t-left, .dil-head .t-right{ display:none; }
   .dil-row.is-center .dil-head .t-full{ display:inline; }
   .dil-row.is-left   .dil-head .t-left{ display:inline; }
@@ -259,30 +263,47 @@
      côté. La pastille colorée vient le recouvrir quand le curseur s'en approche. */
   .dil-col{ position:relative; display:flex; flex-direction:column; gap:7px; }
   .dil-col::before{ content:""; position:absolute; inset:0; border-radius:6px;
-    border:1.5px dashed rgba(255,255,255,.24); background:rgba(255,255,255,.045); }
+    border:1.5px dashed rgba(255,255,255,.34); background:rgba(255,255,255,.06); }
   .dil-col--r{ align-items:flex-end; }
   /* Pas de transition sur l'opacité : elle suit directement la position du
-     curseur, un fondu la ferait traîner derrière le geste. */
+     curseur, un fondu la ferait traîner derrière le geste. En revanche le
+     dégradé se termine tôt (voir REVEAL dans le script) : la pastille est
+     pleinement opaque sur presque toute la course, jamais lue à 40 %. */
   .dil-pole{ position:relative; background:var(--c); color:var(--fg); border-radius:6px; padding:7px 13px;
-    font-size:15.5px; font-weight:700; line-height:1.25; width:100%; box-sizing:border-box; }
+    font-size:15.5px; font-weight:700; line-height:1.25; width:100%; box-sizing:border-box;
+    box-shadow:0 6px 16px -10px rgba(0,0,0,.8); }
   .dil-col--l .dil-pole{ opacity:var(--ol); }
   .dil-col--r .dil-pole{ opacity:var(--or); text-align:right; }
 
-  .dil-track{ position:relative; height:30px; cursor:pointer; touch-action:none; }
+  .dil-track{ position:relative; height:32px; cursor:pointer; touch-action:none; }
+  /* Le repère central rappelle la position neutre une fois le curseur déplacé. */
   .dil-track::before{ content:""; position:absolute; left:0; right:0; top:50%; height:7px;
-    transform:translateY(-50%); background:var(--c); border-radius:4px; opacity:.9; }
+    transform:translateY(-50%); border-radius:4px; opacity:.92;
+    background:linear-gradient(rgba(6,40,38,.55) 0 100%) center / 3px 100% no-repeat, var(--c); }
   /* pointes de flèche aux deux extrémités, comme sur le modèle */
   .dil-track::after{ content:""; position:absolute; left:0; right:0; top:50%; height:13px; transform:translateY(-50%);
     background:
       linear-gradient(45deg, var(--c) 0 50%, transparent 50%) left center / 9px 13px no-repeat,
       linear-gradient(-45deg, var(--c) 0 50%, transparent 50%) right center / 9px 13px no-repeat;
     opacity:.85; }
-  .dil-thumb{ position:absolute; top:50%; left:50%; width:28px; height:28px; margin:-14px 0 0 -14px;
-    border-radius:50%; background:#fff; border:3.5px solid var(--c); cursor:grab; touch-action:none;
-    box-shadow:0 4px 14px -4px rgba(0,0,0,.75); transition:transform .12s, box-shadow .12s; }
+  /* Cerclage sombre : sur des teintes désormais claires, un liseré coloré seul
+     ne détachait plus la pastille blanche de la barre. */
+  .dil-thumb{ position:absolute; top:50%; left:50%; width:30px; height:30px; margin:-15px 0 0 -15px;
+    border-radius:50%; background:#fff; border:4px solid var(--c); cursor:grab; touch-action:none;
+    box-shadow:0 0 0 2px rgba(5,38,36,.85), 0 4px 14px -4px rgba(0,0,0,.75);
+    transition:transform .12s, box-shadow .12s; }
   .dil-thumb:hover{ transform:scale(1.12); }
-  .dil-thumb:focus-visible{ outline:3px solid #9ff0ed; outline-offset:3px; }
-  .dil-thumb.grabbing{ cursor:grabbing; transform:scale(1.2); box-shadow:0 6px 20px -4px rgba(0,0,0,.85); }
+  .dil-thumb:focus-visible{ outline:3px solid #9ff0ed; outline-offset:5px; }
+  .dil-thumb.grabbing{ cursor:grabbing; transform:scale(1.2);
+    box-shadow:0 0 0 2px rgba(5,38,36,.85), 0 6px 20px -4px rgba(0,0,0,.85); }
+  /* Halo d'amorce : signale que la pastille se saisit. Il s'éteint dès la
+     première manipulation de la diapo. */
+  .dil-thumb::after{ content:""; position:absolute; inset:-5px; border-radius:50%;
+    border:2px solid rgba(255,255,255,.6); pointer-events:none;
+    animation:dilPulse 2.4s ease-out infinite; }
+  @keyframes dilPulse{ 0%{ transform:scale(1); opacity:.75; } 70%,100%{ transform:scale(1.85); opacity:0; } }
+  .dil-list.is-touched .dil-thumb::after, .dil-thumb.grabbing::after{ display:none; }
+  @media (prefers-reduced-motion:reduce){ .dil-thumb::after{ animation:none; opacity:0; } }
 
   /* ---- iceberg de l'activité : ce que l'on voit / ce que l'on fait ----
      Deux zones cliquables (pointe émergée, masse immergée) ; chacune ouvre
@@ -884,7 +905,7 @@
         </div>
 
         <div class="dil-list">
-          <div class="dil-row is-center" style="--c:#2A73BF">
+          <div class="dil-row is-center" style="--c:#8FC3EE;--fg:#0B2136">
             <div class="dil-head">
               <span class="t-full">Aider <em>ou</em> évaluer</span>
               <span class="t-left">Aider</span>
@@ -896,11 +917,11 @@
                 <div class="dil-thumb" role="slider" tabindex="0" aria-label="Aider ou évaluer"
                      aria-valuemin="-100" aria-valuemax="100" aria-valuenow="0"></div>
               </div>
-              <div class="dil-col dil-col--r"><span class="dil-pole">Dire tout ce qu'on a vu</span></div>
+              <div class="dil-col dil-col--r"><span class="dil-pole">Noter ce qu'on voit</span></div>
             </div>
           </div>
 
-          <div class="dil-row is-center" style="--c:#E0A030;--fg:#14212E">
+          <div class="dil-row is-center" style="--c:#E8B04A;--fg:#2E1F02">
             <div class="dil-head">
               <span class="t-full">Conseiller à partir de ce que l'on a fait soi-même <em>ou</em> à partir d'une «&nbsp;culture de métier&nbsp;»</span>
               <span class="t-left">Conseiller à partir de ce que l'on a fait soi-même</span>
@@ -916,7 +937,7 @@
             </div>
           </div>
 
-          <div class="dil-row is-center" style="--c:#0B7A70">
+          <div class="dil-row is-center" style="--c:#7FD6A6;--fg:#06301D">
             <div class="dil-head">
               <span class="t-full">Aider à réaliser <em>ou</em> à apprendre le métier</span>
               <span class="t-left">Aider à réaliser</span>
@@ -938,7 +959,7 @@
             </div>
           </div>
 
-          <div class="dil-row is-center" style="--c:#5BC4C0;--fg:#0A2E2C">
+          <div class="dil-row is-center" style="--c:#5BC4C0;--fg:#052928">
             <div class="dil-head">
               <span class="t-full">Conseiller face à l'urgence de la situation <em>ou</em> pour un plus long terme</span>
               <span class="t-left">Conseiller face à l'urgence de la situation</span>
@@ -1177,7 +1198,7 @@
     <p>Accompagner, ce n'est pas appliquer une méthode : c'est arbitrer en permanence entre des exigences également légitimes. Six tensions reviennent&nbsp;:</p>
     <ul>
       <li><strong>Aider</strong> ↔ <strong>Évaluer</strong> — tenir les deux sans les confondre.</li>
-      <li><strong>Hiérarchiser les conseils</strong> ↔ <strong>Dire tout ce qu'on a vu</strong></li>
+      <li><strong>Hiérarchiser les conseils</strong> ↔ <strong>Noter ce qu'on voit</strong></li>
       <li><strong>Conseiller depuis sa propre expérience</strong> ↔ <strong>depuis une culture de métier</strong></li>
       <li><strong>Aider à réaliser</strong> ↔ <strong>Aider à apprendre le métier</strong></li>
       <li><strong>Prescrire une solution</strong> ↔ <strong>Faire réfléchir au métier</strong></li>
@@ -1632,8 +1653,12 @@
   (function(){
     var rows = document.querySelectorAll('.dil-row');
     if(!rows.length) return;
+    var list = document.querySelector('.dil-list');
     var DEAD = 0.10;    // zone morte centrale : rien ne s'affiche tant qu'on n'a pas quitté le centre
+    var REVEAL = 0.34;  // position à laquelle le pôle est pleinement opaque
     var SWITCH = 0.14;  // seuil auquel l'intitulé bascule sur un seul pôle
+
+    function touched(){ if(list) list.classList.add('is-touched'); }
 
     Array.prototype.forEach.call(rows, function(row){
       var track = row.querySelector('.dil-track');
@@ -1643,9 +1668,11 @@
 
       function apply(){
         thumb.style.left = ((pos + 1) / 2 * 100) + '%';
-        // opacité progressive : 0 dans la zone morte, 1 à l'extrémité
-        var l = Math.min(1, Math.max(0, (-pos - DEAD) / (1 - DEAD)));
-        var r = Math.min(1, Math.max(0, ( pos - DEAD) / (1 - DEAD)));
+        // Opacité progressive, mais saturée dès REVEAL : le pôle reste lisible
+        // sur toute la fin de la course au lieu de monter linéairement jusqu'au
+        // bout, ce qui le laissait à demi transparent la plupart du temps.
+        var l = Math.min(1, Math.max(0, (-pos - DEAD) / (REVEAL - DEAD)));
+        var r = Math.min(1, Math.max(0, ( pos - DEAD) / (REVEAL - DEAD)));
         row.style.setProperty('--ol', l);
         row.style.setProperty('--or', r);
         row.classList.toggle('is-left',   pos <= -SWITCH);
@@ -1665,14 +1692,14 @@
       var dragging = false;
       thumb.addEventListener('pointerdown', function(e){
         e.preventDefault(); e.stopPropagation();
-        dragging = true;
+        dragging = true; touched();
         try{ thumb.setPointerCapture(e.pointerId); }catch(err){}
         thumb.classList.add('grabbing');
       });
       // clic ailleurs sur la barre : le curseur s'y déplace directement
       track.addEventListener('pointerdown', function(e){
         if(e.target === thumb) return;
-        e.preventDefault(); e.stopPropagation();
+        e.preventDefault(); e.stopPropagation(); touched();
         setFromClientX(e.clientX);
       });
       window.addEventListener('pointermove', function(e){
@@ -1692,7 +1719,7 @@
         if(e.key === 'ArrowLeft'  || e.key === 'ArrowDown'){ pos = Math.max(-1, pos - step); used = true; }
         if(e.key === 'ArrowRight' || e.key === 'ArrowUp'){   pos = Math.min( 1, pos + step); used = true; }
         if(e.key === 'Home'){ pos = 0; used = true; }
-        if(used){ e.preventDefault(); e.stopPropagation(); apply(); }
+        if(used){ e.preventDefault(); e.stopPropagation(); touched(); apply(); }
       });
     });
   })();
