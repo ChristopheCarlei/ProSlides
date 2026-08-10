@@ -491,6 +491,10 @@
      ===================================================================== */
 
   function setSteps() {
+    /* Les boutons de mode ne s'affichent que sur l'écran d'accueil (idx === -1).
+       Voir la règle .el-accueil dans elearn.css. À poser AVANT reserveTop(),
+       qui mesure la barre : l'ordre inverse relèverait l'état précédent. */
+    document.body.classList.toggle('el-accueil', idx === -1);
     reserveTop();          /* appelé par chaque écran : la réserve reste juste */
     steps.innerHTML = '';
     QS.forEach(function (q, i) {
@@ -729,9 +733,15 @@
   function reserveTop() {
     if (!app) return;
     var bar = document.querySelector('.topbtns') || document.getElementById('quizbtn');
-    if (!bar) return;
-    var bas = bar.getBoundingClientRect().bottom;
-    if (bas > 0) app.style.setProperty('--el-topgap', Math.ceil(bas) + 10 + 'px');
+    /* Hors de l'écran d'accueil la barre est masquée : plus rien à contourner,
+       la rangée de progression remonte. Sans ce cas, on garderait 64 px de vide
+       réservés à des boutons qui ne sont plus là.
+       Le test porte sur la largeur mesurée, pas sur offsetParent : celui-ci vaut
+       toujours null pour un élément en position:fixed, ce qui faisait retomber
+       la réserve à 14 px même quand la barre était bien affichée. */
+    var r = bar ? bar.getBoundingClientRect() : null;
+    if (!r || !r.width) { app.style.setProperty('--el-topgap', '14px'); return; }
+    app.style.setProperty('--el-topgap', Math.ceil(r.bottom) + 10 + 'px');
   }
 
   function pauseMedia() {

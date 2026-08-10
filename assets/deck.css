@@ -220,3 +220,17 @@ body.support-open .mg-wrap, body.elearn-open .mg-wrap{ display:none !important; 
 .mg-lien:focus-visible{ outline:2.5px solid var(--rose); outline-offset:2px; }
 
 @media print{ .mg-wrap{ display:none !important; } }
+
+/* ---------------------------------------------------------------------------
+   Boutons de mode : visibles seulement sur la couverture
+
+   En séance, les deux pastilles en haut à droite encombrent les diapos alors
+   qu'elles ne servent qu'au moment d'entrer dans un mode. Elles ne s'affichent
+   donc qu'en couverture (body.cover-active, posé par syncChrome quand la diapo
+   courante contient .cover2).
+
+   Les deux exclusions comptent : en mode support et en mode e-learning,
+   cover-active est retiré par support.js / elearn.js. Sans elles, la barre
+   disparaîtrait dans ces modes et on ne pourrait plus en sortir.
+   ------------------------------------------------------------------------ */
+body:not(.support-open):not(.elearn-open):not(.cover-active) .topbtns{ display:none; }

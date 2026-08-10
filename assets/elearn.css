@@ -38,6 +38,13 @@ body.elearn-open .brandstrip{ position:fixed; }
 /* « Imprimer » ne produit que le support A4 : hors sujet ici. */
 body.elearn-open .printbtn{ display:none !important; }
 
+/* Comme en présentation, les boutons de mode ne s'affichent qu'à l'entrée :
+   sur l'écran d'accueil du parcours. Pendant les activités et sur le bilan ils
+   s'effacent, pour ne pas concurrencer les réponses.
+   Sorties de secours conservées : Échap ferme le quiz, et le bilan propose
+   « Revenir aux diapositives ». La classe est posée par elearn.js. */
+body.elearn-open:not(.el-accueil) .topbtns{ display:none; }
+
 /* libellés du bouton de bascule */
 .quizbtn .lbl-off{ display:inline; }
 .quizbtn .lbl-on{ display:none; }
