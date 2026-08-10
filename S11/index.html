@@ -494,6 +494,13 @@
   .origine .op .revealtext{ margin-top:.35em; }
   .origine .op .rt-body{ background:none; backdrop-filter:none; -webkit-backdrop-filter:none;
     box-shadow:none; padding:.45em 0 0; max-width:none; text-shadow:none; }
+  /* Le texte était coupé par des <br> calés sur une mesure plus large que
+     l'encart (470 px) : chaque ligne forcée débordait et se repliait, d'où une
+     alternance ligne longue / bout de ligne. Il coule maintenant librement,
+     découpé en trois temps — le mythe, l'étude, ce qu'il en reste en classe. */
+  .origine .op .rt-body p{ margin:0 0 .75em; text-wrap:pretty; }
+  .origine .op .rt-body p:last-child{ margin-bottom:0; }
+  .origine .op .rt-body .chute{ color:#9ff0ed; font-weight:700; }
 
   /* ---- schéma cerveau (aires visuelles) ---- */
   .brainmap{ position:relative; width:100%; height:100%; overflow:hidden;
@@ -1011,7 +1018,11 @@
           <div class="revealtext" onclick="this.classList.toggle('open')">
             <span class="rt-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>Afficher la description</span>
           </div>
-          <p class="rt-body" style="text-align:left;">Le sculpteur <strong>Pygmalion</strong> taille dans l'ivoire une femme si parfaite<br />qu'il en tombe amoureux et la traite comme vivante.<br />Aphrodite exauce son vœu&nbsp;: la statue <strong>s'anime</strong>.<br />En 1968, <strong>Rosenthal et Jacobson</strong> en font un effet mesuré en classe&nbsp;:<br />les élèves dont on attend davantage progressent davantage.<br />Ce que l'on <em>croit</em> de l'autre finit par le façonner.</p>
+          <div class="rt-body" style="text-align:left;">
+            <p>Le sculpteur <strong>Pygmalion</strong> taille dans l'ivoire une femme si parfaite qu'il en tombe amoureux et la traite comme vivante. Aphrodite exauce son vœu&nbsp;: la statue <strong>s'anime</strong>.</p>
+            <p>En 1968, <strong>Rosenthal et Jacobson</strong> en font un effet mesuré en classe&nbsp;: les élèves dont on attend davantage progressent davantage.</p>
+            <p class="chute">Ce que l'on <em>croit</em> de l'autre finit par le façonner.</p>
+          </div>
          </div>
         </div>
       </div>
@@ -1032,11 +1043,15 @@
           <div class="revealtext" onclick="this.classList.toggle('open')">
             <span class="rt-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>Afficher la description</span>
           </div>
-          <!-- Six lignes, 66 caractères au maximum : l'encart doit rester à
-               564 px de haut (65 → 629), entre la frise et le pied de page,
-               exactement comme la diapo Pygmalion. Toute ligne ajoutée le fait
-               passer sous les deux bandes réservées. -->
-          <p class="rt-body" style="text-align:left;">Dans la légende de Prague, le rabbin façonne dans l'argile<br />un serviteur réduit à obéir — qui finit par tout détruire.<br />En 1982, <strong>Babad, Inbar et Rosenthal</strong> nomment l'envers de Pygmalion&nbsp;:<br />attendre peu d'une personne suffit à la faire réussir moins.<br />En classe&nbsp;: moins de temps pour répondre, des tâches allégées,<br />des retours plus pauvres — ce que l'on <em>renonce</em> à attendre façonne.</p>
+          <!-- L'encart doit tenir dans 564 px de haut (65 → 629), entre la frise
+               et le pied de page, exactement comme la diapo Pygmalion. Ajouter
+               un paragraphe le fait passer sous les deux bandes réservées. -->
+          <div class="rt-body" style="text-align:left;">
+            <p>Dans la légende de Prague, le rabbin façonne dans l'argile un serviteur réduit à obéir — qui finit par tout détruire.</p>
+            <p>En 1982, <strong>Babad, Inbar et Rosenthal</strong> nomment l'envers de Pygmalion&nbsp;: attendre peu d'une personne suffit à la faire réussir moins.</p>
+            <p>En classe&nbsp;: moins de temps pour répondre, des tâches allégées, des retours plus pauvres.</p>
+            <p class="chute">Ce que l'on <em>renonce</em> à attendre façonne aussi.</p>
+          </div>
          </div>
         </div>
       </div>

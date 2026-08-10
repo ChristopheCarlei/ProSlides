@@ -271,6 +271,12 @@
 
   /* colonne de droite */
   .fg-side, .apd-side{ flex:1 1 auto; min-width:0; position:relative; }
+  /* Courbe de l'oubli seulement : le graphique était déjà centré avec 38 px de
+     blanc de chaque côté dans sa carte (viewBox 800x516 contre 800x492 de
+     hauteur utile). En ramenant la carte à 750 px, la colonne de droite gagne
+     50 px sans que la courbe perde en taille — c'est ce qui rend les libellés
+     lisibles sans les couper toutes les trois ou quatre mots. */
+  .fg-chart{ flex-basis:750px; width:750px; }
   .fg-card, .apd-card{ position:absolute; left:0; right:0; box-sizing:border-box; border-radius:14px;
     background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); padding:14px 20px; }
   .fg-live, .apd-live{ top:0; height:136px; display:flex; flex-direction:column; justify-content:center; }
@@ -281,13 +287,13 @@
 
   /* Éteint, le jalon reste lisible (5,4:1) : c'est sa valeur qui est cachée,
      pas son intitulé — le chiffre se dévoile quand la courbe l'atteint. */
-  .fg-mile{ height:52px; display:flex; align-items:center; justify-content:space-between; gap:10px;
+  .fg-mile{ height:62px; display:flex; align-items:center; justify-content:space-between; gap:10px;
     padding:0 18px; opacity:.75; transition:opacity .35s ease, background .35s ease, border-color .35s ease; }
   /* ancrées par data-at, pas par nth-of-type : les cartes voisines sont des
      div elles aussi, la numérotation par type ne désignait pas les jalons. */
-  .fg-mile[data-t="19"]{ top:148px; } .fg-mile[data-t="1440"]{ top:206px; } .fg-mile[data-t="44640"]{ top:264px; }
-  .fg-mile .ml{ font-size:15.5px; font-weight:700; color:rgba(255,255,255,.88); }
-  .fg-mile .mv{ font-size:23px; font-weight:800; color:#fff; font-variant-numeric:tabular-nums; }
+  .fg-mile[data-t="19"]{ top:0; } .fg-mile[data-t="1440"]{ top:70px; } .fg-mile[data-t="44640"]{ top:140px; }
+  .fg-mile .ml{ font-size:17px; font-weight:700; color:rgba(255,255,255,.88); }
+  .fg-mile .mv{ font-size:26px; font-weight:800; color:#fff; font-variant-numeric:tabular-nums; }
   .fg-mile .mr{ display:none; }
   .fg-mile .mq{ color:#9ff0ed; }
   .fg-mile.on{ opacity:1; background:rgba(229,50,63,.26); border-color:rgba(229,50,63,.8); }
@@ -295,11 +301,11 @@
   .fg-mile.on .mr{ display:inline; }
   .fg-mile.on .mq{ display:none; }
 
-  .fg-concl{ top:328px; height:110px; display:flex; flex-direction:column; justify-content:center; gap:5px;
+  .fg-concl{ top:226px; height:170px; display:flex; flex-direction:column; justify-content:center; gap:7px;
     background:rgba(159,240,237,.14); border-color:rgba(159,240,237,.4);
     opacity:0; transform:translateY(9px); transition:opacity .45s ease, transform .45s ease; }
   .fg-map.done .fg-concl{ opacity:1; transform:none; }
-  .fg-concl .ct{ font-size:17px; font-weight:700; line-height:1.34; color:#fff; }
+  .fg-concl .ct{ font-size:19px; font-weight:700; line-height:1.38; color:#fff; text-wrap:pretty; }
   .fg-concl .ct b{ color:#9ff0ed; font-weight:800; }
 
   .fg-btn{ position:absolute; left:0; right:0; top:448px; height:50px; appearance:none; border:0;
@@ -796,26 +802,7 @@
       </div>
     </section>
 
-    <!-- 06 · NOTION — mémoire & courbe de l'oubli -->
-    <section data-screen-label="Mémoire" data-phase="3" data-state="dark">
-      <div class="mediafull objectifs">
-        <div class="media-slot video">
-          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Rennes7.mp4" aria-hidden="true"></video>
-        </div>
-        <div class="scrim"></div>
-        <div class="overlay">
-          <span class="eyebrow">Notion clé · mémoire</span>
-          <h2 style="max-width:22ch;">La courbe de l'oubli</h2>
-          <ol class="obj">
-            <li data-ico="bulb">La <strong>fonction mémoire</strong> a aussi une dimension anthropologique.</li>
-            <li data-ico="processus">On oublie vite&nbsp;: l'<strong>apprentissage distribué</strong> consolide dans la durée.</li>
-            <li data-ico="target"><strong>Revoir régulièrement</strong> vaut mieux qu'un seul bloc intensif.</li>
-          </ol>
-        </div>
-      </div>
-    </section>
-
-    <!-- 06b · NOTION — fonction mémoire : anticiper, pas archiver -->
+    <!-- 06 · NOTION — fonction mémoire : anticiper, pas archiver -->
     <section data-screen-label="Fonction mémoire" data-phase="3" data-state="dark">
       <div class="fm-wrap">
        <div class="fm-canvas">
@@ -894,7 +881,7 @@
       </div>
     </section>
 
-    <!-- 06c · NOTION — courbe de l'oubli (tracé progressif au clic) -->
+    <!-- 06b · NOTION — courbe de l'oubli (tracé progressif au clic) -->
     <section data-screen-label="Courbe de l'oubli" data-phase="3" data-state="dark">
       <div class="fg-wrap">
        <div class="fg-canvas">
@@ -961,19 +948,16 @@
           </div>
 
           <div class="fg-side">
-            <div class="fg-card fg-live">
-              <span class="fg-k">Ce qu'il vous reste</span>
-              <div class="fg-num"><span id="s12FgNum">100</span>&nbsp;%</div>
-              <span class="fg-sub">de ce que vous venez d'apprendre</span>
-            </div>
-
+            <!-- Le compteur « ce qu'il vous reste » a été retiré : il redisait
+                 en chiffres ce que le repère mobile montre déjà sur la courbe.
+                 Les trois jalons occupent la place libérée. -->
             <div class="fg-card fg-mile" data-t="19"><span class="ml">Après 20 minutes</span><span class="mv"><span class="mq">?</span><span class="mr">58 %</span></span></div>
             <div class="fg-card fg-mile" data-t="1440"><span class="ml">Après 1 jour</span><span class="mv"><span class="mq">?</span><span class="mr">34 %</span></span></div>
             <div class="fg-card fg-mile" data-t="44640"><span class="ml">Après 31 jours</span><span class="mv"><span class="mq">?</span><span class="mr">21 %</span></span></div>
 
             <div class="fg-card fg-concl">
               <span class="fg-k">Ce que ça dit</span>
-              <span class="ct">Oublier n'est <b>pas un défaut</b>&nbsp;: c'est le fonctionnement normal de la mémoire. Ce qui se travaille, c'est le <b>rythme des reprises</b>.</span>
+              <span class="ct">Oublier n'est <b>pas un défaut</b>&nbsp;: c'est le fonctionnement normal de la mémoire.</span>
             </div>
 
             <button class="fg-btn" id="s12FgBtn" type="button" data-state="idle">
@@ -1060,6 +1044,27 @@
           </div>
         </div>
        </div>
+      </div>
+    </section>
+
+    <!-- 06d · SYNTHÈSE — ce que le bloc mémoire aura montré.
+         Déplacée ici le 2026-08-10 : elle ouvrait le bloc, elle le referme
+         désormais, après la courbe de l'oubli et l'apprentissage distribué. -->
+    <section data-screen-label="Mémoire" data-phase="3" data-state="dark">
+      <div class="mediafull objectifs">
+        <div class="media-slot video">
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Rennes7.mp4" aria-hidden="true"></video>
+        </div>
+        <div class="scrim"></div>
+        <div class="overlay">
+          <span class="eyebrow">Notion clé · mémoire</span>
+          <h2 style="max-width:22ch;">La courbe de l'oubli</h2>
+          <ol class="obj">
+            <li data-ico="bulb">La <strong>fonction mémoire</strong> a aussi une dimension anthropologique.</li>
+            <li data-ico="processus">On oublie vite&nbsp;: l'<strong>apprentissage distribué</strong> consolide dans la durée.</li>
+            <li data-ico="target"><strong>Revoir régulièrement</strong> vaut mieux qu'un seul bloc intensif.</li>
+          </ol>
+        </div>
       </div>
     </section>
 
@@ -2055,8 +2060,9 @@
       marker.setAttribute('cx', pt.x.toFixed(2)); marker.setAttribute('cy', pt.y.toFixed(2));
       guide.setAttribute('y1', pt.y.toFixed(2));
       guide.setAttribute('x2', pt.x.toFixed(2)); guide.setAttribute('y2', pt.y.toFixed(2));
-      var v = (Y1 - pt.y) / (Y1-Y0) * 100;
-      num.textContent = Math.round(v);
+      // le compteur chiffré a été retiré de la diapo ; la garde permet de le
+      // remettre sans toucher au reste
+      if(num){ num.textContent = Math.round((Y1 - pt.y) / (Y1-Y0) * 100); }
       // un jalon s'allume quand la tête dépasse sa graduation
       miles.forEach(function(m){
         m.classList.toggle('on', pt.x >= xOfT(parseFloat(m.getAttribute('data-t'))) - 0.5);
@@ -2068,7 +2074,7 @@
       curve.style.strokeDasharray = LEN; curve.style.strokeDashoffset = LEN;
       map.classList.remove('armed','done');
       clip.setAttribute('width', 0);
-      num.textContent = '100';
+      if(num){ num.textContent = '100'; }
       miles.forEach(function(m){ m.classList.remove('on'); });
       btn.setAttribute('data-state','idle');
     }
