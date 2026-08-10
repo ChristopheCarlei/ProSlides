@@ -326,6 +326,69 @@
   .fg-btn[data-state="done"] .ico-again{ display:block; }
   @media(prefers-reduced-motion:reduce){ .fg-concl, .fg-mile, .fg-guide, .fg-marker{ transition:none; } }
 
+  /* ---- controverse professionnelle (Yves Clot) --------------------------
+     Trois cartes qui se découvrent au clic ; les trois ouvertes, la bande de
+     conclusion apparaît. Préfixe « ctv- » : surtout pas « ad- », filtré en
+     dur par les bloqueurs de publicité (voir le CLAUDE.md du projet).      */
+  .ctv{ position:relative; width:100%; height:100%; overflow:hidden; box-sizing:border-box;
+    padding:var(--safe-t) var(--safe-x) var(--safe-b); display:flex; flex-direction:column; color:#fff;
+    background:radial-gradient(circle at 78% 14%, #14514e 0%, #0a3d3b 54%, #062a29 100%); }
+  .ctv-head{ flex:0 0 auto; margin-bottom:10px; }
+  .ctv-head .eyebrow{ display:block; font-size:12.5px; font-weight:800; letter-spacing:.09em;
+    text-transform:uppercase; color:rgba(255,255,255,.62); margin-bottom:.4em; }
+  .ctv-head h2{ margin:0; font-size:29px; font-weight:800; color:#fff; text-shadow:0 2px 16px rgba(8,40,39,.5); }
+  .ctv-head .src{ font-size:13px; font-weight:600; color:rgba(255,255,255,.5); margin-left:.7em; }
+
+  .ctv-intro{ flex:0 0 auto; display:flex; align-items:flex-end; justify-content:space-between;
+    gap:22px; margin-bottom:16px; }
+  .ctv-lead{ margin:0; max-width:76ch; font-size:16.5px; line-height:1.5; color:rgba(255,255,255,.9); }
+  .ctv-lead strong{ color:#9ff0ed; }
+
+  .ctv-row{ flex:0 0 auto; display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  .ctv-card{ appearance:none; font-family:var(--font); text-align:left; cursor:pointer;
+    box-sizing:border-box; min-height:252px; border-radius:14px; padding:16px 20px 18px;
+    display:flex; flex-direction:column; gap:8px;
+    background:rgba(255,255,255,.06); border:1.5px dashed rgba(255,255,255,.3);
+    transition:background .3s, border-color .3s, transform .15s, box-shadow .25s; }
+  .ctv-card:hover{ background:rgba(255,255,255,.13); border-color:rgba(255,255,255,.55); }
+  .ctv-card:focus-visible{ outline:3px solid #9ff0ed; outline-offset:3px; }
+  .ctv-card.on{ background:rgba(0,177,174,.17); border-style:solid; border-color:rgba(159,240,237,.5);
+    box-shadow:0 14px 34px -20px rgba(0,0,0,.8); }
+  .ctv-card.on:hover{ transform:translateY(-2px); }
+
+  .ctv-n{ flex:none; width:26px; height:26px; border-radius:50%; background:var(--rose); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; }
+  .ctv-t{ font-size:20px; font-weight:800; line-height:1.15; color:#fff; }
+  /* Fermée, la carte garde son titre : c'est l'annonce du raisonnement. Seule
+     la substance se cache, et le chevron dit qu'il y a quelque chose dessous. */
+  .ctv-d{ font-size:15px; line-height:1.45; color:rgba(255,255,255,.9); }
+  /* .reveal em impose var(--teal-deep) : sur ce fond sombre le terme mis en
+     avant tombait à 1,6:1, donc invisible. Même piège que .jg-cell em et
+     .dil-head em, déjà rencontré ailleurs dans le dépôt. */
+  .ctv-d em{ color:#9ff0ed; font-style:italic; font-weight:700; }
+  .ctv-k{ margin-top:auto; padding-top:9px; border-top:1px solid rgba(159,240,237,.28);
+    font-size:14.5px; font-weight:700; line-height:1.35; color:#9ff0ed; }
+  .ctv-d, .ctv-k{ opacity:0; transition:opacity .32s ease; }
+  .ctv-card.on .ctv-d, .ctv-card.on .ctv-k{ opacity:1; }
+  .ctv-more{ margin-top:auto; display:flex; align-items:center; gap:8px;
+    font-size:13.5px; font-weight:700; color:rgba(255,255,255,.62); transition:opacity .25s ease; }
+  .ctv-more svg{ width:15px; height:15px; display:block; }
+  .ctv-card.on .ctv-more{ opacity:0; height:0; margin:0; overflow:hidden; }
+
+  .ctv-foot{ flex:0 0 auto; margin-top:16px; border-radius:12px; padding:13px 20px;
+    background:rgba(159,240,237,.13); border:1px solid rgba(159,240,237,.4);
+    font-size:15.5px; line-height:1.45; color:#fff;
+    opacity:0; transform:translateY(9px); transition:opacity .45s ease, transform .45s ease; }
+  .ctv.tout .ctv-foot{ opacity:1; transform:none; }
+  .ctv-foot b{ color:#9ff0ed; font-weight:800; }
+  /* .68 et non .48 : composé sur le fond, le blanc à 48 % ne donnait que
+     3,0:1 pour un corps de 11,5 px. */
+  .ctv-src{ flex:0 0 auto; margin:10px 0 0; font-size:12px; line-height:1.4; color:rgba(255,255,255,.68); }
+  .ctv-src em{ color:inherit; font-style:italic; }
+  @media(prefers-reduced-motion:reduce){
+    .ctv-card, .ctv-d, .ctv-k, .ctv-foot, .ctv-more{ transition:none; }
+  }
+
   /* ---- fonction mémoire : le souvenir sert la décision à venir -----------
      Cinq souvenirs cliquables à gauche ; chacun dévoile à droite ce qu'il
      permet d'anticiper. Les cinq dévoilés, la consigne cède la place aux
@@ -1087,6 +1150,58 @@
       </div>
     </section>
 
+    <!-- 07b · NOTION — la controverse professionnelle selon Yves Clot.
+         Synthèse appuyée sur : La fonction psychologique du travail (1999),
+         Travail et pouvoir d'agir (2008), Le travail à cœur (2010) et, avec
+         J.-Y. Bonnefond, A. Bonnemain et M. Zittoun, Le prix du travail bien
+         fait. La coopération conflictuelle dans les organisations (2021). -->
+    <section data-screen-label="Clinique de l'activité" data-phase="3" data-state="dark">
+      <div class="ctv">
+        <div class="ctv-head">
+          <span class="eyebrow">Notion clé · clinique de l'activité</span>
+          <h2>La controverse professionnelle<span class="src">Yves Clot, CNAM</span></h2>
+        </div>
+
+        <div class="ctv-intro">
+          <p class="ctv-lead">Un métier ne tient pas par ses procédures&nbsp;: il tient par la <strong>dispute</strong> que ses membres entretiennent sur ce qu'est du travail bien fait. Là où cette dispute est confisquée, le métier s'appauvrit.</p>
+          <button class="socio-btn ghost" type="button" id="ctvAll">
+            <span class="lbl-on">Tout révéler</span>
+            <span class="lbl-off" hidden>Tout masquer</span>
+          </button>
+        </div>
+
+        <div class="ctv-row">
+          <button class="ctv-card" type="button">
+            <span class="ctv-n">1</span>
+            <span class="ctv-t">Le réel de l'activité</span>
+            <span class="ctv-d">Ce qui se voit — l'activité réalisée — n'est qu'une part du travail. S'y ajoutent ce qu'on n'a pas pu faire, ce qu'on aurait voulu faire, ce qu'on a fait faute de mieux.</span>
+            <span class="ctv-more"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>Découvrir</span>
+            <span class="ctv-k">Ce qui use n'est pas tant le travail que la qualité empêchée.</span>
+          </button>
+
+          <button class="ctv-card" type="button">
+            <span class="ctv-n">2</span>
+            <span class="ctv-t">Le genre et le style</span>
+            <span class="ctv-d">Le <em>genre professionnel</em> est la mémoire du métier&nbsp;: les manières de faire que le milieu reconnaît sans jamais les écrire. Le <em>style</em>, c'est la reprise singulière que chacun en fait.</span>
+            <span class="ctv-more"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>Découvrir</span>
+            <span class="ctv-k">Un métier vivant se tient entre les deux&nbsp;: ni exécution, ni improvisation.</span>
+          </button>
+
+          <button class="ctv-card" type="button">
+            <span class="ctv-n">3</span>
+            <span class="ctv-t">Le conflit de critères</span>
+            <span class="ctv-d">Les critères du bien-fait sont multiples et s'opposent&nbsp;: aller vite ou soigner, servir l'usager ou tenir l'institution. La controverse, c'est le travail collectif sur ce conflit.</span>
+            <span class="ctv-more"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>Découvrir</span>
+            <span class="ctv-k">Se disputer sur le travail développe le pouvoir d'agir.</span>
+          </button>
+        </div>
+
+        <p class="ctv-foot">Faute de dispute organisée, chacun reste seul avec ses arbitrages et le désaccord se replie sur les personnes. D'où des méthodes qui l'<b>organisent</b> plutôt que de l'éteindre&nbsp;: l'<b>autoconfrontation croisée</b>, où deux professionnels commentent leur activité filmée, et l'<b>instruction au sosie</b>, où l'on explique à un collègue comment agir à sa place.</p>
+
+        <p class="ctv-src">Y. Clot, <em>La fonction psychologique du travail</em> (1999) · <em>Travail et pouvoir d'agir</em> (2008) · <em>Le travail à cœur</em> (2010) · avec J.-Y. Bonnefond, A. Bonnemain et M. Zittoun, <em>Le prix du travail bien fait. La coopération conflictuelle dans les organisations</em> (2021).</p>
+      </div>
+    </section>
+
     <!-- 08 · ÉVALUATION DU COURS -->
     <section data-screen-label="Évaluation du cours" data-phase="4" data-state="dark">
       <div class="mediafull content">
@@ -1254,6 +1369,19 @@
       <li><strong>Des controverses professionnelles restent ouvertes.</strong> Un champ vivant est un champ où l'on débat : l'absence de consensus n'est pas une faiblesse, c'est un signe d'activité.</li>
     </ul>
     <p>La posture attendue au terme du cours n'est donc pas de détenir les bonnes réponses, mais de savoir <strong>situer un débat</strong>, reconnaître ce qui est établi et ce qui ne l'est pas, et se tenir informé.</p>
+  </section>
+
+  <section class="sup-block" data-notes="oui">
+    <h2>La controverse professionnelle (Yves Clot)</h2>
+    <p>« Controverse » ne désigne pas seulement un débat savant. En psychologie du travail, Yves Clot, professeur au CNAM, en fait le cœur de la santé d'un métier. Sa <em>clinique de l'activité</em> part d'un constat simple : travailler ne se réduit pas à ce que l'on fait.</p>
+    <ul>
+      <li><strong>Le réel de l'activité.</strong> À côté de l'activité réalisée — la seule observable — il y a ce qu'on n'a pas pu faire, ce qu'on aurait voulu faire, ce qu'on a fait faute de mieux. Ce qui use n'est pas tant la charge que cette <strong>qualité empêchée</strong>.</li>
+      <li><strong>Le genre et le style.</strong> Le <em>genre professionnel</em> est la mémoire collective du métier : les manières de faire que le milieu reconnaît sans jamais les écrire. Le <em>style</em> est la reprise singulière que chacun en fait. Un métier vivant se tient entre les deux — ni pure exécution, ni improvisation solitaire.</li>
+      <li><strong>Le conflit de critères.</strong> Les critères du travail bien fait sont multiples et s'opposent : aller vite ou soigner, servir l'usager ou tenir l'institution. La controverse professionnelle est le travail collectif sur ce conflit, et c'est lui qui développe le <strong>pouvoir d'agir</strong>.</li>
+    </ul>
+    <p>Faute de dispute organisée, chacun reste seul avec ses arbitrages et le désaccord se replie sur les personnes. D'où des méthodes qui organisent la controverse au lieu de l'éteindre : l'<strong>autoconfrontation croisée</strong>, où deux professionnels commentent leur activité filmée, et l'<strong>instruction au sosie</strong>, où l'on explique à un collègue comment agir exactement à sa place.</p>
+    <p>Pour le métier de formatrice ou de formateur, la conséquence est directe : un désaccord sur la façon de faire n'est pas un dysfonctionnement à étouffer, c'est la matière première du métier — à condition de lui donner un cadre. C'est aussi ce que vous avez pratiqué en séance 9 avec la controverse argumentée, et en séance 6 avec le feedback entre pairs.</p>
+    <p>Sources : Y. Clot, <em>La fonction psychologique du travail</em> (1999), <em>Travail et pouvoir d'agir</em> (2008), <em>Le travail à cœur</em> (2010) ; avec J.-Y. Bonnefond, A. Bonnemain et M. Zittoun, <em>Le prix du travail bien fait. La coopération conflictuelle dans les organisations</em> (2021).</p>
   </section>
 
   <section class="sup-block">
@@ -1940,6 +2068,51 @@
       });
     }
     reset();
+  })();
+
+  // ---- Controverse professionnelle : trois cartes à découvrir ----
+  (function(){
+    var wrap = document.querySelector('.ctv');
+    if(!wrap) return;
+    var cartes = Array.prototype.slice.call(wrap.querySelectorAll('.ctv-card'));
+    var btn = document.getElementById('ctvAll');
+    if(!cartes.length) return;
+
+    function toutOuvert(){
+      return cartes.every(function(c){ return c.classList.contains('on'); });
+    }
+    // la bande de conclusion n'a de sens qu'une fois les trois temps posés
+    function sync(){
+      wrap.classList.toggle('tout', toutOuvert());
+      if(!btn) return;
+      var t = toutOuvert();
+      var a = btn.querySelector('.lbl-on'), z = btn.querySelector('.lbl-off');
+      if(a) a.hidden = t;
+      if(z) z.hidden = !t;
+      btn.setAttribute('aria-pressed', String(t));
+    }
+
+    cartes.forEach(function(c){
+      c.setAttribute('aria-pressed','false');
+      c.addEventListener('click', function(){
+        var on = !c.classList.contains('on');
+        c.classList.toggle('on', on);
+        c.setAttribute('aria-pressed', String(on));
+        sync();
+      });
+    });
+
+    if(btn){
+      btn.addEventListener('click', function(){
+        var on = !toutOuvert();
+        cartes.forEach(function(c){
+          c.classList.toggle('on', on);
+          c.setAttribute('aria-pressed', String(on));
+        });
+        sync();
+      });
+    }
+    sync();
   })();
 
   // ---- Courbe de l'oubli : tracé progressif au clic ----
