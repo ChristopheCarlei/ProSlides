@@ -578,8 +578,14 @@
       </div>
     </section>
 
-    <!-- 06 · ACTIVITÉ — présentations projet -->
-    <section data-screen-label="Présentations" data-phase="2" data-state="dark">
+    <!-- 06 · ACTIVITÉ — démonstration puis retours.
+         Fusion des deux diapos « Présentations » et « Feedback » le
+         2026-08-10 : c'est un seul passage par groupe, le minuteur enchaîne
+         désormais les deux temps (10 min puis 5 min) sans changer de diapo.
+         La section porte data-phase="3" : la phase 3 de la frise n'avait que
+         la diapo Feedback, la laisser en phase 2 l'aurait vidée et le repli
+         du script aurait placé son jalon au hasard. -->
+    <section data-screen-label="Démonstrations &amp; retours" data-phase="3" data-state="dark">
       <div class="mediafull activity">
         <div class="media-slot video">
           <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/giraffe2.mp4" aria-hidden="true"></video>
@@ -587,34 +593,9 @@
         <div class="scrim"></div>
         <div class="overlay" style="justify-content:flex-end;padding-bottom:9%;">
           <h3>Activité · démonstration du livrable</h3>
-          <h2 style="max-width:20ch;">Chaque groupe présente en 10 minutes</h2>
+          <h2 style="max-width:22ch;">15 minutes par groupe, démonstration puis retours</h2>
           <ol class="steps timed">
             <li data-min="10" data-modal="groupe"><span class="lead-col"><span class="n">10'</span><span class="ttl">Un groupe démontre</span></span><span class="d">10 minutes pour faire <strong>expérimenter votre livrable</strong> aux collègues et commanditaires&nbsp;: interactif et concret.</span></li>
-          </ol>
-        </div>
-        <div class="timepanel is-idle">
-          <div class="tt-disc" role="button" tabindex="0" aria-label="Lancer ou avancer le minuteur"><span class="tt-time">—</span></div>
-          <div class="tt-controls">
-            <button class="tt-btn" type="button" data-act="minus">− 1 min</button>
-            <button class="tt-btn tt-pause" type="button" data-act="pause">Pause</button>
-            <button class="tt-btn" type="button" data-act="plus">+ 1 min</button>
-          </div>
-          <div class="tt-hint">Cliquez pour lancer le minuteur</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 07 · ACTIVITÉ — feedback projet -->
-    <section data-screen-label="Feedback" data-phase="3" data-state="dark">
-      <div class="mediafull activity">
-        <div class="media-slot video">
-          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/PostIt.mp4" aria-hidden="true"></video>
-        </div>
-        <div class="scrim"></div>
-        <div class="overlay" style="justify-content:flex-end;padding-bottom:9%;">
-          <h3>Activité · feedback après chaque démonstration</h3>
-          <h2 style="max-width:20ch;">5 minutes de retours</h2>
-          <ol class="steps timed">
             <li data-min="5" data-modal="pleniere"><span class="lead-col"><span class="n">5'</span><span class="ttl">Retours croisés</span></span><span class="d">Retours des <strong>pairs</strong>, des <strong>commanditaires</strong> et de l'<strong>enseignant</strong>&nbsp;: sur la <strong>grille EVAL</strong>, précis et bienveillants.</span></li>
           </ol>
         </div>
