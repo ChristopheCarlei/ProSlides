@@ -250,27 +250,32 @@
   .socio-main{ flex:0 0 auto; display:flex; gap:26px; align-items:flex-start; }
 
   /* ---- repère et grille ---- */
-  .socio-chart{ flex:0 0 auto; display:grid; grid-template-columns:26px 116px 566px;
-    grid-template-rows:418px 30px 22px; align-items:stretch; }
+  /* Colonnes 1-2 et rangées 2-3 élargies avec les libellés d'axes agrandis.
+     La case du repère (566 x 418) est intouchable : le viewBox des flèches est
+     calé dessus, tout autre rapport largeur/hauteur les décalerait des cases. */
+  .socio-chart{ flex:0 0 auto; display:grid; grid-template-columns:32px 136px 566px;
+    grid-template-rows:418px 34px 38px; align-items:stretch; }
   .socio-ytitle{ grid-column:1; grid-row:1; writing-mode:vertical-rl; transform:rotate(180deg);
     display:flex; align-items:center; justify-content:center;
-    font-size:15.5px; font-weight:800; color:#fff; letter-spacing:.05em;
+    font-size:21px; font-weight:800; color:#fff; letter-spacing:.05em;
     text-shadow:0 1px 6px rgba(0,0,0,.55); }
   .socio-yaxis{ grid-column:2; grid-row:1; display:flex; flex-direction:column-reverse;
     justify-content:space-around; align-items:flex-end; padding-right:9px; }
   .socio-ystep{ display:flex; align-items:center; gap:7px; }
-  .socio-ystep .lab{ font-size:13.5px; font-weight:800; color:rgba(255,255,255,.86);
+  .socio-ystep .lab{ font-size:16px; font-weight:800; color:rgba(255,255,255,.86);
     text-shadow:0 1px 5px rgba(0,0,0,.5); white-space:nowrap; }
   .socio-xaxis{ grid-column:3; grid-row:2; display:flex; justify-content:space-around;
     align-items:center; padding-top:7px; }
   .socio-xstep{ display:flex; align-items:center; gap:7px; }
-  .socio-xstep .lab{ font-size:13.5px; font-weight:800; color:rgba(255,255,255,.86);
+  .socio-xstep .lab{ font-size:16px; font-weight:800; color:rgba(255,255,255,.86);
     text-shadow:0 1px 5px rgba(0,0,0,.5); white-space:nowrap; }
-  .socio-xtitle{ grid-column:3; grid-row:3; text-align:center;
-    font-size:15.5px; font-weight:800; color:#fff; letter-spacing:.05em;
+  /* padding-top : « Antagonisme » collait aux graduations de l'axe et se lisait
+     mal. Il descend, la rangée 3 a été agrandie d'autant. */
+  .socio-xtitle{ grid-column:3; grid-row:3; text-align:center; padding-top:13px;
+    font-size:21px; font-weight:800; color:#fff; letter-spacing:.05em;
     text-shadow:0 1px 6px rgba(0,0,0,.55); }
-  .socio-badge{ width:25px; height:25px; border-radius:50%; display:flex; align-items:center;
-    justify-content:center; font-size:13px; font-weight:800; flex:none;
+  .socio-badge{ width:28px; height:28px; border-radius:50%; display:flex; align-items:center;
+    justify-content:center; font-size:15px; font-weight:800; flex:none;
     background:rgba(255,255,255,.2); color:rgba(255,255,255,.9);
     border:1.5px solid rgba(255,255,255,.36); transition:background .2s, color .2s, transform .2s; }
   .socio-badge.on{ background:#fff; color:#0a3d3b; border-color:#fff; transform:scale(1.16); }
@@ -304,6 +309,11 @@
      <defs> hérite de fill:none et du tracé pointillé, et disparaît.        */
   .socio-arrows > path{ fill:none; stroke:#F2C14E; stroke-width:3.4; stroke-linecap:round;
     stroke-dasharray:var(--len,300); stroke-dashoffset:var(--len,300); }
+  /* La pointe ignore stroke-dasharray : sans cela elle est posée à l'arrivée
+     dès la première image, alors que le trait n'est pas encore parti. Elle est
+     retirée par défaut et rendue par le script à la fin du tracé. */
+  .socio-arrows > path{ marker-end:none; }
+  .socio-arrows > path.pointe{ marker-end:url(#socioArr); }
   .socio.show-moves .socio-arrows > path{ animation:socioDraw .9s ease forwards; }
   .socio.show-moves .socio-arrows > path:nth-of-type(2){ animation-delay:.15s; }
   .socio.show-moves .socio-arrows > path:nth-of-type(3){ animation-delay:.3s; }
@@ -328,19 +338,19 @@
     padding-top:10px; border-top:1px solid rgba(255,255,255,.14); }
   .socio.has-sel .socio-axinfo{ display:flex; }
   .socio-axinfo .ax{ margin:0; display:flex; align-items:baseline; gap:9px;
-    font-size:13.5px; line-height:1.35; }
-  .socio-axinfo .k{ flex:none; width:86px; font-size:10.5px; font-weight:800; letter-spacing:.07em;
+    font-size:15px; line-height:1.35; }
+  .socio-axinfo .k{ flex:none; width:86px; font-size:11.5px; font-weight:800; letter-spacing:.07em;
     text-transform:uppercase; color:rgba(255,255,255,.5); }
   .socio-axinfo .v{ font-weight:700; color:#9ff0ed; }
-  .socio-ask{ font-size:15px; line-height:1.5; color:rgba(255,255,255,.9); }
+  .socio-ask{ font-size:17px; line-height:1.5; color:rgba(255,255,255,.9); }
   .socio-ask p{ margin:0 0 .9em; }
   .socio-ask strong{ color:#9ff0ed; }
   .socio-card{ display:none; border-left:4px solid var(--c,#fff); padding:2px 0 2px 14px; }
-  .socio-card h3{ margin:0 0 .1em; font-size:20px; font-weight:800; color:#fff; }
-  .socio-card .coord{ display:block; font-size:11.5px; font-weight:700; letter-spacing:.05em;
+  .socio-card h3{ margin:0 0 .1em; font-size:23px; font-weight:800; color:#fff; }
+  .socio-card .coord{ display:block; font-size:13px; font-weight:700; letter-spacing:.05em;
     text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:.6em; }
-  .socio-card p{ margin:0 0 .7em; font-size:14.5px; line-height:1.5; color:rgba(255,255,255,.88); }
-  .socio-card .todo{ font-size:14px; line-height:1.45; color:#9ff0ed; font-weight:700; }
+  .socio-card p{ margin:0 0 .7em; font-size:17px; line-height:1.5; color:rgba(255,255,255,.88); }
+  .socio-card .todo{ font-size:16.5px; line-height:1.45; color:#9ff0ed; font-weight:700; }
   .socio-card .todo::before{ content:"→ "; }
   .socio.has-sel .socio-ask{ display:none; }
   .socio.has-sel .socio-card.is-sel{ display:block; }
@@ -374,20 +384,23 @@
   .typo-head .src{ font-size:12px; font-weight:600; color:rgba(255,255,255,.5); margin-left:.6em; }
 
   .typo-main{ flex:0 0 auto; display:flex; gap:26px; align-items:flex-start; }
-  .typo-chart{ flex:0 0 auto; display:grid; grid-template-columns:30px 108px 604px;
-    grid-template-rows:418px 30px 22px; align-items:stretch; }
+  /* Colonne 1 et rangée 3 élargies avec les libellés d'axes passés à 21 px :
+     à 30 px / 22 px la ligne de texte débordait de sa case. La case du repère
+     (604 x 418) ne bouge pas — le viewBox des flèches est calé dessus. */
+  .typo-chart{ flex:0 0 auto; display:grid; grid-template-columns:38px 108px 604px;
+    grid-template-rows:418px 30px 30px; align-items:stretch; }
   .typo-ytitle{ grid-column:1; grid-row:1; writing-mode:vertical-rl; transform:rotate(180deg);
     display:flex; align-items:center; justify-content:center;
-    font-size:15.5px; font-weight:800; color:#fff; letter-spacing:.05em; text-align:center;
+    font-size:21px; font-weight:800; color:#fff; letter-spacing:.05em; text-align:center;
     text-shadow:0 1px 6px rgba(0,0,0,.55); }
   .typo-yaxis{ grid-column:2; grid-row:1; display:flex; flex-direction:column;
     justify-content:space-around; align-items:flex-end; padding-right:11px; }
   .typo-xaxis{ grid-column:3; grid-row:2; display:flex; justify-content:space-around;
     align-items:center; padding-top:6px; }
   .typo-xtitle{ grid-column:3; grid-row:3; text-align:center;
-    font-size:15.5px; font-weight:800; color:#fff; letter-spacing:.05em;
+    font-size:21px; font-weight:800; color:#fff; letter-spacing:.05em;
     text-shadow:0 1px 6px rgba(0,0,0,.55); }
-  .typo-badge{ padding:5px 14px; border-radius:999px; font-size:13.5px; font-weight:800; letter-spacing:.05em;
+  .typo-badge{ padding:5px 14px; border-radius:999px; font-size:16px; font-weight:800; letter-spacing:.05em;
     background:rgba(255,255,255,.2); color:rgba(255,255,255,.92);
     border:1.5px solid rgba(255,255,255,.36); transition:background .2s, color .2s, transform .2s; }
   .typo-badge.on{ background:#fff; color:#0a3d3b; border-color:#fff; transform:scale(1.1); }
@@ -420,6 +433,9 @@
   .typo.show-moves .typo-arrows{ opacity:1; }
   .typo-arrows > path{ fill:none; stroke:#F2C14E; stroke-width:3.4; stroke-linecap:round;
     stroke-dasharray:var(--len,300); stroke-dashoffset:var(--len,300); }
+  /* Même traitement de la pointe que sur la carte des acteurs. */
+  .typo-arrows > path{ marker-end:none; }
+  .typo-arrows > path.pointe{ marker-end:url(#typoArr); }
   .typo.show-moves .typo-arrows > path{ animation:socioDraw .9s ease forwards; }
   .typo.show-moves .typo-arrows > path:nth-of-type(2){ animation-delay:.3s; }
   .typo.show-moves .typo-arrows > path:nth-of-type(3){ animation-delay:.6s; }
@@ -428,17 +444,17 @@
   }
 
   .typo-panel{ flex:1 1 auto; min-width:0; align-self:stretch; display:flex; flex-direction:column; }
-  .typo-ask{ font-size:15px; line-height:1.5; color:rgba(255,255,255,.9); }
+  .typo-ask{ font-size:17px; line-height:1.5; color:rgba(255,255,255,.9); }
   .typo-ask p{ margin:0 0 .9em; }
   .typo-ask strong{ color:#9ff0ed; }
   .typo-card{ display:none; border-left:4px solid var(--c,#fff); padding:2px 0 2px 14px; }
-  .typo-card h3{ margin:0 0 .05em; font-size:21px; font-weight:800; color:#fff; }
-  .typo-card .role{ display:block; font-size:14px; font-style:italic; font-weight:600;
+  .typo-card h3{ margin:0 0 .05em; font-size:24px; font-weight:800; color:#fff; }
+  .typo-card .role{ display:block; font-size:16px; font-style:italic; font-weight:600;
     color:rgba(255,255,255,.75); margin-bottom:.15em; }
-  .typo-card .coord{ display:block; font-size:11.5px; font-weight:700; letter-spacing:.05em;
+  .typo-card .coord{ display:block; font-size:13px; font-weight:700; letter-spacing:.05em;
     text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:.6em; }
-  .typo-card p{ margin:0 0 .7em; font-size:14.5px; line-height:1.5; color:rgba(255,255,255,.88); }
-  .typo-card .todo{ font-size:14px; line-height:1.45; color:#9ff0ed; font-weight:700; }
+  .typo-card p{ margin:0 0 .7em; font-size:17px; line-height:1.5; color:rgba(255,255,255,.88); }
+  .typo-card .todo{ font-size:16.5px; line-height:1.45; color:#9ff0ed; font-weight:700; }
   .typo-card .todo::before{ content:"→ "; }
   .typo.has-sel .typo-ask{ display:none; }
   .typo.has-sel .typo-card.is-sel{ display:block; }
@@ -467,6 +483,17 @@
     background:#12A39A; color:#062522; border-radius:9px; padding:11px 34px;
     font-size:19px; font-weight:800; box-shadow:0 8px 22px -12px rgba(0,0,0,.8); }
   .bp-loop{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:1; }
+
+  /* La boucle de maîtrise n'a de sens qu'une fois Planification et Réalisation
+     découvertes : jusque-là le bouton et les deux courbes n'existent pas à
+     l'écran. `visibility` et non `display` — la boîte garde sa place, donc la
+     rangée d'étapes ne se déplace pas au moment où la boucle apparaît, et le
+     bouton masqué sort du parcours de tabulation. */
+  .bp-ctrl, .bp-loop{ opacity:0; visibility:hidden;
+    transition:opacity .45s ease, visibility 0s linear .45s; }
+  .bp-flow.boucle .bp-ctrl, .bp-flow.boucle .bp-loop{ opacity:1; visibility:visible;
+    transition:opacity .45s ease, visibility 0s; }
+  @media(prefers-reduced-motion:reduce){ .bp-ctrl, .bp-loop{ transition:none; } }
   .bp-loop > path{ fill:none; stroke:rgba(255,255,255,.75); stroke-width:3; stroke-linecap:round; }
   .bp-row{ position:absolute; left:0; right:0; bottom:0; display:flex; align-items:center; }
   .bp-step{ flex:1 1 0; background:#0B7A70; color:#fff; border-radius:9px; padding:15px 10px;
@@ -507,14 +534,24 @@
   .bp-ctrl:not(.on):hover, .bp-step:not(.on):hover, .bp-key:not(.on):hover{
     background:rgba(255,255,255,.13); border-color:rgba(255,255,255,.5); }
   .bp-key:not(.on) b, .bp-key:not(.on) span.d{ color:transparent; }
-  .bp-ctrl.on:hover, .bp-step.on:hover, .bp-key.on:hover{ transform:translateY(-2px); }
+  .bp-step.on:hover, .bp-key.on:hover{ transform:translateY(-2px); }
+  /* .bp-ctrl est centré par translateX(-50%) : un simple translateY au survol
+     écrasait ce centrage et faisait sauter la boîte d'une demi-largeur vers la
+     droite. Les deux translations doivent être écrites ensemble. */
+  .bp-ctrl.on:hover{ transform:translateX(-50%) translateY(-2px); }
 
   .bp-key{ text-align:left; }
+  /* Boîte fermée : un pictogramme, et non plus un « ? ». Il donne un indice sur
+     le facteur à deviner (une cible pour les objectifs, un cœur pour la
+     maturité émotionnelle…) — c'est ce qui rend la devinette jouable. Dessin
+     SVG et non émoji : le rendu d'un émoji change d'un système à l'autre. */
   .bp-key .zq{ position:absolute; right:12px; top:50%; transform:translateY(-50%);
-    width:26px; height:26px; border-radius:50%; border:1.5px solid rgba(255,255,255,.42);
+    width:34px; height:34px; border-radius:50%; border:1.5px solid rgba(255,255,255,.42);
+    background:rgba(255,255,255,.07);
     display:flex; align-items:center; justify-content:center;
-    font-size:15px; font-weight:800; color:rgba(255,255,255,.6);
+    color:rgba(255,255,255,.72);
     transition:opacity .25s; pointer-events:none; }
+  .bp-key .zq svg{ width:19px; height:19px; display:block; }
   .bp-key.on .zq{ opacity:0; }
 
   .bp-subrow{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:18px; }
@@ -925,13 +962,16 @@
             <span class="lbl-off" hidden>Tout masquer</span>
           </button>
         </div>
+        <!-- Le pictogramme de chaque boîte fermée est l'indice : bouclier =
+             soutien, cœur = maturité émotionnelle, groupe = utilisateurs,
+             presse-papier = gestion, cible = objectifs, blocs = décomposition. -->
         <div class="bp-keys">
-          <button class="bp-key" type="button"><span class="n">1</span><b>Soutien exécutif</b><span class="d">Management du projet</span><span class="zq" aria-hidden="true">?</span></button>
-          <button class="bp-key" type="button"><span class="n">2</span><b>Maturité émotionnelle</b><span class="d">Liens entre les collaborateurs</span><span class="zq" aria-hidden="true">?</span></button>
-          <button class="bp-key" type="button"><span class="n">3</span><b>Implication des utilisateurs</b><span class="d">Prise de décision</span><span class="zq" aria-hidden="true">?</span></button>
-          <button class="bp-key" type="button"><span class="n">4</span><b>Gestion de projet</b><span class="d">Planifier, organiser, suivre</span><span class="zq" aria-hidden="true">?</span></button>
-          <button class="bp-key" type="button"><span class="n">5</span><b>Objectifs clairs</b><span class="d">Stratégie globale, utilité</span><span class="zq" aria-hidden="true">?</span></button>
-          <button class="bp-key" type="button"><span class="n">6</span><b>Décomposition</b><span class="d">Livrables pour chaque étape</span><span class="zq" aria-hidden="true">?</span></button>
+          <button class="bp-key" type="button"><span class="n">1</span><b>Soutien exécutif</b><span class="d">Management du projet</span><span class="zq" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.6 4.6 5.5v5.6c0 4.6 3.1 8.8 7.4 10.3 4.3-1.5 7.4-5.7 7.4-10.3V5.5z"/><path d="m8.9 11.8 2.2 2.2 4-4.2"/></svg></span></button>
+          <button class="bp-key" type="button"><span class="n">2</span><b>Maturité émotionnelle</b><span class="d">Liens entre les collaborateurs</span><span class="zq" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5.2 5.2 0 0 0-7.4 0L12 7l-1.4-1.4a5.2 5.2 0 1 0-7.4 7.4l8.8 8.8 8.8-8.8a5.2 5.2 0 0 0 0-7.4z"/></svg></span></button>
+          <button class="bp-key" type="button"><span class="n">3</span><b>Implication des utilisateurs</b><span class="d">Prise de décision</span><span class="zq" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="3.6"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16.4 3.3a4 4 0 0 1 0 7.5"/></svg></span></button>
+          <button class="bp-key" type="button"><span class="n">4</span><b>Gestion de projet</b><span class="d">Planifier, organiser, suivre</span><span class="zq" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4H6.6A1.6 1.6 0 0 0 5 5.6v14.8A1.6 1.6 0 0 0 6.6 22h10.8a1.6 1.6 0 0 0 1.6-1.6V5.6A1.6 1.6 0 0 0 17.4 4H15"/><rect x="9" y="2" width="6" height="4" rx="1.2"/><path d="M8.6 12h6.8M8.6 16.4h4.6"/></svg></span></button>
+          <button class="bp-key" type="button"><span class="n">5</span><b>Objectifs clairs</b><span class="d">Stratégie globale, utilité</span><span class="zq" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.2"/><circle cx="12" cy="12" r="5.2"/><circle cx="12" cy="12" r="1.4"/></svg></span></button>
+          <button class="bp-key" type="button"><span class="n">6</span><b>Décomposition</b><span class="d">Livrables pour chaque étape</span><span class="zq" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.8" y="2.8" width="7.4" height="7.4" rx="1.4"/><rect x="13.8" y="2.8" width="7.4" height="7.4" rx="1.4"/><rect x="2.8" y="13.8" width="7.4" height="7.4" rx="1.4"/><rect x="13.8" y="13.8" width="7.4" height="7.4" rx="1.4"/></svg></span></button>
         </div>
       </div>
     </section>
@@ -2002,9 +2042,33 @@
       var current = null;   // zone sélectionnée, ou null
 
       // Longueur réelle de chaque flèche : sans cela le tracé progressif est faux.
-      q('.' + p + '-arrows > path').forEach(function(path){
+      var fleches = q('.' + p + '-arrows > path');
+      fleches.forEach(function(path){
         try{ path.style.setProperty('--len', path.getTotalLength()); }catch(e){}
       });
+
+      /* Chaque flèche se trace de son origine vers sa cible ; sa pointe n'arrive
+         qu'au bout du trait (voir la règle `.pointe` de la feuille de style).
+         Les traits pleins la reçoivent sur `animationend`. Les pointillés et le
+         mode « mouvement réduit » n'ont pas d'animation de tracé, donc jamais
+         d'`animationend` : la pointe y est posée après le fondu du calque. */
+      var FONDU = 400;
+      var attentes = [];
+      fleches.forEach(function(path){
+        path.addEventListener('animationend', function(){ path.classList.add('pointe'); });
+      });
+      function majPointes(on){
+        attentes.forEach(clearTimeout); attentes = [];
+        fleches.forEach(function(path){ path.classList.remove('pointe'); });
+        if(!on) return;
+        var reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        fleches.forEach(function(path){
+          if(reduit || path.classList.contains('dash')){
+            attentes.push(setTimeout(function(){ path.classList.add('pointe'); },
+                                     reduit ? 0 : FONDU));
+          }
+        });
+      }
 
       function clearBadges(){ badges.forEach(function(b){ b.classList.remove('on'); }); }
 
@@ -2098,6 +2162,7 @@
         var on = !wrap.classList.contains('show-moves');
         wrap.classList.toggle('show-moves', on);
         swapLabels(btnMove, on);
+        majPointes(on);
         // les flèches ne veulent rien dire sur une carte encore muette
         if(on){ revealAll(true); }
       });
@@ -2111,8 +2176,29 @@
   (function(){
     var bp = document.querySelector('.bp');
     if(!bp) return;
-    var boites = Array.prototype.slice.call(bp.querySelectorAll('.bp-ctrl, .bp-step, .bp-key'));
+    /* .bp-ctrl (« Maîtrise ») ne fait pas partie des boîtes cliquables : elle
+       n'est pas une étape à deviner mais la conséquence des deux qu'elle relie.
+       Elle apparaît, avec les deux courbes, dès que Planification et
+       Réalisation sont découvertes. */
+    var boites = Array.prototype.slice.call(bp.querySelectorAll('.bp-step, .bp-key'));
     var btn = document.getElementById('bpAll');
+    var flow  = bp.querySelector('.bp-flow');
+    var ctrl  = bp.querySelector('.bp-ctrl');
+    var etapes = Array.prototype.slice.call(bp.querySelectorAll('.bp-step'));
+    var boucle = etapes.filter(function(e){
+      var t = e.textContent.trim();
+      return t === 'Planification' || t === 'Réalisation';
+    });
+
+    function majBoucle(){
+      var pret = boucle.length === 2 && boucle.every(function(e){ return e.classList.contains('on'); });
+      if(flow) flow.classList.toggle('boucle', pret);
+      if(ctrl){
+        ctrl.classList.toggle('on', pret);
+        ctrl.setAttribute('aria-hidden', String(!pret));
+        ctrl.tabIndex = pret ? 0 : -1;
+      }
+    }
 
     function toutOuvert(){
       return boites.every(function(b){ return b.classList.contains('on'); });
@@ -2132,6 +2218,7 @@
         var on = !b.classList.contains('on');
         b.classList.toggle('on', on);
         b.setAttribute('aria-pressed', String(on));
+        majBoucle();
         syncBouton();
       });
     });
@@ -2143,9 +2230,11 @@
           b.classList.toggle('on', on);
           b.setAttribute('aria-pressed', String(on));
         });
+        majBoucle();
         syncBouton();
       });
     }
+    majBoucle();
     syncBouton();
   })();
 </script>
