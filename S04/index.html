@@ -286,7 +286,13 @@
   .tri-svg .tri-handle.grabbing{ r:18; cursor:grabbing; }
   .tri-svg .tri-center{ fill:rgba(255,255,255,.5); }
   .tri-svg .tri-zero{ font-family:var(--font); font-size:14px; font-weight:700; fill:rgba(255,255,255,.55); }
-  .tri-svg .tri-label{ font-family:var(--font); font-size:24px; font-weight:800; fill:#fff; text-shadow:0 2px 10px rgba(0,0,0,.5); }
+  .tri-svg .tri-label{ font-family:var(--font); font-size:31px; font-weight:800; fill:#fff; text-shadow:0 2px 10px rgba(0,0,0,.5); }
+  /* « + » à la pointe de chaque flèche : dit dans quel sens la grandeur augmente. */
+  .tri-svg .tri-plus{ font-family:var(--font); font-size:34px; font-weight:800; fill:rgba(255,255,255,.9);
+    text-anchor:middle; dominant-baseline:middle; text-shadow:0 2px 10px rgba(0,0,0,.5); }
+  /* Repère de départ : tiret perpendiculaire posé par le script à la position
+     initiale du sommet, pour que le déplacement se lise par rapport à quelque chose. */
+  .tri-svg .tri-tick{ stroke:#fff; stroke-width:4; stroke-linecap:round; }
 
   /* ---- tuiles outils ---- */
 
@@ -645,9 +651,18 @@
           <circle class="tri-center" cx="320" cy="320" r="3"></circle>
           <text class="tri-zero" x="332" y="316">0</text>
 
-          <text class="tri-label" x="320" y="52" text-anchor="middle">Qualité</text>
-          <text class="tri-label" x="552.1" y="460" text-anchor="start">Délais</text>
-          <text class="tri-label" x="87.9" y="460" text-anchor="end">Coûts</text>
+          <!-- Le « + » est décalé perpendiculairement à l'axe : dans son
+               prolongement il tomberait sur le libellé, qui est déjà au-delà
+               de la pointe. -->
+          <text class="tri-plus" x="358" y="96">+</text>
+          <text class="tri-plus" x="535" y="407">+</text>
+          <text class="tri-plus" x="105" y="407">+</text>
+
+          <!-- Libellés recentrés (ancre « middle ») : à 31 px, « Délais » calé à
+               gauche sur 552 sortait du viewBox 640 et se faisait rogner. -->
+          <text class="tri-label" x="320" y="50" text-anchor="middle">Qualité</text>
+          <text class="tri-label" x="558" y="470" text-anchor="middle">Délais</text>
+          <text class="tri-label" x="82" y="470" text-anchor="middle">Coûts</text>
         </svg>
       </div>
     </section>
@@ -1600,6 +1615,7 @@
     var svg = document.querySelector('.tri-svg');
     if(!svg) return;
     var CX=320, CY=320, MAXR=230, MINR=0;
+    var DEFAUT = MAXR/2;   // position de départ des trois sommets — sert aussi aux repères
     var axes = [
       { key:'qualite',  dx:0,        dy:-1   },
       { key:'delais',   dx:0.8660,   dy:0.5  },
@@ -1649,8 +1665,29 @@
     axes.forEach(function(ax){
       ax.handle = svg.querySelector('.tri-handle[data-axis="'+ax.key+'"]');
       ax.inverse = (ax.key === 'qualite');
-      ax.r = MAXR/2; // position initiale : milieu de l'axe, sommet blanc
+      ax.r = DEFAUT; // position initiale : milieu de l'axe, sommet blanc
     });
+
+    /* Repère de départ : un tiret blanc perpendiculaire à l'axe, à la position
+       initiale du sommet. Demi-longueur 24 > rayon de la pastille (14, 18 en
+       cours de glissement) : le tiret dépasse, donc il reste visible même
+       lorsque le sommet est encore posé dessus. Tracé par le script pour ne pas
+       pouvoir se désaligner de DEFAUT. */
+    (function(){
+      var DEMI = 28;
+      axes.forEach(function(ax){
+        var x = CX + ax.dx*DEFAUT, y = CY + ax.dy*DEFAUT;
+        var px = -ax.dy, py = ax.dx;               // perpendiculaire unitaire
+        var t = document.createElementNS('http://www.w3.org/2000/svg','line');
+        t.setAttribute('class','tri-tick');
+        t.setAttribute('x1', (x - px*DEMI).toFixed(2));
+        t.setAttribute('y1', (y - py*DEMI).toFixed(2));
+        t.setAttribute('x2', (x + px*DEMI).toFixed(2));
+        t.setAttribute('y2', (y + py*DEMI).toFixed(2));
+        svg.insertBefore(t, ax.handle);            // sous les pastilles, sur le remplissage
+      });
+    })();
+
     render();
 
     function svgPoint(evt){
