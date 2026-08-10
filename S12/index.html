@@ -235,20 +235,20 @@
      sur un canevas 1280×720, mis à l'échelle hors présentation.             */
   /* Habillage partagé avec la diapo « Apprentissage distribué » qui suit :
      les deux graphiques doivent se lire comme une paire. */
-  .fg-wrap, .ad-wrap{ position:relative; width:100%; height:100%; overflow:hidden;
+  .fg-wrap, .apd-wrap{ position:relative; width:100%; height:100%; overflow:hidden;
     background:radial-gradient(circle at 78% 16%, #12595A 0%, #0a3d3b 54%, #061f22 100%); }
-  .fg-canvas, .ad-canvas{ position:absolute; left:0; top:0; width:1280px; height:720px; transform-origin:top left;
+  .fg-canvas, .apd-canvas{ position:absolute; left:0; top:0; width:1280px; height:720px; transform-origin:top left;
     box-sizing:border-box; padding:var(--safe-t) var(--safe-x) var(--safe-b); display:flex; flex-direction:column; color:#fff; }
-  .fg-head, .ad-head{ flex:0 0 auto; text-align:center; margin-bottom:12px; }
-  .fg-head .eyebrow, .ad-head .eyebrow{ display:block; font-size:12.5px; font-weight:800; letter-spacing:.09em;
+  .fg-head, .apd-head{ flex:0 0 auto; text-align:center; margin-bottom:12px; }
+  .fg-head .eyebrow, .apd-head .eyebrow{ display:block; font-size:12.5px; font-weight:800; letter-spacing:.09em;
     text-transform:uppercase; color:rgba(255,255,255,.62); margin-bottom:.4em; }
-  .fg-head h2, .ad-head h2{ margin:0; font-size:29px; font-weight:800; color:#fff; text-shadow:0 2px 16px rgba(8,40,39,.5); }
-  .fg-body, .ad-body{ flex:1 1 auto; min-height:0; display:flex; gap:28px; }
+  .fg-head h2, .apd-head h2{ margin:0; font-size:29px; font-weight:800; color:#fff; text-shadow:0 2px 16px rgba(8,40,39,.5); }
+  .fg-body, .apd-body{ flex:1 1 auto; min-height:0; display:flex; gap:28px; }
 
   /* le graphique */
-  .fg-chart, .ad-chart{ flex:0 0 800px; width:800px; border-radius:16px; overflow:hidden; background:#fff;
+  .fg-chart, .apd-chart{ flex:0 0 800px; width:800px; border-radius:16px; overflow:hidden; background:#fff;
     box-shadow:0 22px 56px -26px rgba(0,0,0,.8); }
-  .fg-chart svg, .ad-chart svg{ display:block; width:100%; height:100%; }
+  .fg-chart svg, .apd-chart svg{ display:block; width:100%; height:100%; }
   .fg-grid{ stroke:#DDE4E6; stroke-width:1; }
   .fg-axis{ stroke:#1B2A2E; stroke-width:2; }
   .fg-tick{ font-family:var(--font); font-size:15px; font-weight:700; fill:#41545A; }
@@ -269,14 +269,14 @@
   .fg-map.armed .fg-guide, .fg-map.armed .fg-marker{ opacity:1; }
 
   /* colonne de droite */
-  .fg-side, .ad-side{ flex:1 1 auto; min-width:0; position:relative; }
-  .fg-card, .ad-card{ position:absolute; left:0; right:0; box-sizing:border-box; border-radius:14px;
+  .fg-side, .apd-side{ flex:1 1 auto; min-width:0; position:relative; }
+  .fg-card, .apd-card{ position:absolute; left:0; right:0; box-sizing:border-box; border-radius:14px;
     background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); padding:14px 20px; }
-  .fg-live, .ad-live{ top:0; height:136px; display:flex; flex-direction:column; justify-content:center; }
-  .fg-k, .ad-k{ font-size:11.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:#9ff0ed; }
-  .fg-num, .ad-num{ font-size:52px; font-weight:800; letter-spacing:-.03em; line-height:1; color:#fff;
+  .fg-live, .apd-live{ top:0; height:136px; display:flex; flex-direction:column; justify-content:center; }
+  .fg-k, .apd-k{ font-size:11.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:#9ff0ed; }
+  .fg-num, .apd-num{ font-size:52px; font-weight:800; letter-spacing:-.03em; line-height:1; color:#fff;
     font-variant-numeric:tabular-nums; margin:4px 0 3px; }
-  .fg-sub, .ad-sub{ font-size:15px; font-weight:600; line-height:1.3; color:rgba(255,255,255,.82); }
+  .fg-sub, .apd-sub{ font-size:15px; font-weight:600; line-height:1.3; color:rgba(255,255,255,.82); }
 
   /* Éteint, le jalon reste lisible (5,4:1) : c'est sa valeur qui est cachée,
      pas son intitulé — le chiffre se dévoile quand la courbe l'atteint. */
@@ -399,55 +399,55 @@
      Les graduations de l'axe « Rappel » sont les boutons. Chaque clic fait
      monter une flèche verte puis trace la courbe suivante, plus plate et plus
      haute que la précédente.                                                */
-  .ad-curve{ fill:none; stroke:#E5323F; stroke-width:3.6; stroke-linecap:round; stroke-linejoin:round; }
-  .ad-curve.first{ stroke-width:4.2; }
-  .ad-arrow{ stroke:#2E9E5B; stroke-width:9; stroke-linecap:butt; fill:none; }
-  .ad-head-tri{ fill:#2E9E5B; opacity:0; transition:opacity .2s ease; }
-  .ad-head-tri.on{ opacity:1; }
-  .ad-badge rect{ fill:#2E9E5B; }
-  .ad-badge text{ font-family:var(--font); font-size:21px; font-weight:800; fill:#fff; text-anchor:middle; }
+  .apd-curve{ fill:none; stroke:#E5323F; stroke-width:3.6; stroke-linecap:round; stroke-linejoin:round; }
+  .apd-curve.first{ stroke-width:4.2; }
+  .apd-arrow{ stroke:#2E9E5B; stroke-width:9; stroke-linecap:butt; fill:none; }
+  .apd-head-tri{ fill:#2E9E5B; opacity:0; transition:opacity .2s ease; }
+  .apd-head-tri.on{ opacity:1; }
+  .apd-badge rect{ fill:#2E9E5B; }
+  .apd-badge text{ font-family:var(--font); font-size:21px; font-weight:800; fill:#fff; text-anchor:middle; }
 
   /* graduations cliquables, posées sous l'axe */
-  .ad-plot{ position:relative; width:800px; height:100%; }
-  .ad-plot svg{ position:absolute; inset:0; }
-  .ad-tick{ position:absolute; width:36px; height:36px; margin-left:-18px; top:434px;
+  .apd-plot{ position:relative; width:800px; height:100%; }
+  .apd-plot svg{ position:absolute; inset:0; }
+  .apd-tick{ position:absolute; width:36px; height:36px; margin-left:-18px; top:434px;
     appearance:none; border:2px solid #B9C6C9; background:#fff; color:#41545A; cursor:pointer;
     border-radius:50%; font-family:var(--font); font-size:17px; font-weight:800; line-height:1;
     display:flex; align-items:center; justify-content:center;
     transition:background .16s, color .16s, border-color .16s, transform .12s; }
-  .ad-tick:hover{ transform:translateY(-2px); border-color:#2E9E5B; color:#1B6B3E; }
-  .ad-tick:focus-visible{ outline:3px solid #2E9E5B; outline-offset:3px; }
+  .apd-tick:hover{ transform:translateY(-2px); border-color:#2E9E5B; color:#1B6B3E; }
+  .apd-tick:focus-visible{ outline:3px solid #2E9E5B; outline-offset:3px; }
   /* Fonds plus sombres que le rouge des courbes et le vert des flèches : le
      chiffre en blanc doit tenir le contraste à 17 px (5,9 et 5,3). */
-  .ad-tick.is-done{ background:#C21F2C; border-color:#C21F2C; color:#fff; }
-  .ad-tick.is-next{ background:#1F7A45; border-color:#1F7A45; color:#fff;
+  .apd-tick.is-done{ background:#C21F2C; border-color:#C21F2C; color:#fff; }
+  .apd-tick.is-next{ background:#1F7A45; border-color:#1F7A45; color:#fff;
     box-shadow:0 0 0 0 rgba(46,158,91,.55); animation:adPulse 1.9s ease-out infinite; }
   @keyframes adPulse{ 0%{ box-shadow:0 0 0 0 rgba(46,158,91,.55) } 70%{ box-shadow:0 0 0 13px rgba(46,158,91,0) } 100%{ box-shadow:0 0 0 0 rgba(46,158,91,0) } }
-  .ad-xtitle{ position:absolute; left:0; right:0; top:478px; text-align:center;
+  .apd-xtitle{ position:absolute; left:0; right:0; top:478px; text-align:center;
     font-size:15.5px; font-weight:800; color:#1B2A2E; }
 
   /* colonne de droite */
-  .ad-gain{ top:152px; height:52px; display:flex; align-items:center; justify-content:space-between;
+  .apd-gain{ top:152px; height:52px; display:flex; align-items:center; justify-content:space-between;
     gap:10px; padding:0 18px; background:rgba(46,158,91,.24); border-color:rgba(46,158,91,.8);
     opacity:0; transform:translateY(8px); transition:opacity .35s ease, transform .35s ease; }
-  .ad-map.gained .ad-gain{ opacity:1; transform:none; }
-  .ad-gain .gl{ font-size:15.5px; font-weight:700; color:rgba(255,255,255,.9); }
-  .ad-gain .gv{ font-size:23px; font-weight:800; color:#A9EFC5; font-variant-numeric:tabular-nums; }
-  .ad-note{ top:216px; height:200px; display:flex; flex-direction:column; justify-content:center; gap:6px; }
-  .ad-note .nt{ font-size:16.5px; font-weight:700; line-height:1.38; color:#fff; }
-  .ad-note .nt b{ color:#9ff0ed; font-weight:800; }
-  .ad-note .n-done{ display:none; }
-  .ad-map.done .ad-note{ background:rgba(159,240,237,.14); border-color:rgba(159,240,237,.4); }
-  .ad-map.done .ad-note .n-todo{ display:none; }
-  .ad-map.done .ad-note .n-done{ display:block; }
-  .ad-reset{ position:absolute; left:0; right:0; top:428px; height:50px; appearance:none;
+  .apd-map.gained .apd-gain{ opacity:1; transform:none; }
+  .apd-gain .gl{ font-size:15.5px; font-weight:700; color:rgba(255,255,255,.9); }
+  .apd-gain .gv{ font-size:23px; font-weight:800; color:#A9EFC5; font-variant-numeric:tabular-nums; }
+  .apd-note{ top:216px; height:200px; display:flex; flex-direction:column; justify-content:center; gap:6px; }
+  .apd-note .nt{ font-size:16.5px; font-weight:700; line-height:1.38; color:#fff; }
+  .apd-note .nt b{ color:#9ff0ed; font-weight:800; }
+  .apd-note .n-done{ display:none; }
+  .apd-map.done .apd-note{ background:rgba(159,240,237,.14); border-color:rgba(159,240,237,.4); }
+  .apd-map.done .apd-note .n-todo{ display:none; }
+  .apd-map.done .apd-note .n-done{ display:block; }
+  .apd-reset{ position:absolute; left:0; right:0; top:428px; height:50px; appearance:none;
     border:1.5px solid rgba(255,255,255,.34); border-radius:999px; cursor:pointer;
     font-family:var(--font); font-size:16px; font-weight:800; color:#fff; background:rgba(255,255,255,.1);
     display:flex; align-items:center; justify-content:center; gap:9px; transition:background .16s, transform .12s; }
-  .ad-reset:hover{ background:rgba(255,255,255,.22); transform:translateY(-2px); }
-  .ad-reset:focus-visible{ outline:3px solid #9ff0ed; outline-offset:3px; }
-  .ad-reset svg{ width:17px; height:17px; display:block; }
-  @media(prefers-reduced-motion:reduce){ .ad-gain, .ad-head-tri{ transition:none; } .ad-tick.is-next{ animation:none; } }
+  .apd-reset:hover{ background:rgba(255,255,255,.22); transform:translateY(-2px); }
+  .apd-reset:focus-visible{ outline:3px solid #9ff0ed; outline-offset:3px; }
+  .apd-reset svg{ width:17px; height:17px; display:block; }
+  @media(prefers-reduced-motion:reduce){ .apd-gain, .apd-head-tri{ transition:none; } .apd-tick.is-next{ animation:none; } }
 
   /* ---- tuiles outils ---- */
 
@@ -990,16 +990,16 @@
 
     <!-- 06c · NOTION — apprentissage distribué (une courbe par rappel) -->
     <section data-screen-label="Apprentissage distribué" data-phase="3" data-state="dark">
-      <div class="ad-wrap">
-       <div class="ad-canvas">
-        <div class="ad-head">
+      <div class="apd-wrap">
+       <div class="apd-canvas">
+        <div class="apd-head">
           <span class="eyebrow">Notion clé · mémoire</span>
           <h2>Apprentissage distribué</h2>
         </div>
 
-        <div class="ad-body ad-map">
-          <div class="ad-chart">
-            <div class="ad-plot">
+        <div class="apd-body apd-map">
+          <div class="apd-chart">
+            <div class="apd-plot">
               <svg viewBox="0 0 800 498" role="img" aria-label="Chaque rappel relance la rétention à 100 % et aplatit la courbe de l'oubli">
                 <g class="fg-grid">
                   <line x1="78" y1="26"  x2="772" y2="26"  /><line x1="78" y1="105.6" x2="772" y2="105.6" />
@@ -1015,44 +1015,44 @@
                 </g>
                 <text class="fg-atitle" x="24" y="225" text-anchor="middle" transform="rotate(-90 24 225)">Rétention d'information (%)</text>
 
-                <g id="s12AdLayer"></g>
+                <g id="s12ApdLayer"></g>
 
                 <!-- posé sous la première courbe, seule zone libre des six tracés -->
-                <g class="ad-badge">
+                <g class="apd-badge">
                   <rect x="150" y="350" width="286" height="44" rx="7" />
                   <text x="293" y="380">Apprentissage distribué</text>
                 </g>
               </svg>
 
-              <button class="ad-tick" type="button" data-k="0" style="left:78px"  aria-label="Apprentissage initial">0</button>
-              <button class="ad-tick" type="button" data-k="1" style="left:194px" aria-label="Premier rappel">1</button>
-              <button class="ad-tick" type="button" data-k="2" style="left:309px" aria-label="Deuxième rappel">2</button>
-              <button class="ad-tick" type="button" data-k="3" style="left:425px" aria-label="Troisième rappel">3</button>
-              <button class="ad-tick" type="button" data-k="4" style="left:541px" aria-label="Quatrième rappel">4</button>
-              <button class="ad-tick" type="button" data-k="5" style="left:656px" aria-label="Cinquième rappel">5</button>
-              <div class="ad-xtitle">Rappel</div>
+              <button class="apd-tick" type="button" data-k="0" style="left:78px"  aria-label="Apprentissage initial">0</button>
+              <button class="apd-tick" type="button" data-k="1" style="left:194px" aria-label="Premier rappel">1</button>
+              <button class="apd-tick" type="button" data-k="2" style="left:309px" aria-label="Deuxième rappel">2</button>
+              <button class="apd-tick" type="button" data-k="3" style="left:425px" aria-label="Troisième rappel">3</button>
+              <button class="apd-tick" type="button" data-k="4" style="left:541px" aria-label="Quatrième rappel">4</button>
+              <button class="apd-tick" type="button" data-k="5" style="left:656px" aria-label="Cinquième rappel">5</button>
+              <div class="apd-xtitle">Rappel</div>
             </div>
           </div>
 
-          <div class="ad-side">
-            <div class="ad-card ad-live">
-              <span class="ad-k">Rétention à l'arrivée</span>
-              <div class="ad-num"><span id="s12AdNum">—</span>&nbsp;%</div>
-              <span class="ad-sub">de ce que vous aviez appris, un mois plus tard</span>
+          <div class="apd-side">
+            <div class="apd-card apd-live">
+              <span class="apd-k">Rétention à l'arrivée</span>
+              <div class="apd-num"><span id="s12ApdNum">—</span>&nbsp;%</div>
+              <span class="apd-sub">de ce que vous aviez appris, un mois plus tard</span>
             </div>
 
-            <div class="ad-card ad-gain">
+            <div class="apd-card apd-gain">
               <span class="gl">Gain du dernier rappel</span>
-              <span class="gv" id="s12AdGain">+0</span>
+              <span class="gv" id="s12ApdGain">+0</span>
             </div>
 
-            <div class="ad-card ad-note">
-              <span class="ad-k">Comment lire</span>
+            <div class="apd-card apd-note">
+              <span class="apd-k">Comment lire</span>
               <span class="nt n-todo">Cliquez les graduations <b>0 → 5</b> sous l'axe. À chaque rappel, la rétention repart de 100&nbsp;%… et la courbe qui suit descend <b>moins vite</b>.</span>
               <span class="nt n-done">Chaque rappel relance la mémoire <b>et aplatit la courbe</b>. Cinq reprises espacées laissent <b>94&nbsp;%</b> là où une seule séance n'en laissait <b>14&nbsp;%</b>.</span>
             </div>
 
-            <button class="ad-reset" id="s12AdReset" type="button">
+            <button class="apd-reset" id="s12ApdReset" type="button">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v5h-5"/></svg>
               Recommencer
             </button>
@@ -1845,12 +1845,12 @@
 
   // ---- Apprentissage distribué : une courbe relancée à chaque rappel ----
   (function(){
-    var map = document.querySelector('.ad-map');
+    var map = document.querySelector('.apd-map');
     if(!map) return;
     var NS = 'http://www.w3.org/2000/svg';
 
-    var wrap = map.closest('.ad-wrap');
-    var canvas = wrap && wrap.querySelector('.ad-canvas');
+    var wrap = map.closest('.apd-wrap');
+    var canvas = wrap && wrap.querySelector('.apd-canvas');
     function fitAd(){
       if(!canvas) return;
       var w = wrap.clientWidth, h = wrap.clientHeight;
@@ -1877,10 +1877,10 @@
     function xOf(t){ return X0 + (X1-X0)*t/SPAN; }
     function yOf(v){ return Y1 - (Y1-Y0)*v/100; }
 
-    var layer = document.getElementById('s12AdLayer');
-    var num   = document.getElementById('s12AdNum');
-    var gain  = document.getElementById('s12AdGain');
-    var ticks = Array.prototype.slice.call(map.querySelectorAll('.ad-tick'));
+    var layer = document.getElementById('s12ApdLayer');
+    var num   = document.getElementById('s12ApdNum');
+    var gain  = document.getElementById('s12ApdGain');
+    var ticks = Array.prototype.slice.call(map.querySelectorAll('.apd-tick'));
     var END   = FLOOR.map(function(f,k){ return Math.round(ret(k, SPAN-k)); });
 
     // Construction : pour chaque rappel, la flèche verte puis la courbe.
@@ -1891,11 +1891,11 @@
       if(k > 0){
         var xa = xOf(k), yb = yOf(ret(k-1, 1));
         arrow = document.createElementNS(NS,'line');
-        arrow.setAttribute('class','ad-arrow');
+        arrow.setAttribute('class','apd-arrow');
         arrow.setAttribute('x1', xa); arrow.setAttribute('y1', yb);
         arrow.setAttribute('x2', xa); arrow.setAttribute('y2', Y0+14);
         tri = document.createElementNS(NS,'polygon');
-        tri.setAttribute('class','ad-head-tri');
+        tri.setAttribute('class','apd-head-tri');
         tri.setAttribute('points', (xa-11)+','+(Y0+16)+' '+(xa+11)+','+(Y0+16)+' '+xa+','+(Y0-2));
         g.appendChild(arrow); g.appendChild(tri);
       }
@@ -1905,7 +1905,7 @@
         d += (i ? ' L' : 'M') + xOf(k+u).toFixed(2) + ' ' + yOf(ret(k,u)).toFixed(2);
       }
       var path = document.createElementNS(NS,'path');
-      path.setAttribute('class','ad-curve' + (k ? '' : ' first'));
+      path.setAttribute('class','apd-curve' + (k ? '' : ' first'));
       path.setAttribute('d', d);
       g.appendChild(path);
       layer.appendChild(g);
@@ -1981,7 +1981,7 @@
         if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); e.stopPropagation(); goTo(+b.getAttribute('data-k')); }
       });
     });
-    var rst = document.getElementById('s12AdReset');
+    var rst = document.getElementById('s12ApdReset');
     rst.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); reset(); });
     rst.addEventListener('keydown', function(e){
       if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); e.stopPropagation(); reset(); }
