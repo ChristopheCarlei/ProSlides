@@ -22,6 +22,26 @@
 /assets/clips/*
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 
+# Feuilles de style et scripts partagés par les 13 séances.
+#
+# Ils n'avaient aucune règle et retombaient sur le défaut de Netlify — qui se
+# trouve être identique, mais rien ne le garantit. La règle est donc explicite.
+# Même politique que les pages : revalidation à chaque visite, pour qu'une
+# correction d'habillage apparaisse immédiatement après un push. Le coût est
+# d'une requête conditionnelle par fichier, qui répond 304 sans corps.
+/assets/deck.css
+  Cache-Control: public, max-age=0, must-revalidate
+/assets/support.css
+  Cache-Control: public, max-age=0, must-revalidate
+/assets/support.js
+  Cache-Control: public, max-age=0, must-revalidate
+/assets/elearn.css
+  Cache-Control: public, max-age=0, must-revalidate
+/assets/elearn.js
+  Cache-Control: public, max-age=0, must-revalidate
+/assets/mobile.js
+  Cache-Control: public, max-age=0, must-revalidate
+
 # Composant partagé.
 /image-slot.js
   Cache-Control: public, max-age=86400

@@ -215,7 +215,9 @@
     justify-content:center; gap:20px; padding:3% 4%; background:rgba(6,38,37,.94); cursor:pointer; }
   .mediafull.reveal-open .roomreveal{ display:flex; animation:rrFade .35s ease both; }
   @keyframes rrFade{ from{ opacity:0; } to{ opacity:1; } }
-  .roomreveal img{ max-width:100%; max-height:78vh; width:auto; height:auto; border-radius:16px;
+  /* Le média de la scène est une vidéo depuis 2026-08-10 : le GIF d'origine
+     pesait 16 Mo pour 6,5 s, contre 601 Ko en H.264 à qualité équivalente. */
+  .roomreveal img, .roomreveal video{ max-width:100%; max-height:78vh; width:auto; height:auto; border-radius:16px;
     box-shadow:0 34px 90px -30px rgba(0,0,0,.85); animation:rrPop .45s cubic-bezier(.2,.7,.2,1) both; }
   @keyframes rrPop{ from{ opacity:0; transform:scale(.94); } to{ opacity:1; transform:none; } }
   .roomreveal figcaption{ font-size:20px; font-weight:600; color:rgba(255,255,255,.92); text-align:center;
@@ -418,7 +420,7 @@
     <section data-screen-label="Couverture" data-phase="1" data-state="dark">
       <div class="mediafull cover2">
         <div class="media-slot video">
-          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Surricates2.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Surricates2.mp4" aria-hidden="true"></video>
         </div>
         <div class="scrim"></div>
         <div class="cover-logos">
@@ -445,7 +447,7 @@
     <section data-screen-label="Questions" data-phase="1" data-state="dark">
       <div class="mediafull content">
         <div class="media-slot video">
-          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Hibou.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Hibou.mp4" aria-hidden="true"></video>
         </div>
         <div class="scrim"></div>
         <div class="overlay">
@@ -473,7 +475,7 @@
     <section data-screen-label="Dimensions" data-phase="2" data-state="dark">
       <div class="mediafull content content--diagram">
         <div class="media-slot video">
-          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Surricates.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Surricates.mp4" aria-hidden="true"></video>
         </div>
         <div class="scrim"></div>
         <div class="bridge gated">
@@ -501,7 +503,7 @@
     <section data-screen-label="Continuum" data-phase="2" data-state="dark">
       <div class="mediafull content content--diagram">
         <div class="media-slot video">
-          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Surricate1.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Surricate1.mp4" aria-hidden="true"></video>
         </div>
         <div class="scrim"></div>
         <div class="bridge">
@@ -529,7 +531,7 @@
     <section data-screen-label="Problématique" data-phase="2" data-state="dark">
       <div class="mediafull">
         <div class="media-slot video">
-          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Cameleon2.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Cameleon2.mp4" aria-hidden="true"></video>
         </div>
         <div class="scrim"></div>
         <div class="overlay" style="justify-content:center;">
@@ -544,7 +546,7 @@
     <section data-screen-label="Objectifs" data-phase="2" data-state="dark">
       <div class="mediafull objectifs">
         <div class="media-slot video">
-          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Crabe2.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Crabe2.mp4" aria-hidden="true"></video>
         </div>
         <div class="scrim"></div>
         <div class="overlay">
@@ -563,7 +565,7 @@
     <section data-screen-label="Inscriptions" data-phase="2" data-state="dark">
       <div class="mediafull content">
         <div class="media-slot video">
-          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Surricate1.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Surricate1.mp4" aria-hidden="true"></video>
         </div>
         <div class="scrim"></div>
         <div class="overlay" style="justify-content:center;">
@@ -578,7 +580,7 @@
     <section data-screen-label="Marketplace" data-phase="3" data-state="dark">
       <div class="mediafull activity">
         <div class="media-slot video">
-          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Surricates2.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Surricates2.mp4" aria-hidden="true"></video>
         </div>
         <div class="scrim"></div>
         <div class="overlay">
@@ -605,7 +607,7 @@
     <section data-screen-label="Identité de groupe" data-phase="3" data-state="dark">
       <div class="mediafull activity">
         <div class="media-slot video">
-          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Surricate1_1.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Surricate1_1.mp4" aria-hidden="true"></video>
         </div>
         <div class="scrim"></div>
         <div class="overlay">
@@ -632,7 +634,7 @@
     <section data-screen-label="Problématique prénoms" data-phase="3" data-state="dark">
       <div class="mediafull">
         <div class="media-slot video">
-          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Bar3.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Bar3.mp4" aria-hidden="true"></video>
         </div>
         <div class="scrim"></div>
         <div class="overlay" style="justify-content:center;">
@@ -647,7 +649,7 @@
     <section data-screen-label="Chambre romaine" data-phase="3" data-state="dark">
       <div class="mediafull">
         <div class="media-slot video">
-          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/CameraScene2.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/CameraScene2.mp4" aria-hidden="true"></video>
         </div>
         <div class="scrim"></div>
         <div class="overlay" style="justify-content:center;">
@@ -667,7 +669,8 @@
         <div class="roomreveal" onclick="this.closest('.mediafull').classList.remove('reveal-open')">
           <button class="rr-close" type="button" aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
           <figure style="margin:0;display:flex;flex-direction:column;align-items:center;gap:20px;max-width:100%;">
-            <img src="../assets/clips/Christophe.gif" alt="Chambre romaine — la scène qui ancre le prénom Christophe" />
+            <video src="../assets/clips/Christophe.mp4" preload="metadata" autoplay muted loop playsinline
+                   aria-label="Chambre romaine — la scène qui ancre le prénom Christophe"></video>
             <figcaption><b>Christophe</b> · devant Uni Dufour, je traîne une énorme <b>croix</b> (Christ) et j'appuie sur le bouton pour tout éteindre (off).</figcaption>
           </figure>
         </div>
@@ -678,7 +681,7 @@
     <section data-screen-label="Mémorisation" data-phase="3" data-state="dark">
       <div class="mediafull activity">
         <div class="media-slot video">
-          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/CameraScene2.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/CameraScene2.mp4" aria-hidden="true"></video>
         </div>
         <div class="scrim"></div>
         <div class="overlay">
@@ -704,7 +707,7 @@
     <section data-screen-label="Outils" data-phase="3" data-state="dark">
       <div class="mediafull content outils">
         <div class="media-slot video">
-          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/ChatClavier.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/ChatClavier.mp4" aria-hidden="true"></video>
         </div>
         <div class="scrim"></div>
         <div class="overlay">
@@ -719,7 +722,7 @@
     <section data-screen-label="À retenir" data-phase="4" data-state="dark">
       <div class="mediafull content">
         <div class="media-slot video">
-          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Ecureuil.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Ecureuil.mp4" aria-hidden="true"></video>
         </div>
         <div class="scrim"></div>
         <div class="overlay">
@@ -738,7 +741,7 @@
     <section data-screen-label="Prochaine fois" data-phase="4" data-state="dark">
       <div class="mediafull content">
         <div class="media-slot video">
-          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Pingoin.mp4"></video>
+          <video preload="metadata" data-autoplay autoplay muted loop playsinline src="../assets/clips/Pingoin.mp4" aria-hidden="true"></video>
         </div>
         <div class="scrim"></div>
         <div class="overlay">
@@ -1106,6 +1109,7 @@
 
 <script src="../assets/support.js"></script>
 <script src="../assets/elearn.js"></script>
+<script src="../assets/mobile.js"></script>
 <script src="../assets/vendor/reveal/reveal.min.js"></script>
 <script>
   const deck = new Reveal({
@@ -1129,7 +1133,14 @@
     if(document.body.classList.contains('support-open')) return;
     var vw = window.innerWidth, vh = window.innerHeight;
     if(!vw || !vh) return;   // viewport pas encore dimensionné : ne pas appliquer scale(0)
-    var scale = Math.max(vw/1280, vh/720);
+    // Rogne plafonne a la zone de securite : au-dela, on laisse des bandes
+    // plutot que de couper du contenu. Sur 16/9 rien ne change ; sous 16/10 le
+    // plafond prend le relais (4/3 rognait 160 px par cote, soit 64 px de plus
+    // que la marge declaree, et coupait le texte des diapos).
+    var couverture = Math.max(vw/1280, vh/720);
+    var plafondH   = vw / (1280 - 2*96);   // --safe-x
+    var plafondV   = vh / (720  - 2*72);   // --safe-t (la plus petite des deux)
+    var scale = Math.min(couverture, plafondH, plafondV);
     if(!scale || !isFinite(scale)) return;
     slides.style.left='50%'; slides.style.top='50%';
     slides.style.right='auto'; slides.style.bottom='auto';
