@@ -80,11 +80,19 @@ body.elearn-open .quizbtn .lbl-on{ display:inline; }
 
 /* --- barre supérieure : progression + score ------------------------------ */
 
+/* La barre de boutons est fixée en haut à droite (z-index 60) tandis que cette
+   rangée est centrée sur une bande de 900 px : le compteur passait dessous dès
+   que la fenêtre faisait moins d'environ 1600 px, c'est-à-dire presque
+   toujours. La rangée est donc descendue SOUS les boutons.
+   La réserve ne peut pas être une constante : sous ~340 px les libellés des
+   boutons passent sur deux lignes et la barre grandit. elearn.js mesure sa
+   hauteur réelle et renseigne --el-topgap ; la valeur ci-dessous n'est qu'un
+   repli avant la première mesure. */
 .el-top{
   position:sticky; top:0; z-index:30;
   background:rgba(237,244,243,.93); backdrop-filter:blur(10px);
   border-bottom:1px solid var(--el-line);
-  padding:14px clamp(14px,4vw,34px) 12px;
+  padding:var(--el-topgap, 62px) clamp(14px,4vw,34px) 12px;
 }
 .el-top__in{ max-width:900px; margin:0 auto; display:flex; align-items:center; gap:16px; }
 .el-steps{ flex:1 1 auto; display:flex; gap:5px; min-width:0; }
@@ -104,7 +112,9 @@ body.elearn-open .quizbtn .lbl-on{ display:inline; }
 
 /* --- scène --------------------------------------------------------------- */
 
-.el-stage{ max-width:900px; margin:0 auto; padding:clamp(20px,4vw,38px) clamp(14px,4vw,34px) 0; }
+/* En-tête déjà haute (elle passe sous les boutons) : la scène se contente
+   d'une respiration modérée au-dessus de la carte. */
+.el-stage{ max-width:900px; margin:0 auto; padding:clamp(16px,2.6vw,26px) clamp(14px,4vw,34px) 0; }
 
 .el-card{
   background:var(--el-card); border:1px solid var(--el-line); border-radius:18px;
@@ -359,7 +369,8 @@ body.elearn-open .quizbtn .lbl-on{ display:inline; }
    ------------------------------------------------------------------------ */
 
 .el-intro{ text-align:center; }
-.el-intro .el-kicker{
+/* Non scopé à .el-intro : l'écran de bilan porte le même bandeau. */
+.el-kicker{
   display:block; font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
   color:var(--rose-deep, #A8004F); margin-bottom:10px;
 }

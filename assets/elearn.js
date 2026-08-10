@@ -491,6 +491,7 @@
      ===================================================================== */
 
   function setSteps() {
+    reserveTop();          /* appelé par chaque écran : la réserve reste juste */
     steps.innerHTML = '';
     QS.forEach(function (q, i) {
       var s = node('span', 'el-step');
@@ -722,6 +723,17 @@
      rejeter sa promesse (AbortError, non capturée puisqu'elle lui appartient).
      On redemande donc la lecture pour obtenir une promesse sur la même
      opération, et on ne coupe qu'une fois qu'elle a abouti. */
+  /* La barre de boutons est fixée au-dessus de tout : on réserve sous elle la
+     hauteur qu'elle occupe réellement, plutôt qu'une constante — ses libellés
+     passent sur deux lignes sur les écrans très étroits. */
+  function reserveTop() {
+    if (!app) return;
+    var bar = document.querySelector('.topbtns') || document.getElementById('quizbtn');
+    if (!bar) return;
+    var bas = bar.getBoundingClientRect().bottom;
+    if (bas > 0) app.style.setProperty('--el-topgap', Math.ceil(bas) + 10 + 'px');
+  }
+
   function pauseMedia() {
     Array.prototype.forEach.call(
       document.querySelectorAll('.reveal video, .reveal audio'),
@@ -756,6 +768,7 @@
       document.body.classList.remove('dark-slide', 'cover-active');
       pauseMedia();
       if (idx === -1 && !stage.children.length) screenIntro();
+      reserveTop();
       window.scrollTo(0, 0);
     }
 
@@ -796,6 +809,13 @@
 
     document.addEventListener('keydown', function (e) {
       if (open && (e.key === 'Escape' || e.key === 'Esc')) setOpen(false);
+    });
+
+    /* Le retour à la ligne des libellés dépend de la largeur : on remesure,
+       mais une frame plus tard — au moment de l'évènement la barre n'a pas
+       encore été redisposée et on relèverait l'ancienne hauteur. */
+    window.addEventListener('resize', function () {
+      if (open) requestAnimationFrame(reserveTop);
     });
   }
 
