@@ -20,8 +20,13 @@ Une image par séance, référencée depuis `S0x/index.html` :
 ## A. Images sous licence libre — attributions obligatoires
 
 Ces cinq images viennent de Wikimedia Commons. Elles sont réutilisables **à
-condition de créditer**. Le crédit figure sous chaque portrait dans
-`<p class="perso-credit">` ; les liens exigés par les licences sont ici.
+condition de créditer**.
+
+La ligne de crédit sous le portrait a été retirée des diapos le 2026-08-11.
+L'attribution a donc été reportée **en fin de la ligne de références**
+(`<p class="perso-src">`, au bas de la fiche) : les licences CC BY et CC BY-SA
+imposent de créditer partout où l'œuvre est diffusée, et le diaporama est en
+ligne. Ne pas la supprimer sans la replacer ailleurs.
 
 | Fichier | Séance | Source | Auteur | Licence |
 |---|---|---|---|---|
@@ -45,7 +50,8 @@ photo de lui n'est disponible sous licence libre. Le crédit de la diapo le dit.
 ## B. Images fournies — provenance à établir
 
 Ces sept images ont été fournies par l'enseignant. **Leur source et leurs droits
-ne sont pas documentés**, et leur crédit affiche donc « crédit photo à préciser ».
+ne sont pas documentés** et, depuis le retrait des lignes de crédit, les diapos
+ne portent plus aucune mention à leur sujet.
 
 | Fichier | Séance | Personne |
 |---|---|---|
