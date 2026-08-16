@@ -325,3 +325,75 @@ body:not(.support-open):not(.elearn-open):not(.cover-active) .topbtns{ display:n
 .perso-src{ margin:9px 0 0; font-size:12px; line-height:1.4; color:rgba(255,255,255,.68); }
 /* Deux classes ici aussi : même duel de spécificité avec .reveal em. */
 .perso .perso-src em{ color:inherit; font-style:italic; }
+
+/* ------------------------------------------------------------------------
+   Diapo « Dans l'actualité » — accroche presse, ajoutée 2026-08-16
+   Placée juste avant la problématique dans chaque séance : des coupures de
+   presse réelles (titre, chapô, source, date) posées sur un fond turquoise
+   clair, façon revue de presse. Diapo CLAIRE : ne pas mettre
+   data-state="dark" sur la section, le chrome (frise, pied) passe tout seul
+   en encre sombre. Les titres et dates viennent de vrais articles — ne
+   jamais en inventer (même exigence que « Contenus chiffrés »).
+   Préfixe « actu- » vérifié non filtré par les bloqueurs de publicité.
+   ------------------------------------------------------------------------ */
+/* Volontairement SANS titre ni eyebrow : sur un écran plus large que 16/9 le
+   rogne vertical (plafonné à 72 px) fait remonter la zone haute sous la
+   frise — un libellé posé là entre en collision avec ses étiquettes
+   (constaté à 1568×709). La planche de coupures se suffit ; l'annonce se
+   fait à l'oral. */
+.actu{
+  position:relative; width:100%; height:100%; overflow:hidden; box-sizing:border-box;
+  padding:84px var(--safe-x) 96px;
+  display:flex; flex-direction:column; gap:10px;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 84% 14%, rgba(255,255,255,.38) 0%, rgba(255,255,255,0) 46%),
+    #A9DEDC;
+}
+
+/* ---- planche de coupures ---- */
+.actu-board{
+  flex:1; min-height:0; display:flex; flex-wrap:wrap;
+  gap:24px 30px; align-content:center; justify-content:center;
+}
+/* 4 coupures → 2 par rangée (2×486 + 30 = 1002 px < largeur utile 1088).
+   3 coupures → 2 + 1 centrée. L'éparpillement vient des rotations/décalages
+   nth-child ; on peut les surcharger à la coupure via --rot / --dy. */
+.actu-clip{
+  flex:0 1 486px; min-width:0; display:flex; flex-direction:column; gap:7px;
+  transform:rotate(var(--rot,0deg)) translateY(var(--dy,0px));
+}
+.actu-clip:nth-child(1){ --rot:-1.4deg; --dy:5px; }
+.actu-clip:nth-child(2){ --rot:1.1deg;  --dy:-3px; }
+.actu-clip:nth-child(3){ --rot:-.7deg;  --dy:2px; }
+.actu-clip:nth-child(4){ --rot:1.5deg;  --dy:-5px; }
+.actu-card{
+  background:#fff; border-radius:3px; padding:16px 22px 15px;
+  box-shadow:0 20px 42px -20px rgba(6,42,41,.5);
+}
+/* Sélecteurs à DEUX classes (.actu .actu-…) : le <style> des séances est
+   chargé après deck.css et ses règles génériques (.reveal h3 en capitales
+   turquoise, etc.) gagnaient le duel à spécificité égale — constaté sur S01.
+   Chaque règle re-déclare casse, couleur et interlettrage pour la même
+   raison. */
+/* Nom du journal : petites capitales serif, teinte surchargée par --src-c
+   (ex. rouge sombre Le Temps, bleu TdG) — évocation typographique, pas de
+   reproduction de logo. */
+.actu .actu-src{
+  display:block; margin:0 0 6px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:14px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--src-c,#1d232e);
+}
+.actu .actu-title{
+  margin:0 0 6px; font-family:Georgia,"Times New Roman",serif;
+  font-size:19px; font-weight:700; line-height:1.18; color:#14181f;
+  text-transform:none; letter-spacing:normal; text-wrap:balance;
+}
+/* Chapô borné à 3 lignes : une coupure reste une coupure, pas un article. */
+.actu .actu-lede{
+  display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
+  margin:0; font-size:12.5px; line-height:1.38; color:#4c5563;
+  text-transform:none; letter-spacing:normal;
+}
+.actu .actu-date{ align-self:center; font-size:13.5px; font-weight:800; letter-spacing:.02em; color:var(--teal-ink); }
