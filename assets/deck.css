@@ -18,7 +18,7 @@
   @font-face{font-family:"TheSans";src:url("fonts/TheSansOsF-ExtraBold.otf") format("opentype");font-weight:800;font-display:swap}
   :root{
     --teal:#00B1AE; --teal-deep:#00857F; --teal-ink:#0A4C4A;
-    --rose:#CF0063; --rose-deep:#A8004F;
+    --rose:#D80669; --rose-deep:#A60551;
     --ink:#172033; --muted:#5A6477;
     --line:#E4E7EC; --line-strong:#D4D9E0;
     --bg:#FFFFFF; --bg-soft:#F6F8F8; --bg-teal:#EAF6F5;
@@ -141,7 +141,7 @@ body.dark-slide .deckfoot{ text-shadow:0 1px 2px rgba(0,0,0,.4); }
 html.safeguides .reveal .slides::after{
   content:""; position:absolute; z-index:99; pointer-events:none;
   left:var(--safe-x); right:var(--safe-x); top:var(--safe-t); bottom:var(--safe-b);
-  outline:2px dashed rgba(207,0,99,.85); outline-offset:0;
+  outline:2px dashed rgba(216,6,105,.85); outline-offset:0;
 }
 html.safeguides .reveal .slides::before{
   content:"zone de sécurité"; position:absolute; z-index:99; pointer-events:none;

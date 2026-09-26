@@ -55,13 +55,13 @@ body.elearn-open .quizbtn .lbl-on{ display:inline; }
   appearance:none; cursor:pointer; font-family:var(--font, system-ui, sans-serif);
   display:inline-flex; align-items:center; gap:9px;
   padding:9px 16px 9px 13px; border-radius:999px;
-  border:1.5px solid rgba(207,0,99,.42); background:rgba(255,255,255,.92);
+  border:1.5px solid rgba(216,6,105,.42); background:rgba(255,255,255,.92);
   backdrop-filter:blur(6px);
-  font-size:14px; font-weight:700; color:var(--rose-deep, #A8004F);
-  box-shadow:0 2px 14px rgba(207,0,99,.16);
+  font-size:14px; font-weight:700; color:var(--rose-deep, #A60551);
+  box-shadow:0 2px 14px rgba(216,6,105,.16);
   transition:background .15s, border-color .15s, color .15s;
 }
-.quizbtn:hover{ background:#FDEDF4; border-color:var(--rose, #CF0063); }
+.quizbtn:hover{ background:#FDEDF4; border-color:var(--rose, #D80669); }
 .quizbtn:focus-visible{ outline:3px solid var(--teal-deep, #00857F); outline-offset:2px; }
 .quizbtn svg{ display:block; }
 
@@ -81,7 +81,7 @@ body.elearn-open .quizbtn .lbl-on{ display:inline; }
   padding:0 0 64px;
   background:
     radial-gradient(1100px 460px at 88% -8%, rgba(0,177,174,.16), transparent 62%),
-    radial-gradient(760px 380px at 4% 4%, rgba(207,0,99,.09), transparent 60%),
+    radial-gradient(760px 380px at 4% 4%, rgba(216,6,105,.09), transparent 60%),
     #EDF4F3;
 }
 
@@ -142,7 +142,7 @@ body.elearn-open .quizbtn .lbl-on{ display:inline; }
   background:var(--bg-teal, #EAF6F5); color:#00706B;
 }
 /* Les rappels des séances précédentes se distinguent au premier coup d'œil. */
-.el-tag--old{ background:#FDEDF4; color:var(--rose-deep, #A8004F); }
+.el-tag--old{ background:#FDEDF4; color:var(--rose-deep, #A60551); }
 .el-tag--kind{ background:#EEF1F5; color:var(--el-muted); }
 
 .el-stem{
@@ -363,7 +363,7 @@ body.elearn-open .quizbtn .lbl-on{ display:inline; }
   font-size:15.5px; font-weight:800; letter-spacing:.01em;
   transition:background .15s, border-color .15s, color .15s, transform .12s, box-shadow .15s;
 }
-.el-btn:focus-visible{ outline:3px solid var(--rose, #CF0063); outline-offset:3px; }
+.el-btn:focus-visible{ outline:3px solid var(--rose, #D80669); outline-offset:3px; }
 .el-btn--go{ background:var(--teal-deep, #00857F); color:#fff; box-shadow:0 8px 22px -12px rgba(0,133,127,.9); }
 .el-btn--go:hover:not(:disabled){ background:#00706B; transform:translateY(-1px); }
 .el-btn--go:disabled{ background:#C6D4D3; color:#4E5D5C; cursor:default; box-shadow:none; }
@@ -379,7 +379,7 @@ body.elearn-open .quizbtn .lbl-on{ display:inline; }
 /* Non scopé à .el-intro : l'écran de bilan porte le même bandeau. */
 .el-kicker{
   display:block; font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
-  color:var(--rose-deep, #A8004F); margin-bottom:10px;
+  color:var(--rose-deep, #A60551); margin-bottom:10px;
 }
 .el-intro h1{ margin:0 0 12px; font-size:clamp(25px,3.6vw,34px); font-weight:800; line-height:1.2; }
 .el-intro p{ margin:0 auto 10px; max-width:52ch; font-size:16.5px; line-height:1.55; color:var(--el-muted); }

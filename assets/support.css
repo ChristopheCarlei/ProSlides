@@ -62,7 +62,7 @@ body.support-open .modebtn .lbl-pres{ display:inline; }
 }
 body.support-open .printbtn{ display:inline-flex; }
 .printbtn:hover{ background:var(--bg-teal, #EAF6F5); border-color:var(--teal-deep, #00857F); }
-.printbtn:focus-visible{ outline:3px solid var(--rose, #CF0063); outline-offset:2px; }
+.printbtn:focus-visible{ outline:3px solid var(--rose, #D80669); outline-offset:2px; }
 .printbtn svg{ display:block; }
 
 /* ---------------------------------------------------------------------------
@@ -75,7 +75,7 @@ body.support-open .printbtn{ display:inline-flex; }
   --sup-rule:#D9DEE1;
   --sup-teal:#00857F;
   --sup-teal-ink:#0A4C4A;
-  --sup-rose:#CF0063;
+  --sup-rose:#D80669;
 
   box-sizing:border-box;
   width:min(210mm, calc(100% - 24px));

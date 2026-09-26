@@ -426,8 +426,8 @@
       linear-gradient(90deg, rgba(10,76,74,.5) 0%, rgba(10,76,74,.18) 40%, transparent 66%);
   }
   .steps.timed li{ cursor:pointer; user-select:none; transition:background .2s,border-color .2s,box-shadow .2s; }
-  .steps.timed li:hover{ border-color:rgba(207,0,99,.5); }
-  .steps.timed li.is-active{ background:var(--rose); border-color:var(--rose); box-shadow:0 8px 26px -10px rgba(207,0,99,.7); }
+  .steps.timed li:hover{ border-color:rgba(216,6,105,.5); }
+  .steps.timed li.is-active{ background:var(--rose); border-color:var(--rose); box-shadow:0 8px 26px -10px rgba(216,6,105,.7); }
   .steps.timed li.is-active .t{ color:#fff; }
   .steps.timed li.is-active .x, .steps.timed li.is-active .x b{ color:#fff; }
   .steps.timed li.is-active em{ color:#ffe3ef; }
@@ -450,7 +450,7 @@
 
   /* minuteur visuel (Time Timer) */
   .timepanel.tt-flash .tt-disc{ animation:ttFlash .7s ease; }
-  @keyframes ttFlash{ 0%,100%{ box-shadow:0 0 0 0 rgba(207,0,99,0); } 30%{ box-shadow:0 0 0 14px rgba(207,0,99,.45); } }
+  @keyframes ttFlash{ 0%,100%{ box-shadow:0 0 0 0 rgba(216,6,105,0); } 30%{ box-shadow:0 0 0 14px rgba(216,6,105,.45); } }
   @media(prefers-reduced-motion:reduce){ .timepanel.tt-flash .tt-disc{ animation:none; outline:4px solid var(--rose); } }
   .timepanel{ position:absolute; z-index:4; top:50%; right:var(--safe-x); transform:translateY(-50%);
     display:flex; flex-direction:column; align-items:center; gap:16px; cursor:pointer; }
@@ -1242,7 +1242,7 @@
         <span class="el-match">Interrogation d'un corpus de documents que vous fournissez vous-même.</span>
         <span class="el-fb"><p><strong>NotebookLM</strong> — il travaille sur <em>vos</em> documents. Utile pour l'analyse de l'existant, une fois la matière collectée.</p></span>
       </li>
-      <li data-ico="✍️" data-tint="#A8004F">
+      <li data-ico="✍️" data-tint="#A60551">
         <span class="el-lbl">Claude</span>
         <span class="el-match">Rédaction, analyse de documents, structuration d'idées.</span>
         <span class="el-fb"><p><strong>Claude</strong> — pour mettre en forme et organiser une matière que vous maîtrisez déjà.</p></span>

@@ -239,8 +239,8 @@
       linear-gradient(90deg, rgba(10,76,74,.5) 0%, rgba(10,76,74,.18) 40%, transparent 66%);
   }
   .steps.timed li{ cursor:pointer; user-select:none; transition:background .2s,border-color .2s,box-shadow .2s; }
-  .steps.timed li:hover{ border-color:rgba(207,0,99,.5); }
-  .steps.timed li.is-active{ background:var(--rose); border-color:var(--rose); box-shadow:0 8px 26px -10px rgba(207,0,99,.7); }
+  .steps.timed li:hover{ border-color:rgba(216,6,105,.5); }
+  .steps.timed li.is-active{ background:var(--rose); border-color:var(--rose); box-shadow:0 8px 26px -10px rgba(216,6,105,.7); }
   .steps.timed li.is-active .t{ color:#fff; }
   .steps.timed li.is-active .x, .steps.timed li.is-active .x b{ color:#fff; }
   .steps.timed li.is-active em{ color:#ffe3ef; }
@@ -263,7 +263,7 @@
 
   /* minuteur visuel (Time Timer) */
   .timepanel.tt-flash .tt-disc{ animation:ttFlash .7s ease; }
-  @keyframes ttFlash{ 0%,100%{ box-shadow:0 0 0 0 rgba(207,0,99,0); } 30%{ box-shadow:0 0 0 14px rgba(207,0,99,.45); } }
+  @keyframes ttFlash{ 0%,100%{ box-shadow:0 0 0 0 rgba(216,6,105,0); } 30%{ box-shadow:0 0 0 14px rgba(216,6,105,.45); } }
   @media(prefers-reduced-motion:reduce){ .timepanel.tt-flash .tt-disc{ animation:none; outline:4px solid var(--rose); } }
   .timepanel{ position:absolute; z-index:4; top:50%; right:var(--safe-x); transform:translateY(-50%);
     display:flex; flex-direction:column; align-items:center; gap:16px; cursor:pointer; }
@@ -943,7 +943,7 @@ On pose ensemble les règles du jeu !</p>
     <p class="el-stem">Quatre notions posées aujourd'hui. Retrouvez ce que chacune désigne.</p>
     <p class="el-hint">Touchez une vignette à gauche, puis sa description à droite.</p>
     <ul class="el-pairs">
-      <li data-ico="🎯" data-tint="#A8004F">
+      <li data-ico="🎯" data-tint="#A60551">
         <span class="el-lbl">Commanditaire</span>
         <span class="el-match">L'organisation extérieure qui adresse au groupe une demande réelle, et qui recevra le livrable.</span>
         <span class="el-fb"><p><strong>Commanditaire</strong> — association, service ou institution de formation. C'est ce qui distingue ce cours d'un exercice&nbsp;: quelqu'un attend vraiment quelque chose.</p></span>

@@ -212,7 +212,7 @@
   .roomreveal-cta{ align-self:center; margin-top:24px; display:inline-flex; align-items:center; gap:12px;
     cursor:pointer; appearance:none; font-family:var(--font); font-size:17px; font-weight:800; letter-spacing:.01em;
     color:#fff; background:var(--rose); border:2px solid var(--rose); border-radius:999px; padding:13px 26px;
-    box-shadow:0 12px 34px -14px rgba(207,0,99,.8); transition:background .15s,border-color .15s,transform .12s; }
+    box-shadow:0 12px 34px -14px rgba(216,6,105,.8); transition:background .15s,border-color .15s,transform .12s; }
   .roomreveal-cta:hover{ background:var(--rose-deep); border-color:var(--rose-deep); transform:translateY(-2px); }
   .roomreveal-cta svg{ width:1.25em; height:1.25em; display:block; }
   .roomreveal{ position:absolute; inset:0; z-index:6; display:none; flex-direction:column; align-items:center;
@@ -362,8 +362,8 @@
       linear-gradient(90deg, rgba(10,76,74,.5) 0%, rgba(10,76,74,.18) 40%, transparent 66%);
   }
   .steps.timed li{ cursor:pointer; user-select:none; transition:background .2s,border-color .2s,box-shadow .2s; }
-  .steps.timed li:hover{ border-color:rgba(207,0,99,.5); }
-  .steps.timed li.is-active{ background:var(--rose); border-color:var(--rose); box-shadow:0 8px 26px -10px rgba(207,0,99,.7); }
+  .steps.timed li:hover{ border-color:rgba(216,6,105,.5); }
+  .steps.timed li.is-active{ background:var(--rose); border-color:var(--rose); box-shadow:0 8px 26px -10px rgba(216,6,105,.7); }
   .steps.timed li.is-active .t{ color:#fff; }
   .steps.timed li.is-active .x, .steps.timed li.is-active .x b{ color:#fff; }
   .steps.timed li.is-active em{ color:#ffe3ef; }
@@ -386,7 +386,7 @@
 
   /* minuteur visuel (Time Timer) */
   .timepanel.tt-flash .tt-disc{ animation:ttFlash .7s ease; }
-  @keyframes ttFlash{ 0%,100%{ box-shadow:0 0 0 0 rgba(207,0,99,0); } 30%{ box-shadow:0 0 0 14px rgba(207,0,99,.45); } }
+  @keyframes ttFlash{ 0%,100%{ box-shadow:0 0 0 0 rgba(216,6,105,0); } 30%{ box-shadow:0 0 0 14px rgba(216,6,105,.45); } }
   @media(prefers-reduced-motion:reduce){ .timepanel.tt-flash .tt-disc{ animation:none; outline:4px solid var(--rose); } }
   .timepanel{ position:absolute; z-index:4; top:50%; right:var(--safe-x); transform:translateY(-50%);
     display:flex; flex-direction:column; align-items:center; gap:16px; cursor:pointer; }
@@ -875,7 +875,7 @@
         <span class="el-match">Une idée forte, un message clair, une structure simple.</span>
         <span class="el-fb"><p><strong>Le fond</strong> — le test&nbsp;: si l'on ne peut pas résumer sa présentation en une phrase, elle n'est pas encore prête.</p></span>
       </li>
-      <li data-ico="🎭" data-tint="#A8004F">
+      <li data-ico="🎭" data-tint="#A60551">
         <span class="el-lbl">La forme</span>
         <span class="el-match">Voix, rythme, regard, posture&nbsp;: le non-verbal porte le message autant que les mots.</span>
         <span class="el-fb"><p><strong>La forme</strong> — un contenu juste, dit sans conviction, ne passe pas.</p></span>
